@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gdac-superbowl-pipeline"
+version = "0.1.0"
+description = "Modular social media analytics pipeline for Super Bowl data"
+requires-python = ">=3.12"
+dependencies = [
+  "pydantic>=2.7",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+ml = [
+  "nltk>=3.8",
+  "torch>=2.2",
+]
+
+# Deferred for US2/US3:
+# - pandas
+# - pyarrow
+# - matplotlib
+# - seaborn
+# - jinja2
+# - typer
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

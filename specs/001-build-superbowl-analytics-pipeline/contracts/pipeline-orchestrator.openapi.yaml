@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+  title: Super Bowl Social Analytics Orchestrator API
+  version: 1.0.0
+  description: >-
+    Contract for triggering modular pipeline runs and retrieving comparison-ready artifacts.
+servers:
+  - url: https://analytics.example.com
+paths:
+  /runs:
+    post:
+      summary: Start a pipeline run
+      operationId: createRun
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRunRequest'
+      responses:
+        '202':
+          description: Run accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineRun'
+    get:
+      summary: List pipeline runs
+      operationId: listRuns
+      parameters:
+        - in: query
+          name: event_name
+          schema:
+            type: string
+        - in: query
+          name: year
+          schema:
+            type: integer
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum: [pending, running, succeeded, failed]
+      responses:
+        '200':
+          description: Runs list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PipelineRun'
+  /runs/{run_id}:
+    get:
+      summary: Get run details
+      operationId: getRun
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Run details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PipelineRunDetail'
+  /runs/{run_id}/artifacts:
+    get:
+      summary: List run artifacts
+      operationId: listRunArtifacts
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: artifact_type
+          schema:
+            type: string
+            enum: [dataset, kpi, visualization, summary, manifest]
+      responses:
+        '200':
+          description: Artifacts list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Artifact'
+  /kpi-definitions:
+    get:
+      summary: List active KPI definitions
+      operationId: listKPIDefinitions
+      responses:
+        '200':
+          description: KPI definitions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KPIDefinition'
+components:
+  schemas:
+    CreateRunRequest:
+      type: object
+      required: [event_name, year, config_ref, kpi_definition_ref]
+      properties:
+        event_name:
+          type: string
+        year:
+          type: integer
+          minimum: 2000
+        event_window_ref:
+          type: string
+          description: Path or identifier for event window config
+        keywords_ref:
+          type: string
+          description: Path or identifier for keyword config
+        config_ref:
+          type: string
+        kpi_definition_ref:
+          type: string
+        dry_run:
+          type: boolean
+          default: false
+    PipelineRun:
+      type: object
+      required: [run_id, event_name, year, status, started_at]
+      properties:
+        run_id:
+          type: string
+        event_name:
+          type: string
+        year:
+          type: integer
+        status:
+          type: string
+          enum: [pending, running, succeeded, failed]
+        started_at:
+          type: string
+          format: date-time
+        ended_at:
+          type: string
+          format: date-time
+          nullable: true
+    PipelineRunDetail:
+      allOf:
+        - $ref: '#/components/schemas/PipelineRun'
+        - type: object
+          properties:
+            config_hash:
+              type: string
+            quality_summary:
+              $ref: '#/components/schemas/QualitySummary'
+            stage_metrics:
+              type: array
+              items:
+                $ref: '#/components/schemas/StageMetric'
+    QualitySummary:
+      type: object
+      required: [accepted_records, rejected_records, rejection_breakdown]
+      properties:
+        accepted_records:
+          type: integer
+        rejected_records:
+          type: integer
+        rejection_breakdown:
+          type: object
+          additionalProperties:
+            type: integer
+    StageMetric:
+      type: object
+      required: [stage_name, duration_ms, status]
+      properties:
+        stage_name:
+          type: string
+          enum: [ingestion, cleaning, enrichment, analysis, visualization, reporting]
+        duration_ms:
+          type: integer
+        status:
+          type: string
+          enum: [succeeded, failed]
+    Artifact:
+      type: object
+      required: [artifact_id, artifact_type, year, file_path]
+      properties:
+        artifact_id:
+          type: string
+        artifact_type:
+          type: string
+          enum: [dataset, kpi, visualization, summary, manifest]
+        year:
+          type: integer
+        file_path:
+          type: string
+        checksum:
+          type: string
+    KPIDefinition:
+      type: object
+      required: [kpi_id, name, definition_version, formula_description]
+      properties:
+        kpi_id:
+          type: string
+        name:
+          type: string
+        definition_version:
+          type: string
+        formula_description:
+          type: string
+        unit:
+          type: string

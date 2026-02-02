@@ -31,7 +31,20 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- **Stage Separation**: Design isolates ingestion, cleaning, analysis, visualization,
+  and reporting with explicit interfaces and ownership.
+- **Reproducibility**: Inputs are parameterized (for example year range/platform) and
+  no hardcoded temporal or source constants remain in pipeline logic.
+- **Validation and Logging**: Each stage defines schema/quality checks and structured
+  logging requirements, including failure behavior.
+- **Method Transparency**: Planned deliverables include assumptions, limitations, and
+  metric/method definitions.
+- **Testability and Consistency**: Test strategy covers repeatability and cross-year
+  comparability; performance budgets are defined for large datasets.
+- **Year-Agnostic Logic**: Analytical logic is reusable across years with no code
+  changes; year differences are handled by configuration and input data only.
+- **Documentation Currency**: Plan includes README.md updates for any new feature
+  behavior, commands, config keys, or outputs.
 
 ## Project Structure
 

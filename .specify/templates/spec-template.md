@@ -95,6 +95,21 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Constitution Alignment Requirements *(mandatory)*
+
+- **CA-001 (Modularity)**: Specification MUST define boundaries between ingestion,
+  cleaning, analysis, visualization, and reporting responsibilities.
+- **CA-002 (Reproducibility)**: Specification MUST list parameterized inputs and MUST
+  not rely on hardcoded year ranges or source-specific constants.
+- **CA-003 (Validation/Logging)**: Specification MUST define validation checks and
+  logging expectations for each pipeline stage.
+- **CA-004 (Transparency)**: Specification MUST document analytical assumptions,
+  limitations, and methodological choices.
+- **CA-005 (Consistency/Performance)**: Specification MUST define repeatability checks,
+  cross-year comparability rules, and measurable performance targets.
+- **CA-006 (Year-Agnostic Logic)**: Specification MUST require analytical logic to run
+  across years without code modification, using configuration and input changes only.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]
