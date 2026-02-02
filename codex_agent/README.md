@@ -1,8 +1,60 @@
 # GDAC Social Media Analytics Pipeline
 
+## How This Codebase Was Created
+
+This project was bootstrapped and evolved using **Spec-Driven Development** with
+**Spec Kit (speckit)**. The workflow used in this repo follows the staged command flow:
+
+- `/speckit.constitution` for project principles and governance
+- `/speckit.specify` for feature requirements and user stories
+- `/speckit.plan` for technical design
+- `/speckit.tasks` for executable implementation tasks
+- `/speckit.implement` for phased implementation
+
+Primary references:
+
+- GitHub repository: `https://github.com/github/spec-kit`
+- Documentation site: `https://github.github.com/spec-kit/index.html`
+
+The `.specify/` directory and `specs/` feature artifacts in this repository are outputs
+of that workflow and are treated as first-class project assets.
+
 This repository contains a modular, year-agnostic data pipeline for Super Bowl social
 media analysis. It ingests raw data, cleans and enriches records, computes KPIs,
 produces EDA/NLP outputs, and generates reporting artifacts.
+
+## Quick Start (5 Minutes)
+
+Run this from repo root to validate the pipeline end-to-end on toy data:
+
+```bash
+# 1) Install dependencies
+python3 -m pip install -e .
+
+# Optional: enable ML NLP path
+# python3 -m pip install -e '.[ml]'
+
+# 2) Create toy raw CSV
+mkdir -p data/raw/super-bowl/2025
+cat > data/raw/super-bowl/2025/posts.csv << 'EOF'
+id,keyword,created_at,text,brand_ad_name,public_metrics.retweet_count,public_metrics.like_count,public_metrics.reply_count,public_metrics.quote_count,entities.hashtags,entities.mentions
+1,super-bowl,2025-02-11T14:13:37.000Z,"so excited about this ad #SuperBowl @BrandA",BrandA,10,25,1,2,"[{'tag':'SuperBowl'}]","[{'username':'BrandA'}]"
+2,super-bowl,2025-02-11T14:14:37.000Z,"proud of this campaign #Halftime @BrandB",BrandB,3,12,0,1,"[{'tag':'Halftime'}]","[{'username':'BrandB'}]"
+EOF
+
+# 3) Run one year
+python3 -m src.orchestrator.run_pipeline --event super-bowl --year 2025 --config config/pipeline.yaml
+
+# 4) Inspect key outputs
+cat outputs/super-bowl/2025/manifests/run_manifest.json
+head -n 20 outputs/super-bowl/2025/kpis/brand_popularity.jsonl
+head -n 20 outputs/super-bowl/2025/kpis/nlp_lexicon/emotion_by_ad.jsonl
+head -n 20 outputs/super-bowl/2025/kpis/nlp_ml/emotion_by_ad.jsonl
+head -n 20 outputs/super-bowl/2025/kpis/roi_join_ready.csv
+
+# 5) Run test suite
+python3 -m unittest discover -s tests -p 'test_*.py' -v
+```
 
 ## Architecture At A Glance
 
