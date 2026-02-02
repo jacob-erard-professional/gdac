@@ -1,0 +1,12 @@
+{
+  "traceability": [
+    {
+      "claim": "Engagement trends are derived from KPI outputs.",
+      "kpi_ids": [
+        "total_posts",
+        "valid_posts",
+        "keyword_hit_rate"
+      ]
+    }
+  ]
+}

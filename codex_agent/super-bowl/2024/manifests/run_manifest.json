@@ -1,0 +1,18 @@
+{
+  "run_id": "b9b5fc67-e372-4369-bd0b-8b347878d312",
+  "event_name": "super-bowl",
+  "year": 2024,
+  "status": "succeeded",
+  "config_path": "config/pipeline.yaml",
+  "config_hash": "d025c23e0b95c65b20f679a396fcabdfe25c5e4d2445672257de5dead81ca524",
+  "kpi_definition_version": "1.0.0",
+  "quality_summary": {
+    "accepted_records": 1,
+    "rejected_records": 1,
+    "rejection_breakdown": {
+      "short_or_empty_text": 1
+    }
+  },
+  "artifact_index": "outputs/super-bowl/2024/manifests/artifact_index.json",
+  "written_at": "2026-02-01T23:16:10.877227+00:00"
+}

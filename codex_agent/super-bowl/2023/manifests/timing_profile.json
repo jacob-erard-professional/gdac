@@ -1,0 +1,19 @@
+{
+  "year": 2023,
+  "event_name": "super-bowl",
+  "total_seconds": 2854.413,
+  "stage_seconds": {
+    "cleaning": 2.059,
+    "nlp_lexicon_finalize": 1.13,
+    "nlp_ml_finalize": 1.119,
+    "sort_rows": 1.02,
+    "enrichment": 0.527,
+    "narratives_generation": 0.0,
+    "visualization": 0.0,
+    "brand_finalize": 0.0,
+    "summary_generation": 0.0,
+    "infographic_export": 0.0,
+    "traceability": 0.0,
+    "kpi_finalize": 0.0
+  }
+}

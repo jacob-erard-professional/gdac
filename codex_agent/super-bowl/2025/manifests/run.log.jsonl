@@ -1,0 +1,2 @@
+{"timestamp": "2026-02-01T23:16:10.879980+00:00", "level": "INFO", "message": "run_started", "run_id": "0569f365-64bb-4912-99aa-87e0dfa12d08", "event": "super-bowl", "year": 2025}
+{"timestamp": "2026-02-01T23:16:10.881029+00:00", "level": "INFO", "message": "quality_summary", "accepted_records": 1, "rejected_records": 1, "rejection_breakdown": {"short_or_empty_text": 1}}
