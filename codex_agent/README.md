@@ -34,7 +34,7 @@ python3 -m pip install -e .
 # Optional: enable ML NLP path
 # python3 -m pip install -e '.[ml]'
 
-# 2) Create toy raw CSV
+# 2) Create toy raw CSV (or use a dataset of your choice, but ensure it matches X API)
 mkdir -p data/raw/super-bowl/2025
 cat > data/raw/super-bowl/2025/posts.csv << 'EOF'
 id,keyword,created_at,text,brand_ad_name,public_metrics.retweet_count,public_metrics.like_count,public_metrics.reply_count,public_metrics.quote_count,entities.hashtags,entities.mentions
