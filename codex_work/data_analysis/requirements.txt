@@ -1,0 +1,7 @@
+pandas==2.2.3
+typer==0.15.1
+click==8.1.7
+pydantic==2.10.6
+vaderSentiment==3.3.2
+pyarrow==19.0.0
+pytest==8.3.4
