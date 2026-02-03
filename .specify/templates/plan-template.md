@@ -31,7 +31,14 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] Stage boundaries are explicit; each stage runs independently and is resumable.
+- [ ] No stage design implicitly triggers upstream stages.
+- [ ] Input/output artifacts are explicit, versioned, and schema-documented.
+- [ ] Semantic or fuzzy-equivalence logic is implemented via auditable agentic workflows.
+- [ ] Every stage defines CLI flags: `--input`, `--output`, `--config`, and `--dry-run`
+      where applicable.
+- [ ] Design favors extension via new stages/pipelines without modifying existing ones.
+- [ ] Determinism plan is defined, including non-determinism logging for agent behavior.
 
 ## Project Structure
 

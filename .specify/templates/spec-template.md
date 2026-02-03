@@ -95,6 +95,21 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Constitution Alignment *(mandatory)*
+
+- **CA-001 Stage Isolation**: Define each pipeline stage and confirm it runs independently
+  without implicitly triggering upstream stages.
+- **CA-002 Artifact Contracts**: Define input/output artifacts per stage, including schema
+  versioning and persistence requirements.
+- **CA-003 Agentic Semantics**: Identify semantic/fuzzy tasks and specify the agentic
+  workflow plus audit artifacts for outputs and decision traces.
+- **CA-004 CLI Contract**: Specify CLI invocation requirements for each stage:
+  `--input`, `--output`, `--config`, and `--dry-run` where applicable.
+- **CA-005 Extensibility**: Explain how new pipelines or stages can be added without
+  modifying existing stage behavior.
+- **CA-006 Reproducibility**: Define deterministic execution expectations and required
+  logging for non-deterministic agent behavior.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]

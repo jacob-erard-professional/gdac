@@ -62,12 +62,12 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T004 Define stage boundaries and independent CLI entrypoints for each stage
+- [ ] T005 [P] Define versioned artifact schemas and validation contracts
+- [ ] T006 [P] Implement artifact persistence layout and naming/version conventions
+- [ ] T007 Define agentic workflow interfaces for semantic/fuzzy-equivalence tasks
+- [ ] T008 Configure execution/audit logging including non-determinism metadata
+- [ ] T009 Setup configuration management for reproducible stage execution
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -85,6 +85,7 @@ Examples of foundational tasks (adjust based on your project):
 
 - [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
 - [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T011a [P] [US1] Idempotency test for re-running stage with identical inputs
 
 ### Implementation for User Story 1
 
@@ -93,7 +94,9 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
 - [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
 - [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+- [ ] T017 [US1] Persist stage artifacts and agent outputs for user story 1 operations
+- [ ] T017a [US1] Implement CLI flags `--input`, `--output`, `--config`, `--dry-run`
+- [ ] T017b [US1] Log reproducibility metadata (config hash, model/version, seed controls)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -246,6 +249,9 @@ With multiple developers:
 - [Story] label maps task to specific user story for traceability
 - Each user story should be independently completable and testable
 - Verify tests fail before implementing
+- Include tasks for artifact schema versioning and persistence whenever data crosses stages
+- Include tasks for idempotency and reproducibility verification for each stage
+- Include agent audit artifact tasks for all semantic/fuzzy-equivalence workflows
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
