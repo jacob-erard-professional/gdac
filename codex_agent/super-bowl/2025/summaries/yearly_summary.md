@@ -1,6 +1,0 @@
-# super-bowl 2025 Summary
-
-## KPI Highlights
-- total_posts: 1.0
-- valid_posts: 1.0
-- keyword_hit_rate: 1.0

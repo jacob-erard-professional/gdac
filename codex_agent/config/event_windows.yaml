@@ -1,4 +1,0 @@
-super-bowl:
-  default:
-    pre_event_days: 7
-    post_event_days: 2
