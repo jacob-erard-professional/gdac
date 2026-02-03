@@ -3,6 +3,27 @@ from datetime import datetime
 from src.pipeline.stage_runtime import make_manifest
 from src.utils.io import write_csv
 
+TARGET_COLUMNS = [
+    'id',
+    'author_id',
+    'created_at',
+    'conversation_id',
+    'text',
+    'lang',
+    'possibly_sensitive',
+    'entities.hashtags',
+    'entities.urls',
+    'referenced_tweets',
+    'in_reply_to_user_id',
+    'public_metrics.retweet_count',
+    'public_metrics.reply_count',
+    'public_metrics.like_count',
+    'public_metrics.quote_count',
+    'public_metrics.bookmark_count',
+    'username',
+    'name',
+]
+
 
 def _normalize_ts(value: str) -> str:
     if not value:
@@ -23,15 +44,19 @@ def run(config):
     with in_file.open(newline='', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            tid = row.get('tweet_id')
+            tid = row.get('id') or row.get('tweet_id')
             if tid in seen:
                 continue
             seen.add(tid)
-            row['created_at_utc'] = _normalize_ts(row.get('created_at', ''))
-            row['text_original'] = row.get('text', '')
-            row['text'] = (row.get('text') or '').strip()
-            row['cleaning_flags'] = '' if row['text'] else 'empty_text'
-            cleaned.append(row)
-    fields = sorted({k for r in cleaned for k in r.keys()}) if cleaned else []
+            text = (row.get('text') or '').strip()
+            normalized = {k: row.get(k, '') for k in TARGET_COLUMNS}
+            normalized['id'] = normalized['id'] or row.get('tweet_id', '')
+            normalized['author_id'] = normalized['author_id'] or row.get('user_id', '')
+            normalized['text'] = text
+            normalized['created_at_utc'] = _normalize_ts(row.get('created_at', ''))
+            normalized['text_original'] = row.get('text', '')
+            normalized['cleaning_flags'] = '' if text else 'empty_text'
+            cleaned.append(normalized)
+    fields = TARGET_COLUMNS + ['created_at_utc', 'text_original', 'cleaning_flags']
     write_csv(out_file, cleaned, fields)
     return make_manifest([in_file], [out_file], len(cleaned), len(cleaned))

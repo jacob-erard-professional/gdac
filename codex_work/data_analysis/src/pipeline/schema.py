@@ -1,13 +1,21 @@
 from typing import Iterable, Dict, Tuple
 
-REQUIRED_COLUMNS = {"tweet_id", "created_at", "text", "user_id"}
+# Canonical fields expected from the Twitter export used by this pipeline.
+CANONICAL_REQUIRED_COLUMNS = {"id", "author_id", "created_at", "text"}
+LEGACY_REQUIRED_COLUMNS = {"tweet_id", "user_id", "created_at", "text"}
 
 
 def validate_columns(columns: Iterable[str]) -> Tuple[bool, set]:
     cols = set(columns)
-    missing = REQUIRED_COLUMNS - cols
-    return (len(missing) == 0, missing)
+    if CANONICAL_REQUIRED_COLUMNS.issubset(cols) or LEGACY_REQUIRED_COLUMNS.issubset(cols):
+        return (True, set())
+    missing = CANONICAL_REQUIRED_COLUMNS - cols
+    return (False, missing)
 
 
 def validate_row(row: Dict[str, str]) -> bool:
-    return all(row.get(c) not in (None, "") for c in REQUIRED_COLUMNS)
+    row_id = row.get("id") or row.get("tweet_id")
+    author_id = row.get("author_id") or row.get("user_id")
+    created_at = row.get("created_at")
+    text = row.get("text")
+    return all(v not in (None, "") for v in (row_id, author_id, created_at, text))

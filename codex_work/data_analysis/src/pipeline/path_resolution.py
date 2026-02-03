@@ -16,7 +16,7 @@ def resolve_year_config(base_dir: Path, year: str | None = None, data_dir: Path 
             raw_dir=raw_dir,
             processed_dir=base_dir / "data" / "processed" / y,
             enriched_dir=base_dir / "data" / "enriched" / y,
-            analytics_dir=base_dir / "data" / "analytics" / y,
+            analytics_dir=base_dir / "outputs" / "analytics" / y,
         )
     assert year is not None
     validate_year(year)
@@ -25,5 +25,5 @@ def resolve_year_config(base_dir: Path, year: str | None = None, data_dir: Path 
         raw_dir=base_dir / "data" / "raw" / year,
         processed_dir=base_dir / "data" / "processed" / year,
         enriched_dir=base_dir / "data" / "enriched" / year,
-        analytics_dir=base_dir / "data" / "analytics" / year,
+        analytics_dir=base_dir / "outputs" / "analytics" / year,
     )

@@ -13,7 +13,7 @@ def test_rerun_is_deterministic(tmp_path: Path):
     _seed(tmp_path / 'data' / 'raw' / '2024')
     req = RunRequest(mode='full_year', stage=None, year='2024', data_dir=None)
     run_pipeline(tmp_path, req)
-    out = tmp_path / 'data' / 'analytics' / '2024' / 'sentiment_metrics.json'
+    out = tmp_path / 'outputs' / 'analytics' / '2024' / 'sentiment_metrics.json'
     c1 = sha256_file(out)
     run_pipeline(tmp_path, req)
     c2 = sha256_file(out)
