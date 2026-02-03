@@ -40,6 +40,14 @@ Full pipeline from explicit data directory:
 python -m src.cli run --data-dir data/raw/2024 --all
 ```
 
+Full pipeline for all discovered years under `data/raw/`:
+
+```bash
+python -m src.cli run --all
+```
+
+`--data-dir` is treated as the explicit raw-input directory for that run (it is not rewritten).
+
 ## Stages
 
 - ingest: schema validation from `data/raw/<year>/` to `data/processed/<year>/ingested.csv`

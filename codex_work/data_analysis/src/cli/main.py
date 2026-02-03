@@ -2,6 +2,14 @@ import typer
 from .run import run_command
 
 app = typer.Typer(add_completion=False)
+
+
+@app.callback()
+def root():
+    """Super Bowl analytics CLI."""
+    return None
+
+
 app.command('run')(run_command)
 
 
