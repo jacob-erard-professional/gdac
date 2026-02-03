@@ -49,6 +49,16 @@ python -m src.cli run --all
 
 `--data-dir` is treated as the explicit raw-input directory for that run (it is not rewritten).
 
+Brand-grouping agent workflow (reads `hashtags_frequency.json` and groups hashtag aliases by brand):
+
+```bash
+cp .env.example .env
+export OPENROUTER_API_KEY=... # keep local only; never commit
+python -m src.cli group-brands --year 2023 --model openai/gpt-oss-120b:free
+```
+
+If free-model rate limits are high, add `--request-delay 2.5 --max-rate-limit-retries 12`.
+
 ## Stages
 
 - ingest: schema validation from `data/raw/<year>/` to `data/processed/<year>/ingested.csv`
@@ -69,3 +79,6 @@ python -m src.cli run --all
 
 The analyze stage writes only two files under `outputs/analytics/<year>/`:
 `hashtags_frequency.json` and `mentions_frequency.json`.
+
+The brand-grouping agent writes:
+- `outputs/analytics/<year>/brand_groups.json`
