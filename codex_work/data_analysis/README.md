@@ -62,15 +62,10 @@ python -m src.cli run --all
 
 ## Analytics Capabilities
 
-- Brand/ad volume metrics
-- Sentiment aggregation
-- Time-bucket analysis
-- ROI proxy metrics
-- Relationship analysis
-- Event-aligned analysis
-- Text/network hashtag co-occurrence summary
+- Hashtag frequency list ordered by frequency (`hashtags_frequency.json`)
+- Mention frequency list ordered by frequency (`mentions_frequency.json`)
 
 ## Outputs and Metadata
 
-Each stage emits a manifest JSON under `outputs/analytics/<year>/` with input files,
-output files, timestamps, and record counts.
+The analyze stage writes only two files under `outputs/analytics/<year>/`:
+`hashtags_frequency.json` and `mentions_frequency.json`.

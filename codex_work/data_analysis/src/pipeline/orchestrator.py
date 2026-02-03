@@ -3,7 +3,6 @@ from pathlib import Path
 from src.pipeline.config import RunRequest
 from src.pipeline.path_resolution import resolve_year_config
 from src.pipeline.stage_registry import ordered_stages
-from src.pipeline.manifest import write_manifest
 from src.pipeline.contracts import StageResult
 from src.pipeline.year_discovery import discover_years
 from src.pipeline import stages
@@ -43,7 +42,6 @@ def _run_for_year(
         for out in manifest.output_files:
             ensure_not_raw_output(Path(out))
         stage_result = StageResult(stage=stage, status='success', metadata=manifest)
-        write_manifest(config.analytics_dir / f'{stage}_manifest.json', manifest)
         results.append(stage_result_to_contract(stage_result))
     return OrchestratorResult(year=year, mode=req.mode, status='success', stages=results)
 

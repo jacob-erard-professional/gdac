@@ -11,9 +11,9 @@ def test_analyze_outputs_exist(tmp_path: Path):
     run_pipeline(tmp_path, req)
     adir = tmp_path / 'outputs' / 'analytics' / '2024'
     expected = [
-        'volume_metrics.json', 'sentiment_metrics.json', 'time_bucket_metrics.json',
-        'roi_proxy_metrics.json', 'relationship_metrics.json', 'event_alignment_metrics.json',
-        'text_network_metrics.json'
+        'hashtags_frequency.json',
+        'mentions_frequency.json',
     ]
     for name in expected:
         assert (adir / name).exists()
+    assert sorted(p.name for p in adir.glob('*.json')) == sorted(expected)
