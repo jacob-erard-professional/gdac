@@ -26,25 +26,25 @@ Raw files are immutable after ingest.
 Single stage:
 
 ```bash
-python -m src.cli run --year 2024 --stage clean
+.venv/bin/python -m src.cli run --year 2024 --stage clean
 ```
 
 Full pipeline for one year:
 
 ```bash
-python -m src.cli run --year 2024 --all
+.venv/bin/python -m src.cli run --year 2024 --all
 ```
 
 Full pipeline from explicit data directory:
 
 ```bash
-python -m src.cli run --data-dir data/raw/2024 --all
+.venv/bin/python -m src.cli run --data-dir data/raw/2024 --all
 ```
 
 Full pipeline for all discovered years under `data/raw/`:
 
 ```bash
-python -m src.cli run --all
+.venv/bin/python -m src.cli run --all
 ```
 
 `--data-dir` is treated as the explicit raw-input directory for that run (it is not rewritten).
@@ -54,7 +54,7 @@ Brand-grouping agent workflow (reads `hashtags_frequency.json` and groups hashta
 ```bash
 cp .env.example .env
 export OPENROUTER_API_KEY=... # keep local only; never commit
-python -m src.cli group-brands --year 2023 --model openai/gpt-oss-120b:free
+.venv/bin/python -m src.cli group-brands --year 2023 --model openai/gpt-oss-120b:free
 ```
 
 If free-model rate limits are high, add `--request-delay 2.5 --max-rate-limit-retries 12`.
