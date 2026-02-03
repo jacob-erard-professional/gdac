@@ -15,6 +15,7 @@ data/
   raw/<year>/*.csv
   processed/<year>/
   enriched/<year>/
+outputs/
   analytics/<year>/
 ```
 
@@ -52,8 +53,10 @@ python -m src.cli run --all
 
 - ingest: schema validation from `data/raw/<year>/` to `data/processed/<year>/ingested.csv`
 - clean: dedupe/null/timestamp normalization to `data/processed/<year>/cleaned.csv`
+  (includes canonical Twitter fields such as `id`, `author_id`, `conversation_id`,
+  `entities.*`, `public_metrics.*`, `username`, and `name`)
 - process: text features/tags to `data/enriched/<year>/enriched.csv`
-- analyze: analytics artifact generation under `data/analytics/<year>/`
+- analyze: analytics artifact generation under `outputs/analytics/<year>/`
 - visualize (optional): placeholder visualization output
 - export (optional): placeholder export artifact
 
@@ -69,5 +72,5 @@ python -m src.cli run --all
 
 ## Outputs and Metadata
 
-Each stage emits a manifest JSON under `data/analytics/<year>/` with input files,
+Each stage emits a manifest JSON under `outputs/analytics/<year>/` with input files,
 output files, timestamps, and record counts.

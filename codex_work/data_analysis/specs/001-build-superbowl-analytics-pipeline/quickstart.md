@@ -7,7 +7,7 @@
 3. Ensure destination year folders exist or are creatable in:
    - `data/processed/<year>/`
    - `data/enriched/<year>/`
-   - `data/analytics/<year>/`
+   - `outputs/analytics/<year>/`
 
 ## CLI Run Examples
 
@@ -43,7 +43,7 @@ A successful full run produces:
 
 - processed artifacts in `data/processed/<year>/`
 - enriched artifacts in `data/enriched/<year>/`
-- analytics artifacts in `data/analytics/<year>/`
+- analytics artifacts in `outputs/analytics/<year>/`
 - stage manifests with input/output/count metadata per stage
 
 ## Validation Checklist

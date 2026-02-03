@@ -20,8 +20,8 @@ def run(config):
                     rows.append(r)
                 else:
                     bad += 1
-    rows = sorted(rows, key=lambda r: (r.get('tweet_id', ''), r.get('created_at', '')))
+    rows = sorted(rows, key=lambda r: (r.get('id') or r.get('tweet_id', ''), r.get('created_at', '')))
     out = config.processed_dir / 'ingested.csv'
-    fields = sorted({k for r in rows for k in r.keys()}) if rows else ['tweet_id', 'created_at', 'text', 'user_id']
+    fields = sorted({k for r in rows for k in r.keys()}) if rows else ['id', 'author_id', 'created_at', 'text']
     write_csv(out, rows, fields)
     return make_manifest(raw_files, [out], len(rows) + bad, len(rows), notes=[f'invalid_rows={bad}'])
