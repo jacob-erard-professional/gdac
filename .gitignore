@@ -1,2 +1,13 @@
-codex_work/data_analysis/data
+# Raw data (never commit)
+codex_work/data_analysis/data/
+
+# Codex / tool artifacts
 codex_work/data_analysis/.codex/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
