@@ -1,0 +1,142 @@
+openapi: 3.0.3
+info:
+  title: Twitter Super Bowl Analytics Pipeline Contract
+  version: 1.0.0
+  description: Contract for orchestrating stage-based, year-scoped pipeline runs.
+servers:
+  - url: https://pipeline.local
+paths:
+  /pipeline/runs:
+    post:
+      summary: Start a pipeline run
+      operationId: startPipelineRun
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+      responses:
+        '202':
+          description: Run accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunAccepted'
+        '400':
+          description: Invalid run request
+  /pipeline/runs/{runId}:
+    get:
+      summary: Get run status and artifacts
+      operationId: getPipelineRun
+      parameters:
+        - in: path
+          name: runId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Run status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunStatus'
+        '404':
+          description: Run not found
+components:
+  schemas:
+    RunRequest:
+      type: object
+      additionalProperties: false
+      required: [mode, deterministic]
+      properties:
+        mode:
+          type: string
+          enum: [stage, full_year, full_all_years]
+        year:
+          type: string
+          pattern: '^[0-9]{4}$'
+        dataDir:
+          type: string
+        stage:
+          type: string
+          enum: [ingest, clean, process, analyze, visualize, export]
+        deterministic:
+          type: boolean
+        params:
+          type: object
+      oneOf:
+        - required: [year]
+        - required: [dataDir]
+    RunAccepted:
+      type: object
+      required: [runId, status]
+      properties:
+        runId:
+          type: string
+        status:
+          type: string
+          enum: [accepted]
+    RunStatus:
+      type: object
+      required: [runId, mode, status, stages]
+      properties:
+        runId:
+          type: string
+        mode:
+          type: string
+          enum: [stage, full_year, full_all_years]
+        status:
+          type: string
+          enum: [running, success, failed]
+        year:
+          type: string
+          pattern: '^[0-9]{4}$'
+        stages:
+          type: array
+          items:
+            $ref: '#/components/schemas/StageResult'
+    StageResult:
+      type: object
+      required: [stage, status, metadata]
+      properties:
+        stage:
+          type: string
+          enum: [ingest, clean, process, analyze, visualize, export]
+        status:
+          type: string
+          enum: [success, failed, skipped]
+        metadata:
+          $ref: '#/components/schemas/RunManifest'
+    RunManifest:
+      type: object
+      required:
+        - inputFiles
+        - outputFiles
+        - recordCounts
+        - startedAt
+        - completedAt
+      properties:
+        inputFiles:
+          type: array
+          items:
+            type: string
+        outputFiles:
+          type: array
+          items:
+            type: string
+        recordCounts:
+          type: object
+          additionalProperties:
+            type: integer
+        startedAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+        notes:
+          type: array
+          items:
+            type: string
