@@ -1,9 +1,14 @@
 # Super Bowl Twitter Data Analysis
 
-This repository cleans, processes, and analyzes large-scale Super Bowl Twitter CSV
-datasets with deterministic, year-scoped pipeline runs.
+This repository contains a deterministic, stage-based CLI pipeline for year-scoped
+Twitter Super Bowl analysis.
 
-## Required Data Layout
+## Directory Scope Rule
+
+All work for this project remains inside the `data_analysis` directory. Add new
+subdirectories here when needed.
+
+## Data Layout
 
 ```text
 data/
@@ -13,35 +18,48 @@ data/
   analytics/<year>/
 ```
 
-`data/raw` is read-only after ingest.
+Raw files are immutable after ingest.
 
-## Pipeline Stages
+## CLI
 
-- `ingest`
-- `clean`
-- `process`
-- `analyze`
-- `visualize` (optional)
-- `export`
+Single stage:
 
-Each stage must support explicit input/output paths and independent CLI execution.
+```bash
+python -m src.cli run --year 2024 --stage clean
+```
 
-## Run Modes (Conceptual)
+Full pipeline for one year:
 
-- Single stage, single year: `run --year 2024 --stage clean`
-- Full pipeline, single year: `run --year 2024 --all`
-- Full pipeline, explicit directory: `run --data-dir data/raw/2023 --all`
+```bash
+python -m src.cli run --year 2024 --all
+```
 
-## Analytics Scope
+Full pipeline from explicit data directory:
 
-- Brand and ad volume metrics
-- Sentiment by ad/brand over time
-- Quarter/minute and before/after analysis
-- ROI proxy metrics (cost, followers, retweets, engagement)
-- Variable relationship analysis
-- Event-aligned analysis (game events, ad timing)
-- Text mining and co-occurrence/network analysis
+```bash
+python -m src.cli run --data-dir data/raw/2024 --all
+```
 
-## Governance
+## Stages
 
-Repository governance is defined in `.specify/memory/constitution.md`.
+- ingest: schema validation from `data/raw/<year>/` to `data/processed/<year>/ingested.csv`
+- clean: dedupe/null/timestamp normalization to `data/processed/<year>/cleaned.csv`
+- process: text features/tags to `data/enriched/<year>/enriched.csv`
+- analyze: analytics artifact generation under `data/analytics/<year>/`
+- visualize (optional): placeholder visualization output
+- export (optional): placeholder export artifact
+
+## Analytics Capabilities
+
+- Brand/ad volume metrics
+- Sentiment aggregation
+- Time-bucket analysis
+- ROI proxy metrics
+- Relationship analysis
+- Event-aligned analysis
+- Text/network hashtag co-occurrence summary
+
+## Outputs and Metadata
+
+Each stage emits a manifest JSON under `data/analytics/<year>/` with input files,
+output files, timestamps, and record counts.
