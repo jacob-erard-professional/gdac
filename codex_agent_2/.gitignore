@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+*.egg-info/
+.pytest_cache/
+
+# Project artifacts
+artifacts/**
+!artifacts/.gitkeep
+
+# Logs and env
+*.log
+.env*
+.env.openrouter
+!.env.openrouter.example
+
+# Universal
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/
+
+# Local tool state
+.codex/
