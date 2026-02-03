@@ -1,9 +1,0 @@
-provider: openrouter
-model: openai/gpt-oss-120b:free
-env_file: .env.openrouter
-iteration: 1
-temperature: 0.0
-seed: 0
-timeout_seconds: 120
-prompt:
-  task: normalize hashtags
