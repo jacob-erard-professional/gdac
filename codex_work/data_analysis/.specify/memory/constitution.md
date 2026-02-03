@@ -1,24 +1,14 @@
 <!--
 Sync Impact Report
-- Version change: template-unset -> 1.0.0
+- Version change: 1.0.0 -> 1.0.1
 - Modified principles:
-  - Principle 1 placeholder -> I. Year-Scoped Data Organization
-  - Principle 2 placeholder -> II. Modular, Stage-Based Pipeline Execution
-  - Principle 3 placeholder -> III. Deterministic and Scalable Processing
-  - Principle 4 placeholder -> IV. Required Super Bowl Analytics Coverage
-  - Principle 5 placeholder -> V. Documentation and Extensibility by Default
+  - Repository scope rule expanded to enforce in-directory work boundaries
 - Added sections:
-  - Repository Scope and Mandatory Data Layout
-  - Delivery Workflow and Compliance Gates
+  - None
 - Removed sections:
-  - Section 2 placeholder
-  - Section 3 placeholder
+  - None
 - Templates requiring updates:
-  - ✅ updated `.specify/templates/plan-template.md`
-  - ✅ updated `.specify/templates/spec-template.md`
-  - ✅ updated `.specify/templates/tasks-template.md`
-  - ⚠ pending `.specify/templates/commands/*.md` (directory not present)
-  - ✅ updated `README.md` (created to satisfy constitution)
+  - ✅ no updates required (constitutional clarification only)
 - Follow-up TODOs:
   - None.
 -->
@@ -82,6 +72,9 @@ The repository purpose is to clean, process, and analyze large-scale Twitter CSV
 for Super Bowl analysis. Implementations MUST prioritize explicit configuration over
 implicit behavior, reproducibility over speed, modularity over convenience, and
 clarity over cleverness when requirements are ambiguous.
+All work for this repository MUST remain within the `data_analysis` directory tree.
+If additional structure is needed, new subdirectories MUST be created under
+`data_analysis` rather than in parent or sibling directories.
 
 Required layout:
 
@@ -115,4 +108,4 @@ MUST run during planning and pull request review using constitution-aligned chec
 `.specify/templates/plan-template.md`, `.specify/templates/spec-template.md`, and
 `.specify/templates/tasks-template.md`.
 
-**Version**: 1.0.0 | **Ratified**: 2026-02-03 | **Last Amended**: 2026-02-03
+**Version**: 1.0.1 | **Ratified**: 2026-02-03 | **Last Amended**: 2026-02-03
