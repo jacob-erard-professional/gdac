@@ -1,0 +1,2 @@
+emotion_lexicon_path: artifacts/emotion_lexicon/predictions.v1.json
+emotion_ml_path: artifacts/emotion_ml/predictions.v1.json
