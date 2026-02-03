@@ -9,4 +9,5 @@ def test_new_year_works_without_code_changes(tmp_path: Path):
     (raw / 'tweets.csv').write_text('tweet_id,created_at,text,user_id\n1,2025-02-10 10:00:00,ok,u1\n', encoding='utf-8')
     req = RunRequest(mode='full_year', stage=None, year='2025', data_dir=None)
     run_pipeline(tmp_path, req)
-    assert (tmp_path / 'outputs' / 'analytics' / '2025' / 'sentiment_metrics.json').exists()
+    assert (tmp_path / 'outputs' / 'analytics' / '2025' / 'hashtags_frequency.json').exists()
+    assert (tmp_path / 'outputs' / 'analytics' / '2025' / 'mentions_frequency.json').exists()

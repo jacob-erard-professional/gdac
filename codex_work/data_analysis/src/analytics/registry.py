@@ -1,13 +1,8 @@
-from . import volume, sentiment, time_buckets, roi_proxy, relationships, event_alignment, text_network
+from . import hashtag_frequency, mention_frequency
 
 
 def module_registry():
     return {
-        "volume": volume.run,
-        "sentiment": sentiment.run,
-        "time": time_buckets.run,
-        "roi_proxy": roi_proxy.run,
-        "relationship": relationships.run,
-        "event": event_alignment.run,
-        "text_network": text_network.run,
+        "hashtags_frequency": hashtag_frequency.run,
+        "mentions_frequency": mention_frequency.run,
     }

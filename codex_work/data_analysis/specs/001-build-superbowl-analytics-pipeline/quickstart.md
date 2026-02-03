@@ -43,8 +43,9 @@ A successful full run produces:
 
 - processed artifacts in `data/processed/<year>/`
 - enriched artifacts in `data/enriched/<year>/`
-- analytics artifacts in `outputs/analytics/<year>/`
-- stage manifests with input/output/count metadata per stage
+- analytics artifacts in `outputs/analytics/<year>/`:
+  - `hashtags_frequency.json`
+  - `mentions_frequency.json`
 
 ## Validation Checklist
 

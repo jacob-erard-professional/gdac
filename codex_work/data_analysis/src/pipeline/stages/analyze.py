@@ -9,6 +9,10 @@ def run(config):
         rows = list(csv.DictReader(f))
     out_dir = config.analytics_dir
     out_dir.mkdir(parents=True, exist_ok=True)
+    # Keep the analytics output directory limited to current run artifacts.
+    for existing in out_dir.glob('*'):
+        if existing.is_file():
+            existing.unlink()
     outputs = []
     for _, func in module_registry().items():
         outputs.append(func(rows, config.year, out_dir))
