@@ -29,6 +29,14 @@ Full pipeline from explicit data directory:
 python -m src.cli run --data-dir data/raw/2023 --all
 ```
 
+Full pipeline for all discovered years:
+
+```bash
+python -m src.cli run --all
+```
+
+Note: `--data-dir` is used as the explicit raw input directory for the run.
+
 ## Expected Outputs
 
 A successful full run produces:

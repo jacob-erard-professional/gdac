@@ -29,8 +29,14 @@ class OrchestratorResult:
     stages: list[dict]
 
 
-def _run_for_year(base_dir: Path, req: RunRequest, year: str, stage_list: list[str]):
-    config = resolve_year_config(base_dir, year=year)
+def _run_for_year(
+    base_dir: Path,
+    req: RunRequest,
+    year: str | None,
+    data_dir: Path | None,
+    stage_list: list[str],
+):
+    config = resolve_year_config(base_dir, year=year, data_dir=data_dir)
     results = []
     for stage in stage_list:
         manifest = RUNNERS[stage](config)
@@ -47,19 +53,20 @@ def run_pipeline(base_dir: Path, req: RunRequest):
         if not req.stage:
             raise ValueError('stage mode requires stage')
         stage_list = [req.stage]
-        y = req.year or (req.data_dir.name if req.data_dir else None)
-        if not y:
+        if bool(req.year) == bool(req.data_dir):
             raise ValueError('stage mode requires year or data_dir')
-        return [_run_for_year(base_dir, req, y, stage_list)]
+        return [_run_for_year(base_dir, req, req.year, req.data_dir, stage_list)]
 
     if req.mode == 'full_year':
-        y = req.year or (req.data_dir.name if req.data_dir else None)
-        if not y:
+        if bool(req.year) == bool(req.data_dir):
             raise ValueError('full_year mode requires year or data_dir')
-        return [_run_for_year(base_dir, req, y, ordered_stages(include_optional=False))]
+        return [_run_for_year(base_dir, req, req.year, req.data_dir, ordered_stages(include_optional=False))]
 
     if req.mode == 'full_all_years':
         years = discover_years(base_dir / 'data' / 'raw')
-        return [_run_for_year(base_dir, req, y, ordered_stages(include_optional=False)) for y in years]
+        return [
+            _run_for_year(base_dir, req, y, None, ordered_stages(include_optional=False))
+            for y in years
+        ]
 
     raise ValueError(f'unknown mode {req.mode}')
