@@ -19,6 +19,13 @@ class RunRequest:
     year: Optional[str]
     data_dir: Optional[Path]
     deterministic: bool = True
+    with_sentiment: bool = False
+    with_ad_sentiment: bool = False
+    sentiment_model: str = "finiteautomata/bertweet-base-sentiment-analysis"
+    sentiment_batch_size: int = 64
+    sentiment_dry_run: bool = False
+    sentiment_allow_fallback: bool = False
+    ad_sentiment_min_tweets: int = 1
 
 
 def validate_year(year: str) -> str:

@@ -4,10 +4,19 @@ from json import JSONDecodeError
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from time import monotonic, sleep
+from time import sleep
 from typing import Dict, Iterable, List
 
 from langchain_openai import ChatOpenAI
+
+from src.agents.rate_limit_policy import (
+    MAX_BACKOFF_SECONDS,
+    MIN_INITIAL_BACKOFF_SECONDS,
+    MIN_MAX_RATE_LIMIT_RETRIES,
+    MIN_REQUEST_DELAY_SECONDS,
+    enforce_rate_limit_policy,
+    wait_for_slot,
+)
 
 
 MODEL_DEFAULT = "openai/gpt-oss-120b:free"
@@ -26,25 +35,20 @@ class _RateLimitedInvoker:
     min_interval_seconds: float
     max_rate_limit_retries: int
     initial_backoff_seconds: float
-    _last_call_at: float = 0.0
 
     def invoke(self, prompt: str):
-        now = monotonic()
-        wait = self.min_interval_seconds - (now - self._last_call_at)
-        if wait > 0:
-            sleep(wait)
+        wait_for_slot(scope="openrouter", min_interval_seconds=self.min_interval_seconds)
 
         for attempt in range(self.max_rate_limit_retries + 1):
             try:
                 response = self.llm.invoke(prompt)
-                self._last_call_at = monotonic()
                 return response
             except Exception as exc:  # noqa: BLE001
                 if not _is_rate_limit_error(exc):
                     raise
                 if attempt >= self.max_rate_limit_retries:
                     raise
-                backoff = min(self.initial_backoff_seconds * (2 ** attempt), 30.0)
+                backoff = min(self.initial_backoff_seconds * (2 ** attempt), MAX_BACKOFF_SECONDS)
                 sleep(backoff)
 
 
@@ -192,13 +196,19 @@ def run_parent_company_grouping(
     output_path: Path,
     model: str = MODEL_DEFAULT,
     chunk_size: int = 40,
-    request_delay_seconds: float = 1.5,
-    max_rate_limit_retries: int = 8,
-    initial_backoff_seconds: float = 2.0,
+    request_delay_seconds: float = MIN_REQUEST_DELAY_SECONDS,
+    max_rate_limit_retries: int = MIN_MAX_RATE_LIMIT_RETRIES,
+    initial_backoff_seconds: float = MIN_INITIAL_BACKOFF_SECONDS,
 ) -> Path:
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
         raise ValueError("OPENROUTER_API_KEY is required in your environment")
+
+    request_delay_seconds, max_rate_limit_retries, initial_backoff_seconds = enforce_rate_limit_policy(
+        request_delay_seconds=request_delay_seconds,
+        max_rate_limit_retries=max_rate_limit_retries,
+        initial_backoff_seconds=initial_backoff_seconds,
+    )
 
     year, groups = _load_brand_groups(brand_groups_path)
     llm = ChatOpenAI(
@@ -210,9 +220,9 @@ def run_parent_company_grouping(
     )
     invoker = _RateLimitedInvoker(
         llm=llm,
-        min_interval_seconds=max(0.0, request_delay_seconds),
-        max_rate_limit_retries=max(0, max_rate_limit_retries),
-        initial_backoff_seconds=max(0.5, initial_backoff_seconds),
+        min_interval_seconds=request_delay_seconds,
+        max_rate_limit_retries=max_rate_limit_retries,
+        initial_backoff_seconds=initial_backoff_seconds,
     )
 
     brand_to_parent: Dict[str, str] = {}
