@@ -1,0 +1,2 @@
+"""Agentic sentiment analysis package."""
+
