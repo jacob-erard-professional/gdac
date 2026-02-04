@@ -28,18 +28,18 @@ artifacts are produced only under year-scoped directories.
 
 ### User Story 2 - Produce Required Analytics Coverage (Priority: P2)
 
-As a researcher, I generate per-year analytics for sentiment, volume, time buckets,
-ROI proxies, relationships, event alignment, and text/network signals.
+As a researcher, I generate baseline per-year analytics for hashtags and mentions,
+with clear extension points for additional modules.
 
 **Why this priority**: Analytics is the repository purpose after pipeline reliability.
 
-**Independent Test**: Run `analyze` for a year with enriched data and verify each
-required analytics artifact is generated under `data/analytics/<year>/`.
+**Independent Test**: Run `analyze` for a year with enriched data and verify baseline
+artifacts are generated under `outputs/analytics/<year>/`.
 
 **Acceptance Scenarios**:
 
 1. **Given** enriched year data, **When** I run `--year 2024 --stage analyze`,
-   **Then** all required analytics modules output year-scoped artifacts.
+   **Then** hashtag and mention frequency modules output year-scoped artifacts.
 
 ---
 
@@ -81,7 +81,8 @@ add one analytics module and verify existing modules still execute.
 - **FR-005**: Ingest MUST perform canonical schema validation before downstream work.
 - **FR-006**: Raw data in `data/raw/` MUST remain immutable.
 - **FR-007**: Intermediate artifacts MUST persist to disk between stages.
-- **FR-008**: Processing MUST support streaming/chunked execution for large files.
+- **FR-008**: Processing SHOULD support streaming/chunked execution for large files,
+  and MUST document any in-memory constraints.
 - **FR-009**: Analytics outputs MUST be per-year and non-overwriting across years.
 - **FR-010**: README MUST be updated for any new stage, CLI option, or analytics module.
 
@@ -92,7 +93,7 @@ add one analytics module and verify existing modules still execute.
 - **RawTweetRecord**: Raw CSV row validated against canonical schema.
 - **ProcessedTweetRecord**: Cleaned and normalized tweet with preserved originals.
 - **EnrichedTweetRecord**: Processed row with tags/features for analytics.
-- **AnalyticsArtifact**: Module-specific, year-scoped metrics output.
+- **AnalyticsArtifact**: Module-specific, year-scoped metrics output under `outputs/analytics/<year>/`.
 - **RunManifest**: Metadata linking inputs, outputs, counts, and timestamps per stage.
 
 ## Success Criteria *(mandatory)*
@@ -103,4 +104,6 @@ add one analytics module and verify existing modules still execute.
 - **SC-002**: All required stages run independently via CLI with explicit paths.
 - **SC-003**: Full pipeline run writes processed, enriched, analytics, and metadata outputs.
 - **SC-004**: Raw files remain unchanged after any stage or full run.
-- **SC-005**: README reflects all implemented CLI options, stages, and analytics modules.
+- **SC-005**: Analyze stage writes `hashtags_frequency.json` and `mentions_frequency.json`
+  under `outputs/analytics/<year>/`.
+- **SC-006**: README reflects all implemented CLI options, stages, and analytics modules.

@@ -59,6 +59,12 @@ export OPENROUTER_API_KEY=... # keep local only; never commit
 
 If free-model rate limits are high, add `--request-delay 2.5 --max-rate-limit-retries 12`.
 
+Parent-company grouping agent workflow (reads `brand_groups.json` and groups brands under parent companies):
+
+```bash
+.venv/bin/python -m src.cli group-parent-companies --year 2023 --model openai/gpt-oss-120b:free
+```
+
 ## Stages
 
 - ingest: schema validation from `data/raw/<year>/` to `data/processed/<year>/ingested.csv`
@@ -82,3 +88,6 @@ The analyze stage writes only two files under `outputs/analytics/<year>/`:
 
 The brand-grouping agent writes:
 - `outputs/analytics/<year>/brand_groups.json`
+
+The parent-company grouping agent writes:
+- `outputs/analytics/<year>/parent_company_groups.json`

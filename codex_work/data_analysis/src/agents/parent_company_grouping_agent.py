@@ -14,9 +14,10 @@ MODEL_DEFAULT = "openai/gpt-oss-120b:free"
 
 
 @dataclass(frozen=True)
-class HashtagCount:
-    hashtag: str
-    count: int
+class BrandGroup:
+    brand: str
+    total_count: int
+    hashtags: List[Dict[str, int | str]]
 
 
 @dataclass
@@ -50,34 +51,6 @@ class _RateLimitedInvoker:
 def _is_rate_limit_error(exc: Exception) -> bool:
     msg = str(exc).lower()
     return "429" in msg or "rate limit" in msg or "rate-limited" in msg
-
-
-def _load_hashtags(path: Path) -> tuple[str, List[HashtagCount]]:
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    year = str(payload.get("year", "unknown"))
-    raw_hashtags = payload.get("hashtags", [])
-
-    if isinstance(raw_hashtags, dict):
-        raw_hashtags = [
-            {"hashtag": tag, "count": count} for tag, count in raw_hashtags.items()
-        ]
-
-    hashtags: List[HashtagCount] = []
-    for item in raw_hashtags:
-        tag = str(item.get("hashtag", "")).strip().lower()
-        if not tag:
-            continue
-        try:
-            count = int(item.get("count", 0))
-        except (TypeError, ValueError):
-            count = 0
-        hashtags.append(HashtagCount(hashtag=tag, count=max(count, 0)))
-    return year, hashtags
-
-
-def _chunks(items: List[HashtagCount], size: int) -> Iterable[List[HashtagCount]]:
-    for i in range(0, len(items), size):
-        yield items[i : i + size]
 
 
 def _extract_json(text: str) -> dict:
@@ -120,48 +93,84 @@ def _invoke_json(invoker: _RateLimitedInvoker, prompt: str, retries: int = 2) ->
     raise ValueError(f"Model response could not be parsed as JSON: {last_error}") from last_error
 
 
-def _map_chunk_to_brands(invoker: _RateLimitedInvoker, chunk: List[HashtagCount]) -> Dict[str, str]:
-    items = [{"hashtag": item.hashtag, "count": item.count} for item in chunk]
+def _load_brand_groups(path: Path) -> tuple[str, List[BrandGroup]]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    year = str(payload.get("year", "unknown"))
+    raw_groups = payload.get("brands", [])
+
+    groups: List[BrandGroup] = []
+    for item in raw_groups:
+        brand = str(item.get("brand", "")).strip().lower()
+        if not brand:
+            continue
+        try:
+            total_count = int(item.get("total_count", 0))
+        except (TypeError, ValueError):
+            total_count = 0
+        hashtags = item.get("hashtags", [])
+        if not isinstance(hashtags, list):
+            hashtags = []
+        groups.append(
+            BrandGroup(
+                brand=brand,
+                total_count=max(total_count, 0),
+                hashtags=hashtags,
+            )
+        )
+    return year, groups
+
+
+def _chunks(items: List[BrandGroup], size: int) -> Iterable[List[BrandGroup]]:
+    for i in range(0, len(items), size):
+        yield items[i : i + size]
+
+
+def _map_chunk_to_parent_companies(
+    invoker: _RateLimitedInvoker, chunk: List[BrandGroup]
+) -> Dict[str, str]:
+    items = [
+        {
+            "brand": item.brand,
+            "total_count": item.total_count,
+            "hashtags": [h.get("hashtag") for h in item.hashtags[:8] if isinstance(h, dict)],
+        }
+        for item in chunk
+    ]
     prompt = (
-        "Group hashtags into coherent canonical groups.\n"
+        "Map each brand group to a real parent company label when known.\n"
         "Output strict JSON only with schema:\n"
-        '{"mappings":[{"hashtag":"<string>","brand":"<canonical group label>"}]}\n'
+        '{"mappings":[{"brand":"<string>","parent_company":"<canonical parent company label>"}]}\n'
         "Rules:\n"
-        "- brand values are lowercase short labels like dc, pepsi, nfl, or lisa.\n"
-        "- if two hashtags refer to the same concept, use exactly the same brand label.\n"
-        "- every hashtag MUST map to a specific group label.\n"
-        "- do NOT use a generic catch-all label like 'unassigned'.\n"
-        "- if a hashtag has no close match, create a singleton group label for it.\n"
-        "- map every hashtag exactly once.\n"
+        "- parent_company labels must be lowercase concise names.\n"
+        "- every brand must map exactly once.\n"
+        "- if parent company is unknown, keep parent_company equal to the brand label.\n"
         "- never return markdown.\n\n"
-        f"hashtags={json.dumps(items, ensure_ascii=True)}"
+        f"brand_groups={json.dumps(items, ensure_ascii=True)}"
     )
     payload = _invoke_json(invoker, prompt)
     mappings = payload.get("mappings", [])
     out: Dict[str, str] = {}
     for mapping in mappings:
-        hashtag = str(mapping.get("hashtag", "")).strip().lower()
-        brand = str(mapping.get("brand", "")).strip().lower() or hashtag
-        if hashtag:
-            out[hashtag] = brand
+        brand = str(mapping.get("brand", "")).strip().lower()
+        parent = str(mapping.get("parent_company", "")).strip().lower() or brand
+        if brand:
+            out[brand] = parent
     for item in chunk:
-        out.setdefault(item.hashtag, item.hashtag)
+        out.setdefault(item.brand, item.brand)
     return out
 
 
-def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> Dict[str, str]:
+def _normalize_parent_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> Dict[str, str]:
     unique_labels = sorted(set(labels))
     prompt = (
-        "You will normalize brand label aliases.\n"
+        "Normalize parent company aliases.\n"
         "Output strict JSON only with schema:\n"
         '{"aliases":[{"label":"<input label>","canonical":"<merged canonical label>"}]}\n'
         "Rules:\n"
-        "- Keep labels lowercase.\n"
-        "- Only merge labels that clearly refer to the same brand/property.\n"
-        "- Every label must resolve to a specific canonical group label.\n"
-        "- Do NOT map labels to generic catch-alls like 'unassigned'.\n"
-        "- If a label has no clear alias, keep it as its own canonical label.\n"
-        "- Return one alias entry for every input label.\n"
+        "- keep labels lowercase.\n"
+        "- merge only labels that clearly refer to the same company.\n"
+        "- if unclear, keep label unchanged.\n"
+        "- return one alias entry for every input label.\n"
         "- never return markdown.\n\n"
         f"labels={json.dumps(unique_labels, ensure_ascii=True)}"
     )
@@ -178,11 +187,11 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
     return out
 
 
-def run_brand_grouping(
-    hashtags_path: Path,
+def run_parent_company_grouping(
+    brand_groups_path: Path,
     output_path: Path,
     model: str = MODEL_DEFAULT,
-    chunk_size: int = 60,
+    chunk_size: int = 40,
     request_delay_seconds: float = 1.5,
     max_rate_limit_retries: int = 8,
     initial_backoff_seconds: float = 2.0,
@@ -191,7 +200,7 @@ def run_brand_grouping(
     if not api_key:
         raise ValueError("OPENROUTER_API_KEY is required in your environment")
 
-    year, hashtags = _load_hashtags(hashtags_path)
+    year, groups = _load_brand_groups(brand_groups_path)
     llm = ChatOpenAI(
         model=model,
         api_key=api_key,
@@ -206,34 +215,47 @@ def run_brand_grouping(
         initial_backoff_seconds=max(0.5, initial_backoff_seconds),
     )
 
-    hashtag_to_brand: Dict[str, str] = {}
-    for chunk in _chunks(hashtags, size=chunk_size):
-        hashtag_to_brand.update(_map_chunk_to_brands(invoker, chunk))
+    brand_to_parent: Dict[str, str] = {}
+    for chunk in _chunks(groups, size=chunk_size):
+        brand_to_parent.update(_map_chunk_to_parent_companies(invoker, chunk))
 
-    alias_map = _normalize_brand_labels(invoker, list(hashtag_to_brand.values()))
+    alias_map = _normalize_parent_labels(invoker, list(brand_to_parent.values()))
 
-    grouped: Dict[str, List[Dict[str, int | str]]] = {}
-    for item in hashtags:
-        label = hashtag_to_brand.get(item.hashtag, item.hashtag)
-        brand = alias_map.get(label, label)
-        grouped.setdefault(brand, []).append(
-            {"hashtag": item.hashtag, "count": item.count}
+    grouped: Dict[str, List[dict]] = {}
+    for group in groups:
+        raw_parent = brand_to_parent.get(group.brand, group.brand)
+        parent = alias_map.get(raw_parent, raw_parent)
+        grouped.setdefault(parent, []).append(
+            {
+                "brand": group.brand,
+                "total_count": group.total_count,
+                "hashtags": group.hashtags,
+            }
         )
 
-    brands = []
-    for brand, items in grouped.items():
-        ordered_items = sorted(items, key=lambda x: (-int(x["count"]), str(x["hashtag"])))
-        total = sum(int(i["count"]) for i in ordered_items)
-        brands.append({"brand": brand, "total_count": total, "hashtags": ordered_items})
-    brands.sort(key=lambda x: (-int(x["total_count"]), str(x["brand"])))
+    parent_companies = []
+    for parent, children in grouped.items():
+        ordered_children = sorted(
+            children, key=lambda x: (-int(x["total_count"]), str(x["brand"]))
+        )
+        total = sum(int(c["total_count"]) for c in ordered_children)
+        parent_companies.append(
+            {
+                "parent_company": parent,
+                "total_count": total,
+                "brands": ordered_children,
+            }
+        )
+    parent_companies.sort(key=lambda x: (-int(x["total_count"]), str(x["parent_company"])))
 
     result = {
         "year": year,
         "model": model,
-        "source_file": str(hashtags_path),
+        "source_file": str(brand_groups_path),
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-        "brands": brands,
+        "parent_companies": parent_companies,
     }
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
     return output_path

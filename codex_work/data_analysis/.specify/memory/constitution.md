@@ -1,14 +1,19 @@
 <!--
 Sync Impact Report
-- Version change: 1.0.0 -> 1.0.1
+- Version change: 1.0.1 -> 2.0.0
 - Modified principles:
-  - Repository scope rule expanded to enforce in-directory work boundaries
+  - I. Year-Scoped Data Organization (analytics output root aligned to implementation)
+  - III. Deterministic and Scalable Processing (streaming/chunking downgraded from MUST to SHOULD)
+  - IV. Required Super Bowl Analytics Coverage -> IV. Baseline Analytics Coverage and Extension Contract
 - Added sections:
   - None
 - Removed sections:
   - None
 - Templates requiring updates:
-  - ✅ no updates required (constitutional clarification only)
+  - ✅ updated `specs/001-build-superbowl-analytics-pipeline/spec.md`
+  - ✅ updated `specs/001-build-superbowl-analytics-pipeline/plan.md`
+  - ✅ updated `specs/001-build-superbowl-analytics-pipeline/tasks.md`
+  - ✅ updated `specs/001-build-superbowl-analytics-pipeline/data-model.md`
 - Follow-up TODOs:
   - None.
 -->
@@ -19,7 +24,7 @@ Sync Impact Report
 ### I. Year-Scoped Data Organization
 All repository data MUST be organized by Super Bowl year using this structure:
 `data/raw/<year>/`, `data/processed/<year>/`, `data/enriched/<year>/`, and
-`data/analytics/<year>/`. Raw files in `data/raw` are immutable after ingest and MUST
+`outputs/analytics/<year>/`. Raw files in `data/raw` are immutable after ingest and MUST
 never be modified by scripts. Every pipeline run MUST target a single explicit year or
 single explicit data directory, and cross-year analysis is only permitted through an
 explicit aggregation step.
@@ -39,22 +44,20 @@ without side effects.
 
 ### III. Deterministic and Scalable Processing
 All processing and analytics steps MUST be deterministic for the same inputs and
-configuration. Intermediate artifacts MUST be persisted to disk. Implementations MUST
-use streaming or chunked processing where applicable and MUST NOT assume full datasets
-fit in memory.
+configuration. Intermediate artifacts MUST be persisted to disk. Implementations SHOULD
+support streaming or chunked processing where applicable for large datasets and MUST
+document any in-memory constraints in stage/module documentation.
 
 Rationale: reproducibility and scale are mandatory for large CSV-based social datasets.
 
-### IV. Required Super Bowl Analytics Coverage
-The analytics layer MUST, at minimum, support: brand/ad volume metrics, sentiment by
-ad and brand over time, quarter/minute and before/after time analysis, ROI proxy
-metrics (cost, followers, retweets, engagement proxies), relationship analysis among
-key variables, event-aligned analysis (game events and ad timing), and text/network
-analysis (hashtags, keywords, co-occurrence where applicable). Analytics outputs MUST
-be written per year and MUST NOT overwrite other years.
+### IV. Baseline Analytics Coverage and Extension Contract
+The analytics layer MUST ship with baseline per-year modules for hashtag frequency and
+mention frequency. Additional analytics modules MAY be developed iteratively, but MUST
+be integrated through the analytics registry contract and MUST NOT break baseline
+module behavior. Analytics outputs MUST be written per year under
+`outputs/analytics/<year>/` and MUST NOT overwrite other years.
 
-Rationale: these capabilities define the repository's purpose and minimum analytical
-completeness.
+Rationale: a reliable baseline preserves quality while allowing controlled expansion.
 
 ### V. Documentation and Extensibility by Default
 A root `README.md` MUST exist and MUST be updated for every new feature, pipeline
@@ -87,6 +90,7 @@ data/
     <year>/
   enriched/
     <year>/
+outputs/
   analytics/
     <year>/
 ```
@@ -96,7 +100,7 @@ All features MUST preserve independently runnable pipeline stages and explicit C
 inputs (`--year` or `--data-dir`, and stage/all selection). Pull requests MUST include:
 (1) deterministic execution confirmation, (2) proof that raw files remain unchanged,
 (3) per-year output path verification, (4) memory-safety strategy for large files
-(chunked/streaming where applicable), and (5) README updates for any new capability.
+(including chunked/streaming when used), and (5) README updates for any new capability.
 
 ## Governance
 This constitution supersedes conflicting local practices for this repository.
@@ -108,4 +112,4 @@ MUST run during planning and pull request review using constitution-aligned chec
 `.specify/templates/plan-template.md`, `.specify/templates/spec-template.md`, and
 `.specify/templates/tasks-template.md`.
 
-**Version**: 1.0.1 | **Ratified**: 2026-02-03 | **Last Amended**: 2026-02-03
+**Version**: 2.0.0 | **Ratified**: 2026-02-03 | **Last Amended**: 2026-02-04

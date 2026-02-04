@@ -19,7 +19,7 @@ implementable and testable.
 
 **Purpose**: Initialize repository layout and baseline tooling.
 
-- [X] T001 Create repository directories in `data/raw/`, `data/processed/`, `data/enriched/`, `data/analytics/`, `src/cli/`, `src/pipeline/`, `src/analytics/`, `src/utils/`, `tests/unit/`, and `tests/integration/`
+- [X] T001 Create repository directories in `data/raw/`, `data/processed/`, `data/enriched/`, `outputs/analytics/`, `src/cli/`, `src/pipeline/`, `src/analytics/`, `src/utils/`, `tests/unit/`, and `tests/integration/`
 - [X] T002 Create package entry files in `src/__init__.py`, `src/cli/__init__.py`, `src/pipeline/__init__.py`, `src/analytics/__init__.py`, and `src/utils/__init__.py`
 - [X] T003 [P] Create pinned dependency manifest in `requirements.txt` for `pandas`, `typer`, `pydantic`, `vaderSentiment`, `pyarrow`, and `pytest`
 - [X] T004 [P] Create pytest configuration in `pytest.ini` for `tests/unit/` and `tests/integration/`
@@ -35,7 +35,7 @@ implementable and testable.
 
 - [X] T006 Implement configuration models in `src/pipeline/config.py` (`YearConfig`, run modes, resolved paths)
 - [X] T007 Implement stage contract types in `src/pipeline/contracts.py` (`StageContract`, `RunManifest`, stage metadata)
-- [X] T008 [P] Implement canonical schema validators in `src/pipeline/schema.py` using pydantic models for raw/process/enriched records
+- [X] T008 [P] Implement canonical schema validators in `src/pipeline/schema.py` for raw/process/enriched records
 - [X] T009 [P] Implement deterministic IO helpers in `src/utils/io.py` (chunk readers, stable sorting, stable writers)
 - [X] T010 Implement manifest writer and artifact tracker in `src/pipeline/manifest.py`
 - [X] T011 Implement stage registry and ordering in `src/pipeline/stage_registry.py` for `ingest->clean->process->analyze->visualize->export`
@@ -78,10 +78,10 @@ implementable and testable.
 
 ## Phase 4: User Story 2 - Produce Required Analytics Coverage (Priority: P2)
 
-**Goal**: Generate required per-year analytics artifacts from enriched data.
+**Goal**: Generate baseline per-year analytics artifacts from enriched data.
 
 **Independent Test**: Run `python -m src.cli run --year 2024 --stage analyze`; verify
-required artifacts for all analytics modules exist in `data/analytics/2024/`.
+baseline artifacts exist in `outputs/analytics/2024/`.
 
 ### Tests for User Story 2
 
@@ -92,17 +92,13 @@ required artifacts for all analytics modules exist in `data/analytics/2024/`.
 ### Implementation for User Story 2
 
 - [X] T030 [US2] Implement process stage in `src/pipeline/stages/process.py` for text normalization, hashtags, keywords, and brand/ad tagging
-- [X] T031 [P] [US2] Implement volume analytics module in `src/analytics/volume.py`
-- [X] T032 [P] [US2] Implement sentiment analytics module in `src/analytics/sentiment.py`
-- [X] T033 [P] [US2] Implement time-bucket analytics module in `src/analytics/time_buckets.py`
-- [X] T034 [P] [US2] Implement ROI-proxy analytics module in `src/analytics/roi_proxy.py`
-- [X] T035 [P] [US2] Implement relationship analytics module in `src/analytics/relationships.py`
-- [X] T036 [P] [US2] Implement event-aligned analytics module in `src/analytics/event_alignment.py`
-- [X] T037 [P] [US2] Implement text/network analytics module in `src/analytics/text_network.py`
-- [X] T038 [US2] Implement analyze stage aggregator in `src/pipeline/stages/analyze.py` to execute all analytics modules and persist outputs
+- [X] T031 [P] [US2] Implement hashtag frequency analytics module in `src/analytics/hashtag_frequency.py`
+- [X] T032 [P] [US2] Implement mention frequency analytics module in `src/analytics/mention_frequency.py`
+- [X] T033 [P] [US2] Scaffold additional analytics modules in `src/analytics/volume.py`, `src/analytics/sentiment.py`, `src/analytics/time_buckets.py`, `src/analytics/roi_proxy.py`, `src/analytics/relationships.py`, `src/analytics/event_alignment.py`, and `src/analytics/text_network.py`
+- [X] T038 [US2] Implement analyze stage aggregator in `src/pipeline/stages/analyze.py` to execute registry-enabled analytics modules and persist outputs
 - [X] T039 [US2] Document analytics capabilities and outputs in `README.md`
 
-**Checkpoint**: P2 analytics coverage is independently runnable and testable.
+**Checkpoint**: P2 baseline analytics coverage is independently runnable and testable.
 
 ---
 

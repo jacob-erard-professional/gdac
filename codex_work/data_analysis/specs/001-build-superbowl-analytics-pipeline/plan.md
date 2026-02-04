@@ -13,12 +13,12 @@ runnable analytics modules.
 ## Technical Context
 
 **Language/Version**: Python 3.11
-**Primary Dependencies**: pandas (chunked IO), typer, pydantic, vaderSentiment, pyarrow
-**Storage**: Year-scoped filesystem artifacts under `data/raw/<year>/`, `data/processed/<year>/`, `data/enriched/<year>/`, `data/analytics/<year>/`
+**Primary Dependencies**: typer + Python standard library CSV/JSON stack (with optional libraries listed in `requirements.txt`)
+**Storage**: Year-scoped filesystem artifacts under `data/raw/<year>/`, `data/processed/<year>/`, `data/enriched/<year>/`, `outputs/analytics/<year>/`
 **Testing**: pytest
 **Target Platform**: Linux CLI environment
 **Project Type**: data pipeline / analytics CLI
-**Performance Goals**: process multi-GB annual CSV datasets without OOM using chunked/streamed stages
+**Performance Goals**: deterministic yearly runs with explicit stage artifacts; support chunked/streamed paths where implemented
 **Constraints**: deterministic output, raw-data immutability, explicit CLI input paths, no implicit file discovery
 **Scale/Scope**: repeatable yearly operation for all available Super Bowl years
 
@@ -31,9 +31,9 @@ runnable analytics modules.
   `analyze`, optional `visualize`, `export`) with explicit inputs and outputs.
 - PASS: CLI plan supports `--year` or `--data-dir`, single-stage runs, per-year full
   runs, and all-years full runs.
-- PASS: Deterministic execution and chunked/streaming processing are required by design.
-- PASS: Analytics coverage includes volume, sentiment, time buckets, ROI proxies,
-  relationship analysis, event alignment, and text/network analysis.
+- PASS: Deterministic execution and explicit stage artifacts are required by design.
+- PASS: Baseline analytics coverage includes hashtag and mention frequency, with
+  registry-based extension points for additional modules.
 - PASS: README update duties are explicit in implementation and acceptance criteria.
 
 ## Project Structure
