@@ -19,9 +19,6 @@ class RunRequest:
     year: Optional[str]
     data_dir: Optional[Path]
     deterministic: bool = True
-    with_sentiment: bool = False
-    sentiment_dry_run: bool = False
-    sentiment_verbose: bool = False
 
 
 def validate_year(year: str) -> str:

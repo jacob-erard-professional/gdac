@@ -1,19 +1,16 @@
 <!--
 Sync Impact Report
-- Version change: 1.0.1 -> 2.0.0
+- Version change: 2.0.0 -> 2.1.0
 - Modified principles:
-  - I. Year-Scoped Data Organization (analytics output root aligned to implementation)
-  - III. Deterministic and Scalable Processing (streaming/chunking downgraded from MUST to SHOULD)
-  - IV. Required Super Bowl Analytics Coverage -> IV. Baseline Analytics Coverage and Extension Contract
+  - III. Deterministic and Scalable Processing -> III. Deterministic, Scalable, and Ethical API Processing
 - Added sections:
   - None
 - Removed sections:
   - None
 - Templates requiring updates:
-  - ✅ updated `specs/001-build-superbowl-analytics-pipeline/spec.md`
-  - ✅ updated `specs/001-build-superbowl-analytics-pipeline/plan.md`
-  - ✅ updated `specs/001-build-superbowl-analytics-pipeline/tasks.md`
-  - ✅ updated `specs/001-build-superbowl-analytics-pipeline/data-model.md`
+  - ✅ no template text changes required (`.specify/templates/plan-template.md`)
+  - ✅ no template text changes required (`.specify/templates/spec-template.md`)
+  - ✅ no template text changes required (`.specify/templates/tasks-template.md`)
 - Follow-up TODOs:
   - None.
 -->
@@ -42,13 +39,18 @@ one year, and full pipeline for all available years.
 Rationale: modular stages reduce coupling, improve debugging, and allow targeted reruns
 without side effects.
 
-### III. Deterministic and Scalable Processing
+### III. Deterministic, Scalable, and Ethical API Processing
 All processing and analytics steps MUST be deterministic for the same inputs and
 configuration. Intermediate artifacts MUST be persisted to disk. Implementations SHOULD
 support streaming or chunked processing where applicable for large datasets and MUST
-document any in-memory constraints in stage/module documentation.
+document any in-memory constraints in stage/module documentation. Any external API or
+web requests MUST follow ethical access practices, including explicit throttling,
+rate-limit-aware retries with backoff, and conservative request pacing to avoid abuse
+or service disruption.
 
 Rationale: reproducibility and scale are mandatory for large CSV-based social datasets.
+Ethical API behavior protects upstream services, improves reliability, and prevents
+avoidable failures.
 
 ### IV. Baseline Analytics Coverage and Extension Contract
 The analytics layer MUST ship with baseline per-year modules for hashtag frequency and
@@ -112,4 +114,4 @@ MUST run during planning and pull request review using constitution-aligned chec
 `.specify/templates/plan-template.md`, `.specify/templates/spec-template.md`, and
 `.specify/templates/tasks-template.md`.
 
-**Version**: 2.0.0 | **Ratified**: 2026-02-03 | **Last Amended**: 2026-02-04
+**Version**: 2.1.0 | **Ratified**: 2026-02-03 | **Last Amended**: 2026-02-04

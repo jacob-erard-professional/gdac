@@ -35,12 +35,6 @@ Full pipeline for one year:
 .venv/bin/python -m src.cli run --year 2024 --all
 ```
 
-Full pipeline with optional sentiment subsystem:
-
-```bash
-.venv/bin/python -m src.cli run --year 2024 --all --with-sentiment
-```
-
 Full pipeline from explicit data directory:
 
 ```bash
@@ -64,20 +58,14 @@ export OPENROUTER_API_KEY=... # keep local only; never commit
 ```
 
 If free-model rate limits are high, add `--request-delay 2.5 --max-rate-limit-retries 12`.
+All agentic workflows enforce constitution-aligned minimum throttling and retries
+(currently 2.5s request delay and 12 rate-limit retries), even if lower values are passed.
 
 Parent-company grouping agent workflow (reads `brand_groups.json` and groups brands under parent companies):
 
 ```bash
 .venv/bin/python -m src.cli group-parent-companies --year 2023 --model openai/gpt-oss-120b:free
 ```
-
-Agentic sentiment workflow (independent CLI command):
-
-```bash
-.venv/bin/python -m src.cli sentiment --year 2024 --dry-run
-```
-
-To use LLM-backed sentiment (non-dry-run), set `OPENROUTER_API_KEY` and remove `--dry-run`.
 
 ## Stages
 
@@ -105,7 +93,3 @@ The brand-grouping agent writes:
 
 The parent-company grouping agent writes:
 - `outputs/analytics/<year>/parent_company_groups.json`
-
-The sentiment subsystem writes:
-- `outputs/analytics/<year>/sentiment_agentic.jsonl`
-- `outputs/analytics/<year>/sentiment_agentic_summary.json`

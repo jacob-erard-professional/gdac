@@ -2,6 +2,12 @@ from pathlib import Path
 
 import typer
 
+from src.agents.rate_limit_policy import (
+    MIN_INITIAL_BACKOFF_SECONDS,
+    MIN_MAX_RATE_LIMIT_RETRIES,
+    MIN_REQUEST_DELAY_SECONDS,
+)
+
 
 def group_brands_command(
     year: str = typer.Option(..., "--year", help="Year to read from outputs/analytics/<year>/"),
@@ -22,13 +28,22 @@ def group_brands_command(
     ),
     chunk_size: int = typer.Option(60, "--chunk-size", min=20, max=500),
     request_delay: float = typer.Option(
-        1.5, "--request-delay", min=0.0, help="Delay between LLM requests in seconds"
+        MIN_REQUEST_DELAY_SECONDS,
+        "--request-delay",
+        min=MIN_REQUEST_DELAY_SECONDS,
+        help="Delay between LLM requests in seconds (constitution minimum enforced).",
     ),
     max_rate_limit_retries: int = typer.Option(
-        8, "--max-rate-limit-retries", min=0, help="Retries for HTTP 429/rate-limit errors"
+        MIN_MAX_RATE_LIMIT_RETRIES,
+        "--max-rate-limit-retries",
+        min=MIN_MAX_RATE_LIMIT_RETRIES,
+        help="Retries for HTTP 429/rate-limit errors (constitution minimum enforced).",
     ),
     initial_backoff: float = typer.Option(
-        2.0, "--initial-backoff", min=0.5, help="Initial exponential backoff in seconds"
+        MIN_INITIAL_BACKOFF_SECONDS,
+        "--initial-backoff",
+        min=MIN_INITIAL_BACKOFF_SECONDS,
+        help="Initial exponential backoff in seconds (constitution minimum enforced).",
     ),
 ):
     try:
