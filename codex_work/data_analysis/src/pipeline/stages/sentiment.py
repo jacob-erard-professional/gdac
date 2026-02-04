@@ -19,5 +19,6 @@ def run(
         batch_size=batch_size,
         dry_run=dry_run,
         allow_fallback=allow_fallback,
+        logger=print,
     )
     return manifest
