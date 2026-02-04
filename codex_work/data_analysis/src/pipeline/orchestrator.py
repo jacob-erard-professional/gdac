@@ -17,6 +17,8 @@ RUNNERS = {
     'analyze': stages.analyze.run,
     'visualize': stages.visualize.run,
     'export': stages.export.run,
+    'sentiment': stages.sentiment.run,
+    'ad_sentiment': stages.ad_sentiment.run,
 }
 
 
@@ -38,7 +40,21 @@ def _run_for_year(
     config = resolve_year_config(base_dir, year=year, data_dir=data_dir)
     results = []
     for stage in stage_list:
-        manifest = RUNNERS[stage](config)
+        if stage == 'sentiment':
+            manifest = RUNNERS[stage](
+                config,
+                model_id=req.sentiment_model,
+                batch_size=req.sentiment_batch_size,
+                dry_run=req.sentiment_dry_run,
+                allow_fallback=req.sentiment_allow_fallback,
+            )
+        elif stage == 'ad_sentiment':
+            manifest = RUNNERS[stage](
+                config,
+                min_tweets=req.ad_sentiment_min_tweets,
+            )
+        else:
+            manifest = RUNNERS[stage](config)
         for out in manifest.output_files:
             ensure_not_raw_output(Path(out))
         stage_result = StageResult(stage=stage, status='success', metadata=manifest)
@@ -59,11 +75,19 @@ def run_pipeline(base_dir: Path, req: RunRequest):
         if bool(req.year) == bool(req.data_dir):
             raise ValueError('full_year mode requires year or data_dir')
         stage_list = ordered_stages(include_optional=False)
+        if req.with_sentiment:
+            stage_list = stage_list + ['sentiment']
+        if req.with_ad_sentiment:
+            stage_list = stage_list + ['ad_sentiment']
         return [_run_for_year(base_dir, req, req.year, req.data_dir, stage_list)]
 
     if req.mode == 'full_all_years':
         years = discover_years(base_dir / 'data' / 'raw')
         stage_list = ordered_stages(include_optional=False)
+        if req.with_sentiment:
+            stage_list = stage_list + ['sentiment']
+        if req.with_ad_sentiment:
+            stage_list = stage_list + ['ad_sentiment']
         return [
             _run_for_year(base_dir, req, y, None, stage_list)
             for y in years
