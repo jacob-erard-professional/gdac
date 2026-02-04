@@ -1,0 +1,12 @@
+{
+  "emotion_counts": {
+    "joy": 1
+  },
+  "low_confidence_count": 0,
+  "sarcasm_rate": 0.0,
+  "sentiment_counts": {
+    "positive": 1
+  },
+  "total_tweets": 1,
+  "year": 2024
+}
