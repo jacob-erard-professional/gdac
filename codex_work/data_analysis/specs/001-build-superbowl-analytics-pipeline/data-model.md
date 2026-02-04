@@ -49,27 +49,26 @@ Validation:
 ## Entity: ProcessedTweetRecord
 
 Fields:
-- all RawTweetRecord fields
+- selected RawTweetRecord fields preserved for lineage
 - created_at_utc: datetime
-- text_normalized: string
-- is_duplicate: boolean
-- cleaning_flags: array[string]
+- text_original: string
+- cleaning_flags: string
 
 Validation:
-- Original `text` retained for lineage.
-- `created_at_utc` must be parseable and timezone-normalized.
+- Original `text` MUST be retained for lineage.
+- `created_at_utc` is normalized when parseable; otherwise input is retained.
 
 ## Entity: EnrichedTweetRecord
 
 Fields:
 - all ProcessedTweetRecord fields
-- hashtags: array[string]
-- keywords: array[string]
+- hashtags: string (`|`-delimited)
+- keywords: string (`|`-delimited)
 - brand_tag: string
 - ad_tag: string
 - sentiment_score: number
 - sentiment_label: enum(`negative`, `neutral`, `positive`)
-- game_phase: enum(`pre`, `q1`, `q2`, `halftime`, `q3`, `q4`, `post`)
+- game_phase: string (`unknown` default when absent)
 
 Validation:
 - Feature extraction must be deterministic for identical inputs.
@@ -79,13 +78,13 @@ Validation:
 Fields:
 - artifact_name: string
 - year: string
-- module: enum(`volume`, `sentiment`, `time`, `roi_proxy`, `relationship`, `event`, `text_network`)
+- module: enum(`hashtags_frequency`, `mentions_frequency`, `custom`)
 - file_path: string
 - row_count: integer
 - generated_at: datetime
 
 Validation:
-- Artifact path must remain under `data/analytics/<year>/`.
+- Artifact path must remain under `outputs/analytics/<year>/`.
 
 ## Entity: RunManifest
 

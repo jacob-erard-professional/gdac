@@ -1,0 +1,412 @@
+{
+  "year": "2023",
+  "model": "openai/gpt-oss-120b:free",
+  "source_file": "outputs/analytics/2023/hashtags_frequency_top50.json",
+  "generated_at_utc": "2026-02-04T03:57:33.264135+00:00",
+  "brands": [
+    {
+      "brand": "sb",
+      "total_count": 126528,
+      "hashtags": [
+        {
+          "hashtag": "superbowl",
+          "count": 81895
+        },
+        {
+          "hashtag": "sblvii",
+          "count": 25472
+        },
+        {
+          "hashtag": "superbowllvii",
+          "count": 15930
+        },
+        {
+          "hashtag": "superbowl2023",
+          "count": 3231
+        }
+      ]
+    },
+    {
+      "brand": "contest",
+      "total_count": 96370,
+      "hashtags": [
+        {
+          "hashtag": "sweepstakes",
+          "count": 42037
+        },
+        {
+          "hashtag": "cellysweepstakes",
+          "count": 37525
+        },
+        {
+          "hashtag": "entry",
+          "count": 9857
+        },
+        {
+          "hashtag": "contest",
+          "count": 6951
+        }
+      ]
+    },
+    {
+      "brand": "flash",
+      "total_count": 65234,
+      "hashtags": [
+        {
+          "hashtag": "theflashmovie",
+          "count": 44699
+        },
+        {
+          "hashtag": "theflash",
+          "count": 20535
+        }
+      ]
+    },
+    {
+      "brand": "easytoenjoy",
+      "total_count": 41973,
+      "hashtags": [
+        {
+          "hashtag": "easytoenjoy",
+          "count": 41973
+        }
+      ]
+    },
+    {
+      "brand": "gotg",
+      "total_count": 20688,
+      "hashtags": [
+        {
+          "hashtag": "gotgvol3",
+          "count": 9324
+        },
+        {
+          "hashtag": "gotgvo",
+          "count": 6903
+        },
+        {
+          "hashtag": "guardiansofthegalaxyvol3",
+          "count": 4461
+        }
+      ]
+    },
+    {
+      "brand": "timeoutforbuds",
+      "total_count": 18885,
+      "hashtags": [
+        {
+          "hashtag": "timeoutforbuds",
+          "count": 18885
+        }
+      ]
+    },
+    {
+      "brand": "halftime",
+      "total_count": 14634,
+      "hashtags": [
+        {
+          "hashtag": "applemusichalftime",
+          "count": 10452
+        },
+        {
+          "hashtag": "halftimeshow",
+          "count": 4182
+        }
+      ]
+    },
+    {
+      "brand": "ultraclub",
+      "total_count": 13822,
+      "hashtags": [
+        {
+          "hashtag": "ultraclub",
+          "count": 13822
+        }
+      ]
+    },
+    {
+      "brand": "rihanna",
+      "total_count": 12285,
+      "hashtags": [
+        {
+          "hashtag": "rihanna",
+          "count": 8842
+        },
+        {
+          "hashtag": "riri",
+          "count": 3443
+        }
+      ]
+    },
+    {
+      "brand": "lisa",
+      "total_count": 11998,
+      "hashtags": [
+        {
+          "hashtag": "lisaxcelinewinter23",
+          "count": 4676
+        },
+        {
+          "hashtag": "lisa",
+          "count": 4357
+        },
+        {
+          "hashtag": "lisaxceline",
+          "count": 2965
+        }
+      ]
+    },
+    {
+      "brand": "bts",
+      "total_count": 10973,
+      "hashtags": [
+        {
+          "hashtag": "bts",
+          "count": 7266
+        },
+        {
+          "hashtag": "rm",
+          "count": 3707
+        }
+      ]
+    },
+    {
+      "brand": "doritostrianglescheme",
+      "total_count": 10856,
+      "hashtags": [
+        {
+          "hashtag": "doritostrianglescheme",
+          "count": 10856
+        }
+      ]
+    },
+    {
+      "brand": "nft",
+      "total_count": 10231,
+      "hashtags": [
+        {
+          "hashtag": "freenft",
+          "count": 6189
+        },
+        {
+          "hashtag": "nft",
+          "count": 4042
+        }
+      ]
+    },
+    {
+      "brand": "popcorners",
+      "total_count": 10046,
+      "hashtags": [
+        {
+          "hashtag": "popcorners10k",
+          "count": 6452
+        },
+        {
+          "hashtag": "popcornersbreakinggood",
+          "count": 3594
+        }
+      ]
+    },
+    {
+      "brand": "zerodebate",
+      "total_count": 9577,
+      "hashtags": [
+        {
+          "hashtag": "zerodebate",
+          "count": 9577
+        }
+      ]
+    },
+    {
+      "brand": "depthcampaign",
+      "total_count": 8813,
+      "hashtags": [
+        {
+          "hashtag": "depthcampaign",
+          "count": 8813
+        }
+      ]
+    },
+    {
+      "brand": "slowmo",
+      "total_count": 8004,
+      "hashtags": [
+        {
+          "hashtag": "slowmo",
+          "count": 8004
+        }
+      ]
+    },
+    {
+      "brand": "indianajones",
+      "total_count": 7931,
+      "hashtags": [
+        {
+          "hashtag": "indianajones",
+          "count": 7931
+        }
+      ]
+    },
+    {
+      "brand": "wheelsup",
+      "total_count": 7623,
+      "hashtags": [
+        {
+          "hashtag": "wheelsup",
+          "count": 7623
+        }
+      ]
+    },
+    {
+      "brand": "whoareyou",
+      "total_count": 7144,
+      "hashtags": [
+        {
+          "hashtag": "whoareyou",
+          "count": 7144
+        }
+      ]
+    },
+    {
+      "brand": "buschguide",
+      "total_count": 6889,
+      "hashtags": [
+        {
+          "hashtag": "buschguide",
+          "count": 6889
+        }
+      ]
+    },
+    {
+      "brand": "realoracting",
+      "total_count": 6725,
+      "hashtags": [
+        {
+          "hashtag": "realoracting",
+          "count": 6725
+        }
+      ]
+    },
+    {
+      "brand": "bambam",
+      "total_count": 6497,
+      "hashtags": [
+        {
+          "hashtag": "bambam",
+          "count": 6497
+        }
+      ]
+    },
+    {
+      "brand": "wlopportunity",
+      "total_count": 5325,
+      "hashtags": [
+        {
+          "hashtag": "wlopportunity",
+          "count": 5325
+        }
+      ]
+    },
+    {
+      "brand": "makeitbetter",
+      "total_count": 5229,
+      "hashtags": [
+        {
+          "hashtag": "makeitbetter",
+          "count": 5229
+        }
+      ]
+    },
+    {
+      "brand": "fentybowl",
+      "total_count": 4672,
+      "hashtags": [
+        {
+          "hashtag": "fentybowl",
+          "count": 4672
+        }
+      ]
+    },
+    {
+      "brand": "transformers",
+      "total_count": 4657,
+      "hashtags": [
+        {
+          "hashtag": "transformers",
+          "count": 4657
+        }
+      ]
+    },
+    {
+      "brand": "iheartawards",
+      "total_count": 4261,
+      "hashtags": [
+        {
+          "hashtag": "iheartawards",
+          "count": 4261
+        }
+      ]
+    },
+    {
+      "brand": "nfl",
+      "total_count": 3947,
+      "hashtags": [
+        {
+          "hashtag": "nfl",
+          "count": 3947
+        }
+      ]
+    },
+    {
+      "brand": "batman",
+      "total_count": 3894,
+      "hashtags": [
+        {
+          "hashtag": "batman",
+          "count": 3894
+        }
+      ]
+    },
+    {
+      "brand": "one",
+      "total_count": 3428,
+      "hashtags": [
+        {
+          "hashtag": "1",
+          "count": 3428
+        }
+      ]
+    },
+    {
+      "brand": "eagles",
+      "total_count": 3302,
+      "hashtags": [
+        {
+          "hashtag": "eagles",
+          "count": 3302
+        }
+      ]
+    },
+    {
+      "brand": "disney100",
+      "total_count": 3277,
+      "hashtags": [
+        {
+          "hashtag": "disney100",
+          "count": 3277
+        }
+      ]
+    },
+    {
+      "brand": "ad",
+      "total_count": 3233,
+      "hashtags": [
+        {
+          "hashtag": "ad",
+          "count": 3233
+        }
+      ]
+    }
+  ]
+}
