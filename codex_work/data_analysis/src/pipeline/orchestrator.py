@@ -30,6 +30,10 @@ class OrchestratorResult:
     stages: list[dict]
 
 
+def _log(message: str) -> None:
+    print(f"[pipeline] {message}")
+
+
 def _run_for_year(
     base_dir: Path,
     req: RunRequest,
@@ -38,8 +42,11 @@ def _run_for_year(
     stage_list: list[str],
 ):
     config = resolve_year_config(base_dir, year=year, data_dir=data_dir)
+    _log(f"year={config.year} mode={req.mode} starting")
     results = []
-    for stage in stage_list:
+    total_stages = len(stage_list)
+    for idx, stage in enumerate(stage_list, start=1):
+        _log(f"year={config.year} stage={stage} ({idx}/{total_stages}) start")
         if stage == 'sentiment':
             manifest = RUNNERS[stage](
                 config,
@@ -59,6 +66,11 @@ def _run_for_year(
             ensure_not_raw_output(Path(out))
         stage_result = StageResult(stage=stage, status='success', metadata=manifest)
         results.append(stage_result_to_contract(stage_result))
+        _log(
+            f"year={config.year} stage={stage} complete "
+            f"rows_in={manifest.record_counts['input']} rows_out={manifest.record_counts['output']}"
+        )
+    _log(f"year={config.year} mode={req.mode} complete")
     return OrchestratorResult(year=year, mode=req.mode, status='success', stages=results)
 
 
