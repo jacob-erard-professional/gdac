@@ -1,0 +1,157 @@
+================================================================================
+SPEC 002 - AGENTIC SENTIMENT ANALYSIS FOR X DATA
+================================================================================
+
+File: specs/002-agentic-sentiment-analysis/specify.plan
+
+TITLE
+-----
+Agentic, Multi-Step Sentiment Analysis Pipeline for X (Twitter) Data
+
+PURPOSE
+-------
+This specification governs the design and implementation of an agentic,
+multi-step natural language processing subsystem for sentiment analysis
+of X (Twitter) data.
+
+The system is designed to operate downstream of the core data ingestion
+and cleaning pipeline defined in Spec 001. It consumes cleaned tweet text
+artifacts and produces structured, auditable sentiment outputs.
+
+This subsystem prioritizes modularity, explainability, repeatability,
+and cost-aware LLM usage.
+
+SCOPE
+-----
+IN SCOPE:
+- Agentic sentiment analysis using LangChain
+- Multi-agent workflows (committee-style analysis)
+- Use of OpenRouter-compatible LLMs
+- Structured JSON outputs for sentiment and emotion
+- CLI-invokable execution, per year or per dataset
+- Optional integration into the full pipeline run
+
+OUT OF SCOPE:
+- Raw data ingestion
+- CSV cleaning or normalization
+- Schema changes to upstream data artifacts
+- Model fine-tuning or training
+- Real-time inference or API services
+- UI or dashboarding
+
+DEPENDENCIES
+------------
+- Requires outputs from Spec 001:
+  - Cleaned tweet text
+  - Tweet identifiers
+  - Year-based data partitioning
+
+- Must not refactor or alter upstream pipeline logic unless explicitly
+  required for integration hooks.
+
+ARCHITECTURAL PRINCIPLES
+------------------------
+1. Agentic Design
+   - Each agent has a single, well-defined responsibility.
+   - Agents operate independently and communicate only via structured data.
+
+2. Deterministic Interfaces
+   - All agents must emit strict, machine-parseable JSON.
+   - No free-form text outputs are permitted beyond rationale fields.
+
+3. Parallelism
+   - Independent agents should execute in parallel where possible.
+
+4. Supervisory Arbitration
+   - A supervisor agent resolves disagreements and calibrates confidence.
+   - The supervisor may downgrade confidence or mark ambiguity.
+
+5. Cost Awareness
+   - Cheaper models may be used for simpler agents.
+   - Stronger models reserved for arbitration and edge cases.
+
+6. Repeatability
+   - Identical inputs must yield structurally consistent outputs.
+   - Outputs must be comparable across years.
+
+AGENT ROLES
+-----------
+Minimum required agents:
+
+1. Normalizer Agent
+   - Expands slang and emojis
+   - Removes URLs and usernames
+   - Preserves sentiment-bearing tokens
+
+2. Polarity Agent
+   - Classifies sentiment as positive, neutral, or negative
+
+3. Emotion Agent
+   - Classifies emotion using a fixed taxonomy
+     (e.g., joy, anger, disappointment, excitement, neutral)
+
+4. Sarcasm Detection Agent
+   - Flags potential sarcasm or irony
+
+5. Supervisor Agent
+   - Reviews all agent outputs
+   - Produces final sentiment decision
+   - Assigns calibrated confidence
+   - Flags ambiguity or low confidence cases
+
+OPTIONAL AGENTS (DEFERRED)
+--------------------------
+- Topic Inference Agent (refs, teams, commercials, halftime, etc.)
+- Toxicity / Abuse Detection Agent
+- Language Detection Agent
+
+OUTPUT CONTRACT
+---------------
+Each processed tweet must yield a single structured record:
+
+{
+  "tweet_id": "<string>",
+  "year": <int>,
+  "final": {
+    "sentiment": "positive | neutral | negative",
+    "confidence": <float 0.0-1.0>
+  },
+  "agents": {
+    "polarity": {...},
+    "emotion": {...},
+    "sarcasm": {...},
+    "normalizer": {...}
+  },
+  "flags": [ "<string>" ]
+}
+
+INTEGRATION REQUIREMENTS
+------------------------
+- The subsystem must be invokable independently via CLI.
+- The subsystem must be optionally callable from the full pipeline.
+- Year-based execution must be supported.
+- Output artifacts must be written to a deterministic location.
+- Output path standard:
+  - `outputs/analytics/<year>/sentiment_agentic.jsonl` (per-tweet records)
+  - `outputs/analytics/<year>/sentiment_agentic_summary.json` (aggregate counts)
+
+CONSTITUTION ALIGNMENT
+----------------------
+- Year-scoped paths are required; no cross-year overwrite.
+- No writes to `data/raw/` are permitted.
+- Existing stage contracts remain intact; integration is additive.
+- Baseline analytics modules remain unchanged and continue to run.
+- README updates are mandatory with agent roles, model choices, cost controls,
+  CLI usage, and known limitations.
+
+DOCUMENTATION REQUIREMENTS
+--------------------------
+- README must be created or updated to document:
+  - Agent roles
+  - Model choices
+  - Execution instructions
+  - Known limitations
+  - Cost considerations
+
+END OF SPECIFY.PLAN
+================================================================================
