@@ -123,6 +123,7 @@ def run_ad_sentiment_analysis(
     enriched_path: Path,
     output_dir: Path,
     min_tweets: int = 1,
+    logger=None,
 ):
     if min_tweets < 1:
         raise ValueError("min_tweets must be >= 1")
@@ -131,9 +132,15 @@ def run_ad_sentiment_analysis(
     if not enriched_path.exists():
         raise ValueError(f"Missing enriched input file: {enriched_path}")
 
+    if logger:
+        logger(f"[ad-sentiment] loading sentiment from {sentiment_path}")
     sentiment = _load_sentiment_records(sentiment_path)
+    if logger:
+        logger(f"[ad-sentiment] loading enriched rows from {enriched_path}")
     enriched = _load_enriched_rows(enriched_path, year)
 
+    if logger:
+        logger("[ad-sentiment] joining sentiment with enriched rows")
     joined = sentiment.merge(enriched, on=["tweet_id", "year"], how="left", indicator=True)
     joined["join_status"] = joined.pop("_merge")
     joined["ad_tag"] = joined["ad_tag"].fillna("unmatched")
@@ -167,6 +174,8 @@ def run_ad_sentiment_analysis(
     )
 
     pd.DataFrame(summary_rows).to_csv(summary_csv, index=False)
+    if logger:
+        logger(f"[ad-sentiment] wrote outputs to {output_dir}")
 
     notes = [
         f"matched_rows={(joined['join_status'] == 'both').sum()}",
@@ -180,5 +189,7 @@ def run_ad_sentiment_analysis(
         len(joined),
         notes=notes,
     )
+    if logger:
+        logger("[ad-sentiment] complete")
 
     return AdSentimentOutputs(joined_parquet=joined_out, summary_json=summary_json, summary_csv=summary_csv), manifest

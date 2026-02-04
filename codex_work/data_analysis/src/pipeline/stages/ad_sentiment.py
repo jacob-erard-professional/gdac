@@ -13,5 +13,6 @@ def run(config, *, min_tweets: int = 1):
         enriched_path=enriched_path,
         output_dir=output_dir,
         min_tweets=min_tweets,
+        logger=print,
     )
     return manifest

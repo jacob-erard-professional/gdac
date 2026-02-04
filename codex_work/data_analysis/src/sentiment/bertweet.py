@@ -279,7 +279,14 @@ def run_bertweet_sentiment(
     allow_fallback: bool = False,
     logger: Callable[[str], None] | None = None,
 ):
+    if logger:
+        logger(f"[sentiment] loading input rows from {input_path}")
     rows, invalid_rows = load_input_rows(input_path, target_year=year)
+    if logger:
+        logger(
+            f"[sentiment] loaded rows total={len(rows) + invalid_rows} "
+            f"valid={len(rows)} invalid_skipped={invalid_rows}"
+        )
 
     if dry_run:
         notes = [
@@ -293,9 +300,13 @@ def run_bertweet_sentiment(
         return None, manifest
 
     model_bundle = load_model_bundle(model_id, allow_fallback=allow_fallback, logger=logger)
+    if logger:
+        logger(f"[sentiment] model loaded: {model_bundle.model_id}")
     records = infer_sentiment_batches(rows, model_bundle=model_bundle, batch_size=batch_size, logger=logger)
 
     output_path = output_root / "bertweet" / str(year) / "sentiment.json"
+    if logger:
+        logger(f"[sentiment] writing output to {output_path}")
     write_sentiment_output(
         output_path=output_path,
         input_path=input_path,
@@ -313,4 +324,6 @@ def run_bertweet_sentiment(
         notes.append(f"model_commit_hash={model_bundle.commit_hash}")
 
     manifest = make_manifest([input_path], [output_path], len(rows) + invalid_rows, len(records), notes=notes)
+    if logger:
+        logger("[sentiment] complete")
     return output_path, manifest

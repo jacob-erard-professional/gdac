@@ -41,6 +41,7 @@ def ad_sentiment_command(
         enriched_path=resolved_enriched,
         output_dir=resolved_output_dir,
         min_tweets=min_tweets,
+        logger=typer.echo,
     )
 
     typer.echo(f"ad sentiment joined output written to {outputs.joined_parquet}")
