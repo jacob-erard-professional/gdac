@@ -2,6 +2,7 @@ from pathlib import Path
 import typer
 from src.pipeline.config import RunRequest
 from src.pipeline.orchestrator import run_pipeline
+from src.sentiment.deep_emotion import DEFAULT_MODEL_ID as DEFAULT_DEEP_SENTIMENT_MODEL
 
 
 def run_command(
@@ -19,6 +20,14 @@ def run_command(
     sentiment_dry_run: bool = typer.Option(False, "--sentiment-dry-run"),
     sentiment_allow_fallback: bool = typer.Option(False, "--sentiment-allow-fallback"),
     ad_sentiment_min_tweets: int = typer.Option(1, "--ad-sentiment-min-tweets", min=1),
+    with_deep_sentiment: bool = typer.Option(False, "--with-deep-sentiment"),
+    deep_sentiment_model: str = typer.Option(
+        DEFAULT_DEEP_SENTIMENT_MODEL,
+        "--deep-sentiment-model",
+    ),
+    deep_sentiment_batch_size: int = typer.Option(64, "--deep-sentiment-batch-size", min=1, max=4096),
+    deep_sentiment_dry_run: bool = typer.Option(False, "--deep-sentiment-dry-run"),
+    deep_sentiment_label_map_file: Path = typer.Option(None, "--deep-sentiment-label-map-file"),
 ):
     if bool(stage) == bool(all_):
         raise typer.BadParameter("Provide exactly one of --stage or --all")
@@ -29,8 +38,10 @@ def run_command(
         resolved_data_dir = (base_dir / resolved_data_dir).resolve()
 
     if stage:
-        if with_sentiment or with_ad_sentiment:
-            raise typer.BadParameter("--with-sentiment/--with-ad-sentiment are supported only with --all")
+        if with_sentiment or with_ad_sentiment or with_deep_sentiment:
+            raise typer.BadParameter(
+                "--with-sentiment/--with-ad-sentiment/--with-deep-sentiment are supported only with --all"
+            )
         if bool(year) == bool(resolved_data_dir):
             raise typer.BadParameter("Stage mode requires exactly one of --year or --data-dir")
         mode = 'stage'
@@ -54,6 +65,11 @@ def run_command(
         sentiment_dry_run=sentiment_dry_run,
         sentiment_allow_fallback=sentiment_allow_fallback,
         ad_sentiment_min_tweets=ad_sentiment_min_tweets,
+        with_deep_sentiment=with_deep_sentiment,
+        deep_sentiment_model=deep_sentiment_model,
+        deep_sentiment_batch_size=deep_sentiment_batch_size,
+        deep_sentiment_dry_run=deep_sentiment_dry_run,
+        deep_sentiment_label_map_file=deep_sentiment_label_map_file,
     )
     results = run_pipeline(base_dir, req)
     for result in results:
