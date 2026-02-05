@@ -4,6 +4,7 @@ from json import JSONDecodeError
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+from random import uniform
 from time import sleep
 from typing import Dict, Iterable, List
 
@@ -28,6 +29,12 @@ class HashtagCount:
     count: int
 
 
+class ModelJsonParseError(ValueError):
+    def __init__(self, message: str, raw_text: str):
+        super().__init__(message)
+        self.raw_text = raw_text
+
+
 @dataclass
 class _RateLimitedInvoker:
     llm: ChatOpenAI
@@ -45,15 +52,32 @@ class _RateLimitedInvoker:
             except Exception as exc:  # noqa: BLE001
                 if not _is_rate_limit_error(exc):
                     raise
+                _log_provider_error(exc, attempt, self.max_rate_limit_retries)
                 if attempt >= self.max_rate_limit_retries:
                     raise
-                backoff = min(self.initial_backoff_seconds * (2 ** attempt), MAX_BACKOFF_SECONDS)
+                backoff = _next_backoff_seconds(self.initial_backoff_seconds, attempt, exc)
                 sleep(backoff)
 
 
 def _is_rate_limit_error(exc: Exception) -> bool:
     msg = str(exc).lower()
     return "429" in msg or "rate limit" in msg or "rate-limited" in msg
+
+
+def _log_provider_error(exc: Exception, attempt: int, max_retries: int) -> None:
+    text = str(exc)
+    lowered = text.lower()
+    if "<html" in lowered or "<!doctype html" in lowered or "openrouter" in lowered:
+        print(f"[openrouter] provider error (attempt {attempt + 1}/{max_retries + 1}): {text}")
+
+
+def _next_backoff_seconds(initial_backoff_seconds: float, attempt: int, exc: Exception) -> float:
+    msg = str(exc).lower()
+    if "temporarily rate-limited upstream" in msg:
+        base = min(initial_backoff_seconds * (2 ** attempt), 120.0)
+    else:
+        base = min(initial_backoff_seconds * (2 ** attempt), MAX_BACKOFF_SECONDS)
+    return round(base + uniform(0.0, 0.25), 3)
 
 
 def _load_hashtags(path: Path) -> tuple[str, List[HashtagCount]]:
@@ -110,9 +134,11 @@ def _repair_json_via_model(invoker: _RateLimitedInvoker, raw_text: str) -> dict:
 
 def _invoke_json(invoker: _RateLimitedInvoker, prompt: str, retries: int = 2) -> dict:
     last_error: Exception | None = None
+    last_text = ""
     for _ in range(retries + 1):
         response = invoker.invoke(prompt)
         text = str(response.content)
+        last_text = text
         try:
             return _extract_json(text)
         except (JSONDecodeError, ValueError) as exc:
@@ -121,7 +147,28 @@ def _invoke_json(invoker: _RateLimitedInvoker, prompt: str, retries: int = 2) ->
                 return _repair_json_via_model(invoker, text)
             except (JSONDecodeError, ValueError):
                 continue
-    raise ValueError(f"Model response could not be parsed as JSON: {last_error}") from last_error
+    raise ModelJsonParseError(f"Model response could not be parsed as JSON: {last_error}", last_text) from last_error
+
+
+def _append_jsonl(path: Path, payload: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
+def _append_parse_failure(path: Path, *, phase: str, detail: str, raw_text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(f"phase={phase}\n")
+        f.write(f"detail={detail}\n")
+        f.write(raw_text)
+        f.write("\n\n---\n\n")
+
+
+def _count_parse_failure_blocks(path: Path) -> int:
+    if not path.exists():
+        return 0
+    return path.read_text(encoding="utf-8").count("\n\n---\n\n")
 
 
 def _map_chunk_to_brands(invoker: _RateLimitedInvoker, chunk: List[HashtagCount]) -> Dict[str, str]:
@@ -133,6 +180,7 @@ def _map_chunk_to_brands(invoker: _RateLimitedInvoker, chunk: List[HashtagCount]
         "Rules:\n"
         "- brand values are lowercase short labels like dc, pepsi, nfl, or lisa.\n"
         "- if two hashtags refer to the same concept, use exactly the same brand label.\n"
+        "- Consider spelling variants, typos, abbreviations, numerals, and aliases as referring to the same concept when appropriate.\n"
         "- every hashtag MUST map to a specific group label.\n"
         "- do NOT use a generic catch-all label like 'unassigned'.\n"
         "- if a hashtag has no close match, create a singleton group label for it.\n"
@@ -215,12 +263,83 @@ def run_brand_grouping(
         max_rate_limit_retries=max_rate_limit_retries,
         initial_backoff_seconds=initial_backoff_seconds,
     )
+    partial_jsonl_path = output_path.with_name(f"{output_path.stem}_partial.jsonl")
+    parse_failures_path = output_path.with_name(f"{output_path.stem}_parse_failures.txt")
+    for path in (partial_jsonl_path, parse_failures_path):
+        if path.exists():
+            path.unlink()
 
     hashtag_to_brand: Dict[str, str] = {}
-    for chunk in _chunks(hashtags, size=chunk_size):
-        hashtag_to_brand.update(_map_chunk_to_brands(invoker, chunk))
+    degraded_rate_limit_fallback = False
+    degraded_parse_fallback = False
+    for chunk_index, chunk in enumerate(_chunks(hashtags, size=chunk_size), start=1):
+        try:
+            mapped = _map_chunk_to_brands(invoker, chunk)
+            hashtag_to_brand.update(mapped)
+            _append_jsonl(
+                partial_jsonl_path,
+                {
+                    "phase": "map_chunk",
+                    "chunk_index": chunk_index,
+                    "mappings": [{"hashtag": item.hashtag, "brand": mapped.get(item.hashtag, item.hashtag)} for item in chunk],
+                },
+            )
+        except ModelJsonParseError as exc:
+            degraded_parse_fallback = True
+            _append_parse_failure(
+                parse_failures_path,
+                phase="map_chunk",
+                detail=str(exc),
+                raw_text=exc.raw_text,
+            )
+            for item in chunk:
+                hashtag_to_brand[item.hashtag] = item.hashtag
+            _append_jsonl(
+                partial_jsonl_path,
+                {
+                    "phase": "map_chunk_fallback",
+                    "chunk_index": chunk_index,
+                    "mappings": [{"hashtag": item.hashtag, "brand": item.hashtag} for item in chunk],
+                },
+            )
+        except Exception as exc:  # noqa: BLE001
+            if not _is_rate_limit_error(exc):
+                raise
+            degraded_rate_limit_fallback = True
+            for item in chunk:
+                hashtag_to_brand[item.hashtag] = item.hashtag
+            _append_jsonl(
+                partial_jsonl_path,
+                {
+                    "phase": "map_chunk_rate_limit_fallback",
+                    "chunk_index": chunk_index,
+                    "mappings": [{"hashtag": item.hashtag, "brand": item.hashtag} for item in chunk],
+                },
+            )
 
-    alias_map = _normalize_brand_labels(invoker, list(hashtag_to_brand.values()))
+    try:
+        alias_map = _normalize_brand_labels(invoker, list(hashtag_to_brand.values()))
+        _append_jsonl(
+            partial_jsonl_path,
+            {
+                "phase": "normalize_labels",
+                "aliases": [{"label": label, "canonical": canonical} for label, canonical in sorted(alias_map.items())],
+            },
+        )
+    except ModelJsonParseError as exc:
+        degraded_parse_fallback = True
+        _append_parse_failure(
+            parse_failures_path,
+            phase="normalize_labels",
+            detail=str(exc),
+            raw_text=exc.raw_text,
+        )
+        alias_map = {label: label for label in hashtag_to_brand.values()}
+    except Exception as exc:  # noqa: BLE001
+        if not _is_rate_limit_error(exc):
+            raise
+        degraded_rate_limit_fallback = True
+        alias_map = {label: label for label in hashtag_to_brand.values()}
 
     grouped: Dict[str, List[Dict[str, int | str]]] = {}
     for item in hashtags:
@@ -240,10 +359,33 @@ def run_brand_grouping(
     result = {
         "year": year,
         "model": model,
+        "degraded_rate_limit_fallback": degraded_rate_limit_fallback,
+        "degraded_parse_fallback": degraded_parse_fallback,
+        "partial_results_file": str(partial_jsonl_path),
+        "parse_failures_file": str(parse_failures_path),
         "source_file": str(hashtags_path),
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "brands": brands,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
+
+    if degraded_rate_limit_fallback or degraded_parse_fallback:
+        recovered_path = output_path.with_name(f"{output_path.stem}_recovered.json")
+        recovered_payload = {
+            "year": year,
+            "model": model,
+            "recovered_from_partial": True,
+            "degraded_rate_limit_fallback": degraded_rate_limit_fallback,
+            "degraded_parse_fallback": degraded_parse_fallback,
+            "partial_results_file": str(partial_jsonl_path),
+            "parse_failures_file": str(parse_failures_path),
+            "parse_failure_blocks": _count_parse_failure_blocks(parse_failures_path),
+            "source_file": str(hashtags_path),
+            "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+            "brands": brands,
+        }
+        recovered_path.write_text(json.dumps(recovered_payload, indent=2), encoding="utf-8")
+        print(f"[group-brands] auto-recovery output written to {recovered_path}")
+
     return output_path
