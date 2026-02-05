@@ -69,6 +69,20 @@ Full pipeline for all discovered years under `data/raw/`:
 
 `--data-dir` is treated as the explicit raw-input directory for that run (it is not rewritten).
 
+Run all available workflows for one year (pipeline + sentiment + deep sentiment + grouping):
+
+```bash
+.venv/bin/python -m src.cli run-everything --year 2024
+```
+
+Run everything except selected workflows (repeat `--exclude` as needed):
+
+```bash
+.venv/bin/python -m src.cli run-everything --year 2024 --exclude deep-sentiment --exclude group-parent-companies
+```
+
+`run-everything` assumes `OPENROUTER_API_KEY` is already set when grouping workflows are included.
+
 Brand-grouping agent workflow (reads `hashtags_frequency.json` and groups hashtag aliases by brand):
 
 ```bash
