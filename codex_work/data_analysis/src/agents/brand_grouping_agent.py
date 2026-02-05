@@ -21,6 +21,8 @@ from src.agents.rate_limit_policy import (
 
 
 MODEL_DEFAULT = "openai/gpt-oss-120b:free"
+NORMALIZE_CHUNK_SIZE = 200
+LLM_TIMEOUT_SECONDS = 180
 
 
 @dataclass(frozen=True)
@@ -203,30 +205,67 @@ def _map_chunk_to_brands(invoker: _RateLimitedInvoker, chunk: List[HashtagCount]
 
 def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> Dict[str, str]:
     unique_labels = sorted(set(labels))
-    prompt = (
-        "You will normalize brand label aliases.\n"
-        "Output strict JSON only with schema:\n"
-        '{"aliases":[{"label":"<input label>","canonical":"<merged canonical label>"}]}\n'
-        "Rules:\n"
-        "- Keep labels lowercase.\n"
-        "- Only merge labels that clearly refer to the same brand/property.\n"
-        "- Every label must resolve to a specific canonical group label.\n"
-        "- Do NOT map labels to generic catch-alls like 'unassigned'.\n"
-        "- If a label has no clear alias, keep it as its own canonical label.\n"
-        "- Return one alias entry for every input label.\n"
-        "- never return markdown.\n\n"
-        f"labels={json.dumps(unique_labels, ensure_ascii=True)}"
-    )
-    payload = _invoke_json(invoker, prompt)
-    aliases = payload.get("aliases", [])
+    if not unique_labels:
+        return {}
+
     out: Dict[str, str] = {}
-    for alias in aliases:
-        label = str(alias.get("label", "")).strip().lower()
-        canonical = str(alias.get("canonical", "")).strip().lower() or label
-        if label:
-            out[label] = canonical
-    for label in unique_labels:
-        out.setdefault(label, label)
+    for i in range(0, len(unique_labels), NORMALIZE_CHUNK_SIZE):
+        chunk = unique_labels[i : i + NORMALIZE_CHUNK_SIZE]
+        prompt = (
+            "You will normalize brand label aliases.\n"
+            "Output strict JSON only with schema:\n"
+            '{"aliases":[{"label":"<input label>","canonical":"<merged canonical label>"}]}\n'
+            "Rules:\n"
+            "- Keep labels lowercase.\n"
+            "- Only merge labels that clearly refer to the same brand/property.\n"
+            "- Every label must resolve to a specific canonical group label.\n"
+            "- Do NOT map labels to generic catch-alls like 'unassigned'.\n"
+            "- If a label has no clear alias, keep it as its own canonical label.\n"
+            "- Return one alias entry for every input label.\n"
+            "- never return markdown.\n\n"
+            f"labels={json.dumps(chunk, ensure_ascii=True)}"
+        )
+        payload = _invoke_json(invoker, prompt)
+        aliases = payload.get("aliases", [])
+        for alias in aliases:
+            label = str(alias.get("label", "")).strip().lower()
+            canonical = str(alias.get("canonical", "")).strip().lower() or label
+            if label:
+                out[label] = canonical
+        for label in chunk:
+            out.setdefault(label, label)
+
+    # Second pass to merge aliases across chunks.
+    second_pass_labels = sorted(set(out.values()))
+    if len(second_pass_labels) > 1:
+        second_pass: Dict[str, str] = {}
+        for i in range(0, len(second_pass_labels), NORMALIZE_CHUNK_SIZE):
+            chunk = second_pass_labels[i : i + NORMALIZE_CHUNK_SIZE]
+            prompt = (
+                "You will normalize brand label aliases.\n"
+                "Output strict JSON only with schema:\n"
+                '{"aliases":[{"label":"<input label>","canonical":"<merged canonical label>"}]}\n'
+                "Rules:\n"
+                "- Keep labels lowercase.\n"
+                "- Only merge labels that clearly refer to the same brand/property.\n"
+                "- Every label must resolve to a specific canonical group label.\n"
+                "- Do NOT map labels to generic catch-alls like 'unassigned'.\n"
+                "- If a label has no clear alias, keep it as its own canonical label.\n"
+                "- Return one alias entry for every input label.\n"
+                "- never return markdown.\n\n"
+                f"labels={json.dumps(chunk, ensure_ascii=True)}"
+            )
+            payload = _invoke_json(invoker, prompt)
+            aliases = payload.get("aliases", [])
+            for alias in aliases:
+                label = str(alias.get("label", "")).strip().lower()
+                canonical = str(alias.get("canonical", "")).strip().lower() or label
+                if label:
+                    second_pass[label] = canonical
+            for label in chunk:
+                second_pass.setdefault(label, label)
+        out = {label: second_pass.get(canonical, canonical) for label, canonical in out.items()}
+
     return out
 
 
@@ -256,6 +295,7 @@ def run_brand_grouping(
         base_url="https://openrouter.ai/api/v1",
         temperature=0,
         max_retries=3,
+        request_timeout=LLM_TIMEOUT_SECONDS,
     )
     invoker = _RateLimitedInvoker(
         llm=llm,
@@ -273,6 +313,7 @@ def run_brand_grouping(
     degraded_rate_limit_fallback = False
     degraded_parse_fallback = False
     for chunk_index, chunk in enumerate(_chunks(hashtags, size=chunk_size), start=1):
+        print(f"[group-brands] mapping chunk {chunk_index} size={len(chunk)}")
         try:
             mapped = _map_chunk_to_brands(invoker, chunk)
             hashtag_to_brand.update(mapped)
@@ -318,6 +359,7 @@ def run_brand_grouping(
             )
 
     try:
+        print(f"[group-brands] normalizing labels total={len(set(hashtag_to_brand.values()))}")
         alias_map = _normalize_brand_labels(invoker, list(hashtag_to_brand.values()))
         _append_jsonl(
             partial_jsonl_path,

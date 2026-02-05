@@ -101,6 +101,10 @@ Parent-company grouping agent workflow (reads `brand_groups.json` and groups bra
 .venv/bin/python -m src.cli group-parent-companies --year 2023 --model openai/gpt-oss-120b:free
 ```
 
+Parent-company grouping applies deterministic franchise/company overrides from
+`config/parent_company_overrides.json` before LLM mapping (for example, minions
+and despicableme4 map to universal).
+
 BERTweet sentiment workflow (independent CLI command):
 
 ```bash

@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from json import JSONDecodeError
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -21,6 +22,9 @@ from src.agents.rate_limit_policy import (
 
 
 MODEL_DEFAULT = "openai/gpt-oss-120b:free"
+NORMALIZE_CHUNK_SIZE = 200
+LLM_TIMEOUT_SECONDS = 180
+DEFAULT_OVERRIDE_FILE = Path(__file__).resolve().parents[2] / "config" / "parent_company_overrides.json"
 
 
 @dataclass(frozen=True)
@@ -94,6 +98,29 @@ def _extract_json(text: str) -> dict:
     if start == -1 or end == -1 or end <= start:
         raise ValueError("Model response did not contain valid JSON")
     return json.loads(cleaned[start : end + 1])
+
+
+def _normalize_override_key(value: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", value.lower())
+
+
+def _load_parent_company_overrides(path: Path = DEFAULT_OVERRIDE_FILE) -> dict[str, str]:
+    if not path.exists():
+        return {}
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError(f"Invalid parent override file format: {path}")
+    out: dict[str, str] = {}
+    for key, value in payload.items():
+        norm_key = _normalize_override_key(str(key))
+        norm_value = str(value).strip().lower()
+        if norm_key and norm_value:
+            out[norm_key] = norm_value
+    return out
+
+
+def _override_parent(brand: str, overrides: dict[str, str]) -> str | None:
+    return overrides.get(_normalize_override_key(brand))
 
 
 def _repair_json_via_model(invoker: _RateLimitedInvoker, raw_text: str) -> dict:
@@ -207,28 +234,62 @@ def _map_chunk_to_parent_companies(
 
 def _normalize_parent_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> Dict[str, str]:
     unique_labels = sorted(set(labels))
-    prompt = (
-        "Normalize parent company aliases.\n"
-        "Output strict JSON only with schema:\n"
-        '{"aliases":[{"label":"<input label>","canonical":"<merged canonical label>"}]}\n'
-        "Rules:\n"
-        "- keep labels lowercase.\n"
-        "- merge only labels that clearly refer to the same company.\n"
-        "- if unclear, keep label unchanged.\n"
-        "- return one alias entry for every input label.\n"
-        "- never return markdown.\n\n"
-        f"labels={json.dumps(unique_labels, ensure_ascii=True)}"
-    )
-    payload = _invoke_json(invoker, prompt)
-    aliases = payload.get("aliases", [])
+    if not unique_labels:
+        return {}
+
     out: Dict[str, str] = {}
-    for alias in aliases:
-        label = str(alias.get("label", "")).strip().lower()
-        canonical = str(alias.get("canonical", "")).strip().lower() or label
-        if label:
-            out[label] = canonical
-    for label in unique_labels:
-        out.setdefault(label, label)
+    for i in range(0, len(unique_labels), NORMALIZE_CHUNK_SIZE):
+        chunk = unique_labels[i : i + NORMALIZE_CHUNK_SIZE]
+        prompt = (
+            "Normalize parent company aliases.\n"
+            "Output strict JSON only with schema:\n"
+            '{"aliases":[{"label":"<input label>","canonical":"<merged canonical label>"}]}\n'
+            "Rules:\n"
+            "- keep labels lowercase.\n"
+            "- merge only labels that clearly refer to the same company.\n"
+            "- if unclear, keep label unchanged.\n"
+            "- return one alias entry for every input label.\n"
+            "- never return markdown.\n\n"
+            f"labels={json.dumps(chunk, ensure_ascii=True)}"
+        )
+        payload = _invoke_json(invoker, prompt)
+        aliases = payload.get("aliases", [])
+        for alias in aliases:
+            label = str(alias.get("label", "")).strip().lower()
+            canonical = str(alias.get("canonical", "")).strip().lower() or label
+            if label:
+                out[label] = canonical
+        for label in chunk:
+            out.setdefault(label, label)
+
+    second_pass_labels = sorted(set(out.values()))
+    if len(second_pass_labels) > 1:
+        second_pass: Dict[str, str] = {}
+        for i in range(0, len(second_pass_labels), NORMALIZE_CHUNK_SIZE):
+            chunk = second_pass_labels[i : i + NORMALIZE_CHUNK_SIZE]
+            prompt = (
+                "Normalize parent company aliases.\n"
+                "Output strict JSON only with schema:\n"
+                '{"aliases":[{"label":"<input label>","canonical":"<merged canonical label>"}]}\n'
+                "Rules:\n"
+                "- keep labels lowercase.\n"
+                "- merge only labels that clearly refer to the same company.\n"
+                "- if unclear, keep label unchanged.\n"
+                "- return one alias entry for every input label.\n"
+                "- never return markdown.\n\n"
+                f"labels={json.dumps(chunk, ensure_ascii=True)}"
+            )
+            payload = _invoke_json(invoker, prompt)
+            aliases = payload.get("aliases", [])
+            for alias in aliases:
+                label = str(alias.get("label", "")).strip().lower()
+                canonical = str(alias.get("canonical", "")).strip().lower() or label
+                if label:
+                    second_pass[label] = canonical
+            for label in chunk:
+                second_pass.setdefault(label, label)
+        out = {label: second_pass.get(canonical, canonical) for label, canonical in out.items()}
+
     return out
 
 
@@ -250,6 +311,7 @@ def run_parent_company_grouping(
         max_rate_limit_retries=max_rate_limit_retries,
         initial_backoff_seconds=initial_backoff_seconds,
     )
+    parent_overrides = _load_parent_company_overrides()
 
     year, groups = _load_brand_groups(brand_groups_path)
     llm = ChatOpenAI(
@@ -258,6 +320,7 @@ def run_parent_company_grouping(
         base_url="https://openrouter.ai/api/v1",
         temperature=0,
         max_retries=3,
+        request_timeout=LLM_TIMEOUT_SECONDS,
     )
     invoker = _RateLimitedInvoker(
         llm=llm,
@@ -275,15 +338,40 @@ def run_parent_company_grouping(
     degraded_rate_limit_fallback = False
     degraded_parse_fallback = False
     for chunk_index, chunk in enumerate(_chunks(groups, size=chunk_size), start=1):
+        print(f"[group-parent-companies] mapping chunk {chunk_index} size={len(chunk)}")
+        unresolved_chunk: List[BrandGroup] = []
+        override_mappings = []
+        for item in chunk:
+            forced_parent = _override_parent(item.brand, parent_overrides)
+            if forced_parent:
+                brand_to_parent[item.brand] = forced_parent
+                override_mappings.append({"brand": item.brand, "parent_company": forced_parent})
+            else:
+                unresolved_chunk.append(item)
+        if override_mappings:
+            _append_jsonl(
+                partial_jsonl_path,
+                {
+                    "phase": "map_chunk_override",
+                    "chunk_index": chunk_index,
+                    "mappings": override_mappings,
+                },
+            )
+        if not unresolved_chunk:
+            continue
+
         try:
-            mapped = _map_chunk_to_parent_companies(invoker, chunk)
+            mapped = _map_chunk_to_parent_companies(invoker, unresolved_chunk)
             brand_to_parent.update(mapped)
             _append_jsonl(
                 partial_jsonl_path,
                 {
                     "phase": "map_chunk",
                     "chunk_index": chunk_index,
-                    "mappings": [{"brand": item.brand, "parent_company": mapped.get(item.brand, item.brand)} for item in chunk],
+                    "mappings": [
+                        {"brand": item.brand, "parent_company": mapped.get(item.brand, item.brand)}
+                        for item in unresolved_chunk
+                    ],
                 },
             )
         except ModelJsonParseError as exc:
@@ -295,13 +383,18 @@ def run_parent_company_grouping(
                 raw_text=exc.raw_text,
             )
             for item in chunk:
+                if item.brand in brand_to_parent:
+                    continue
                 brand_to_parent[item.brand] = item.brand
             _append_jsonl(
                 partial_jsonl_path,
                 {
                     "phase": "map_chunk_fallback",
                     "chunk_index": chunk_index,
-                    "mappings": [{"brand": item.brand, "parent_company": item.brand} for item in chunk],
+                    "mappings": [
+                        {"brand": item.brand, "parent_company": brand_to_parent[item.brand]}
+                        for item in unresolved_chunk
+                    ],
                 },
             )
         except Exception as exc:  # noqa: BLE001
@@ -309,17 +402,23 @@ def run_parent_company_grouping(
                 raise
             degraded_rate_limit_fallback = True
             for item in chunk:
+                if item.brand in brand_to_parent:
+                    continue
                 brand_to_parent[item.brand] = item.brand
             _append_jsonl(
                 partial_jsonl_path,
                 {
                     "phase": "map_chunk_rate_limit_fallback",
                     "chunk_index": chunk_index,
-                    "mappings": [{"brand": item.brand, "parent_company": item.brand} for item in chunk],
+                    "mappings": [
+                        {"brand": item.brand, "parent_company": brand_to_parent[item.brand]}
+                        for item in unresolved_chunk
+                    ],
                 },
             )
 
     try:
+        print(f"[group-parent-companies] normalizing labels total={len(set(brand_to_parent.values()))}")
         alias_map = _normalize_parent_labels(invoker, list(brand_to_parent.values()))
         _append_jsonl(
             partial_jsonl_path,
