@@ -55,6 +55,12 @@ Full pipeline with optional deeper emotion classification:
 .venv/bin/python -m src.cli run --year 2024 --all --with-deep-sentiment
 ```
 
+Full pipeline with parent-company sentiment impact:
+
+```bash
+.venv/bin/python -m src.cli run --year 2024 --all --with-sentiment --with-parent-company-sentiment
+```
+
 Full pipeline from explicit data directory:
 
 ```bash
@@ -123,6 +129,12 @@ Ad-level sentiment aggregation workflow:
 .venv/bin/python -m src.cli ad-sentiment --year 2024
 ```
 
+Parent-company sentiment impact workflow:
+
+```bash
+.venv/bin/python -m src.cli parent-company-sentiment --year 2024
+```
+
 Run sentiment on a custom dataset:
 
 ```bash
@@ -145,6 +157,7 @@ pass `--allow-fallback`.
 - sentiment (optional): deterministic BERTweet sentiment inference written to `sentiment/bertweet/<year>/sentiment.json`
 - ad_sentiment (optional): joins sentiment + enriched rows and writes ad-level sentiment outputs
 - deep_sentiment (optional): deterministic deep emotion inference written to `sentiment/deep/<year>/deep_sentiment.json`
+- parent_company_sentiment (optional): joins sentiment + parent company groupings and writes company impact outputs
 - visualize (optional): placeholder visualization output
 - export (optional): placeholder export artifact
 
@@ -171,6 +184,15 @@ The ad sentiment workflow writes:
 - `outputs/analytics/<year>/ad_sentiment_joined.parquet`
 - `outputs/analytics/<year>/ad_sentiment_summary.json`
 - `outputs/analytics/<year>/ad_sentiment_summary.csv`
+
+The parent-company sentiment workflow writes:
+- `outputs/analytics/<year>/parent_company_sentiment_joined.parquet`
+- `outputs/analytics/<year>/parent_company_sentiment_summary.json`
+- `outputs/analytics/<year>/parent_company_sentiment_summary.csv`
+- `outputs/analytics/<year>/parent_company_sentiment_timeslices.json`
+- `outputs/analytics/<year>/parent_company_sentiment_timeslices.csv`
+- `outputs/analytics/<year>/parent_company_sentiment_by_ad_tag.json`
+- `outputs/analytics/<year>/parent_company_sentiment_by_ad_tag.csv`
 
 The deep sentiment workflow writes:
 - `sentiment/deep/<year>/deep_sentiment.json`

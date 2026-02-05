@@ -45,6 +45,12 @@ def test_with_ad_sentiment_requires_with_sentiment():
     assert '--with-ad-sentiment requires --with-sentiment' in r.stdout
 
 
+def test_with_parent_company_sentiment_requires_with_sentiment():
+    r = runner.invoke(app, ['run', '--year', '2024', '--all', '--with-parent-company-sentiment'])
+    assert r.exit_code != 0
+    assert '--with-parent-company-sentiment requires --with-sentiment' in r.stdout
+
+
 def test_with_deep_sentiment_requires_all_mode():
     r = runner.invoke(app, ['run', '--year', '2024', '--stage', 'clean', '--with-deep-sentiment'])
     assert r.exit_code != 0
