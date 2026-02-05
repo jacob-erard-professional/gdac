@@ -26,6 +26,11 @@ class RunRequest:
     sentiment_dry_run: bool = False
     sentiment_allow_fallback: bool = False
     ad_sentiment_min_tweets: int = 1
+    with_deep_sentiment: bool = False
+    deep_sentiment_model: str = "SamLowe/roberta-base-go_emotions"
+    deep_sentiment_batch_size: int = 64
+    deep_sentiment_dry_run: bool = False
+    deep_sentiment_label_map_file: Optional[Path] = None
 
 
 def validate_year(year: str) -> str:
