@@ -6,6 +6,7 @@ from .sentiment import sentiment_command
 from .ad_sentiment import ad_sentiment_command
 from .deep_sentiment import deep_sentiment_command
 from .run_everything import run_everything_command
+from .parent_company_sentiment import parent_company_sentiment_command
 
 app = typer.Typer(add_completion=False)
 
@@ -23,6 +24,7 @@ app.command('sentiment')(sentiment_command)
 app.command('ad-sentiment')(ad_sentiment_command)
 app.command('deep-sentiment')(deep_sentiment_command)
 app.command('run-everything')(run_everything_command)
+app.command('parent-company-sentiment')(parent_company_sentiment_command)
 
 
 def main():

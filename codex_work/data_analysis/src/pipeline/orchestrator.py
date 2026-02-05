@@ -20,6 +20,7 @@ RUNNERS = {
     'sentiment': stages.sentiment.run,
     'ad_sentiment': stages.ad_sentiment.run,
     'deep_sentiment': stages.deep_sentiment.run,
+    'parent_company_sentiment': stages.parent_company_sentiment.run,
 }
 
 
@@ -69,6 +70,11 @@ def _run_for_year(
                 dry_run=req.deep_sentiment_dry_run,
                 label_map_file=req.deep_sentiment_label_map_file,
             )
+        elif stage == 'parent_company_sentiment':
+            manifest = RUNNERS[stage](
+                config,
+                min_tweets=req.parent_company_sentiment_min_tweets,
+            )
         else:
             manifest = RUNNERS[stage](config)
         for out in manifest.output_files:
@@ -102,6 +108,8 @@ def run_pipeline(base_dir: Path, req: RunRequest):
             stage_list = stage_list + ['ad_sentiment']
         if req.with_deep_sentiment:
             stage_list = stage_list + ['deep_sentiment']
+        if req.with_parent_company_sentiment:
+            stage_list = stage_list + ['parent_company_sentiment']
         return [_run_for_year(base_dir, req, req.year, req.data_dir, stage_list)]
 
     if req.mode == 'full_all_years':
@@ -113,6 +121,8 @@ def run_pipeline(base_dir: Path, req: RunRequest):
             stage_list = stage_list + ['ad_sentiment']
         if req.with_deep_sentiment:
             stage_list = stage_list + ['deep_sentiment']
+        if req.with_parent_company_sentiment:
+            stage_list = stage_list + ['parent_company_sentiment']
         return [
             _run_for_year(base_dir, req, y, None, stage_list)
             for y in years
