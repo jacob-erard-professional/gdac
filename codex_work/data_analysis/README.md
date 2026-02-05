@@ -49,6 +49,12 @@ Full pipeline with sentiment + ad sentiment aggregation:
 .venv/bin/python -m src.cli run --year 2024 --all --with-sentiment --with-ad-sentiment
 ```
 
+Full pipeline with optional deeper emotion classification:
+
+```bash
+.venv/bin/python -m src.cli run --year 2024 --all --with-deep-sentiment
+```
+
 Full pipeline from explicit data directory:
 
 ```bash
@@ -87,6 +93,12 @@ BERTweet sentiment workflow (independent CLI command):
 .venv/bin/python -m src.cli sentiment --year 2024 --batch-size 64
 ```
 
+Deep sentiment workflow (independent CLI command):
+
+```bash
+.venv/bin/python -m src.cli deep-sentiment --year 2024 --batch-size 64
+```
+
 Ad-level sentiment aggregation workflow:
 
 ```bash
@@ -114,6 +126,7 @@ pass `--allow-fallback`.
 - analyze: analytics artifact generation under `outputs/analytics/<year>/`
 - sentiment (optional): deterministic BERTweet sentiment inference written to `sentiment/bertweet/<year>/sentiment.json`
 - ad_sentiment (optional): joins sentiment + enriched rows and writes ad-level sentiment outputs
+- deep_sentiment (optional): deterministic deep emotion inference written to `sentiment/deep/<year>/deep_sentiment.json`
 - visualize (optional): placeholder visualization output
 - export (optional): placeholder export artifact
 
@@ -141,9 +154,20 @@ The ad sentiment workflow writes:
 - `outputs/analytics/<year>/ad_sentiment_summary.json`
 - `outputs/analytics/<year>/ad_sentiment_summary.csv`
 
+The deep sentiment workflow writes:
+- `sentiment/deep/<year>/deep_sentiment.json`
+
 ## BERTweet Sentiment Notes
 
 - Why BERTweet: the default checkpoint is pretrained for tweet text and already includes a sentiment classification head.
 - Preprocessing: URLs are removed and whitespace normalized; hashtags/emojis/punctuation are preserved.
 - Output interpretation: each record contains `tweet_id`, `year`, `text`, `sentiment`, and model confidence.
 - Known limitations: sarcasm, memes, and domain drift can reduce accuracy; model outputs may reflect dataset bias.
+
+## Deep Sentiment Notes
+
+- Why this model: default `SamLowe/roberta-base-go_emotions` offers broad emotion coverage and can be canonically mapped to required labels.
+- Required taxonomy: `joy`, `surprise`, `anger`, `disappointment`, `excitement`, `neutral`.
+- Output interpretation: each record contains `tweet_id`, `hashtags`, `text`, `main_sentiment`, `year`, and confidence.
+- Label mapping: provide `--label-map-file path/to/map.json` when using a custom model with non-standard label names.
+- Known limitations: nuanced emotions can collapse into required categories and may not capture sarcasm or mixed sentiment.
