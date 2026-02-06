@@ -148,6 +148,22 @@ Parent-company deep sentiment impact workflow:
 .venv/bin/python -m src.cli parent-company-deep-sentiment --year 2024
 ```
 
+Emotion breakdowns from sentiment-company maps:
+
+```bash
+.venv/bin/python -m src.scripts.emotion_breakdown \
+  --input-jsonl outputs/aux/2024/sentiment_company_map.jsonl \
+  --parent-out outputs/aux/2024/parent_company_sentiment_breakdown.json \
+  --brand-out outputs/aux/2024/brand_sentiment_breakdown.json
+```
+
+```bash
+.venv/bin/python -m src.scripts.emotion_breakdown \
+  --input-jsonl outputs/aux/2024/deep_sentiment_company_map.jsonl \
+  --parent-out outputs/aux/2024/parent_company_emotion_breakdown.json \
+  --brand-out outputs/aux/2024/brand_emotion_breakdown.json
+```
+
 Run sentiment on a custom dataset:
 
 ```bash
@@ -185,6 +201,9 @@ pass `--allow-fallback`.
 The analyze stage writes only two files under `outputs/analytics/<year>/`:
 `hashtags_frequency.json` and `mentions_frequency.json`.
 
+Auxiliary outputs (maps, partial JSONLs, recovery artifacts, joined parquet maps) are written to
+`outputs/aux/<year>/` and are ignored by git.
+
 ## ID Flow Diagram
 
 ```
@@ -211,11 +230,11 @@ ingest -> clean (adds pipeline_row_id)
 
 The brand-grouping agent writes:
 - `outputs/analytics/<year>/brand_groups.json`
-- `outputs/analytics/<year>/brand_tweet_map.json`
+- `outputs/aux/<year>/brand_tweet_map.json`
 
 The parent-company grouping agent writes:
 - `outputs/analytics/<year>/parent_company_groups.json`
-- `outputs/analytics/<year>/parent_company_tweet_map.json`
+- `outputs/aux/<year>/parent_company_tweet_map.json`
 
 The BERTweet sentiment workflow writes:
 - `sentiment/bertweet/<year>/sentiment.json`
@@ -238,7 +257,7 @@ The deep sentiment workflow writes:
 - `sentiment/deep/<year>/deep_sentiment.json`
 
 The parent-company deep sentiment workflow writes:
-- `outputs/analytics/<year>/parent_company_deep_sentiment_joined.parquet`
+- `outputs/aux/<year>/parent_company_deep_sentiment_joined.parquet`
 - `outputs/analytics/<year>/parent_company_deep_sentiment_summary.json`
 - `outputs/analytics/<year>/parent_company_deep_sentiment_summary.csv`
 - `outputs/analytics/<year>/parent_company_deep_sentiment_timeslices.json`
@@ -254,9 +273,8 @@ The parent-company deep sentiment workflow writes:
 
 ## Deep Sentiment Notes
 
-- Why this model: default `SamLowe/roberta-base-go_emotions` offers broad emotion coverage and can be canonically mapped to required labels.
-- Required taxonomy: `joy`, `surprise`, `anger`, `disappointment`, `excitement`, `neutral`.
+- Why this model: default `cardiffnlp/twitter-roberta-base-emotion-latest` is Twitter-trained and retains native labels.
 - Output interpretation: each record contains `tweet_id`, `hashtags`, `text`, `main_sentiment`, `year`, and confidence.
-- Label mapping: provide `--label-map-file path/to/map.json` when using a custom model with non-standard label names.
+- Label mapping: provide `--label-map-file path/to/map.json` to rename model labels (optional).
 - GPU usage: defaults to CUDA when available; falls back to CPU if not (`--device cpu` to force).
-- Known limitations: nuanced emotions can collapse into required categories and may not capture sarcasm or mixed sentiment.
+- Known limitations: model labels may be fine-grained; consider post-processing for aggregation.

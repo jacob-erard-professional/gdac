@@ -31,7 +31,7 @@ def run_everything_command(
     sentiment_batch_size: int = typer.Option(64, "--sentiment-batch-size", min=1, max=4096),
     sentiment_device: str = typer.Option("cuda", "--sentiment-device"),
     deep_sentiment_model: str = typer.Option(
-        "SamLowe/roberta-base-go_emotions",
+        "cardiffnlp/twitter-roberta-base-emotion-latest",
         "--deep-sentiment-model",
     ),
     deep_sentiment_batch_size: int = typer.Option(64, "--deep-sentiment-batch-size", min=1, max=4096),
@@ -153,8 +153,9 @@ def run_everything_command(
             build_brand_tweet_map = None
             build_parent_company_tweet_map = None
         if build_brand_tweet_map and build_parent_company_tweet_map:
-            brand_map_path = cfg.analytics_dir / "brand_tweet_map.json"
-            parent_map_path = cfg.analytics_dir / "parent_company_tweet_map.json"
+            aux_dir = base_dir / "outputs" / "aux" / cfg.year
+            brand_map_path = aux_dir / "brand_tweet_map.json"
+            parent_map_path = aux_dir / "parent_company_tweet_map.json"
             if not brand_map_path.exists():
                 build_brand_tweet_map(
                     enriched_path=cfg.enriched_dir / "enriched.csv",
@@ -191,7 +192,7 @@ def run_everything_command(
             parent_groups_path=parent_groups_path,
             output_dir=cfg.analytics_dir,
             min_tweets=1,
-            tweet_map_path=cfg.analytics_dir / "parent_company_tweet_map.json",
+            tweet_map_path=base_dir / "outputs" / "aux" / cfg.year / "parent_company_tweet_map.json",
         )
 
     typer.echo("[run-everything] complete")

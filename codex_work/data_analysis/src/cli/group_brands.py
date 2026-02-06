@@ -63,7 +63,8 @@ def group_brands_command(
     resolved_input = input_file or (base_dir / "outputs" / "analytics" / year / "hashtags_frequency.json")
     resolved_output = output_file or (base_dir / "outputs" / "analytics" / year / "brand_groups.json")
     resolved_enriched = enriched_file or (base_dir / "data" / "enriched" / year / "enriched.csv")
-    tweet_map_output = resolved_output.with_name("brand_tweet_map.json")
+    aux_dir = base_dir / "outputs" / "aux" / year
+    tweet_map_output = aux_dir / "brand_tweet_map.json"
 
     if not resolved_input.exists():
         raise typer.BadParameter(f"Input file not found: {resolved_input}")

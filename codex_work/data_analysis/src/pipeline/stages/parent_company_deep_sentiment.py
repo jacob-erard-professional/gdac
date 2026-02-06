@@ -7,7 +7,7 @@ def run(config, *, min_tweets: int = 1):
     enriched_path = config.enriched_dir / "enriched.csv"
     parent_groups_path = config.analytics_dir / "parent_company_groups.json"
     output_dir = config.analytics_dir
-    tweet_map_path = config.analytics_dir / "parent_company_tweet_map.json"
+    tweet_map_path = config.analytics_dir.parents[1] / "aux" / config.year / "parent_company_tweet_map.json"
     if not tweet_map_path.exists():
         try:
             from src.utils.tweet_company_map import build_brand_tweet_map, build_parent_company_tweet_map
@@ -16,7 +16,7 @@ def run(config, *, min_tweets: int = 1):
             build_parent_company_tweet_map = None
         if build_brand_tweet_map and build_parent_company_tweet_map:
             brand_groups_path = config.analytics_dir / "brand_groups.json"
-            brand_map_path = config.analytics_dir / "brand_tweet_map.json"
+            brand_map_path = config.analytics_dir.parents[1] / "aux" / config.year / "brand_tweet_map.json"
             if brand_groups_path.exists() and enriched_path.exists():
                 if not brand_map_path.exists():
                     build_brand_tweet_map(
