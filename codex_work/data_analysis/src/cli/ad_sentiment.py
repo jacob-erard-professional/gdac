@@ -28,7 +28,7 @@ def ad_sentiment_command(
     resolved_sentiment = sentiment_file or (base_dir / "sentiment" / "bertweet" / cfg.year / "sentiment.json")
     resolved_enriched = enriched_file or (cfg.enriched_dir / "enriched.csv")
     resolved_output_dir = output_dir or cfg.analytics_dir
-    resolved_tweet_map = tweet_map_file or (cfg.analytics_dir / "brand_tweet_map.json")
+    resolved_tweet_map = tweet_map_file or (base_dir / "outputs" / "aux" / cfg.year / "brand_tweet_map.json")
 
     if not resolved_sentiment.is_absolute():
         resolved_sentiment = (base_dir / resolved_sentiment).resolve()

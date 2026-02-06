@@ -63,8 +63,9 @@ def group_parent_companies_command(
     resolved_input = input_file or (base_dir / "outputs" / "analytics" / year / "brand_groups.json")
     resolved_output = output_file or (base_dir / "outputs" / "analytics" / year / "parent_company_groups.json")
     resolved_enriched = enriched_file or (base_dir / "data" / "enriched" / year / "enriched.csv")
-    brand_tweet_map = resolved_output.with_name("brand_tweet_map.json")
-    parent_tweet_map = resolved_output.with_name("parent_company_tweet_map.json")
+    aux_dir = base_dir / "outputs" / "aux" / year
+    brand_tweet_map = aux_dir / "brand_tweet_map.json"
+    parent_tweet_map = aux_dir / "parent_company_tweet_map.json"
 
     if not resolved_input.exists():
         raise typer.BadParameter(f"Input file not found: {resolved_input}")

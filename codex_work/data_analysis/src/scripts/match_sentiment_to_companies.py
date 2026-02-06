@@ -32,12 +32,21 @@ def main():
     payload = json.loads(args.sentiment_file.read_text(encoding="utf-8"))
     records = payload.get("records", [])
 
+    output_path = args.output_file
+    if not output_path.is_absolute():
+        output_path = (Path.cwd() / output_path).resolve()
+    if "/outputs/analytics/" in str(output_path):
+        parts = str(output_path).split("/outputs/analytics/")
+        if len(parts) == 2:
+            output_path = Path(parts[0]) / "outputs" / "aux" / parts[1]
+            print(f"[sentiment-map] redirecting output to aux: {output_path}")
+
     hashtag_to_brand, _hashtag_counts = _load_brand_groups(args.brand_groups_file)
     parent_map = _load_parent_company_groups(args.parent_groups_file)
 
-    args.output_file.parent.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     total = len(records)
-    with args.output_file.open("w", encoding="utf-8") as f:
+    with output_path.open("w", encoding="utf-8") as f:
         for start in range(0, total, args.batch_size):
             batch = records[start : start + args.batch_size]
             out_records = []

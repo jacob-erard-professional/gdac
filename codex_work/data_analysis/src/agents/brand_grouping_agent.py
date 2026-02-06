@@ -366,8 +366,9 @@ def run_brand_grouping(
 
     current_model = model
     invoker = _build_invoker(current_model)
-    partial_jsonl_path = output_path.with_name(f"{output_path.stem}_partial.jsonl")
-    parse_failures_path = output_path.with_name(f"{output_path.stem}_parse_failures.txt")
+    aux_dir = output_path.parent.parent.parent / "aux" / output_path.parent.name
+    partial_jsonl_path = aux_dir / f"{output_path.stem}_partial.jsonl"
+    parse_failures_path = aux_dir / f"{output_path.stem}_parse_failures.txt"
     if not resume:
         for path in (partial_jsonl_path, parse_failures_path):
             if path.exists():
@@ -522,7 +523,7 @@ def run_brand_grouping(
     output_path.write_text(json.dumps(result, indent=2), encoding="utf-8")
 
     if degraded_rate_limit_fallback or degraded_parse_fallback:
-        recovered_path = output_path.with_name(f"{output_path.stem}_recovered.json")
+        recovered_path = aux_dir / f"{output_path.stem}_recovered.json"
         recovered_payload = {
             "year": year,
             "model": model,

@@ -1,0 +1,11126 @@
+[
+  {
+    "brand": "superbowl",
+    "sentiment_breakdown": {
+      "negative": 0.084249,
+      "neutral": 0.505601,
+      "positive": 0.41015
+    },
+    "tweet_count": 46149
+  },
+  {
+    "brand": "unmatched",
+    "sentiment_breakdown": {
+      "negative": 0.314191,
+      "neutral": 0.425719,
+      "positive": 0.26009
+    },
+    "tweet_count": 21035
+  },
+  {
+    "brand": "nfl",
+    "sentiment_breakdown": {
+      "negative": 0.101119,
+      "neutral": 0.643848,
+      "positive": 0.255034
+    },
+    "tweet_count": 2235
+  },
+  {
+    "brand": "halftime",
+    "sentiment_breakdown": {
+      "negative": 0.027518,
+      "neutral": 0.790314,
+      "positive": 0.182168
+    },
+    "tweet_count": 1817
+  },
+  {
+    "brand": "49ers",
+    "sentiment_breakdown": {
+      "negative": 0.125581,
+      "neutral": 0.636047,
+      "positive": 0.238372
+    },
+    "tweet_count": 1720
+  },
+  {
+    "brand": "deadpool",
+    "sentiment_breakdown": {
+      "negative": 0.018154,
+      "neutral": 0.491679,
+      "positive": 0.490166
+    },
+    "tweet_count": 1322
+  },
+  {
+    "brand": "chiefs",
+    "sentiment_breakdown": {
+      "negative": 0.145514,
+      "neutral": 0.540481,
+      "positive": 0.314004
+    },
+    "tweet_count": 914
+  },
+  {
+    "brand": "haveingablast",
+    "sentiment_breakdown": {
+      "negative": 0.006116,
+      "neutral": 0.264526,
+      "positive": 0.729358
+    },
+    "tweet_count": 654
+  },
+  {
+    "brand": "beyonce",
+    "sentiment_breakdown": {
+      "negative": 0.030043,
+      "neutral": 0.263948,
+      "positive": 0.706009
+    },
+    "tweet_count": 466
+  },
+  {
+    "brand": "afcon2023",
+    "sentiment_breakdown": {
+      "negative": 0.084795,
+      "neutral": 0.739766,
+      "positive": 0.175439
+    },
+    "tweet_count": 342
+  },
+  {
+    "brand": "courttv",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 289
+  },
+  {
+    "brand": "sup",
+    "sentiment_breakdown": {
+      "negative": 0.007042,
+      "neutral": 0.929577,
+      "positive": 0.06338
+    },
+    "tweet_count": 284
+  },
+  {
+    "brand": "wew",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 282
+  },
+  {
+    "brand": "cowboys",
+    "sentiment_breakdown": {
+      "negative": 0.007353,
+      "neutral": 0.084559,
+      "positive": 0.908088
+    },
+    "tweet_count": 272
+  },
+  {
+    "brand": "dunkin",
+    "sentiment_breakdown": {
+      "negative": 0.022901,
+      "neutral": 0.076336,
+      "positive": 0.900763
+    },
+    "tweet_count": 262
+  },
+  {
+    "brand": "carlweathers",
+    "sentiment_breakdown": {
+      "negative": 0.008734,
+      "neutral": 0.973799,
+      "positive": 0.017467
+    },
+    "tweet_count": 229
+  },
+  {
+    "brand": "s",
+    "sentiment_breakdown": {
+      "negative": 0.02451,
+      "neutral": 0.436275,
+      "positive": 0.539216
+    },
+    "tweet_count": 204
+  },
+  {
+    "brand": "suits",
+    "sentiment_breakdown": {
+      "negative": 0.034483,
+      "neutral": 0.634483,
+      "positive": 0.331034
+    },
+    "tweet_count": 145
+  },
+  {
+    "brand": "keepmein",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 138
+  },
+  {
+    "brand": "traviskelce",
+    "sentiment_breakdown": {
+      "negative": 0.966102,
+      "neutral": 0.033898
+    },
+    "tweet_count": 118
+  },
+  {
+    "brand": "arianagrande",
+    "sentiment_breakdown": {
+      "negative": 0.018868,
+      "neutral": 0.745283,
+      "positive": 0.235849
+    },
+    "tweet_count": 106
+  },
+  {
+    "brand": "football",
+    "sentiment_breakdown": {
+      "negative": 0.116505,
+      "neutral": 0.660194,
+      "positive": 0.223301
+    },
+    "tweet_count": 103
+  },
+  {
+    "brand": "statefarm",
+    "sentiment_breakdown": {
+      "negative": 0.082474,
+      "neutral": 0.257732,
+      "positive": 0.659794
+    },
+    "tweet_count": 97
+  },
+  {
+    "brand": "fttb",
+    "sentiment_breakdown": {
+      "negative": 0.085106,
+      "neutral": 0.521277,
+      "positive": 0.393617
+    },
+    "tweet_count": 94
+  },
+  {
+    "brand": "advertising",
+    "sentiment_breakdown": {
+      "negative": 0.076923,
+      "neutral": 0.285714,
+      "positive": 0.637363
+    },
+    "tweet_count": 91
+  },
+  {
+    "brand": "kingdomoftheapes",
+    "sentiment_breakdown": {
+      "negative": 0.022472,
+      "neutral": 0.764045,
+      "positive": 0.213483
+    },
+    "tweet_count": 89
+  },
+  {
+    "brand": "lasvegas",
+    "sentiment_breakdown": {
+      "negative": 0.011236,
+      "neutral": 0.865169,
+      "positive": 0.123596
+    },
+    "tweet_count": 89
+  },
+  {
+    "brand": "breaking",
+    "sentiment_breakdown": {
+      "negative": 0.149425,
+      "neutral": 0.850575
+    },
+    "tweet_count": 87
+  },
+  {
+    "brand": "benaffleck",
+    "sentiment_breakdown": {
+      "negative": 0.604651,
+      "neutral": 0.197674,
+      "positive": 0.197674
+    },
+    "tweet_count": 86
+  },
+  {
+    "brand": "jennaortega",
+    "sentiment_breakdown": {
+      "neutral": 0.987654,
+      "positive": 0.012346
+    },
+    "tweet_count": 81
+  },
+  {
+    "brand": "andyreid",
+    "sentiment_breakdown": {
+      "negative": 0.263158,
+      "neutral": 0.605263,
+      "positive": 0.131579
+    },
+    "tweet_count": 76
+  },
+  {
+    "brand": "sb",
+    "sentiment_breakdown": {
+      "negative": 0.027778,
+      "neutral": 0.583333,
+      "positive": 0.388889
+    },
+    "tweet_count": 72
+  },
+  {
+    "brand": "postmalone",
+    "sentiment_breakdown": {
+      "negative": 0.057143,
+      "neutral": 0.671429,
+      "positive": 0.271429
+    },
+    "tweet_count": 70
+  },
+  {
+    "brand": "icespice",
+    "sentiment_breakdown": {
+      "negative": 0.308824,
+      "neutral": 0.5,
+      "positive": 0.191176
+    },
+    "tweet_count": 68
+  },
+  {
+    "brand": "romo",
+    "sentiment_breakdown": {
+      "negative": 0.40625,
+      "neutral": 0.5,
+      "positive": 0.09375
+    },
+    "tweet_count": 64
+  },
+  {
+    "brand": "wicked",
+    "sentiment_breakdown": {
+      "negative": 0.238095,
+      "neutral": 0.746032,
+      "positive": 0.015873
+    },
+    "tweet_count": 63
+  },
+  {
+    "brand": "betmgm",
+    "sentiment_breakdown": {
+      "negative": 0.131148,
+      "neutral": 0.737705,
+      "positive": 0.131148
+    },
+    "tweet_count": 61
+  },
+  {
+    "brand": "dove",
+    "sentiment_breakdown": {
+      "negative": 0.22807,
+      "neutral": 0.105263,
+      "positive": 0.666667
+    },
+    "tweet_count": 57
+  },
+  {
+    "brand": "brady",
+    "sentiment_breakdown": {
+      "negative": 0.090909,
+      "neutral": 0.563636,
+      "positive": 0.345455
+    },
+    "tweet_count": 55
+  },
+  {
+    "brand": "hegetsus",
+    "sentiment_breakdown": {
+      "negative": 0.254545,
+      "neutral": 0.6,
+      "positive": 0.145455
+    },
+    "tweet_count": 55
+  },
+  {
+    "brand": "ai",
+    "sentiment_breakdown": {
+      "negative": 0.076923,
+      "neutral": 0.5,
+      "positive": 0.423077
+    },
+    "tweet_count": 52
+  },
+  {
+    "brand": "num1",
+    "sentiment_breakdown": {
+      "neutral": 0.153846,
+      "positive": 0.846154
+    },
+    "tweet_count": 52
+  },
+  {
+    "brand": "mahomes",
+    "sentiment_breakdown": {
+      "negative": 0.020408,
+      "neutral": 0.938776,
+      "positive": 0.040816
+    },
+    "tweet_count": 49
+  },
+  {
+    "brand": "brandbowl",
+    "sentiment_breakdown": {
+      "negative": 0.106383,
+      "neutral": 0.297872,
+      "positive": 0.595745
+    },
+    "tweet_count": 47
+  },
+  {
+    "brand": "actii",
+    "sentiment_breakdown": {
+      "negative": 0.043478,
+      "neutral": 0.195652,
+      "positive": 0.76087
+    },
+    "tweet_count": 46
+  },
+  {
+    "brand": "bobesponj",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 46
+  },
+  {
+    "brand": "blakelively",
+    "sentiment_breakdown": {
+      "neutral": 0.72093,
+      "positive": 0.27907
+    },
+    "tweet_count": 43
+  },
+  {
+    "brand": "cbs",
+    "sentiment_breakdown": {
+      "negative": 0.27907,
+      "neutral": 0.511628,
+      "positive": 0.209302
+    },
+    "tweet_count": 43
+  },
+  {
+    "brand": "endisraelsgenocide",
+    "sentiment_breakdown": {
+      "negative": 0.214286,
+      "neutral": 0.785714
+    },
+    "tweet_count": 42
+  },
+  {
+    "brand": "standuptoje",
+    "sentiment_breakdown": {
+      "negative": 0.414634,
+      "neutral": 0.463415,
+      "positive": 0.121951
+    },
+    "tweet_count": 41
+  },
+  {
+    "brand": "gojo",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 39
+  },
+  {
+    "brand": "gaza",
+    "sentiment_breakdown": {
+      "negative": 0.815789,
+      "neutral": 0.184211
+    },
+    "tweet_count": 38
+  },
+  {
+    "brand": "onpoli",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 36
+  },
+  {
+    "brand": "ad",
+    "sentiment_breakdown": {
+      "negative": 0.057143,
+      "neutral": 0.542857,
+      "positive": 0.4
+    },
+    "tweet_count": 35
+  },
+  {
+    "brand": "antisemitism",
+    "sentiment_breakdown": {
+      "negative": 0.228571,
+      "neutral": 0.028571,
+      "positive": 0.742857
+    },
+    "tweet_count": 35
+  },
+  {
+    "brand": "patrickmahomes",
+    "sentiment_breakdown": {
+      "negative": 0.142857,
+      "neutral": 0.657143,
+      "positive": 0.2
+    },
+    "tweet_count": 35
+  },
+  {
+    "brand": "paramountplus",
+    "sentiment_breakdown": {
+      "negative": 0.617647,
+      "neutral": 0.352941,
+      "positive": 0.029412
+    },
+    "tweet_count": 34
+  },
+  {
+    "brand": "deliveringsince1876",
+    "sentiment_breakdown": {
+      "neutral": 0.272727,
+      "positive": 0.727273
+    },
+    "tweet_count": 33
+  },
+  {
+    "brand": "getwild",
+    "sentiment_breakdown": {
+      "neutral": 0.757576,
+      "positive": 0.242424
+    },
+    "tweet_count": 33
+  },
+  {
+    "brand": "applemusic",
+    "sentiment_breakdown": {
+      "negative": 0.09375,
+      "neutral": 0.4375,
+      "positive": 0.46875
+    },
+    "tweet_count": 32
+  },
+  {
+    "brand": "keepherconfident",
+    "sentiment_breakdown": {
+      "negative": 0.03125,
+      "neutral": 0.09375,
+      "positive": 0.875
+    },
+    "tweet_count": 32
+  },
+  {
+    "brand": "dinamitadinero",
+    "sentiment_breakdown": {
+      "neutral": 0.516129,
+      "positive": 0.483871
+    },
+    "tweet_count": 31
+  },
+  {
+    "brand": "doordash",
+    "sentiment_breakdown": {
+      "negative": 0.129032,
+      "neutral": 0.516129,
+      "positive": 0.354839
+    },
+    "tweet_count": 31
+  },
+  {
+    "brand": "kelce",
+    "sentiment_breakdown": {
+      "negative": 0.193548,
+      "neutral": 0.677419,
+      "positive": 0.129032
+    },
+    "tweet_count": 31
+  },
+  {
+    "brand": "rafah",
+    "sentiment_breakdown": {
+      "negative": 0.8,
+      "neutral": 0.2
+    },
+    "tweet_count": 30
+  },
+  {
+    "brand": "2024",
+    "sentiment_breakdown": {
+      "neutral": 0.206897,
+      "positive": 0.793103
+    },
+    "tweet_count": 29
+  },
+  {
+    "brand": "aliciakeys",
+    "sentiment_breakdown": {
+      "negative": 0.035714,
+      "neutral": 0.678571,
+      "positive": 0.285714
+    },
+    "tweet_count": 28
+  },
+  {
+    "brand": "breakingnews",
+    "sentiment_breakdown": {
+      "negative": 0.071429,
+      "neutral": 0.928571
+    },
+    "tweet_count": 28
+  },
+  {
+    "brand": "magic",
+    "sentiment_breakdown": {
+      "neutral": 0.071429,
+      "positive": 0.928571
+    },
+    "tweet_count": 28
+  },
+  {
+    "brand": "boyfriend",
+    "sentiment_breakdown": {
+      "neutral": 0.925926,
+      "positive": 0.074074
+    },
+    "tweet_count": 27
+  },
+  {
+    "brand": "budweiser",
+    "sentiment_breakdown": {
+      "negative": 0.185185,
+      "neutral": 0.185185,
+      "positive": 0.62963
+    },
+    "tweet_count": 27
+  },
+  {
+    "brand": "knuckles",
+    "sentiment_breakdown": {
+      "negative": 0.037037,
+      "neutral": 0.925926,
+      "positive": 0.037037
+    },
+    "tweet_count": 27
+  },
+  {
+    "brand": "twister",
+    "sentiment_breakdown": {
+      "neutral": 0.962963,
+      "positive": 0.037037
+    },
+    "tweet_count": 27
+  },
+  {
+    "brand": "kungfupanda",
+    "sentiment_breakdown": {
+      "negative": 0.076923,
+      "neutral": 0.769231,
+      "positive": 0.153846
+    },
+    "tweet_count": 26
+  },
+  {
+    "brand": "de",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 25
+  },
+  {
+    "brand": "gaza_genocide",
+    "sentiment_breakdown": {
+      "negative": 0.96,
+      "neutral": 0.04
+    },
+    "tweet_count": 25
+  },
+  {
+    "brand": "overtime",
+    "sentiment_breakdown": {
+      "negative": 0.12,
+      "neutral": 0.36,
+      "positive": 0.52
+    },
+    "tweet_count": 25
+  },
+  {
+    "brand": "kennedy24",
+    "sentiment_breakdown": {
+      "negative": 0.208333,
+      "neutral": 0.375,
+      "positive": 0.416667
+    },
+    "tweet_count": 24
+  },
+  {
+    "brand": "sodaisback",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 24
+  },
+  {
+    "brand": "splenda",
+    "sentiment_breakdown": {
+      "neutral": 0.125,
+      "positive": 0.875
+    },
+    "tweet_count": 24
+  },
+  {
+    "brand": "christopherwalken",
+    "sentiment_breakdown": {
+      "negative": 0.086957,
+      "neutral": 0.26087,
+      "positive": 0.652174
+    },
+    "tweet_count": 23
+  },
+  {
+    "brand": "friends",
+    "sentiment_breakdown": {
+      "neutral": 0.73913,
+      "positive": 0.26087
+    },
+    "tweet_count": 23
+  },
+  {
+    "brand": "producks",
+    "sentiment_breakdown": {
+      "neutral": 0.782609,
+      "positive": 0.217391
+    },
+    "tweet_count": 23
+  },
+  {
+    "brand": "taylorswift",
+    "sentiment_breakdown": {
+      "negative": 0.043478,
+      "neutral": 0.652174,
+      "positive": 0.304348
+    },
+    "tweet_count": 23
+  },
+  {
+    "brand": "arnoldschwarzenegger",
+    "sentiment_breakdown": {
+      "negative": 0.090909,
+      "neutral": 0.227273,
+      "positive": 0.681818
+    },
+    "tweet_count": 22
+  },
+  {
+    "brand": "kansascity",
+    "sentiment_breakdown": {
+      "negative": 0.090909,
+      "neutral": 0.772727,
+      "positive": 0.136364
+    },
+    "tweet_count": 22
+  },
+  {
+    "brand": "afcon",
+    "sentiment_breakdown": {
+      "negative": 0.47619,
+      "neutral": 0.428571,
+      "positive": 0.095238
+    },
+    "tweet_count": 21
+  },
+  {
+    "brand": "pringles",
+    "sentiment_breakdown": {
+      "negative": 0.238095,
+      "neutral": 0.095238,
+      "positive": 0.666667
+    },
+    "tweet_count": 21
+  },
+  {
+    "brand": "fyp",
+    "sentiment_breakdown": {
+      "negative": 0.05,
+      "neutral": 0.9,
+      "positive": 0.05
+    },
+    "tweet_count": 20
+  },
+  {
+    "brand": "ifmovie",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 20
+  },
+  {
+    "brand": "jjk",
+    "sentiment_breakdown": {
+      "negative": 0.25,
+      "neutral": 0.75
+    },
+    "tweet_count": 20
+  },
+  {
+    "brand": "ads",
+    "sentiment_breakdown": {
+      "negative": 0.157895,
+      "neutral": 0.263158,
+      "positive": 0.578947
+    },
+    "tweet_count": 19
+  },
+  {
+    "brand": "america",
+    "sentiment_breakdown": {
+      "negative": 0.210526,
+      "neutral": 0.315789,
+      "positive": 0.473684
+    },
+    "tweet_count": 19
+  },
+  {
+    "brand": "beach",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 19
+  },
+  {
+    "brand": "daughters",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 19
+  },
+  {
+    "brand": "doritos",
+    "sentiment_breakdown": {
+      "negative": 0.157895,
+      "neutral": 0.473684,
+      "positive": 0.368421
+    },
+    "tweet_count": 19
+  },
+  {
+    "brand": "sneakers",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 19
+  },
+  {
+    "brand": "amc",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 18
+  },
+  {
+    "brand": "4",
+    "sentiment_breakdown": {
+      "negative": 0.117647,
+      "neutral": 0.764706,
+      "positive": 0.117647
+    },
+    "tweet_count": 17
+  },
+  {
+    "brand": "87",
+    "sentiment_breakdown": {
+      "negative": 0.941176,
+      "positive": 0.058824
+    },
+    "tweet_count": 17
+  },
+  {
+    "brand": "budlight",
+    "sentiment_breakdown": {
+      "negative": 0.294118,
+      "neutral": 0.176471,
+      "positive": 0.529412
+    },
+    "tweet_count": 17
+  },
+  {
+    "brand": "disney",
+    "sentiment_breakdown": {
+      "negative": 0.176471,
+      "neutral": 0.470588,
+      "positive": 0.352941
+    },
+    "tweet_count": 17
+  },
+  {
+    "brand": "freepalestine",
+    "sentiment_breakdown": {
+      "negative": 0.470588,
+      "neutral": 0.470588,
+      "positive": 0.058824
+    },
+    "tweet_count": 17
+  },
+  {
+    "brand": "isra",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 17
+  },
+  {
+    "brand": "jeffgoldblum",
+    "sentiment_breakdown": {
+      "negative": 0.058824,
+      "neutral": 0.352941,
+      "positive": 0.588235
+    },
+    "tweet_count": 17
+  },
+  {
+    "brand": "bmw",
+    "sentiment_breakdown": {
+      "neutral": 0.3125,
+      "positive": 0.6875
+    },
+    "tweet_count": 16
+  },
+  {
+    "brand": "elf",
+    "sentiment_breakdown": {
+      "neutral": 0.1875,
+      "positive": 0.8125
+    },
+    "tweet_count": 16
+  },
+  {
+    "brand": "monkeyman",
+    "sentiment_breakdown": {
+      "negative": 0.0625,
+      "neutral": 0.5625,
+      "positive": 0.375
+    },
+    "tweet_count": 16
+  },
+  {
+    "brand": "planetoftheapes",
+    "sentiment_breakdown": {
+      "negative": 0.1875,
+      "neutral": 0.5625,
+      "positive": 0.25
+    },
+    "tweet_count": 16
+  },
+  {
+    "brand": "atamc",
+    "sentiment_breakdown": {
+      "neutral": 0.2,
+      "positive": 0.8
+    },
+    "tweet_count": 15
+  },
+  {
+    "brand": "bitcoin",
+    "sentiment_breakdown": {
+      "negative": 0.133333,
+      "neutral": 0.4,
+      "positive": 0.466667
+    },
+    "tweet_count": 15
+  },
+  {
+    "brand": "fallguy",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 15
+  },
+  {
+    "brand": "gambling",
+    "sentiment_breakdown": {
+      "negative": 0.133333,
+      "neutral": 0.533333,
+      "positive": 0.333333
+    },
+    "tweet_count": 15
+  },
+  {
+    "brand": "ubereats",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 15
+  },
+  {
+    "brand": "accidentalcollab",
+    "sentiment_breakdown": {
+      "negative": 0.071429,
+      "neutral": 0.642857,
+      "positive": 0.285714
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "act2",
+    "sentiment_breakdown": {
+      "negative": 0.071429,
+      "neutral": 0.285714,
+      "positive": 0.642857
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "biden",
+    "sentiment_breakdown": {
+      "negative": 0.285714,
+      "neutral": 0.428571,
+      "positive": 0.285714
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "dog",
+    "sentiment_breakdown": {
+      "negative": 0.071429,
+      "neutral": 0.714286,
+      "positive": 0.214286
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "halftimegoat",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "harrymeghan",
+    "sentiment_breakdown": {
+      "negative": 0.928571,
+      "neutral": 0.071429
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "sports",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "straykids",
+    "sentiment_breakdown": {
+      "neutral": 0.214286,
+      "positive": 0.785714
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "su",
+    "sentiment_breakdown": {
+      "neutral": 0.714286,
+      "positive": 0.285714
+    },
+    "tweet_count": 14
+  },
+  {
+    "brand": "budweise",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 13
+  },
+  {
+    "brand": "cryptocrash",
+    "sentiment_breakdown": {
+      "negative": 0.230769,
+      "neutral": 0.384615,
+      "positive": 0.384615
+    },
+    "tweet_count": 13
+  },
+  {
+    "brand": "estendencia",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 13
+  },
+  {
+    "brand": "fallontonight",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 13
+  },
+  {
+    "brand": "giveaway",
+    "sentiment_breakdown": {
+      "neutral": 0.461538,
+      "positive": 0.538462
+    },
+    "tweet_count": 13
+  },
+  {
+    "brand": "israel",
+    "sentiment_breakdown": {
+      "negative": 0.923077,
+      "neutral": 0.076923
+    },
+    "tweet_count": 13
+  },
+  {
+    "brand": "mrt",
+    "sentiment_breakdown": {
+      "negative": 0.153846,
+      "neutral": 0.692308,
+      "positive": 0.153846
+    },
+    "tweet_count": 13
+  },
+  {
+    "brand": "usher",
+    "sentiment_breakdown": {
+      "neutral": 0.538462,
+      "positive": 0.461538
+    },
+    "tweet_count": 13
+  },
+  {
+    "brand": "adoptdontshop",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 12
+  },
+  {
+    "brand": "americathebeautiful",
+    "sentiment_breakdown": {
+      "negative": 0.083333,
+      "neutral": 0.5,
+      "positive": 0.416667
+    },
+    "tweet_count": 12
+  },
+  {
+    "brand": "blackpink",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 12
+  },
+  {
+    "brand": "bringalldadsbackhome",
+    "sentiment_breakdown": {
+      "negative": 0.083333,
+      "neutral": 0.833333,
+      "positive": 0.083333
+    },
+    "tweet_count": 12
+  },
+  {
+    "brand": "jlo",
+    "sentiment_breakdown": {
+      "neutral": 0.75,
+      "positive": 0.25
+    },
+    "tweet_count": 12
+  },
+  {
+    "brand": "ke",
+    "sentiment_breakdown": {
+      "neutral": 0.833333,
+      "positive": 0.166667
+    },
+    "tweet_count": 12
+  },
+  {
+    "brand": "mayocat",
+    "sentiment_breakdown": {
+      "neutral": 0.833333,
+      "positive": 0.166667
+    },
+    "tweet_count": 12
+  },
+  {
+    "brand": "420friendly",
+    "sentiment_breakdown": {
+      "neutral": 0.636364,
+      "positive": 0.363636
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "alexjonesshow",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "am",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "bbb24",
+    "sentiment_breakdown": {
+      "neutral": 0.909091,
+      "positive": 0.090909
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "beyoncebowl",
+    "sentiment_breakdown": {
+      "negative": 0.181818,
+      "neutral": 0.727273,
+      "positive": 0.090909
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "crypto",
+    "sentiment_breakdown": {
+      "negative": 0.090909,
+      "neutral": 0.545455,
+      "positive": 0.363636
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "everydayhero",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "fanduel",
+    "sentiment_breakdown": {
+      "negative": 0.363636,
+      "neutral": 0.363636,
+      "positive": 0.272727
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "halo",
+    "sentiment_breakdown": {
+      "negative": 0.090909,
+      "neutral": 0.818182,
+      "positive": 0.090909
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "jasonmamoa",
+    "sentiment_breakdown": {
+      "negative": 0.090909,
+      "neutral": 0.272727,
+      "positive": 0.636364
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "mattdamon",
+    "sentiment_breakdown": {
+      "neutral": 0.272727,
+      "positive": 0.727273
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "nickelodeon",
+    "sentiment_breakdown": {
+      "neutral": 0.272727,
+      "positive": 0.727273
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "noantisemitism",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 11
+  },
+  {
+    "brand": "americafirst",
+    "sentiment_breakdown": {
+      "negative": 0.2,
+      "neutral": 0.5,
+      "positive": 0.3
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "ceasefire",
+    "sentiment_breakdown": {
+      "negative": 0.6,
+      "neutral": 0.4
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "copilot",
+    "sentiment_breakdown": {
+      "negative": 0.8,
+      "neutral": 0.1,
+      "positive": 0.1
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "davidswife",
+    "sentiment_breakdown": {
+      "negative": 0.1,
+      "neutral": 0.9
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "etrade",
+    "sentiment_breakdown": {
+      "neutral": 0.3,
+      "positive": 0.7
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "f1",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "hulu",
+    "sentiment_breakdown": {
+      "negative": 0.4,
+      "neutral": 0.6
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "messi",
+    "sentiment_breakdown": {
+      "neutral": 0.3,
+      "positive": 0.7
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "pfizer",
+    "sentiment_breakdown": {
+      "negative": 0.3,
+      "neutral": 0.5,
+      "positive": 0.2
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "rebamcentire",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "shogun",
+    "sentiment_breakdown": {
+      "negative": 0.1,
+      "neutral": 0.2,
+      "positive": 0.7
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "shogunfx",
+    "sentiment_breakdown": {
+      "neutral": 0.4,
+      "positive": 0.6
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "spongebob",
+    "sentiment_breakdown": {
+      "neutral": 0.2,
+      "positive": 0.8
+    },
+    "tweet_count": 10
+  },
+  {
+    "brand": "apple",
+    "sentiment_breakdown": {
+      "negative": 0.111111,
+      "neutral": 0.333333,
+      "positive": 0.555556
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "bieber",
+    "sentiment_breakdown": {
+      "negative": 0.111111,
+      "neutral": 0.777778,
+      "positive": 0.111111
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "boston",
+    "sentiment_breakdown": {
+      "neutral": 0.444444,
+      "positive": 0.555556
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "chilltrain",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "clydesdale",
+    "sentiment_breakdown": {
+      "negative": 0.222222,
+      "neutral": 0.333333,
+      "positive": 0.444444
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "hewashedfeet",
+    "sentiment_breakdown": {
+      "negative": 0.222222,
+      "neutral": 0.444444,
+      "positive": 0.333333
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "marketing",
+    "sentiment_breakdown": {
+      "neutral": 0.222222,
+      "positive": 0.777778
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "michaelcera",
+    "sentiment_breakdown": {
+      "negative": 0.111111,
+      "neutral": 0.666667,
+      "positive": 0.222222
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "plannerbowl",
+    "sentiment_breakdown": {
+      "neutral": 0.555556,
+      "positive": 0.444444
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "poppi",
+    "sentiment_breakdown": {
+      "negative": 0.111111,
+      "neutral": 0.222222,
+      "positive": 0.666667
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "princeharry",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "sanfrancisco",
+    "sentiment_breakdown": {
+      "neutral": 0.222222,
+      "positive": 0.777778
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "scorsese",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 9
+  },
+  {
+    "brand": "and",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "boycott",
+    "sentiment_breakdown": {
+      "negative": 0.875,
+      "neutral": 0.125
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "bromercial",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "buyintoart",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "changingmethods",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "chrispratt",
+    "sentiment_breakdown": {
+      "negative": 0.125,
+      "neutral": 0.5,
+      "positive": 0.375
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "declareyourindependence",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "deportes",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "dfs",
+    "sentiment_breakdown": {
+      "negative": 0.125,
+      "neutral": 0.375,
+      "positive": 0.5
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "etsy",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "gameonultra",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "gbo",
+    "sentiment_breakdown": {
+      "negative": 0.125,
+      "neutral": 0.75,
+      "positive": 0.125
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "justsayin",
+    "sentiment_breakdown": {
+      "neutral": 0.875,
+      "positive": 0.125
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "kellogg",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "nbnr",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "pizzagate",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "prizepick",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "sblv",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 8
+  },
+  {
+    "brand": "a",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "actorsincommercials",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "allegiantstadium",
+    "sentiment_breakdown": {
+      "neutral": 0.857143,
+      "positive": 0.142857
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "aquietplace",
+    "sentiment_breakdown": {
+      "neutral": 0.714286,
+      "positive": 0.285714
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "beckytheheartof",
+    "sentiment_breakdown": {
+      "neutral": 0.857143,
+      "positive": 0.142857
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "blacknationalanthem",
+    "sentiment_breakdown": {
+      "negative": 0.714286,
+      "neutral": 0.285714
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "cdl",
+    "sentiment_breakdown": {
+      "negative": 0.571429,
+      "neutral": 0.428571
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "compassion",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "consciousness",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "f",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "faith",
+    "sentiment_breakdown": {
+      "neutral": 0.857143,
+      "positive": 0.142857
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "gamblingtwitter",
+    "sentiment_breakdown": {
+      "neutral": 0.857143,
+      "positive": 0.142857
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "hadith",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "janetjackson",
+    "sentiment_breakdown": {
+      "neutral": 0.142857,
+      "positive": 0.857143
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "japanese",
+    "sentiment_breakdown": {
+      "neutral": 0.857143,
+      "positive": 0.142857
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "jesus",
+    "sentiment_breakdown": {
+      "negative": 0.285714,
+      "neutral": 0.571429,
+      "positive": 0.142857
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "michaeljackson",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "mirazones",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "mvp",
+    "sentiment_breakdown": {
+      "negative": 0.142857,
+      "neutral": 0.428571,
+      "positive": 0.428571
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "purdy",
+    "sentiment_breakdown": {
+      "negative": 0.428571,
+      "neutral": 0.571429
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "shib",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "sunday",
+    "sentiment_breakdown": {
+      "negative": 0.285714,
+      "neutral": 0.142857,
+      "positive": 0.571429
+    },
+    "tweet_count": 7
+  },
+  {
+    "brand": "2",
+    "sentiment_breakdown": {
+      "negative": 0.166667,
+      "neutral": 0.333333,
+      "positive": 0.5
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "49",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "actualidad",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "agegap",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "ahoratabasco",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "altseason",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "ar",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "beautifulbeardedbastards",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "bringthemallhome",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.5,
+      "positive": 0.166667
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "canadians",
+    "sentiment_breakdown": {
+      "neutral": 0.833333,
+      "positive": 0.166667
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "cardib",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "cartoon",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "ckg",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "datogeb",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "donttrythisathome",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "dorothymustdie",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "dyk",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "elphaba",
+    "sentiment_breakdown": {
+      "neutral": 0.166667,
+      "positive": 0.833333
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "gamblingx",
+    "sentiment_breakdown": {
+      "negative": 0.166667,
+      "neutral": 0.5,
+      "positive": 0.333333
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "gopackgo",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "heart",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "histsb",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "illuminati",
+    "sentiment_breakdown": {
+      "negative": 0.166667,
+      "neutral": 0.833333
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "jungkook",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "justice",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "kickofdestiny",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "maction",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "maga",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.666667
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "marvel",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "savewomensports",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "scrubs",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "seatbelt",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "temu",
+    "sentiment_breakdown": {
+      "negative": 0.833333,
+      "neutral": 0.166667
+    },
+    "tweet_count": 6
+  },
+  {
+    "brand": "16carriages",
+    "sentiment_breakdown": {
+      "neutral": 0.8,
+      "positive": 0.2
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "abc",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "aiart",
+    "sentiment_breakdown": {
+      "neutral": 0.6,
+      "positive": 0.4
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "alexgonzalez",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "amazon",
+    "sentiment_breakdown": {
+      "negative": 0.6,
+      "neutral": 0.4
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "aminmenang",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "asl",
+    "sentiment_breakdown": {
+      "negative": 0.6,
+      "neutral": 0.4
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "bennifer",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "bills",
+    "sentiment_breakdown": {
+      "negative": 0.2,
+      "neutral": 0.6,
+      "positive": 0.2
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "blackculture",
+    "sentiment_breakdown": {
+      "negative": 0.2,
+      "neutral": 0.2,
+      "positive": 0.6
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "blackhistorymonth",
+    "sentiment_breakdown": {
+      "negative": 0.2,
+      "neutral": 0.6,
+      "positive": 0.2
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "cheese",
+    "sentiment_breakdown": {
+      "negative": 0.4,
+      "positive": 0.6
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "chicago",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "cominghome",
+    "sentiment_breakdown": {
+      "neutral": 0.4,
+      "positive": 0.6
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "cooki",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "dune",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "ebay",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "fail",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "flyeaglesfly",
+    "sentiment_breakdown": {
+      "neutral": 0.2,
+      "positive": 0.8
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "foot",
+    "sentiment_breakdown": {
+      "neutral": 0.8,
+      "positive": 0.2
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "gabriela",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "grammy",
+    "sentiment_breakdown": {
+      "neutral": 0.4,
+      "positive": 0.6
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "gtasu",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "hateflu",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "khou11",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "missing",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "mrirrelvent",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "music",
+    "sentiment_breakdown": {
+      "neutral": 0.8,
+      "positive": 0.2
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "niners",
+    "sentiment_breakdown": {
+      "negative": 0.2,
+      "neutral": 0.4,
+      "positive": 0.4
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "petedavidson",
+    "sentiment_breakdown": {
+      "neutral": 0.2,
+      "positive": 0.8
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "rfkjr",
+    "sentiment_breakdown": {
+      "negative": 0.8,
+      "positive": 0.2
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "rihanna",
+    "sentiment_breakdown": {
+      "neutral": 0.2,
+      "positive": 0.8
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "sbenunivison",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "senseisam",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "skechers",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "voteblue",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 5
+  },
+  {
+    "brand": "15",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "5g",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "adammontgomery",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "adblitz",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "adoptd",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "adspots",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "aew",
+    "sentiment_breakdown": {
+      "neutral": 0.75,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "africanparks",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "allgrit",
+    "sentiment_breakdown": {
+      "neutral": 0.75,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "anthem",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "artificialintelligence",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.25,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "bajablast",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "barbie",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "be",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "bestcommercial",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "bettingx",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "black",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "blogger",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "bringthemallhomenow",
+    "sentiment_breakdown": {
+      "negative": 0.75,
+      "neutral": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "broflakes",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "cantgetenough",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "cats",
+    "sentiment_breakdown": {
+      "neutral": 0.75,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "celebrity",
+    "sentiment_breakdown": {
+      "negative": 0.25,
+      "neutral": 0.25,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "chainsandstakes",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "chief",
+    "sentiment_breakdown": {
+      "negative": 0.25,
+      "neutral": 0.5,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "china",
+    "sentiment_breakdown": {
+      "negative": 0.25,
+      "neutral": 0.75
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "choreography",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "commerci",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "danlevy",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "despicableme4",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "disclosure",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "discover",
+    "sentiment_breakdown": {
+      "negative": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "doratheexplorer",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "draftkings",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "ers",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "espn",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "filmtwitter",
+    "sentiment_breakdown": {
+      "neutral": 0.75,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "flashdance",
+    "sentiment_breakdown": {
+      "neutral": 0.25,
+      "positive": 0.75
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "glenpowell",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "having",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "hbcu",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "hellmanns",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "heyarnold",
+    "sentiment_breakdown": {
+      "negative": 0.25,
+      "neutral": 0.25,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "iykyk",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "kc",
+    "sentiment_breakdown": {
+      "neutral": 0.75,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "liljohn",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "medtwitter",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "memes",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "mercedesmone",
+    "sentiment_breakdown": {
+      "neutral": 0.75,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "nba",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "pickleball",
+    "sentiment_breakdown": {
+      "negative": 0.25,
+      "neutral": 0.5,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "progressive",
+    "sentiment_breakdown": {
+      "negative": 0.25,
+      "neutral": 0.5,
+      "positive": 0.25
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "simpsons",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "sky",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "squidgrow",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "station19",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "stonerfam",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 4
+  },
+  {
+    "brand": "103",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "13feb",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "17live",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.333333,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "71",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "aatb",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.333333,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "actll",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "allstar",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "americanfootball",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "apollocreed",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "art",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "asburyrevival",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "austinpost",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "beater",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "beauty",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "behappy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "boycottdove",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "btc",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "buffalowildwings",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "cannabis",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "catholic",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "catsontwitter",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "cbssports",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "centralmxnoticias",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "chalkboard",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "chiefs49ers",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "chilismoney",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "christianmccaffrey",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "cine",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "cinema",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "claesoldenburg",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "comedy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "comics",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "comm3107",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "crowdstrike",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "cutcocks",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "cybersecurity",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "dazn",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "dea",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "detroit",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "dinamita",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "drumstick",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "easywishes",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "electionresults",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "erastour",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "falcons",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "family",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "firecountry",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "floresfacts",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "fusionfuture",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "genocide",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "genz",
+    "sentiment_breakdown": {
+      "negative": 0.666667,
+      "neutral": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "gijoe",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "girldad",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "gofundme",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "google",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "gosports",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "gronk",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.333333,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "gwenstefani",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "hellofresh",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "henrycavill",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "herewego",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "houston",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "if",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.333333,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "insurance",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "ironman",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "itaintover",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "ittakesallofus",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "jonathanbailey",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "joywins",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "kanyewest",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "katemckinnon",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "kekepalmer",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "kia",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "knucklesseries",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "leftbehind",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "lindor",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "liv",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "magentastatus",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "massacre",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "mccallonlinefeeds",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "neighbah",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "nerds",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "neveragain",
+    "sentiment_breakdown": {
+      "negative": 0.666667,
+      "neutral": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "nickbosa",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "nigeria",
+    "sentiment_breakdown": {
+      "neutral": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "nyfw",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "paramount",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.333333,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "patrickma",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "postybowl",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "raiders",
+    "sentiment_breakdown": {
+      "negative": 0.666667,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "readyforit",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "rebellion",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "redflag",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "reminder",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "robertkraft",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "rt",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "sanremo",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.333333,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "sbin",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "seeotheesodas",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "sem480",
+    "sentiment_breakdown": {
+      "negative": 0.666667,
+      "neutral": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "snow",
+    "sentiment_breakdown": {
+      "neutral": 0.333333,
+      "positive": 0.666667
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "squarespace",
+    "sentiment_breakdown": {
+      "negative": 0.333333,
+      "neutral": 0.333333,
+      "positive": 0.333333
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "tornado",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 3
+  },
+  {
+    "brand": "14",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "19",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "20thcenturystudios",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "210triangleofto",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "abcnews",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "abuse",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "accessibility",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "acklowledgehim",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "adele",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "admeter",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "admin",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "adoptdontb",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "adprsb",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "adventure",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "advertisement",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "afc",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "afco",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "aipac",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "airdrop",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "alicia",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "amytrask",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "andraday",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "andyreed",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "anime",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "anonymous",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "apartments",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "apes",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "apmmusic",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "applevisionpro",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "ar2sports",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "arthur",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "ashleypark",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "askgoddessjlove",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "askingforafriend",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "assault",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "australia",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "avengers",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "averyscinemareview",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "backlash",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "baddieseastreunion",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "badwalkenimpressions",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bajablastout",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "band",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bangbang",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "barbey",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "barcelona",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "batman",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bbq",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "beer",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bekind",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bestfriends",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bettingexpert",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bettingtwitter",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bigpharma",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "birds",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bodyconfidence",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bogp",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "book",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bookshop",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bosch",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "botus",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "boycottsuperbowl",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "brandexperience",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "brandtips",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bringalldads",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "brittanymahomes",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "broadway",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "broncos",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "buffalobills",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "bullying",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "business",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "buyingcontent",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "byloa",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "can2023",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "cashapp",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "cfl",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "chambaii",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "chatgpt",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "chefs",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "classic",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "cmc",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "collegebasketball",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "comicsgate",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "confession20",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "coorslight",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "corona",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "corporate",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "cortedecaja",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "cosplay",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "covid",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "creditcards",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "creepy",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "csulb",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "cutzamala",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "d",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "dadlife",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "dallas",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "davidbeckham",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "detectiondogs",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "devpatel",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "discoverypage",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "domesticviolence",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "dougwilliams",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "drake",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "drone",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "du",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "election",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "elections2024",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "electricvehicle",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "ericandre",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "espnnostarplus",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "eurovision",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "facesinframe",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "faithfultothebay",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "fame20",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "felonydisenfranchisement",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "fieldgoal",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "finsup",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "food",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "foodforthought",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "freebet",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "friendship",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "gameday",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "gatesmanadbreak",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "girlsinsport",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "goblue",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "gochiefsgo",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "godhatesnftees",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "googlepixel",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "gotaylorsboyfriend",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "greatlakes",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "greenzone",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "groceries",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "grok",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "halftimeperformance",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "hanuman",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "happy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "harrisonbutker",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "hellodownthere",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "homes",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "humantrafficking",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "iam205",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "iamlegend",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "ihatenfl",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "inreallife",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "ipitythefool",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "ironbowl",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "irrelevant",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "israelpalestineconflict",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "jellyroll",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "jets",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "jordan",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "jordanpeele",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "judgejudy",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "keephercon",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "keleighteller",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "kelosports",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "kennedy",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "kroenkesucks",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "landback",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "lego",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "lindt",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "lions",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "lotr",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "love",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "loversandfriends",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "luda",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "ludacris",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "ma",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "madden",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "mandelaeffect",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "mardigras",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "medalofhonor",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "mem",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "metaverse",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "mets",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "mexico",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "missedopportunity",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "mississippi",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "mobwife",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "monday",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "myxanniversary",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "nachos",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "name",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "narco",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "nascar",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "neighbaaa",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "neighbor",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "neverforget",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "nicksaban",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "num3",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "num49e",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "nye",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "onedance",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "onmyma",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "parksandrec",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "paulmccartney",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "pfizerliedpeopledied",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "pop",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "pri",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "privacymatters",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "psyop",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "rams",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "reddawg",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "renaissance",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "reptv",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "respect",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "rigged",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "roblox",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "sb53",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "scarlettjohansson",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "scripted",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "shakira",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "soccer",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "spectrum",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "sphere",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "standup",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "staracademy",
+    "sentiment_breakdown": {
+      "neutral": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "stars",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "startrek",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "superbowlhalftime",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "t",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "positive": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "tbeer",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "tbt",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "testforce",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "tracker",
+    "sentiment_breakdown": {
+      "negative": 0.5,
+      "neutral": 0.5
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "visionpro",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 2
+  },
+  {
+    "brand": "10",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "1000xgem",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "100kgchallenge",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "112",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "12",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "13",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "1300hangmytv",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "15th",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "16cartridges",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "181",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "1980s",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "1of1",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "1seller",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "2024newyear",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "2025",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "207",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "20k",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "21",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "27",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "2adays",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "30rock",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "3shahban",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "4j",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "4kresolution",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "5",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "888ula",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "89",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "9",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "9to5marvel",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "a7radio",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "abbottelementary",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "abstractart",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "abuelas",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "accfootball",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "activerecovery",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "actor",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "actuallyautistic",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "adbowls",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "adelanto",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "adinross",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "adjunct",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "adobefirefly",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "adopta",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ads4women",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "adtech",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "advertisingage",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "adweek",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aerosmith",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aesthetic",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "af",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "afcchamps",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "afconfi",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "afl",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "africa",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "africanamericans",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ag7",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ahora",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ahsoka",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aigenerated",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aigirl",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aikia",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "airdropaidforgaza",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "airforce",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "airs",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aiyuk",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aknightstale",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "alabama",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "alangarner",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "alberta",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aliceinchains",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "alienromulus",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "alla",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "allcine",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "allergies",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "alleyesonrafah",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "allstate",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "allthefeels",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "alltiedup",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "allwhitesuit",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "alwaysreppin",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ambi",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "amblin",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "amediting",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "americannight",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "americannightmare",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "americano",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "americanpie",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "amigas",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "amyrose",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "android",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "angermangement",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "anheuser",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "animalplanet",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "animalrescue",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "antarctica",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "anyonebutkc",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aos4",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "apartadomex",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "apartheidisrael",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "appletv",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "apuesta",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aquaman",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "area",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "areyounotentertained",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "areyoureadyforit",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "argentium",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aria",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "armpunt",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "arsenal",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "artist",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "asakawayoshiharu",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ashappme",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ashelesai",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "asia",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "asmr",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "astronomy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "atlantafalcons",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "atlantafx",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "attackontitan",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aubreyplaza",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aussiefans",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "avatarthelastairbender",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aventura",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "avt",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "award",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "awesome",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "aws",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "azteca7",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "azvskc",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "b",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "babecock",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "babies",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "babymakingmusic",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "babynut",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "badadspend",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "badmemory",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bailey",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bajablastclub",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "baklava",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "balloon",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ballsuckingasshole",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bangbangninergang",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bara",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "baseball",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "baseballfest",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "basketball",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bayarea",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bbc",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bbw",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beacon",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beastiality",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beastieboys",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beastmode",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beatles",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bechoes",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beehive",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beerforbitcoin",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beertalk",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beetle",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "belinda",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ben",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "benchhim",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bengals",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "benjaminhoffman",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bestcommunityever",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bestfoods",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bestie",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bestkeptsecret",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bestoneofdayear",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "beten",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "betjams",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "betr",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bets",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "betseneca",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "better",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bettingfreeamerica",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bettingpicks",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bhfyp",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "biased",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bibchat",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bigass",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bigfeet",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "biggamebandicoot",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bigkitty",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bigpenis",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bikinibottom",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bikinngakak",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "billpaxton",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "billyjoho",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "birdccp",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bisexual",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bitrock",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blackrain",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blacktwitter",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blake",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blessed",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blink182",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blog",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bloodline",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bluebeetle",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blueeyeswhitrrunningback",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blurry",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "blurrysuperbowl",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bockpurdy",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boisestate",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bonvihospitalitygroup",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bookingcom",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "booksoftwitter",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bookwriting",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boost",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boosterbump",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boredbowl",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boric",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boring",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boringgame",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "borntochew",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "botargaladina",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bourbon",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boxersnyc",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boycotttina",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boypussy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "boyshaveapenis",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "br",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "brainfog",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "brandb",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bravotv",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "breadandcircus",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "breaktheinternet",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "brilliant",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bringbackgojo",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bringbacktombrady",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bringthefireemoji",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "britneyspears",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "brockpurdyrc",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "brothers",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "browns",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bucketlist",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "budbowl",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "buddyguy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "budlightgenie",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "buenasnoticias",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "buildinginpublic",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bukapi_two",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bulldogs",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bunda",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bundle",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "burnaboy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "burrow",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "busan",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "butcherbiden",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "butlet",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "buttermusicandsound",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "buyadozengettracksuit",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "bycottspectrum",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cable",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "callofduty",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "canada",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "canadian",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cancer",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cann",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cantwaittilitsover",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "canucks",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "capitalism",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "capo",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cardano",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cardart",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "carmel",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "carnaval",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "carti",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "casual",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "catherinezetajones",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "catslover",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cd12",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "celebrimbor",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cerave",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cestlavie",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ch",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "changethechannel",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cheers",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cheerstoyoumyfriend",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cherrymagicthep9",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "chicagobears",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "chihuahua",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "childlabor",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "chills",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "chinese",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "chinesenewyear",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "chinesetakeoverinevitable",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "chocochela",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "chrisbrown",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "christec",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "christiancarl",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "christopherreeve",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cinvssf",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "clubshayshay",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "co",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "coaboys",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cocaine",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "coffee",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cognition",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cointoss",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "college",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "colts",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "comeonman",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "comic",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "comicbookschool",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "comingsoon",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "commanders",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "commentarygoat",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "competition",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "composer",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "compositesketch",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "compost",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "confessions",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "conjures",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "conservation",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "conspiracy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cookingcrushseriesep11",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "corgi",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cornuto",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "counterprogramming",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "countick",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "craigmylek9training",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "crashing",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "crazyvideos",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "creativestrategy",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "creators",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "creditforlagbowl",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "creed",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "crimesagainsthumanity",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "criminal",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cripthevote",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cristiano",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cryingjordan",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cryptotwitter",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cte",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ctespn",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cuppeddad",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "curbyourenrhusiasm",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "customers",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "customerservice",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "cute",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "daddydaughterdance",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "daddyshome",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "damitajo",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dammitman",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "danawhite",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "danmarino",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dannydevito",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dash",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dateline",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "datingapp",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "datsecondcoming",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "davidschwimmer",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dc",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dc2trill",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dcbroadcast",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "deebo",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "defense",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "defyinggravity",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dei",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "demvoice1",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "denzelwashington",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "depechemode",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "deporte",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "designer",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dhs",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "digitalart",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dina",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dinamitadiner",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "director",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "disability",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "disappointed",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "disco",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "discord",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "discountshopping",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dj",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dm4",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dnd",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "doctorwho",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dogecoin",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dojacat",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dontatme",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dontlookaway",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "doover",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "doublehalftime",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dragonsquad",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "drdre",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "drinkresponsibly",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dripanese",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "drunkbowl",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dubcity",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dumbprince",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dv",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "dying",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "earnmoney",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "eastpalestine",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "eats",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ecadgra",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "edmtwitter",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "election2024pakistan",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "elimanning",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "elpaditv",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "encanto",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "engelberthumperdinck",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "entretenimiento",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "entry",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "eoooowww",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "epicuniverse",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "epsteinclientlist",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "esperanzastenemos",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "etradebabies",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "eurovan",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ev9",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "eveonline",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "evo2024",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "excitement",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "faact",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "facebook",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "facethenation",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fake",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fancave",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fashion",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fatigue",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fatkid",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "favoritecommercial",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fcbayern",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "feast",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "feb11",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fed",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "feldkirchenlions",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fentybowl",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "film",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "finalstretch",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "finance",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "finishthestory",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fintwit",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "firesafety",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "firstalertweather",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "firstdown",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fitness",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fixed",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fixednfl",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fliff",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fly",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "flyover",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fo",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "folkstylewrestling",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "foo",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "foodallergy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "foodie",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "foodporn",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "forcedlabor",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "freepick",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "freeu2",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "friendstv",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "frontrunner",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ftt",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fullseo",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fumble",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "funforowl",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "furiadeportiva",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "futbol",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "fyb",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gamedev",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gaora",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "garbage",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "garlicfingers",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gene",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "genocidejoe",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "getaroom",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "getit",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "getsusllc",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "getyourshittogether",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ghana",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "giants",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "girlpower",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "go",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "goal",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gobears",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gobills",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gocougs",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "godblessamerica",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "godgotus",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gohawks",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gohomeifyoudontlikeit",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gomount",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gonin",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "goodfood",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "googleai",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gooning",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gotapair",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "govols",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gowokegobroke",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "grahh",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "graphicdesign",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "greenslime",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "grinchisthetrend",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gsg4eva",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "gta6",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "guide",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "guidedframe",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "h",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "half",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "halflife",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "harbaugh",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hardknocks",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hashtag",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hawaii",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hawkeye",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "heidibowl",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "heidigardner",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "helpthebakapeopleharry",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hesamansoitsok",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "highbloodpressure",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "highlight",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "history",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hiv",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hobbylobby",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "holistic",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hollywood",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "homesdotcom",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "horriableservice",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "horror",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "house",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "houseparty",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "howgreatisball",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "howmanylayers",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "hw",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "i",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "iaffsafetytips",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "icecream",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "iconic",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "icymi",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "idid",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "idontbeonhereanymore",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ifablikes",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ifiremembercorrectly",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "illnesspolitics",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "illseemyselfoutnow",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "iloveit",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ilregnodelpianetadellescimmie",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "imakememes",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "imjusthereforthecommercials",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "independenceday",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "india",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "indianapolis500",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "indigenous",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ineedtoknow",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "inelfwetrust",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "insufferable",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "internationaldayofwomeninscience",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "iran",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "isaidwhatisaid",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "itsanewworldiguess",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "itshappeninghere",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "iuwbb",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jackdorsey",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jamming",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jan6",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "janet",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jauan",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jauanjennings",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jayz",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jennafischer",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jewishhate",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jimmyfallon",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jimnantz",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jjwatt",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jo2024",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "joebiden",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "johnwaters",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jointdiscussion",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "judgebeauty",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "jusmag",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ka",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kansas",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kappaalphapsi",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "karma",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kattwilliams",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kayfabe",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kenjeong",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kiaev9",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kingdom",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kingofrnb",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "knrchopshop",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kolsch73",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "korean",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kotd",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "krauts",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kungfupan",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kyleshanahan",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "kyliekelce",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "l",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lag",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lanadelray",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "latina",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lauradern",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "laurenboebert",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lc",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "leadership",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "learningasigo",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "legend",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "legionofboom",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lemonade",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "letitburn",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "letitgo",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "letsdefygravityniners",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "letsgo",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "letsgoplaces",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lgbt",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "liberals",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lifehaspurpose",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ligamx",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "likeagoodneighbor",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lindseystirling",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lionelmessi",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "littup",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "livetaylorreaction",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "livgolf",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lockherup",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "loki",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "loser",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lost",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "loveislove",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "lovethislife",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "loyaltymatters",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ltaylor",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "magentawins",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "magicgirlsthailand",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mahomeboy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "makeitright",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "makeyourmovescount",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "makingmemories",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "malone",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mariahcarey",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "market2mebaby",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "marthastewart",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "maui",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mbcgoodstuff",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mccaffery",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mceu",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "meangirls",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "megadrive",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "meghanmarkle",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "menopause",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mentalhealthsupport",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "meow",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "miami",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "miamidolphins",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "microsoftcopilot",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "midwestlife",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mikereid",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mileycyrus",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "milkshakes",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "milkthecow",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "millietherapy",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "millionaire",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "minions",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mlb",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mls",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "moana2",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mondaymood",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "montreal",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mortalkombat",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "motivation",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mountaindew",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "moveinfootballhead",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "movementthatinspires",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "moviemath",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "movies",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "movietrailer",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mrbeast",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mrpfizer",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mst3k",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "muppet",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mustache",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "myearshurt",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "mystery",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "myway",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nailbiter",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "napoleondynamite",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nationalanthem",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nebraska",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "newjersey",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "newmusic",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "neworleans",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nhl",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nickiminaj",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nikkihaley",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "njm",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nodumbquestions",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nomakeupiabeautiful",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "notaxes",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "notcool",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "notevenclose",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "notfunny",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "notgoingback",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "notorafahinvasion",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "notovertillitsover",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nsync",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nudefi",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "nyg",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "of",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "officiating",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "oikos",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ojal\u00e1taylorswift",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "oligarchy",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "onlyinvegas",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "onlyonedynasty",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "onlywrestlingisreal",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ontario",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "onthisday",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "onwisconsin",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "oprah",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "osimhen",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ot",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "otrules",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "outstanding",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "overrated",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "owl",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "paisavasool",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "paramou",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "patrick",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "patrickjadams",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "peanut",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "performance",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "picanha",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "pineapple",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "pixar",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "plan",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "playball",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "policecorruption",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "poortravis",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "potus",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "pow",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "pr",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "prep\u00e1rate",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "pretzel",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "prince",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "project365",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "promocode",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "prostrategy",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ps5",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "puppybowl",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "purrfectpals",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "qatar",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "queen",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "queenthangs",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "raer",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ravens",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "realblackmanexperience",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "realwade",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "reba",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "releaseth",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "reno",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "resultsupdate",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "retirementtour",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "reynoldswrap",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rfk",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rgv",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rhom",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rhonj",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rhoslc",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rideshare",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ridewithus",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ring",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rollinginthedeep",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "romosdoingtricksonit",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rossandrachel",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "running",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "rwtfilm",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ryangraves",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ryanreynolds",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "safc",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "saints",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "saitachaincoin",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sakuatsu",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "salt-n-pepa",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sbxespn",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "score",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "screenwriting",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "seattle",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "selfie",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sendyourname",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "serialkiller",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "shameonstar",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "shein",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "shitcoin",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "shootmeifthathappens",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "shop",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "shorts",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sighting",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sixnationsrugby",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "skol",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sleepydog",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "smh",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "smprofs",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "snap",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "snl",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "snoozefest",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "soccersucks",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "socialmedia",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "socialstash",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "soda",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "solana",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sophieai",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "soromo",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sorrynotsorry",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sosad",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "soundsoftheweek",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "spatialawareness",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sponsored",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "starwars",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "stayhungry",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "stellatmmsfunforalltour",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "stepup",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "stockmarket",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "storytelling",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "streetwear",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "subscribe",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sundayticket",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sundayyellow",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "superads",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "superboobs",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "superboringbowl",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "sweepstakes",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "swift",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "tadanobuasano",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "taylor",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "teamjesus",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "theaterkids",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "thingsfayesays",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "timbers",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "tmobile",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "trivia",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "trudeau",
+    "sentiment_breakdown": {
+      "negative": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "trump",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "twitterbakeoff",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "twittersupperclub",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "txwx",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ucl",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "ufotwitter",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "usa",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "usa2024",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "vols",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "whitney",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "woke",
+    "sentiment_breakdown": {
+      "neutral": 1.0
+    },
+    "tweet_count": 1
+  },
+  {
+    "brand": "yes",
+    "sentiment_breakdown": {
+      "positive": 1.0
+    },
+    "tweet_count": 1
+  }
+]
