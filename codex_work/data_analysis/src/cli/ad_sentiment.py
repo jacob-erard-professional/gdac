@@ -11,6 +11,7 @@ def ad_sentiment_command(
     data_dir: Path = typer.Option(None, "--data-dir"),
     sentiment_file: Path = typer.Option(None, "--sentiment-file"),
     enriched_file: Path = typer.Option(None, "--enriched-file"),
+    tweet_map_file: Path = typer.Option(None, "--tweet-map-file"),
     output_dir: Path = typer.Option(None, "--output-dir"),
     min_tweets: int = typer.Option(1, "--min-tweets", min=1),
 ):
@@ -27,6 +28,7 @@ def ad_sentiment_command(
     resolved_sentiment = sentiment_file or (base_dir / "sentiment" / "bertweet" / cfg.year / "sentiment.json")
     resolved_enriched = enriched_file or (cfg.enriched_dir / "enriched.csv")
     resolved_output_dir = output_dir or cfg.analytics_dir
+    resolved_tweet_map = tweet_map_file or (cfg.analytics_dir / "brand_tweet_map.json")
 
     if not resolved_sentiment.is_absolute():
         resolved_sentiment = (base_dir / resolved_sentiment).resolve()
@@ -34,6 +36,10 @@ def ad_sentiment_command(
         resolved_enriched = (base_dir / resolved_enriched).resolve()
     if not resolved_output_dir.is_absolute():
         resolved_output_dir = (base_dir / resolved_output_dir).resolve()
+    if tweet_map_file and not resolved_tweet_map.is_absolute():
+        resolved_tweet_map = (base_dir / resolved_tweet_map).resolve()
+    if not resolved_tweet_map.exists():
+        resolved_tweet_map = None
 
     outputs, manifest = run_ad_sentiment_analysis(
         year=int(cfg.year),
@@ -41,6 +47,7 @@ def ad_sentiment_command(
         enriched_path=resolved_enriched,
         output_dir=resolved_output_dir,
         min_tweets=min_tweets,
+        tweet_map_path=resolved_tweet_map,
         logger=typer.echo,
     )
 

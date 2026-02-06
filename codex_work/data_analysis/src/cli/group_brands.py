@@ -21,12 +21,18 @@ def group_brands_command(
         "--output-file",
         help="Optional explicit output file path",
     ),
+    enriched_file: Path | None = typer.Option(
+        None,
+        "--enriched-file",
+        help="Optional enriched.csv path for tweet-to-brand mapping output",
+    ),
     model: str = typer.Option(
-        "openai/gpt-oss-120b:free",
+        "openai/gpt-4.1-mini",
         "--model",
         help="OpenRouter model id",
     ),
     chunk_size: int = typer.Option(60, "--chunk-size", min=20, max=500),
+    resume: bool = typer.Option(True, "--resume/--no-resume", help="Resume from existing partial results"),
     request_delay: float = typer.Option(
         MIN_REQUEST_DELAY_SECONDS,
         "--request-delay",
@@ -56,6 +62,8 @@ def group_brands_command(
     base_dir = Path(__file__).resolve().parents[2]
     resolved_input = input_file or (base_dir / "outputs" / "analytics" / year / "hashtags_frequency.json")
     resolved_output = output_file or (base_dir / "outputs" / "analytics" / year / "brand_groups.json")
+    resolved_enriched = enriched_file or (base_dir / "data" / "enriched" / year / "enriched.csv")
+    tweet_map_output = resolved_output.with_name("brand_tweet_map.json")
 
     if not resolved_input.exists():
         raise typer.BadParameter(f"Input file not found: {resolved_input}")
@@ -65,8 +73,21 @@ def group_brands_command(
         output_path=resolved_output,
         model=model,
         chunk_size=chunk_size,
+        resume=resume,
         request_delay_seconds=request_delay,
         max_rate_limit_retries=max_rate_limit_retries,
         initial_backoff_seconds=initial_backoff,
     )
     typer.echo(f"brand grouping written to {out}")
+
+    if not resolved_enriched.exists():
+        raise typer.BadParameter(f"Enriched file not found for tweet mapping: {resolved_enriched}")
+    from src.utils.tweet_company_map import build_brand_tweet_map
+
+    tweet_map = build_brand_tweet_map(
+        enriched_path=resolved_enriched,
+        brand_groups_path=resolved_output,
+        output_path=tweet_map_output,
+        year=int(year),
+    )
+    typer.echo(f"brand tweet map written to {tweet_map}")

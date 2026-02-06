@@ -5,8 +5,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from random import uniform
-from time import sleep
-from typing import Dict, Iterable, List
+from time import perf_counter, sleep
+from typing import Dict, Iterable, List, Set, Tuple
 
 from langchain_openai import ChatOpenAI
 
@@ -20,7 +20,7 @@ from src.agents.rate_limit_policy import (
 )
 
 
-MODEL_DEFAULT = "openai/gpt-oss-120b:free"
+MODEL_DEFAULT = "openai/gpt-4.1-mini"
 NORMALIZE_CHUNK_SIZE = 200
 LLM_TIMEOUT_SECONDS = 180
 
@@ -173,6 +173,42 @@ def _count_parse_failure_blocks(path: Path) -> int:
     return path.read_text(encoding="utf-8").count("\n\n---\n\n")
 
 
+def _load_partial_mappings(path: Path) -> Tuple[Dict[str, str], Set[int]]:
+    mappings: Dict[str, str] = {}
+    completed: Set[int] = set()
+    if not path.exists():
+        return mappings, completed
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            payload = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        phase = str(payload.get("phase", ""))
+        chunk_index = payload.get("chunk_index")
+        if phase.startswith("map_chunk") and isinstance(chunk_index, int):
+            completed.add(chunk_index)
+        for item in payload.get("mappings", []):
+            hashtag = str(item.get("hashtag", "")).strip().lower()
+            brand = str(item.get("brand", "")).strip().lower()
+            if hashtag:
+                mappings[hashtag] = brand or hashtag
+    return mappings, completed
+
+
+def _prompt_for_model(current_model: str, *, context: str) -> str | None:
+    prompt = (
+        f"[group-brands] {context}. Current model '{current_model}'.\n"
+        "Enter a new OpenRouter model id to retry, or press Enter to fall back: "
+    )
+    try:
+        value = input(prompt).strip()
+    except EOFError:
+        return None
+    return value or None
+
+
 def _map_chunk_to_brands(invoker: _RateLimitedInvoker, chunk: List[HashtagCount]) -> Dict[str, str]:
     items = [{"hashtag": item.hashtag, "count": item.count} for item in chunk]
     prompt = (
@@ -208,9 +244,14 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
     if not unique_labels:
         return {}
 
+    total_chunks = (len(unique_labels) + NORMALIZE_CHUNK_SIZE - 1) // NORMALIZE_CHUNK_SIZE
+    start_time = perf_counter()
+    completed = 0
     out: Dict[str, str] = {}
     for i in range(0, len(unique_labels), NORMALIZE_CHUNK_SIZE):
         chunk = unique_labels[i : i + NORMALIZE_CHUNK_SIZE]
+        chunk_index = i // NORMALIZE_CHUNK_SIZE + 1
+        print(f"[group-brands] normalize chunk {chunk_index} size={len(chunk)}")
         prompt = (
             "You will normalize brand label aliases.\n"
             "Output strict JSON only with schema:\n"
@@ -234,13 +275,24 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
                 out[label] = canonical
         for label in chunk:
             out.setdefault(label, label)
+        completed += 1
+        elapsed = perf_counter() - start_time
+        avg = elapsed / completed
+        remaining = total_chunks - completed
+        eta = avg * remaining
+        print(f"[group-brands] normalize progress {completed}/{total_chunks} eta={eta:.1f}s")
 
     # Second pass to merge aliases across chunks.
     second_pass_labels = sorted(set(out.values()))
     if len(second_pass_labels) > 1:
+        total_chunks = (len(second_pass_labels) + NORMALIZE_CHUNK_SIZE - 1) // NORMALIZE_CHUNK_SIZE
+        start_time = perf_counter()
+        completed = 0
         second_pass: Dict[str, str] = {}
         for i in range(0, len(second_pass_labels), NORMALIZE_CHUNK_SIZE):
             chunk = second_pass_labels[i : i + NORMALIZE_CHUNK_SIZE]
+            chunk_index = i // NORMALIZE_CHUNK_SIZE + 1
+            print(f"[group-brands] normalize second-pass chunk {chunk_index} size={len(chunk)}")
             prompt = (
                 "You will normalize brand label aliases.\n"
                 "Output strict JSON only with schema:\n"
@@ -264,6 +316,12 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
                     second_pass[label] = canonical
             for label in chunk:
                 second_pass.setdefault(label, label)
+            completed += 1
+            elapsed = perf_counter() - start_time
+            avg = elapsed / completed
+            remaining = total_chunks - completed
+            eta = avg * remaining
+            print(f"[group-brands] normalize second-pass progress {completed}/{total_chunks} eta={eta:.1f}s")
         out = {label: second_pass.get(canonical, canonical) for label, canonical in out.items()}
 
     return out
@@ -277,6 +335,7 @@ def run_brand_grouping(
     request_delay_seconds: float = MIN_REQUEST_DELAY_SECONDS,
     max_rate_limit_retries: int = MIN_MAX_RATE_LIMIT_RETRIES,
     initial_backoff_seconds: float = MIN_INITIAL_BACKOFF_SECONDS,
+    resume: bool = True,
 ) -> Path:
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
@@ -289,99 +348,149 @@ def run_brand_grouping(
     )
 
     year, hashtags = _load_hashtags(hashtags_path)
-    llm = ChatOpenAI(
-        model=model,
-        api_key=api_key,
-        base_url="https://openrouter.ai/api/v1",
-        temperature=0,
-        max_retries=3,
-        request_timeout=LLM_TIMEOUT_SECONDS,
-    )
-    invoker = _RateLimitedInvoker(
-        llm=llm,
-        min_interval_seconds=request_delay_seconds,
-        max_rate_limit_retries=max_rate_limit_retries,
-        initial_backoff_seconds=initial_backoff_seconds,
-    )
+    def _build_invoker(model_id: str) -> _RateLimitedInvoker:
+        llm = ChatOpenAI(
+            model=model_id,
+            api_key=api_key,
+            base_url="https://openrouter.ai/api/v1",
+            temperature=0,
+            max_retries=3,
+            request_timeout=LLM_TIMEOUT_SECONDS,
+        )
+        return _RateLimitedInvoker(
+            llm=llm,
+            min_interval_seconds=request_delay_seconds,
+            max_rate_limit_retries=max_rate_limit_retries,
+            initial_backoff_seconds=initial_backoff_seconds,
+        )
+
+    current_model = model
+    invoker = _build_invoker(current_model)
     partial_jsonl_path = output_path.with_name(f"{output_path.stem}_partial.jsonl")
     parse_failures_path = output_path.with_name(f"{output_path.stem}_parse_failures.txt")
-    for path in (partial_jsonl_path, parse_failures_path):
-        if path.exists():
-            path.unlink()
+    if not resume:
+        for path in (partial_jsonl_path, parse_failures_path):
+            if path.exists():
+                path.unlink()
 
-    hashtag_to_brand: Dict[str, str] = {}
+    hashtag_to_brand, completed_chunks = _load_partial_mappings(partial_jsonl_path) if resume else ({}, set())
     degraded_rate_limit_fallback = False
     degraded_parse_fallback = False
     for chunk_index, chunk in enumerate(_chunks(hashtags, size=chunk_size), start=1):
+        if resume and chunk_index in completed_chunks:
+            continue
         print(f"[group-brands] mapping chunk {chunk_index} size={len(chunk)}")
+        attempt_model_switch = True
+        while True:
+            try:
+                mapped = _map_chunk_to_brands(invoker, chunk)
+                hashtag_to_brand.update(mapped)
+                _append_jsonl(
+                    partial_jsonl_path,
+                    {
+                        "phase": "map_chunk",
+                        "chunk_index": chunk_index,
+                        "mappings": [
+                            {"hashtag": item.hashtag, "brand": mapped.get(item.hashtag, item.hashtag)}
+                            for item in chunk
+                        ],
+                    },
+                )
+                break
+            except ModelJsonParseError as exc:
+                if attempt_model_switch:
+                    new_model = _prompt_for_model(current_model, context="model response parse failed")
+                    if new_model:
+                        current_model = new_model
+                        invoker = _build_invoker(current_model)
+                        attempt_model_switch = False
+                        continue
+                degraded_parse_fallback = True
+                _append_parse_failure(
+                    parse_failures_path,
+                    phase="map_chunk",
+                    detail=str(exc),
+                    raw_text=exc.raw_text,
+                )
+                for item in chunk:
+                    hashtag_to_brand[item.hashtag] = item.hashtag
+                _append_jsonl(
+                    partial_jsonl_path,
+                    {
+                        "phase": "map_chunk_fallback",
+                        "chunk_index": chunk_index,
+                        "mappings": [{"hashtag": item.hashtag, "brand": item.hashtag} for item in chunk],
+                    },
+                )
+                break
+            except Exception as exc:  # noqa: BLE001
+                if not _is_rate_limit_error(exc):
+                    raise
+                if attempt_model_switch:
+                    new_model = _prompt_for_model(current_model, context="rate limit reached")
+                    if new_model:
+                        current_model = new_model
+                        invoker = _build_invoker(current_model)
+                        attempt_model_switch = False
+                        continue
+                degraded_rate_limit_fallback = True
+                for item in chunk:
+                    hashtag_to_brand[item.hashtag] = item.hashtag
+                _append_jsonl(
+                    partial_jsonl_path,
+                    {
+                        "phase": "map_chunk_rate_limit_fallback",
+                        "chunk_index": chunk_index,
+                        "mappings": [{"hashtag": item.hashtag, "brand": item.hashtag} for item in chunk],
+                    },
+                )
+                break
+
+    attempt_model_switch = True
+    while True:
         try:
-            mapped = _map_chunk_to_brands(invoker, chunk)
-            hashtag_to_brand.update(mapped)
+            print(f"[group-brands] normalizing labels total={len(set(hashtag_to_brand.values()))}")
+            alias_map = _normalize_brand_labels(invoker, list(hashtag_to_brand.values()))
             _append_jsonl(
                 partial_jsonl_path,
                 {
-                    "phase": "map_chunk",
-                    "chunk_index": chunk_index,
-                    "mappings": [{"hashtag": item.hashtag, "brand": mapped.get(item.hashtag, item.hashtag)} for item in chunk],
+                    "phase": "normalize_labels",
+                    "aliases": [
+                        {"label": label, "canonical": canonical} for label, canonical in sorted(alias_map.items())
+                    ],
                 },
             )
+            break
         except ModelJsonParseError as exc:
+            if attempt_model_switch:
+                new_model = _prompt_for_model(current_model, context="normalize labels parse failed")
+                if new_model:
+                    current_model = new_model
+                    invoker = _build_invoker(current_model)
+                    attempt_model_switch = False
+                    continue
             degraded_parse_fallback = True
             _append_parse_failure(
                 parse_failures_path,
-                phase="map_chunk",
+                phase="normalize_labels",
                 detail=str(exc),
                 raw_text=exc.raw_text,
             )
-            for item in chunk:
-                hashtag_to_brand[item.hashtag] = item.hashtag
-            _append_jsonl(
-                partial_jsonl_path,
-                {
-                    "phase": "map_chunk_fallback",
-                    "chunk_index": chunk_index,
-                    "mappings": [{"hashtag": item.hashtag, "brand": item.hashtag} for item in chunk],
-                },
-            )
+            alias_map = {label: label for label in hashtag_to_brand.values()}
+            break
         except Exception as exc:  # noqa: BLE001
             if not _is_rate_limit_error(exc):
                 raise
+            if attempt_model_switch:
+                new_model = _prompt_for_model(current_model, context="rate limit reached")
+                if new_model:
+                    current_model = new_model
+                    invoker = _build_invoker(current_model)
+                    attempt_model_switch = False
+                    continue
             degraded_rate_limit_fallback = True
-            for item in chunk:
-                hashtag_to_brand[item.hashtag] = item.hashtag
-            _append_jsonl(
-                partial_jsonl_path,
-                {
-                    "phase": "map_chunk_rate_limit_fallback",
-                    "chunk_index": chunk_index,
-                    "mappings": [{"hashtag": item.hashtag, "brand": item.hashtag} for item in chunk],
-                },
-            )
-
-    try:
-        print(f"[group-brands] normalizing labels total={len(set(hashtag_to_brand.values()))}")
-        alias_map = _normalize_brand_labels(invoker, list(hashtag_to_brand.values()))
-        _append_jsonl(
-            partial_jsonl_path,
-            {
-                "phase": "normalize_labels",
-                "aliases": [{"label": label, "canonical": canonical} for label, canonical in sorted(alias_map.items())],
-            },
-        )
-    except ModelJsonParseError as exc:
-        degraded_parse_fallback = True
-        _append_parse_failure(
-            parse_failures_path,
-            phase="normalize_labels",
-            detail=str(exc),
-            raw_text=exc.raw_text,
-        )
-        alias_map = {label: label for label in hashtag_to_brand.values()}
-    except Exception as exc:  # noqa: BLE001
-        if not _is_rate_limit_error(exc):
-            raise
-        degraded_rate_limit_fallback = True
-        alias_map = {label: label for label in hashtag_to_brand.values()}
+            alias_map = {label: label for label in hashtag_to_brand.values()}
+            break
 
     grouped: Dict[str, List[Dict[str, int | str]]] = {}
     for item in hashtags:
@@ -400,7 +509,7 @@ def run_brand_grouping(
 
     result = {
         "year": year,
-        "model": model,
+        "model": current_model,
         "degraded_rate_limit_fallback": degraded_rate_limit_fallback,
         "degraded_parse_fallback": degraded_parse_fallback,
         "partial_results_file": str(partial_jsonl_path),

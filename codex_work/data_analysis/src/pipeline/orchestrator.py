@@ -20,6 +20,8 @@ RUNNERS = {
     'sentiment': stages.sentiment.run,
     'ad_sentiment': stages.ad_sentiment.run,
     'deep_sentiment': stages.deep_sentiment.run,
+    'parent_company_sentiment': stages.parent_company_sentiment.run,
+    'parent_company_deep_sentiment': stages.parent_company_deep_sentiment.run,
 }
 
 
@@ -55,6 +57,7 @@ def _run_for_year(
                 batch_size=req.sentiment_batch_size,
                 dry_run=req.sentiment_dry_run,
                 allow_fallback=req.sentiment_allow_fallback,
+                device=req.sentiment_device,
             )
         elif stage == 'ad_sentiment':
             manifest = RUNNERS[stage](
@@ -68,6 +71,17 @@ def _run_for_year(
                 batch_size=req.deep_sentiment_batch_size,
                 dry_run=req.deep_sentiment_dry_run,
                 label_map_file=req.deep_sentiment_label_map_file,
+                device=req.deep_sentiment_device,
+            )
+        elif stage == 'parent_company_sentiment':
+            manifest = RUNNERS[stage](
+                config,
+                min_tweets=req.parent_company_sentiment_min_tweets,
+            )
+        elif stage == 'parent_company_deep_sentiment':
+            manifest = RUNNERS[stage](
+                config,
+                min_tweets=req.parent_company_deep_sentiment_min_tweets,
             )
         else:
             manifest = RUNNERS[stage](config)
@@ -102,6 +116,10 @@ def run_pipeline(base_dir: Path, req: RunRequest):
             stage_list = stage_list + ['ad_sentiment']
         if req.with_deep_sentiment:
             stage_list = stage_list + ['deep_sentiment']
+        if req.with_parent_company_sentiment:
+            stage_list = stage_list + ['parent_company_sentiment']
+        if req.with_parent_company_deep_sentiment:
+            stage_list = stage_list + ['parent_company_deep_sentiment']
         return [_run_for_year(base_dir, req, req.year, req.data_dir, stage_list)]
 
     if req.mode == 'full_all_years':
@@ -113,6 +131,10 @@ def run_pipeline(base_dir: Path, req: RunRequest):
             stage_list = stage_list + ['ad_sentiment']
         if req.with_deep_sentiment:
             stage_list = stage_list + ['deep_sentiment']
+        if req.with_parent_company_sentiment:
+            stage_list = stage_list + ['parent_company_sentiment']
+        if req.with_parent_company_deep_sentiment:
+            stage_list = stage_list + ['parent_company_deep_sentiment']
         return [
             _run_for_year(base_dir, req, y, None, stage_list)
             for y in years
