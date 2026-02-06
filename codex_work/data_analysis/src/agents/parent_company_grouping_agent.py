@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from random import uniform
 from time import sleep
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable, List, Set, Tuple
 
 from langchain_openai import ChatOpenAI
 
@@ -21,7 +21,7 @@ from src.agents.rate_limit_policy import (
 )
 
 
-MODEL_DEFAULT = "openai/gpt-oss-120b:free"
+MODEL_DEFAULT = "openai/gpt-4.1-mini"
 NORMALIZE_CHUNK_SIZE = 200
 LLM_TIMEOUT_SECONDS = 180
 DEFAULT_OVERRIDE_FILE = Path(__file__).resolve().parents[2] / "config" / "parent_company_overrides.json"
@@ -165,6 +165,42 @@ def _append_parse_failure(path: Path, *, phase: str, detail: str, raw_text: str)
         f.write("\n\n---\n\n")
 
 
+def _load_partial_mappings(path: Path) -> Tuple[Dict[str, str], Set[int]]:
+    mappings: Dict[str, str] = {}
+    completed: Set[int] = set()
+    if not path.exists():
+        return mappings, completed
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        try:
+            payload = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        phase = str(payload.get("phase", ""))
+        chunk_index = payload.get("chunk_index")
+        if phase.startswith("map_chunk") and isinstance(chunk_index, int):
+            completed.add(chunk_index)
+        for item in payload.get("mappings", []):
+            brand = str(item.get("brand", "")).strip().lower()
+            parent = str(item.get("parent_company", "")).strip().lower()
+            if brand:
+                mappings[brand] = parent or brand
+    return mappings, completed
+
+
+def _prompt_for_model(current_model: str, *, context: str) -> str | None:
+    prompt = (
+        f"[group-parent-companies] {context}. Current model '{current_model}'.\n"
+        "Enter a new OpenRouter model id to retry, or press Enter to fall back: "
+    )
+    try:
+        value = input(prompt).strip()
+    except EOFError:
+        return None
+    return value or None
+
+
 def _load_brand_groups(path: Path) -> tuple[str, List[BrandGroup]]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     year = str(payload.get("year", "unknown"))
@@ -301,6 +337,7 @@ def run_parent_company_grouping(
     request_delay_seconds: float = MIN_REQUEST_DELAY_SECONDS,
     max_rate_limit_retries: int = MIN_MAX_RATE_LIMIT_RETRIES,
     initial_backoff_seconds: float = MIN_INITIAL_BACKOFF_SECONDS,
+    resume: bool = True,
 ) -> Path:
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
@@ -314,30 +351,37 @@ def run_parent_company_grouping(
     parent_overrides = _load_parent_company_overrides()
 
     year, groups = _load_brand_groups(brand_groups_path)
-    llm = ChatOpenAI(
-        model=model,
-        api_key=api_key,
-        base_url="https://openrouter.ai/api/v1",
-        temperature=0,
-        max_retries=3,
-        request_timeout=LLM_TIMEOUT_SECONDS,
-    )
-    invoker = _RateLimitedInvoker(
-        llm=llm,
-        min_interval_seconds=request_delay_seconds,
-        max_rate_limit_retries=max_rate_limit_retries,
-        initial_backoff_seconds=initial_backoff_seconds,
-    )
+    def _build_invoker(model_id: str) -> _RateLimitedInvoker:
+        llm = ChatOpenAI(
+            model=model_id,
+            api_key=api_key,
+            base_url="https://openrouter.ai/api/v1",
+            temperature=0,
+            max_retries=3,
+            request_timeout=LLM_TIMEOUT_SECONDS,
+        )
+        return _RateLimitedInvoker(
+            llm=llm,
+            min_interval_seconds=request_delay_seconds,
+            max_rate_limit_retries=max_rate_limit_retries,
+            initial_backoff_seconds=initial_backoff_seconds,
+        )
+
+    current_model = model
+    invoker = _build_invoker(current_model)
     partial_jsonl_path = output_path.with_name(f"{output_path.stem}_partial.jsonl")
     parse_failures_path = output_path.with_name(f"{output_path.stem}_parse_failures.txt")
-    for path in (partial_jsonl_path, parse_failures_path):
-        if path.exists():
-            path.unlink()
+    if not resume:
+        for path in (partial_jsonl_path, parse_failures_path):
+            if path.exists():
+                path.unlink()
 
-    brand_to_parent: Dict[str, str] = {}
+    brand_to_parent, completed_chunks = _load_partial_mappings(partial_jsonl_path) if resume else ({}, set())
     degraded_rate_limit_fallback = False
     degraded_parse_fallback = False
     for chunk_index, chunk in enumerate(_chunks(groups, size=chunk_size), start=1):
+        if resume and chunk_index in completed_chunks:
+            continue
         print(f"[group-parent-companies] mapping chunk {chunk_index} size={len(chunk)}")
         unresolved_chunk: List[BrandGroup] = []
         override_mappings = []
@@ -360,87 +404,127 @@ def run_parent_company_grouping(
         if not unresolved_chunk:
             continue
 
+        attempt_model_switch = True
+        while True:
+            try:
+                mapped = _map_chunk_to_parent_companies(invoker, unresolved_chunk)
+                brand_to_parent.update(mapped)
+                _append_jsonl(
+                    partial_jsonl_path,
+                    {
+                        "phase": "map_chunk",
+                        "chunk_index": chunk_index,
+                        "mappings": [
+                            {"brand": item.brand, "parent_company": mapped.get(item.brand, item.brand)}
+                            for item in unresolved_chunk
+                        ],
+                    },
+                )
+                break
+            except ModelJsonParseError as exc:
+                if attempt_model_switch:
+                    new_model = _prompt_for_model(current_model, context="model response parse failed")
+                    if new_model:
+                        current_model = new_model
+                        invoker = _build_invoker(current_model)
+                        attempt_model_switch = False
+                        continue
+                degraded_parse_fallback = True
+                _append_parse_failure(
+                    parse_failures_path,
+                    phase="map_chunk",
+                    detail=str(exc),
+                    raw_text=exc.raw_text,
+                )
+                for item in chunk:
+                    if item.brand in brand_to_parent:
+                        continue
+                    brand_to_parent[item.brand] = item.brand
+                _append_jsonl(
+                    partial_jsonl_path,
+                    {
+                        "phase": "map_chunk_fallback",
+                        "chunk_index": chunk_index,
+                        "mappings": [
+                            {"brand": item.brand, "parent_company": brand_to_parent[item.brand]}
+                            for item in unresolved_chunk
+                        ],
+                    },
+                )
+                break
+            except Exception as exc:  # noqa: BLE001
+                if not _is_rate_limit_error(exc):
+                    raise
+                if attempt_model_switch:
+                    new_model = _prompt_for_model(current_model, context="rate limit reached")
+                    if new_model:
+                        current_model = new_model
+                        invoker = _build_invoker(current_model)
+                        attempt_model_switch = False
+                        continue
+                degraded_rate_limit_fallback = True
+                for item in chunk:
+                    if item.brand in brand_to_parent:
+                        continue
+                    brand_to_parent[item.brand] = item.brand
+                _append_jsonl(
+                    partial_jsonl_path,
+                    {
+                        "phase": "map_chunk_rate_limit_fallback",
+                        "chunk_index": chunk_index,
+                        "mappings": [
+                            {"brand": item.brand, "parent_company": brand_to_parent[item.brand]}
+                            for item in unresolved_chunk
+                        ],
+                    },
+                )
+                break
+
+    attempt_model_switch = True
+    while True:
         try:
-            mapped = _map_chunk_to_parent_companies(invoker, unresolved_chunk)
-            brand_to_parent.update(mapped)
+            print(f"[group-parent-companies] normalizing labels total={len(set(brand_to_parent.values()))}")
+            alias_map = _normalize_parent_labels(invoker, list(brand_to_parent.values()))
             _append_jsonl(
                 partial_jsonl_path,
                 {
-                    "phase": "map_chunk",
-                    "chunk_index": chunk_index,
-                    "mappings": [
-                        {"brand": item.brand, "parent_company": mapped.get(item.brand, item.brand)}
-                        for item in unresolved_chunk
+                    "phase": "normalize_labels",
+                    "aliases": [
+                        {"label": label, "canonical": canonical} for label, canonical in sorted(alias_map.items())
                     ],
                 },
             )
+            break
         except ModelJsonParseError as exc:
+            if attempt_model_switch:
+                new_model = _prompt_for_model(current_model, context="normalize labels parse failed")
+                if new_model:
+                    current_model = new_model
+                    invoker = _build_invoker(current_model)
+                    attempt_model_switch = False
+                    continue
             degraded_parse_fallback = True
             _append_parse_failure(
                 parse_failures_path,
-                phase="map_chunk",
+                phase="normalize_labels",
                 detail=str(exc),
                 raw_text=exc.raw_text,
             )
-            for item in chunk:
-                if item.brand in brand_to_parent:
-                    continue
-                brand_to_parent[item.brand] = item.brand
-            _append_jsonl(
-                partial_jsonl_path,
-                {
-                    "phase": "map_chunk_fallback",
-                    "chunk_index": chunk_index,
-                    "mappings": [
-                        {"brand": item.brand, "parent_company": brand_to_parent[item.brand]}
-                        for item in unresolved_chunk
-                    ],
-                },
-            )
+            alias_map = {label: label for label in brand_to_parent.values()}
+            break
         except Exception as exc:  # noqa: BLE001
             if not _is_rate_limit_error(exc):
                 raise
-            degraded_rate_limit_fallback = True
-            for item in chunk:
-                if item.brand in brand_to_parent:
+            if attempt_model_switch:
+                new_model = _prompt_for_model(current_model, context="rate limit reached")
+                if new_model:
+                    current_model = new_model
+                    invoker = _build_invoker(current_model)
+                    attempt_model_switch = False
                     continue
-                brand_to_parent[item.brand] = item.brand
-            _append_jsonl(
-                partial_jsonl_path,
-                {
-                    "phase": "map_chunk_rate_limit_fallback",
-                    "chunk_index": chunk_index,
-                    "mappings": [
-                        {"brand": item.brand, "parent_company": brand_to_parent[item.brand]}
-                        for item in unresolved_chunk
-                    ],
-                },
-            )
-
-    try:
-        print(f"[group-parent-companies] normalizing labels total={len(set(brand_to_parent.values()))}")
-        alias_map = _normalize_parent_labels(invoker, list(brand_to_parent.values()))
-        _append_jsonl(
-            partial_jsonl_path,
-            {
-                "phase": "normalize_labels",
-                "aliases": [{"label": label, "canonical": canonical} for label, canonical in sorted(alias_map.items())],
-            },
-        )
-    except ModelJsonParseError as exc:
-        degraded_parse_fallback = True
-        _append_parse_failure(
-            parse_failures_path,
-            phase="normalize_labels",
-            detail=str(exc),
-            raw_text=exc.raw_text,
-        )
-        alias_map = {label: label for label in brand_to_parent.values()}
-    except Exception as exc:  # noqa: BLE001
-        if not _is_rate_limit_error(exc):
-            raise
-        degraded_rate_limit_fallback = True
-        alias_map = {label: label for label in brand_to_parent.values()}
+            degraded_rate_limit_fallback = True
+            alias_map = {label: label for label in brand_to_parent.values()}
+            break
 
     grouped: Dict[str, List[dict]] = {}
     for group in groups:
@@ -471,7 +555,7 @@ def run_parent_company_grouping(
 
     result = {
         "year": year,
-        "model": model,
+        "model": current_model,
         "degraded_rate_limit_fallback": degraded_rate_limit_fallback,
         "degraded_parse_fallback": degraded_parse_fallback,
         "partial_results_file": str(partial_jsonl_path),

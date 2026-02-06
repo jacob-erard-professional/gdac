@@ -12,6 +12,7 @@ def parent_company_sentiment_command(
     sentiment_file: Path = typer.Option(None, "--sentiment-file"),
     enriched_file: Path = typer.Option(None, "--enriched-file"),
     parent_groups_file: Path = typer.Option(None, "--parent-groups-file"),
+    tweet_map_file: Path = typer.Option(None, "--tweet-map-file"),
     output_dir: Path = typer.Option(None, "--output-dir"),
     min_tweets: int = typer.Option(1, "--min-tweets", min=1),
 ):
@@ -29,6 +30,7 @@ def parent_company_sentiment_command(
     resolved_enriched = enriched_file or (cfg.enriched_dir / "enriched.csv")
     resolved_parent_groups = parent_groups_file or (cfg.analytics_dir / "parent_company_groups.json")
     resolved_output_dir = output_dir or cfg.analytics_dir
+    resolved_tweet_map = tweet_map_file or (cfg.analytics_dir / "parent_company_tweet_map.json")
 
     if not resolved_sentiment.is_absolute():
         resolved_sentiment = (base_dir / resolved_sentiment).resolve()
@@ -38,12 +40,17 @@ def parent_company_sentiment_command(
         resolved_parent_groups = (base_dir / resolved_parent_groups).resolve()
     if not resolved_output_dir.is_absolute():
         resolved_output_dir = (base_dir / resolved_output_dir).resolve()
+    if tweet_map_file and not resolved_tweet_map.is_absolute():
+        resolved_tweet_map = (base_dir / resolved_tweet_map).resolve()
+    if not resolved_tweet_map.exists():
+        resolved_tweet_map = None
 
     outputs, manifest = run_parent_company_sentiment_analysis(
         year=int(cfg.year),
         sentiment_path=resolved_sentiment,
         enriched_path=resolved_enriched,
         parent_groups_path=resolved_parent_groups,
+        tweet_map_path=resolved_tweet_map,
         output_dir=resolved_output_dir,
         min_tweets=min_tweets,
     )

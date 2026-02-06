@@ -40,6 +40,8 @@ def _load_sentiment_records(path: Path) -> pd.DataFrame:
 
     frame = frame.copy()
     frame["tweet_id"] = frame["tweet_id"].astype(str).str.strip()
+    if "pipeline_row_id" in frame.columns:
+        frame["pipeline_row_id"] = frame["pipeline_row_id"].astype(str).str.strip()
     frame["year"] = pd.to_numeric(frame["year"], errors="coerce")
     frame["sentiment"] = frame["sentiment"].map(_normalize_sentiment)
     frame["confidence"] = pd.to_numeric(frame["confidence"], errors="coerce")
@@ -63,12 +65,24 @@ def _load_enriched_rows(path: Path, year: int) -> pd.DataFrame:
             "ad_tag": frame.get("ad_tag", "unknown_ad").astype(str).str.strip(),
             "brand_tag": frame.get("brand_tag", "unknown_brand").astype(str).str.strip(),
             "game_phase": frame.get("game_phase", "unknown").astype(str).str.strip(),
+            "pipeline_row_id": frame.get("pipeline_row_id", "").astype(str).str.strip(),
         }
     )
     selected["ad_tag"] = selected["ad_tag"].replace("", "unknown_ad")
     selected["brand_tag"] = selected["brand_tag"].replace("", "unknown_brand")
     selected["game_phase"] = selected["game_phase"].replace("", "unknown")
     return selected
+
+
+def _load_brand_tweet_map(path: Path) -> dict[str, str]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    mapping: dict[str, str] = {}
+    for record in payload.get("records", []):
+        key = str(record.get("pipeline_row_id") or record.get("tweet_id") or "").strip()
+        brand = str(record.get("primary_brand", "")).strip()
+        if key and brand:
+            mapping[key] = brand
+    return mapping
 
 
 def _build_summary(joined: pd.DataFrame, *, min_tweets: int) -> list[dict[str, Any]]:
@@ -123,6 +137,7 @@ def run_ad_sentiment_analysis(
     enriched_path: Path,
     output_dir: Path,
     min_tweets: int = 1,
+    tweet_map_path: Path | None = None,
     logger=None,
 ):
     if min_tweets < 1:
@@ -131,6 +146,9 @@ def run_ad_sentiment_analysis(
         raise ValueError(f"Missing sentiment input file: {sentiment_path}")
     if not enriched_path.exists():
         raise ValueError(f"Missing enriched input file: {enriched_path}")
+
+    if tweet_map_path and not tweet_map_path.exists():
+        raise ValueError(f"Missing tweet map file: {tweet_map_path}")
 
     if logger:
         logger(f"[ad-sentiment] loading sentiment from {sentiment_path}")
@@ -141,11 +159,28 @@ def run_ad_sentiment_analysis(
 
     if logger:
         logger("[ad-sentiment] joining sentiment with enriched rows")
-    joined = sentiment.merge(enriched, on=["tweet_id", "year"], how="left", indicator=True)
+    join_keys = ["tweet_id", "year"]
+    if "pipeline_row_id" in sentiment.columns and "pipeline_row_id" in enriched.columns:
+        join_keys = ["pipeline_row_id", "year"]
+    joined = sentiment.merge(enriched, on=join_keys, how="left", indicator=True)
     joined["join_status"] = joined.pop("_merge")
     joined["ad_tag"] = joined["ad_tag"].fillna("unmatched")
     joined["brand_tag"] = joined["brand_tag"].fillna("unmatched")
     joined["game_phase"] = joined["game_phase"].fillna("unknown")
+
+    if "tweet_id" not in joined.columns:
+        joined["tweet_id"] = joined.get("tweet_id_x", "").astype(str)
+    if "year" not in joined.columns:
+        joined["year"] = joined.get("year_x", joined.get("year_y", "")).astype(str)
+
+    if tweet_map_path:
+        if logger:
+            logger(f"[ad-sentiment] loading tweet map from {tweet_map_path}")
+        tweet_map = _load_brand_tweet_map(tweet_map_path)
+        key_series = joined["pipeline_row_id"] if "pipeline_row_id" in joined.columns else joined["tweet_id"]
+        mapped_brand = key_series.map(lambda key: tweet_map.get(str(key).strip(), ""))
+        unknown_mask = joined["ad_tag"].isin(["", "unknown_ad", "unmatched"])
+        joined.loc[unknown_mask & mapped_brand.ne(""), "ad_tag"] = mapped_brand[unknown_mask & mapped_brand.ne("")]
 
     joined = joined.sort_values(by=["tweet_id", "year"], kind="mergesort")
     summary_rows = _build_summary(joined, min_tweets=min_tweets)

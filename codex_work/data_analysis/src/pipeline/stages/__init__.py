@@ -6,6 +6,7 @@ from . import (
     export as export,
     ingest as ingest,
     parent_company_sentiment as parent_company_sentiment,
+    parent_company_deep_sentiment as parent_company_deep_sentiment,
     process as process,
     sentiment as sentiment,
     visualize as visualize,

@@ -41,6 +41,7 @@ def run(config):
     out_file = config.processed_dir / 'cleaned.csv'
     seen = set()
     cleaned = []
+    row_index = 0
     with in_file.open(newline='', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -53,10 +54,12 @@ def run(config):
             normalized['id'] = normalized['id'] or row.get('tweet_id', '')
             normalized['author_id'] = normalized['author_id'] or row.get('user_id', '')
             normalized['text'] = text
+            row_index += 1
+            normalized['pipeline_row_id'] = str(row_index)
             normalized['created_at_utc'] = _normalize_ts(row.get('created_at', ''))
             normalized['text_original'] = row.get('text', '')
             normalized['cleaning_flags'] = '' if text else 'empty_text'
             cleaned.append(normalized)
-    fields = TARGET_COLUMNS + ['created_at_utc', 'text_original', 'cleaning_flags']
+    fields = TARGET_COLUMNS + ['pipeline_row_id', 'created_at_utc', 'text_original', 'cleaning_flags']
     write_csv(out_file, cleaned, fields)
     return make_manifest([in_file], [out_file], len(cleaned), len(cleaned))
