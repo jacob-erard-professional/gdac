@@ -169,3 +169,67 @@ def build_parent_company_tweet_map(
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(out_payload, indent=2, sort_keys=True), encoding="utf-8")
     return output_path
+
+
+def build_parent_company_tweet_map_jsonl(
+    *,
+    enriched_path: Path,
+    brand_groups_path: Path,
+    parent_company_groups_path: Path,
+    output_path: Path,
+    year: int | None = None,
+    batch_size: int = 1000,
+) -> Path:
+    if batch_size < 1:
+        raise ValueError("batch_size must be >= 1")
+    if not enriched_path.exists():
+        raise ValueError(f"Missing enriched file: {enriched_path}")
+    if not brand_groups_path.exists():
+        raise ValueError(f"Missing brand groups file: {brand_groups_path}")
+    if not parent_company_groups_path.exists():
+        raise ValueError(f"Missing parent company groups file: {parent_company_groups_path}")
+
+    hashtag_to_brand, hashtag_to_count = _load_brand_groups(brand_groups_path)
+    parent_map = _load_parent_company_groups(parent_company_groups_path)
+    frame = pd.read_csv(enriched_path, dtype=str, keep_default_na=False)
+
+    tweet_id_col = "id" if "id" in frame.columns else ("tweet_id" if "tweet_id" in frame.columns else None)
+    if tweet_id_col is None:
+        raise ValueError("Enriched file missing tweet id column: id or tweet_id")
+    pipeline_col = "pipeline_row_id" if "pipeline_row_id" in frame.columns else None
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    total = len(frame)
+    with output_path.open("w", encoding="utf-8") as f:
+        for start in range(0, total, batch_size):
+            batch = frame.iloc[start : start + batch_size]
+            records: list[dict[str, Any]] = []
+            for _, row in batch.iterrows():
+                tags = _parse_hashtags(row.get("hashtags", ""))
+                scores = _brand_scores(tags, hashtag_to_brand, hashtag_to_count)
+                primary_brand = _select_primary(scores)
+                parent = parent_map.get(primary_brand, "unmatched")
+                record = {
+                    "tweet_id": str(row.get(tweet_id_col, "")).strip(),
+                    "primary_brand": primary_brand,
+                    "parent_company": parent,
+                }
+                if pipeline_col:
+                    record["pipeline_row_id"] = str(row.get(pipeline_col, "")).strip()
+                if "year" in frame.columns:
+                    record["year"] = int(row.get("year")) if str(row.get("year", "")).strip().isdigit() else None
+                elif year is not None:
+                    record["year"] = int(year)
+                records.append(record)
+
+            payload = {
+                "batch_start": int(start),
+                "batch_size": int(len(batch)),
+                "records": records,
+            }
+            f.write(json.dumps(payload, ensure_ascii=False) + "\n")
+            print(
+                f"[tweet-map] wrote batch {start // batch_size + 1} "
+                f"rows={len(batch)} total={total}"
+            )
+    return output_path

@@ -1,2 +1,0 @@
-ad_tag,tweet_count,positive_count,neutral_count,negative_count,positive_rate,neutral_rate,negative_rate,net_sentiment,avg_confidence,weighted_net_sentiment
-unknown_ad,85649,30626,42701,12322,0.357576,0.498558,0.143866,0.213709,0.807628,0.190154

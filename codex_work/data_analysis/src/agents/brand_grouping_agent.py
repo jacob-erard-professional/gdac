@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from random import uniform
-from time import sleep
+from time import perf_counter, sleep
 from typing import Dict, Iterable, List, Set, Tuple
 
 from langchain_openai import ChatOpenAI
@@ -244,9 +244,14 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
     if not unique_labels:
         return {}
 
+    total_chunks = (len(unique_labels) + NORMALIZE_CHUNK_SIZE - 1) // NORMALIZE_CHUNK_SIZE
+    start_time = perf_counter()
+    completed = 0
     out: Dict[str, str] = {}
     for i in range(0, len(unique_labels), NORMALIZE_CHUNK_SIZE):
         chunk = unique_labels[i : i + NORMALIZE_CHUNK_SIZE]
+        chunk_index = i // NORMALIZE_CHUNK_SIZE + 1
+        print(f"[group-brands] normalize chunk {chunk_index} size={len(chunk)}")
         prompt = (
             "You will normalize brand label aliases.\n"
             "Output strict JSON only with schema:\n"
@@ -270,13 +275,24 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
                 out[label] = canonical
         for label in chunk:
             out.setdefault(label, label)
+        completed += 1
+        elapsed = perf_counter() - start_time
+        avg = elapsed / completed
+        remaining = total_chunks - completed
+        eta = avg * remaining
+        print(f"[group-brands] normalize progress {completed}/{total_chunks} eta={eta:.1f}s")
 
     # Second pass to merge aliases across chunks.
     second_pass_labels = sorted(set(out.values()))
     if len(second_pass_labels) > 1:
+        total_chunks = (len(second_pass_labels) + NORMALIZE_CHUNK_SIZE - 1) // NORMALIZE_CHUNK_SIZE
+        start_time = perf_counter()
+        completed = 0
         second_pass: Dict[str, str] = {}
         for i in range(0, len(second_pass_labels), NORMALIZE_CHUNK_SIZE):
             chunk = second_pass_labels[i : i + NORMALIZE_CHUNK_SIZE]
+            chunk_index = i // NORMALIZE_CHUNK_SIZE + 1
+            print(f"[group-brands] normalize second-pass chunk {chunk_index} size={len(chunk)}")
             prompt = (
                 "You will normalize brand label aliases.\n"
                 "Output strict JSON only with schema:\n"
@@ -300,6 +316,12 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
                     second_pass[label] = canonical
             for label in chunk:
                 second_pass.setdefault(label, label)
+            completed += 1
+            elapsed = perf_counter() - start_time
+            avg = elapsed / completed
+            remaining = total_chunks - completed
+            eta = avg * remaining
+            print(f"[group-brands] normalize second-pass progress {completed}/{total_chunks} eta={eta:.1f}s")
         out = {label: second_pass.get(canonical, canonical) for label, canonical in out.items()}
 
     return out

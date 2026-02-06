@@ -185,6 +185,30 @@ pass `--allow-fallback`.
 The analyze stage writes only two files under `outputs/analytics/<year>/`:
 `hashtags_frequency.json` and `mentions_frequency.json`.
 
+## ID Flow Diagram
+
+```
+ingest -> clean (adds pipeline_row_id)
+              |
+              v
+          processed/cleaned.csv
+              |
+              v
+          enriched/enriched.csv
+              |
+              +--> sentiment/bertweet/sentiment.json (pipeline_row_id)
+              |
+              +--> sentiment/deep/deep_sentiment.json (pipeline_row_id)
+              |
+              +--> brand_groups.json + parent_company_groups.json
+                        |
+                        v
+          parent_company_tweet_map.json(.jsonl)
+              |
+              v
+   parent_company_*_sentiment_* joins on pipeline_row_id
+```
+
 The brand-grouping agent writes:
 - `outputs/analytics/<year>/brand_groups.json`
 - `outputs/analytics/<year>/brand_tweet_map.json`
