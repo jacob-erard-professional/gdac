@@ -6,7 +6,7 @@ def run(config, *, min_tweets: int = 1):
     sentiment_path = base_dir / "sentiment" / "bertweet" / config.year / "sentiment.json"
     enriched_path = config.enriched_dir / "enriched.csv"
     output_dir = config.analytics_dir
-    tweet_map_path = config.analytics_dir / "brand_tweet_map.json"
+    tweet_map_path = config.analytics_dir.parents[1] / "aux" / config.year / "brand_tweet_map.json"
     if not tweet_map_path.exists():
         tweet_map_path = None
 

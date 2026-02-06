@@ -50,16 +50,43 @@ def main():
     parser.add_argument("--brand-out", required=True, type=Path, help="Output JSON for brands")
     args = parser.parse_args()
 
-    records = _load_jsonl(args.input_jsonl)
+    input_path = args.input_jsonl
+    if not input_path.is_absolute():
+        input_path = (Path.cwd() / input_path).resolve()
+    if "/outputs/analytics/" in str(input_path):
+        parts = str(input_path).split("/outputs/analytics/")
+        if len(parts) == 2:
+            input_path = Path(parts[0]) / "outputs" / "aux" / parts[1]
+            print(f"[emotion-breakdown] redirecting input to aux: {input_path}")
+
+    parent_out = args.parent_out
+    if not parent_out.is_absolute():
+        parent_out = (Path.cwd() / parent_out).resolve()
+    if "/outputs/analytics/" in str(parent_out):
+        parts = str(parent_out).split("/outputs/analytics/")
+        if len(parts) == 2:
+            parent_out = Path(parts[0]) / "outputs" / "aux" / parts[1]
+            print(f"[emotion-breakdown] redirecting parent output to aux: {parent_out}")
+
+    brand_out = args.brand_out
+    if not brand_out.is_absolute():
+        brand_out = (Path.cwd() / brand_out).resolve()
+    if "/outputs/analytics/" in str(brand_out):
+        parts = str(brand_out).split("/outputs/analytics/")
+        if len(parts) == 2:
+            brand_out = Path(parts[0]) / "outputs" / "aux" / parts[1]
+            print(f"[emotion-breakdown] redirecting brand output to aux: {brand_out}")
+
+    records = _load_jsonl(input_path)
 
     parent_rows = _breakdown(records, "primary_parent_company")
     brand_rows = _breakdown(records, "primary_brand")
 
-    args.parent_out.parent.mkdir(parents=True, exist_ok=True)
-    args.brand_out.parent.mkdir(parents=True, exist_ok=True)
+    parent_out.parent.mkdir(parents=True, exist_ok=True)
+    brand_out.parent.mkdir(parents=True, exist_ok=True)
 
-    args.parent_out.write_text(json.dumps(parent_rows, indent=2, sort_keys=True), encoding="utf-8")
-    args.brand_out.write_text(json.dumps(brand_rows, indent=2, sort_keys=True), encoding="utf-8")
+    parent_out.write_text(json.dumps(parent_rows, indent=2, sort_keys=True), encoding="utf-8")
+    brand_out.write_text(json.dumps(brand_rows, indent=2, sort_keys=True), encoding="utf-8")
 
 
 if __name__ == "__main__":
