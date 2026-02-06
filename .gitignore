@@ -1,5 +1,6 @@
 # Raw data (never commit)
 codex_work/data_analysis/data/
+codex_work/data_analysis/outputs/analytics/2024_copy
 
 # Codex / tool artifacts
 codex_work/data_analysis/.codex/

@@ -147,6 +147,28 @@ def run_everything_command(
             max_rate_limit_retries=max_rate_limit_retries,
             initial_backoff_seconds=initial_backoff,
         )
+        try:
+            from src.utils.tweet_company_map import build_brand_tweet_map, build_parent_company_tweet_map
+        except ModuleNotFoundError:
+            build_brand_tweet_map = None
+            build_parent_company_tweet_map = None
+        if build_brand_tweet_map and build_parent_company_tweet_map:
+            brand_map_path = cfg.analytics_dir / "brand_tweet_map.json"
+            parent_map_path = cfg.analytics_dir / "parent_company_tweet_map.json"
+            if not brand_map_path.exists():
+                build_brand_tweet_map(
+                    enriched_path=cfg.enriched_dir / "enriched.csv",
+                    brand_groups_path=brand_groups_path,
+                    output_path=brand_map_path,
+                    year=int(cfg.year),
+                )
+            if brand_map_path.exists():
+                build_parent_company_tweet_map(
+                    brand_tweet_map_path=brand_map_path,
+                    parent_company_groups_path=cfg.analytics_dir / "parent_company_groups.json",
+                    output_path=parent_map_path,
+                    year=int(cfg.year),
+                )
 
     if run_parent_company_deep_sentiment:
         typer.echo("[run-everything] running parent-company-deep-sentiment")

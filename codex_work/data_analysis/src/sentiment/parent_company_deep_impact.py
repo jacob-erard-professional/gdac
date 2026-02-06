@@ -195,7 +195,7 @@ def run_parent_company_deep_sentiment_analysis(
     if not parent_groups_path.exists():
         raise ValueError(f"Missing parent company groups file: {parent_groups_path}")
     if tweet_map_path and not tweet_map_path.exists():
-        raise ValueError(f"Missing parent company tweet map file: {tweet_map_path}")
+        tweet_map_path = None
 
     deep_sentiment = _load_deep_records(deep_sentiment_path)
     enriched = _load_enriched_rows(enriched_path, year)
