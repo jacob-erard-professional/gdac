@@ -10,6 +10,7 @@ VALID_EXCLUDES = {
     "sentiment",
     "ad-sentiment",
     "deep-sentiment",
+    "parent-company-deep-sentiment",
     "group-brands",
     "group-parent-companies",
 }
@@ -21,20 +22,22 @@ def run_everything_command(
     exclude: list[str] = typer.Option(
         [],
         "--exclude",
-        help="Repeatable. One of: sentiment, ad-sentiment, deep-sentiment, group-brands, group-parent-companies",
+        help="Repeatable. One of: sentiment, ad-sentiment, deep-sentiment, parent-company-deep-sentiment, group-brands, group-parent-companies",
     ),
     sentiment_model: str = typer.Option(
         "finiteautomata/bertweet-base-sentiment-analysis",
         "--sentiment-model",
     ),
     sentiment_batch_size: int = typer.Option(64, "--sentiment-batch-size", min=1, max=4096),
+    sentiment_device: str = typer.Option("cuda", "--sentiment-device"),
     deep_sentiment_model: str = typer.Option(
         "SamLowe/roberta-base-go_emotions",
         "--deep-sentiment-model",
     ),
     deep_sentiment_batch_size: int = typer.Option(64, "--deep-sentiment-batch-size", min=1, max=4096),
+    deep_sentiment_device: str = typer.Option("cuda", "--deep-sentiment-device"),
     deep_sentiment_label_map_file: Path = typer.Option(None, "--deep-sentiment-label-map-file"),
-    grouping_model: str = typer.Option("openai/gpt-oss-120b:free", "--grouping-model"),
+    grouping_model: str = typer.Option("openai/gpt-4.1-mini", "--grouping-model"),
     request_delay: float = typer.Option(2.5, "--request-delay", min=2.5),
     max_rate_limit_retries: int = typer.Option(12, "--max-rate-limit-retries", min=12),
     initial_backoff: float = typer.Option(2.0, "--initial-backoff", min=2.0),
@@ -50,11 +53,20 @@ def run_everything_command(
     run_sentiment = "sentiment" not in excluded
     run_ad_sentiment = "ad-sentiment" not in excluded
     run_deep_sentiment = "deep-sentiment" not in excluded
+    run_parent_company_deep_sentiment = "parent-company-deep-sentiment" not in excluded
     run_group_brands = "group-brands" not in excluded
     run_group_parent_companies = "group-parent-companies" not in excluded
 
     if run_ad_sentiment and not run_sentiment:
         raise typer.BadParameter("ad-sentiment requires sentiment. Remove 'sentiment' from --exclude.")
+    if run_parent_company_deep_sentiment and not run_deep_sentiment:
+        raise typer.BadParameter(
+            "parent-company-deep-sentiment requires deep-sentiment. Remove 'deep-sentiment' from --exclude."
+        )
+    if run_parent_company_deep_sentiment and not run_group_parent_companies:
+        raise typer.BadParameter(
+            "parent-company-deep-sentiment requires group-parent-companies. Remove 'group-parent-companies' from --exclude."
+        )
 
     base_dir = Path(__file__).resolve().parents[2]
     resolved_data_dir = data_dir
@@ -78,11 +90,14 @@ def run_everything_command(
         sentiment_batch_size=sentiment_batch_size,
         sentiment_dry_run=False,
         sentiment_allow_fallback=False,
+        sentiment_device=sentiment_device,
         with_deep_sentiment=run_deep_sentiment,
         deep_sentiment_model=deep_sentiment_model,
         deep_sentiment_batch_size=deep_sentiment_batch_size,
         deep_sentiment_dry_run=False,
         deep_sentiment_label_map_file=resolved_label_map,
+        deep_sentiment_device=deep_sentiment_device,
+        with_parent_company_deep_sentiment=False,
     )
 
     typer.echo(f"[run-everything] starting core pipeline for year={cfg.year}")
@@ -131,6 +146,52 @@ def run_everything_command(
             request_delay_seconds=request_delay,
             max_rate_limit_retries=max_rate_limit_retries,
             initial_backoff_seconds=initial_backoff,
+        )
+        try:
+            from src.utils.tweet_company_map import build_brand_tweet_map, build_parent_company_tweet_map
+        except ModuleNotFoundError:
+            build_brand_tweet_map = None
+            build_parent_company_tweet_map = None
+        if build_brand_tweet_map and build_parent_company_tweet_map:
+            brand_map_path = cfg.analytics_dir / "brand_tweet_map.json"
+            parent_map_path = cfg.analytics_dir / "parent_company_tweet_map.json"
+            if not brand_map_path.exists():
+                build_brand_tweet_map(
+                    enriched_path=cfg.enriched_dir / "enriched.csv",
+                    brand_groups_path=brand_groups_path,
+                    output_path=brand_map_path,
+                    year=int(cfg.year),
+                )
+            if brand_map_path.exists():
+                build_parent_company_tweet_map(
+                    brand_tweet_map_path=brand_map_path,
+                    parent_company_groups_path=cfg.analytics_dir / "parent_company_groups.json",
+                    output_path=parent_map_path,
+                    year=int(cfg.year),
+                )
+
+    if run_parent_company_deep_sentiment:
+        typer.echo("[run-everything] running parent-company-deep-sentiment")
+        from src.sentiment.parent_company_deep_impact import run_parent_company_deep_sentiment_analysis
+
+        deep_path = base_dir / "sentiment" / "deep" / cfg.year / "deep_sentiment.json"
+        if not deep_path.exists():
+            raise typer.BadParameter(
+                f"Deep sentiment file not found: {deep_path}. Run without excluding deep-sentiment."
+            )
+        parent_groups_path = cfg.analytics_dir / "parent_company_groups.json"
+        if not parent_groups_path.exists():
+            raise typer.BadParameter(
+                f"Parent company groups not found: {parent_groups_path}. Run without excluding group-parent-companies."
+            )
+        run_parent_company_deep_sentiment_analysis(
+            year=int(cfg.year),
+            deep_sentiment_path=deep_path,
+            enriched_path=cfg.enriched_dir / "enriched.csv",
+            parent_groups_path=parent_groups_path,
+            output_dir=cfg.analytics_dir,
+            min_tweets=1,
+            tweet_map_path=cfg.analytics_dir / "parent_company_tweet_map.json",
         )
 
     typer.echo("[run-everything] complete")

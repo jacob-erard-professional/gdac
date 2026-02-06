@@ -10,6 +10,7 @@ def run(
     batch_size: int = 64,
     dry_run: bool = False,
     label_map_file: Path | None = None,
+    device: str = "cuda",
 ):
     base_dir = config.processed_dir.parents[2]
     input_path = config.processed_dir / "cleaned.csv"
@@ -26,6 +27,7 @@ def run(
         batch_size=batch_size,
         dry_run=dry_run,
         label_map_file=resolved_label_map,
+        device=device,
         logger=print,
     )
     return manifest
