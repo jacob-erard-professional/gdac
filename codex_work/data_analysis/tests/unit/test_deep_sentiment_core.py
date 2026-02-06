@@ -96,25 +96,25 @@ def test_validate_label_mapping_accepts_go_emotions_and_required_taxonomy():
             6: "amusement",
         }
     )
-    assert canonical[6] == "joy"
+    assert canonical[6] == "amusement"
     assert set(canonical.values()).issuperset(
         {"joy", "surprise", "anger", "disappointment", "excitement", "neutral"}
     )
 
 
-def test_validate_label_mapping_rejects_unknown_labels_without_override():
-    with pytest.raises(ValueError):
-        validate_label_mapping(
-            {
-                0: "anger",
-                1: "disappointment",
-                2: "neutral",
-                3: "surprise",
-                4: "joy",
-                5: "excitement",
-                6: "mystery",
-            }
-        )
+def test_validate_label_mapping_accepts_unknown_labels_without_override():
+    canonical = validate_label_mapping(
+        {
+            0: "anger",
+            1: "disappointment",
+            2: "neutral",
+            3: "surprise",
+            4: "joy",
+            5: "excitement",
+            6: "mystery",
+        }
+    )
+    assert canonical[6] == "mystery"
 
 
 def test_validate_label_mapping_accepts_override_for_unknown_labels():
@@ -175,6 +175,7 @@ def test_infer_deep_sentiment_batches_outputs_required_fields(monkeypatch):
         ],
         model_bundle=bundle,
         batch_size=2,
+        device="cpu",
     )
 
     assert records[0]["main_sentiment"] == "joy"

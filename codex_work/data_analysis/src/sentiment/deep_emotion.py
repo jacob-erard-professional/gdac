@@ -8,46 +8,12 @@ import pandas as pd
 
 from src.pipeline.stage_runtime import make_manifest
 
-DEFAULT_MODEL_ID = "SamLowe/roberta-base-go_emotions"
-REQUIRED_EMOTIONS = {"joy", "surprise", "anger", "disappointment", "excitement", "neutral"}
+DEFAULT_MODEL_ID = "cardiffnlp/twitter-roberta-base-emotion-latest"
+REQUIRED_EMOTIONS = set()
 
 URL_RE = re.compile(r"https?://\S+|www\.\S+", re.IGNORECASE)
 HASHTAG_RE = re.compile(r"#(\w+)")
 
-_MODEL_LABEL_TO_EMOTION = {
-    "anger": "anger",
-    "annoyance": "anger",
-    "disapproval": "anger",
-    "disgust": "anger",
-    "disappointed": "disappointment",
-    "disappointment": "disappointment",
-    "sadness": "disappointment",
-    "grief": "disappointment",
-    "remorse": "disappointment",
-    "embarrassment": "disappointment",
-    "excitement": "excitement",
-    "excited": "excitement",
-    "anticipation": "excitement",
-    "desire": "excitement",
-    "curiosity": "excitement",
-    "joy": "joy",
-    "happiness": "joy",
-    "amusement": "joy",
-    "gratitude": "joy",
-    "love": "joy",
-    "optimism": "joy",
-    "pride": "joy",
-    "relief": "joy",
-    "admiration": "joy",
-    "caring": "joy",
-    "surprise": "surprise",
-    "realization": "surprise",
-    "neutral": "neutral",
-    "confusion": "neutral",
-    "fear": "neutral",
-    "nervousness": "neutral",
-    "approval": "neutral",
-}
 
 
 @dataclass(frozen=True)
@@ -77,17 +43,7 @@ def _normalize_label_key(label: str) -> str:
 
 def _normalize_target_label(label: str) -> str | None:
     normalized = _normalize_label_key(label)
-    if normalized in REQUIRED_EMOTIONS:
-        return normalized
-    if normalized in {"happy", "happiness"}:
-        return "joy"
-    if normalized in {"excited"}:
-        return "excitement"
-    if normalized in {"sad", "sadness", "negative"}:
-        return "disappointment"
-    if normalized in {"positive"}:
-        return "joy"
-    return None
+    return normalized or None
 
 
 def load_label_overrides(path: Path | None) -> dict[str, str]:
@@ -105,7 +61,7 @@ def load_label_overrides(path: Path | None) -> dict[str, str]:
         if not normalized_target:
             raise ValueError(
                 "Label map contains unsupported target label "
-                f"'{raw_target_label}'. Allowed: {', '.join(sorted(REQUIRED_EMOTIONS))}"
+                f"'{raw_target_label}'. Provide a non-empty label."
             )
         overrides[normalized_key] = normalized_target
     return overrides
@@ -126,28 +82,10 @@ def validate_label_mapping(
         idx = int(raw_idx)
         raw_label_str = str(raw_label)
         normalized_key = _normalize_label_key(raw_label_str)
-
-        emotion = overrides.get(normalized_key)
+        emotion = overrides.get(normalized_key) or _normalize_target_label(raw_label_str)
         if emotion is None:
-            emotion = _normalize_target_label(raw_label_str)
-        if emotion is None:
-            emotion = _MODEL_LABEL_TO_EMOTION.get(normalized_key)
-
-        if emotion is None:
-            raise ValueError(
-                "Unable to map model label "
-                f"'{raw_label_str}' to required taxonomy. "
-                "Provide an explicit mapping via --label-map-file."
-            )
-
+            emotion = normalized_key
         canonical[idx] = emotion
-
-    missing = REQUIRED_EMOTIONS.difference(set(canonical.values()))
-    if missing:
-        raise ValueError(
-            "Model label mapping is missing required emotions: "
-            f"{', '.join(sorted(missing))}"
-        )
 
     return canonical
 
@@ -278,7 +216,9 @@ def infer_deep_sentiment_batches(
     total = len(rows)
     out: list[dict[str, Any]] = []
 
-    model = model_bundle.model.to(device)
+    model = model_bundle.model
+    if hasattr(model, "to"):
+        model = model.to(device)
     for start in range(0, total, batch_size):
         batch = rows[start : start + batch_size]
         texts = [item["text"] for item in batch]
@@ -290,7 +230,9 @@ def infer_deep_sentiment_batches(
             max_length=128,
             return_tensors="pt",
         )
-        tokenized = {k: v.to(device) for k, v in tokenized.items()}
+        tokenized = {
+            k: (v.to(device) if hasattr(v, "to") else v) for k, v in tokenized.items()
+        }
 
         with torch.no_grad():
             logits = model(**tokenized).logits
@@ -300,7 +242,7 @@ def infer_deep_sentiment_batches(
         for row, confidence, index in zip(batch, confidence_tensor.tolist(), index_tensor.tolist()):
             label_idx = int(index)
             main_sentiment = model_bundle.canonical_id2label.get(label_idx)
-            if main_sentiment not in REQUIRED_EMOTIONS:
+            if not main_sentiment:
                 raise ValueError(f"Unsupported predicted label index: {label_idx}")
 
             out.append(
@@ -340,7 +282,7 @@ def write_deep_sentiment_output(
             "source_file": str(input_path),
             "invalid_rows_skipped": int(invalid_rows),
             "total_records": len(records),
-            "taxonomy": sorted(REQUIRED_EMOTIONS),
+            "taxonomy": sorted(set(model_bundle.canonical_id2label.values())),
         },
         "records": records,
     }

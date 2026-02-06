@@ -48,7 +48,7 @@ def test_deep_sentiment_surfaces_model_mapping_errors(monkeypatch, tmp_path: Pat
     cleaned.write_text("tweet_id,text,year\n1,hello,2024\n", encoding="utf-8")
 
     def fake_run_deep_sentiment(**kwargs):
-        raise ValueError("Unable to map model label 'mystery' to required taxonomy")
+        raise ValueError("Unable to load model")
 
     monkeypatch.setattr("src.cli.deep_sentiment.run_deep_sentiment", fake_run_deep_sentiment)
 
@@ -59,4 +59,4 @@ def test_deep_sentiment_surfaces_model_mapping_errors(monkeypatch, tmp_path: Pat
 
     assert result.exit_code != 0
     assert isinstance(result.exception, ValueError)
-    assert "Unable to map model label" in str(result.exception)
+    assert "Unable to load model" in str(result.exception)

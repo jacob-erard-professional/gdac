@@ -6,7 +6,6 @@ from typing import Any
 import pandas as pd
 
 from src.pipeline.stage_runtime import make_manifest
-from src.sentiment.deep_emotion import REQUIRED_EMOTIONS
 
 REQUIRED_DEEP_COLUMNS = {"tweet_id", "year", "main_sentiment", "confidence"}
 REQUIRED_ENRICHED_COLUMNS = {"id"}
@@ -43,7 +42,7 @@ def _load_deep_records(path: Path) -> pd.DataFrame:
     if "pipeline_row_id" in frame.columns:
         frame["pipeline_row_id"] = frame["pipeline_row_id"].astype(str).str.strip()
     frame = frame.dropna(subset=["year", "confidence"])
-    frame = frame[frame["main_sentiment"].isin(REQUIRED_EMOTIONS)]
+    frame = frame[frame["main_sentiment"].ne("")]
     frame["year"] = frame["year"].astype(int)
     return frame
 
@@ -114,7 +113,7 @@ def _build_summary(joined: pd.DataFrame, *, min_tweets: int) -> list[dict[str, A
 
     rows: list[dict[str, Any]] = []
     grouped = joined.groupby("parent_company", sort=True)
-    emotions = sorted(REQUIRED_EMOTIONS)
+    emotions = sorted(set(joined["main_sentiment"].dropna().unique()))
     for parent, group in grouped:
         total = int(len(group))
         if total < min_tweets:
@@ -152,7 +151,7 @@ def _build_time_slices(joined: pd.DataFrame, *, min_tweets: int) -> list[dict[st
     working["time_slice"] = working["timestamp"].dt.floor(f"{TIME_SLICE_MINUTES}min")
     rows: list[dict[str, Any]] = []
     grouped = working.groupby(["parent_company", "time_slice"], sort=True)
-    emotions = sorted(REQUIRED_EMOTIONS)
+    emotions = sorted(set(working["main_sentiment"].dropna().unique()))
     for (parent, time_slice), group in grouped:
         total = int(len(group))
         if total < min_tweets:
@@ -231,7 +230,9 @@ def run_parent_company_deep_sentiment_analysis(
     timeslice_rows = _build_time_slices(joined, min_tweets=min_tweets)
 
     output_dir.mkdir(parents=True, exist_ok=True)
-    joined_out = output_dir / "parent_company_deep_sentiment_joined.parquet"
+    aux_dir = output_dir.parents[1] / "aux" / output_dir.name
+    aux_dir.mkdir(parents=True, exist_ok=True)
+    joined_out = aux_dir / "parent_company_deep_sentiment_joined.parquet"
     summary_json = output_dir / "parent_company_deep_sentiment_summary.json"
     summary_csv = output_dir / "parent_company_deep_sentiment_summary.csv"
     timeslices_json = output_dir / "parent_company_deep_sentiment_timeslices.json"
@@ -247,7 +248,7 @@ def run_parent_company_deep_sentiment_analysis(
                 "matched_rows": int((joined["join_status"] == "both").sum()),
                 "unmatched_rows": int((joined["join_status"] != "both").sum()),
                 "min_tweets": int(min_tweets),
-                "emotions": sorted(REQUIRED_EMOTIONS),
+                "emotions": sorted(set(joined["main_sentiment"].dropna().unique())),
                 "parents": summary_rows,
             },
             indent=2,
@@ -262,7 +263,7 @@ def run_parent_company_deep_sentiment_analysis(
                 "year": year,
                 "min_tweets": int(min_tweets),
                 "time_slice_minutes": TIME_SLICE_MINUTES,
-                "emotions": sorted(REQUIRED_EMOTIONS),
+                "emotions": sorted(set(joined["main_sentiment"].dropna().unique())),
                 "time_slices": timeslice_rows,
             },
             indent=2,
