@@ -18,6 +18,7 @@ def sentiment_command(
         "--allow-fallback",
         help="Allow explicit fallback model if the default fails to load.",
     ),
+    device: str = typer.Option("cuda", "--device", help="Inference device (cuda or cpu)"),
 ):
     supplied = [bool(year), bool(data_dir), bool(input_file)]
     if sum(supplied) == 0:
@@ -53,6 +54,7 @@ def sentiment_command(
         batch_size=batch_size,
         dry_run=dry_run,
         allow_fallback=allow_fallback,
+        device=device,
         logger=typer.echo,
     )
 

@@ -49,6 +49,8 @@ def _load_sentiment_records(path: Path) -> pd.DataFrame:
 
     frame = frame.copy()
     frame["tweet_id"] = frame["tweet_id"].astype(str).str.strip()
+    if "pipeline_row_id" in frame.columns:
+        frame["pipeline_row_id"] = frame["pipeline_row_id"].astype(str).str.strip()
     frame["year"] = pd.to_numeric(frame["year"], errors="coerce")
     frame["sentiment"] = frame["sentiment"].map(_normalize_sentiment)
     frame["confidence"] = pd.to_numeric(frame["confidence"], errors="coerce")
@@ -75,6 +77,7 @@ def _load_enriched_rows(path: Path, year: int) -> pd.DataFrame:
             "ad_tag": frame.get("ad_tag", "unknown_ad").astype(str).str.strip(),
             "game_phase": frame.get("game_phase", "unknown").astype(str).str.strip(),
             "created_at": frame.get(created_at_col, "").astype(str).str.strip(),
+            "pipeline_row_id": frame.get("pipeline_row_id", "").astype(str).str.strip(),
         }
     )
     selected["brand_tag"] = selected["brand_tag"].replace("", "unknown_brand")
@@ -82,6 +85,21 @@ def _load_enriched_rows(path: Path, year: int) -> pd.DataFrame:
     selected["game_phase"] = selected["game_phase"].replace("", "unknown")
     selected["created_at"] = selected["created_at"].replace("", pd.NA)
     return selected
+
+
+def _load_parent_company_tweet_map(path: Path) -> pd.DataFrame:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    records = payload.get("records", [])
+    frame = pd.DataFrame(records)
+    if frame.empty:
+        return frame
+    if "pipeline_row_id" in frame.columns:
+        frame["pipeline_row_id"] = frame["pipeline_row_id"].astype(str).str.strip()
+    if "tweet_id" in frame.columns:
+        frame["tweet_id"] = frame["tweet_id"].astype(str).str.strip()
+    if "primary_parent_company" in frame.columns:
+        frame["primary_parent_company"] = frame["primary_parent_company"].astype(str).str.strip()
+    return frame
 
 
 def _load_parent_company_groups(path: Path) -> dict[str, str]:
@@ -251,6 +269,7 @@ def run_parent_company_sentiment_analysis(
     sentiment_path: Path,
     enriched_path: Path,
     parent_groups_path: Path,
+    tweet_map_path: Path | None = None,
     output_dir: Path,
     min_tweets: int = 1,
 ):
@@ -262,14 +281,33 @@ def run_parent_company_sentiment_analysis(
         raise ValueError(f"Missing enriched input file: {enriched_path}")
     if not parent_groups_path.exists():
         raise ValueError(f"Missing parent company groups file: {parent_groups_path}")
+    if tweet_map_path and not tweet_map_path.exists():
+        raise ValueError(f"Missing parent company tweet map file: {tweet_map_path}")
 
     sentiment = _load_sentiment_records(sentiment_path)
     enriched = _load_enriched_rows(enriched_path, year)
     parent_mapping = _load_parent_company_groups(parent_groups_path)
 
-    joined = sentiment.merge(enriched, on=["tweet_id", "year"], how="left", indicator=True)
+    join_keys = ["tweet_id", "year"]
+    if "pipeline_row_id" in sentiment.columns and "pipeline_row_id" in enriched.columns:
+        join_keys = ["pipeline_row_id", "year"]
+    joined = sentiment.merge(enriched, on=join_keys, how="left", indicator=True)
     joined["join_status"] = joined.pop("_merge")
     joined["parent_company"] = joined.apply(lambda row: _assign_parent_company(row, parent_mapping), axis=1)
+
+    if tweet_map_path:
+        tweet_map = _load_parent_company_tweet_map(tweet_map_path)
+        if not tweet_map.empty:
+            map_join_keys = ["tweet_id"]
+            if "pipeline_row_id" in joined.columns and "pipeline_row_id" in tweet_map.columns:
+                map_join_keys = ["pipeline_row_id"]
+            joined = joined.merge(
+                tweet_map[map_join_keys + ["primary_parent_company"]],
+                on=map_join_keys,
+                how="left",
+            )
+            joined["parent_company"] = joined["primary_parent_company"].fillna(joined["parent_company"])
+            joined = joined.drop(columns=["primary_parent_company"])
 
     joined = joined.sort_values(by=["tweet_id", "year"], kind="mergesort")
     joined["score"] = joined["sentiment"].map({"negative": -1.0, "neutral": 0.0, "positive": 1.0})

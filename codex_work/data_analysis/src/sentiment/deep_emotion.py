@@ -163,6 +163,17 @@ def _require_dependencies() -> tuple[Any, Any, Any]:
     return torch, AutoModelForSequenceClassification, AutoTokenizer
 
 
+def _resolve_device(torch: Any, device: str, logger: Callable[[str], None] | None = None) -> str:
+    requested = str(device or "").strip().lower() or "cuda"
+    if requested == "cuda":
+        if torch.cuda.is_available():
+            return "cuda"
+        if logger:
+            logger("[deep-sentiment] CUDA not available, falling back to CPU")
+        return "cpu"
+    return requested
+
+
 def load_model_bundle(
     model_id: str,
     *,
@@ -225,6 +236,7 @@ def load_input_rows(input_path: Path, *, target_year: int | None) -> tuple[list[
             "text": frame["text"].astype(str).map(preprocess_tweet_text),
             "year": years,
             "created_at": frame[created_at_col].astype(str) if created_at_col in frame.columns else "",
+            "pipeline_row_id": frame["pipeline_row_id"].astype(str) if "pipeline_row_id" in frame.columns else "",
         }
     )
 
@@ -243,7 +255,7 @@ def load_input_rows(input_path: Path, *, target_year: int | None) -> tuple[list[
     valid["row_order"] = valid.index.astype(int)
     valid = valid.sort_values(by=["tweet_id", "created_at", "row_order"], kind="mergesort")
 
-    rows = valid[["tweet_id", "text", "hashtags", "year"]].to_dict(orient="records")
+    rows = valid[["tweet_id", "text", "hashtags", "year", "pipeline_row_id"]].to_dict(orient="records")
     return rows, invalid_count
 
 
@@ -252,6 +264,7 @@ def infer_deep_sentiment_batches(
     *,
     model_bundle: ModelBundle,
     batch_size: int,
+    device: str,
     logger: Callable[[str], None] | None = None,
 ) -> list[dict[str, Any]]:
     if batch_size <= 0:
@@ -260,10 +273,12 @@ def infer_deep_sentiment_batches(
         return []
 
     torch, _auto_model_cls, _auto_tokenizer_cls = _require_dependencies()
+    device = _resolve_device(torch, device, logger)
 
     total = len(rows)
     out: list[dict[str, Any]] = []
 
+    model = model_bundle.model.to(device)
     for start in range(0, total, batch_size):
         batch = rows[start : start + batch_size]
         texts = [item["text"] for item in batch]
@@ -275,9 +290,10 @@ def infer_deep_sentiment_batches(
             max_length=128,
             return_tensors="pt",
         )
+        tokenized = {k: v.to(device) for k, v in tokenized.items()}
 
         with torch.no_grad():
-            logits = model_bundle.model(**tokenized).logits
+            logits = model(**tokenized).logits
             probabilities = torch.softmax(logits, dim=-1)
             confidence_tensor, index_tensor = torch.max(probabilities, dim=-1)
 
@@ -293,6 +309,7 @@ def infer_deep_sentiment_batches(
                     "hashtags": row["hashtags"],
                     "text": row["text"],
                     "year": int(row["year"]),
+                    "pipeline_row_id": row.get("pipeline_row_id", ""),
                     "main_sentiment": main_sentiment,
                     "confidence": round(float(confidence), 6),
                 }
@@ -340,6 +357,7 @@ def run_deep_sentiment(
     batch_size: int = 64,
     dry_run: bool = False,
     label_map_file: Path | None = None,
+    device: str = "cuda",
     logger: Callable[[str], None] | None = None,
 ):
     if logger:
@@ -368,7 +386,13 @@ def run_deep_sentiment(
     if logger:
         logger(f"[deep-sentiment] model loaded: {model_bundle.model_id}")
 
-    records = infer_deep_sentiment_batches(rows, model_bundle=model_bundle, batch_size=batch_size, logger=logger)
+    records = infer_deep_sentiment_batches(
+        rows,
+        model_bundle=model_bundle,
+        batch_size=batch_size,
+        device=device,
+        logger=logger,
+    )
 
     output_path = output_root / "deep" / str(year) / "deep_sentiment.json"
     if logger:

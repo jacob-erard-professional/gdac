@@ -8,6 +8,7 @@ def run(
     batch_size: int = 64,
     dry_run: bool = False,
     allow_fallback: bool = False,
+    device: str = "cuda",
 ):
     base_dir = config.processed_dir.parents[2]
     input_path = config.processed_dir / "cleaned.csv"
@@ -19,6 +20,7 @@ def run(
         batch_size=batch_size,
         dry_run=dry_run,
         allow_fallback=allow_fallback,
+        device=device,
         logger=print,
     )
     return manifest
