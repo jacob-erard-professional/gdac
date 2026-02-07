@@ -69,15 +69,20 @@ def _load_enriched_rows(path: Path, year: int) -> pd.DataFrame:
 
     created_at_col = "created_at_utc" if "created_at_utc" in frame.columns else "created_at"
 
+    def _series_or_default(column: str, default: str) -> pd.Series:
+        if column in frame.columns:
+            return frame[column]
+        return pd.Series([default] * len(frame), index=frame.index)
+
     selected = pd.DataFrame(
         {
             "tweet_id": frame["id"].astype(str).str.strip(),
             "year": int(year),
-            "brand_tag": frame.get("brand_tag", "unknown_brand").astype(str).str.strip(),
-            "ad_tag": frame.get("ad_tag", "unknown_ad").astype(str).str.strip(),
-            "game_phase": frame.get("game_phase", "unknown").astype(str).str.strip(),
-            "created_at": frame.get(created_at_col, "").astype(str).str.strip(),
-            "pipeline_row_id": frame.get("pipeline_row_id", "").astype(str).str.strip(),
+            "brand_tag": _series_or_default("brand_tag", "unknown_brand").astype(str).str.strip(),
+            "ad_tag": _series_or_default("ad_tag", "unknown_ad").astype(str).str.strip(),
+            "game_phase": _series_or_default("game_phase", "unknown").astype(str).str.strip(),
+            "created_at": _series_or_default(created_at_col, "").astype(str).str.strip(),
+            "pipeline_row_id": _series_or_default("pipeline_row_id", "").astype(str).str.strip(),
         }
     )
     selected["brand_tag"] = selected["brand_tag"].replace("", "unknown_brand")
@@ -294,6 +299,25 @@ def run_parent_company_sentiment_analysis(
     joined = sentiment.merge(enriched, on=join_keys, how="left", indicator=True)
     joined["join_status"] = joined.pop("_merge")
     joined["parent_company"] = joined.apply(lambda row: _assign_parent_company(row, parent_mapping), axis=1)
+
+    if "tweet_id" not in joined.columns:
+        tweet_left = joined.get("tweet_id_x")
+        tweet_right = joined.get("tweet_id_y")
+        if tweet_left is not None or tweet_right is not None:
+            joined["tweet_id"] = (
+                tweet_left.fillna(tweet_right)
+                if tweet_left is not None and tweet_right is not None
+                else (tweet_left if tweet_left is not None else tweet_right)
+            )
+    if "year" not in joined.columns:
+        year_left = joined.get("year_x")
+        year_right = joined.get("year_y")
+        if year_left is not None or year_right is not None:
+            joined["year"] = (
+                year_left.fillna(year_right)
+                if year_left is not None and year_right is not None
+                else (year_left if year_left is not None else year_right)
+            )
 
     if tweet_map_path:
         tweet_map = _load_parent_company_tweet_map(tweet_map_path)
