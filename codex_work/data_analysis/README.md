@@ -207,6 +207,24 @@ Other helper scripts:
 - `src/scripts/split_hashtags_frequency.py` (first N hashtags for grouping)
 - `src/scripts/recover_grouping_from_partial.py` (rebuild groups from partial JSONL)
 
+## Visualization Website
+
+The `site/` folder contains a React + ECharts visualization dashboard.
+
+Quickstart:
+
+```bash
+cd site
+npm install
+npm run dev
+```
+
+The site reads artifacts from:
+- `outputs/analytics/<year>/`
+- `outputs/aux/<year>/`
+
+Optional: add `outputs/analytics/index.json` with a `years` array for year picker defaults.
+
 ## ID Flow Diagram
 
 ```

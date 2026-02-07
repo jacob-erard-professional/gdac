@@ -5,11 +5,14 @@ __pycache__/
 venv/
 dist/
 *.egg-info/
+node_modules/
+site/dist/
 
 # Data/artifacts
 data/processed/
 data/enriched/
 data/analytics/
+outputs/analytics/
 
 # Universal
 .DS_Store

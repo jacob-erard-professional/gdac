@@ -43,14 +43,13 @@ def _breakdown(records: list[dict], key: str) -> list[dict]:
     return output
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Compute emotion breakdowns per parent company and brand.")
-    parser.add_argument("--input-jsonl", required=True, type=Path, help="JSONL from match_sentiment_to_companies")
-    parser.add_argument("--parent-out", required=True, type=Path, help="Output JSON for parent companies")
-    parser.add_argument("--brand-out", required=True, type=Path, help="Output JSON for brands")
-    args = parser.parse_args()
-
-    input_path = args.input_jsonl
+def run_emotion_breakdown(
+    *,
+    input_jsonl: Path,
+    parent_out: Path,
+    brand_out: Path,
+) -> None:
+    input_path = input_jsonl
     if not input_path.is_absolute():
         input_path = (Path.cwd() / input_path).resolve()
     if "/outputs/analytics/" in str(input_path):
@@ -59,34 +58,48 @@ def main():
             input_path = Path(parts[0]) / "outputs" / "aux" / parts[1]
             print(f"[emotion-breakdown] redirecting input to aux: {input_path}")
 
-    parent_out = args.parent_out
-    if not parent_out.is_absolute():
-        parent_out = (Path.cwd() / parent_out).resolve()
-    if "/outputs/analytics/" in str(parent_out):
-        parts = str(parent_out).split("/outputs/analytics/")
+    resolved_parent_out = parent_out
+    if not resolved_parent_out.is_absolute():
+        resolved_parent_out = (Path.cwd() / resolved_parent_out).resolve()
+    if "/outputs/analytics/" in str(resolved_parent_out):
+        parts = str(resolved_parent_out).split("/outputs/analytics/")
         if len(parts) == 2:
-            parent_out = Path(parts[0]) / "outputs" / "aux" / parts[1]
-            print(f"[emotion-breakdown] redirecting parent output to aux: {parent_out}")
+            resolved_parent_out = Path(parts[0]) / "outputs" / "aux" / parts[1]
+            print(f"[emotion-breakdown] redirecting parent output to aux: {resolved_parent_out}")
 
-    brand_out = args.brand_out
-    if not brand_out.is_absolute():
-        brand_out = (Path.cwd() / brand_out).resolve()
-    if "/outputs/analytics/" in str(brand_out):
-        parts = str(brand_out).split("/outputs/analytics/")
+    resolved_brand_out = brand_out
+    if not resolved_brand_out.is_absolute():
+        resolved_brand_out = (Path.cwd() / resolved_brand_out).resolve()
+    if "/outputs/analytics/" in str(resolved_brand_out):
+        parts = str(resolved_brand_out).split("/outputs/analytics/")
         if len(parts) == 2:
-            brand_out = Path(parts[0]) / "outputs" / "aux" / parts[1]
-            print(f"[emotion-breakdown] redirecting brand output to aux: {brand_out}")
+            resolved_brand_out = Path(parts[0]) / "outputs" / "aux" / parts[1]
+            print(f"[emotion-breakdown] redirecting brand output to aux: {resolved_brand_out}")
 
     records = _load_jsonl(input_path)
 
     parent_rows = _breakdown(records, "primary_parent_company")
     brand_rows = _breakdown(records, "primary_brand")
 
-    parent_out.parent.mkdir(parents=True, exist_ok=True)
-    brand_out.parent.mkdir(parents=True, exist_ok=True)
+    resolved_parent_out.parent.mkdir(parents=True, exist_ok=True)
+    resolved_brand_out.parent.mkdir(parents=True, exist_ok=True)
 
-    parent_out.write_text(json.dumps(parent_rows, indent=2, sort_keys=True), encoding="utf-8")
-    brand_out.write_text(json.dumps(brand_rows, indent=2, sort_keys=True), encoding="utf-8")
+    resolved_parent_out.write_text(json.dumps(parent_rows, indent=2, sort_keys=True), encoding="utf-8")
+    resolved_brand_out.write_text(json.dumps(brand_rows, indent=2, sort_keys=True), encoding="utf-8")
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Compute emotion breakdowns per parent company and brand.")
+    parser.add_argument("--input-jsonl", required=True, type=Path, help="JSONL from match_sentiment_to_companies")
+    parser.add_argument("--parent-out", required=True, type=Path, help="Output JSON for parent companies")
+    parser.add_argument("--brand-out", required=True, type=Path, help="Output JSON for brands")
+    args = parser.parse_args()
+
+    run_emotion_breakdown(
+        input_jsonl=args.input_jsonl,
+        parent_out=args.parent_out,
+        brand_out=args.brand_out,
+    )
 
 
 if __name__ == "__main__":
