@@ -83,6 +83,11 @@ def _run_for_year(
                 config,
                 min_tweets=req.parent_company_deep_sentiment_min_tweets,
             )
+        elif stage == 'analyze':
+            manifest = RUNNERS[stage](
+                config,
+                clean_outputs=req.clean_outputs,
+            )
         else:
             manifest = RUNNERS[stage](config)
         for out in manifest.output_files:

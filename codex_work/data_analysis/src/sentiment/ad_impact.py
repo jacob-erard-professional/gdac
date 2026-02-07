@@ -58,14 +58,19 @@ def _load_enriched_rows(path: Path, year: int) -> pd.DataFrame:
         missing_cols = ", ".join(sorted(missing))
         raise ValueError(f"Enriched file missing required columns: {missing_cols}")
 
+    def _series_or_default(column: str, default: str) -> pd.Series:
+        if column in frame.columns:
+            return frame[column]
+        return pd.Series([default] * len(frame), index=frame.index)
+
     selected = pd.DataFrame(
         {
             "tweet_id": frame["id"].astype(str).str.strip(),
             "year": int(year),
-            "ad_tag": frame.get("ad_tag", "unknown_ad").astype(str).str.strip(),
-            "brand_tag": frame.get("brand_tag", "unknown_brand").astype(str).str.strip(),
-            "game_phase": frame.get("game_phase", "unknown").astype(str).str.strip(),
-            "pipeline_row_id": frame.get("pipeline_row_id", "").astype(str).str.strip(),
+            "ad_tag": _series_or_default("ad_tag", "unknown_ad").astype(str).str.strip(),
+            "brand_tag": _series_or_default("brand_tag", "unknown_brand").astype(str).str.strip(),
+            "game_phase": _series_or_default("game_phase", "unknown").astype(str).str.strip(),
+            "pipeline_row_id": _series_or_default("pipeline_row_id", "").astype(str).str.strip(),
         }
     )
     selected["ad_tag"] = selected["ad_tag"].replace("", "unknown_ad")

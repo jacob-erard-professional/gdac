@@ -58,7 +58,7 @@ Full pipeline + parent-company joins:
 .venv/bin/python -m src.cli run --year 2024 --all --with-deep-sentiment --with-parent-company-deep-sentiment
 ```
 
-Run all available workflows (pipeline + sentiment + deep sentiment + grouping):
+Run all available workflows (pipeline + sentiment + deep sentiment + grouping + maps + breakdowns):
 
 ```bash
 .venv/bin/python -m src.cli run-everything --year 2024
@@ -70,8 +70,11 @@ Run everything except selected workflows (repeat `--exclude`):
 .venv/bin/python -m src.cli run-everything --year 2024 --exclude deep-sentiment --exclude group-parent-companies
 ```
 
-Valid excludes: `sentiment`, `ad-sentiment`, `deep-sentiment`, `parent-company-deep-sentiment`,
-`group-brands`, `group-parent-companies`.
+Valid excludes: `sentiment`, `ad-sentiment`, `deep-sentiment`, `parent-company-sentiment`,
+`parent-company-deep-sentiment`, `group-brands`, `group-parent-companies`,
+`sentiment-maps`, `emotion-breakdowns`.
+Notes: `ad-sentiment` requires `sentiment`, and `parent-company-deep-sentiment` requires
+`deep-sentiment` (these two combinations are hard errors if excluded).
 
 ## Stages
 

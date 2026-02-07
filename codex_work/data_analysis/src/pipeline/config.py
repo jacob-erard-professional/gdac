@@ -37,6 +37,7 @@ class RunRequest:
     deep_sentiment_device: str = "cuda"
     parent_company_sentiment_min_tweets: int = 1
     parent_company_deep_sentiment_min_tweets: int = 1
+    clean_outputs: bool = False
 
 
 def validate_year(year: str) -> str:
