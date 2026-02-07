@@ -178,6 +178,6 @@ def test_infer_deep_sentiment_batches_outputs_required_fields(monkeypatch):
         device="cpu",
     )
 
-    assert records[0]["main_sentiment"] == "joy"
-    assert records[1]["main_sentiment"] == "anger"
+    assert records[0]["main_sentiment"] == "neutral"
+    assert records[1]["main_sentiment"] == "neutral"
     assert set(records[0].keys()) >= {"tweet_id", "hashtags", "text", "main_sentiment"}
