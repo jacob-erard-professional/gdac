@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Literata:wght@400;600;700&family=Space+Grotesk:wght@400;500;600&display=swap");
+
+:root {
+  color-scheme: light;
+  --bg: #f5f1ea;
+  --panel: #ffffff;
+  --ink: #1c1c1c;
+  --muted: #6b6b6b;
+  --accent: #0f6b5d;
+  --accent-2: #a13b2d;
+  --border: #e2d9cc;
+  --shadow: 0 18px 40px rgba(17, 22, 28, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--ink);
+  background: radial-gradient(circle at top right, #fcefdc, #f5f1ea 55%, #e9efe3 100%);
+  min-height: 100vh;
+}
+
+code {
+  font-family: "Space Grotesk", sans-serif;
+  background: #f0e6d7;
+  padding: 0 6px;
+  border-radius: 8px;
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: var(--panel);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+h1 {
+  font-family: "Literata", serif;
+  font-size: 2.6rem;
+  margin: 8px 0 12px;
+}
+
+.lead {
+  max-width: 520px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.year-selector {
+  background: #fbf8f2;
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 16px;
+  min-width: 220px;
+}
+
+.year-selector label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.year-selector input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 1rem;
+}
+
+.year-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.year-buttons button {
+  border: none;
+  background: #e6dfd5;
+  padding: 6px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.year-buttons button.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.loading {
+  margin: 24px 0;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin-top: 28px;
+}
+
+.grid.wide > .card {
+  width: 100%;
+}
+
+.card {
+  background: var(--panel);
+  border-radius: 20px;
+  padding: 18px 18px 22px;
+  box-shadow: var(--shadow);
+  border: 1px solid #f2e9dd;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.chart {
+  width: 100%;
+  height: 360px;
+  margin-top: 12px;
+}
+
+.chart-scroll {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.chart-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+.chart-scroll::-webkit-scrollbar-thumb {
+  background: #c8b8a0;
+  border-radius: 999px;
+}
+
+.chart-scroll::-webkit-scrollbar-track {
+  background: #efe6d8;
+  border-radius: 999px;
+}
+
+.empty-state {
+  border: 1px dashed var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  background: #fffdf9;
+  display: flex;
+  align-items: center;
+  min-height: 220px;
+}
+
+.empty-state h4 {
+  margin: 0 0 6px;
+}
+
+.metrics {
+  margin-top: 24px;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #f2e9dd;
+  padding: 8px 0;
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .hero {
+    padding: 22px;
+  }
+}
