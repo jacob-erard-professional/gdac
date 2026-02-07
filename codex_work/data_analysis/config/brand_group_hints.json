@@ -1,0 +1,10 @@
+{
+  "hints": [
+    { "keyword": "thunderbolts", "brand": "marvel" },
+    { "keyword": "avengers", "brand": "marvel" },
+    { "keyword": "xmen", "brand": "marvel" },
+    { "keyword": "spiderman", "brand": "marvel" },
+    { "keyword": "starwars", "brand": "lucasfilm" },
+    { "keyword": "pixar", "brand": "pixar" }
+  ]
+}

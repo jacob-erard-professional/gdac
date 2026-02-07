@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
+import "echarts-wordcloud";
 
 export default function ChartCard({ title, subtitle, option }) {
   const chartRef = useRef(null);

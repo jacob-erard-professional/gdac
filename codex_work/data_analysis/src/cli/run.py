@@ -34,6 +34,7 @@ def run_command(
     deep_sentiment_device: str = typer.Option("cuda", "--deep-sentiment-device"),
     parent_company_sentiment_min_tweets: int = typer.Option(1, "--parent-company-sentiment-min-tweets", min=1),
     parent_company_deep_sentiment_min_tweets: int = typer.Option(1, "--parent-company-deep-sentiment-min-tweets", min=1),
+    clean_outputs: bool = typer.Option(False, "--clean-outputs"),
 ):
     if bool(stage) == bool(all_):
         raise typer.BadParameter("Provide exactly one of --stage or --all")
@@ -94,6 +95,7 @@ def run_command(
         deep_sentiment_device=deep_sentiment_device,
         parent_company_sentiment_min_tweets=parent_company_sentiment_min_tweets,
         parent_company_deep_sentiment_min_tweets=parent_company_deep_sentiment_min_tweets,
+        clean_outputs=clean_outputs,
     )
     results = run_pipeline(base_dir, req)
     for result in results:

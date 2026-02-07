@@ -51,6 +51,11 @@ def group_parent_companies_command(
         min=MIN_INITIAL_BACKOFF_SECONDS,
         help="Initial exponential backoff in seconds (constitution minimum enforced).",
     ),
+    hints_file: Path = typer.Option(
+        None,
+        "--hints-file",
+        help="Optional JSON file with brand->parent_company hints.",
+    ),
 ):
     try:
         from src.agents.parent_company_grouping_agent import run_parent_company_grouping
@@ -79,6 +84,7 @@ def group_parent_companies_command(
         request_delay_seconds=request_delay,
         max_rate_limit_retries=max_rate_limit_retries,
         initial_backoff_seconds=initial_backoff,
+        hints_path=hints_file,
     )
     typer.echo(f"parent company grouping written to {out}")
 

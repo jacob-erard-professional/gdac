@@ -51,6 +51,11 @@ def group_brands_command(
         min=MIN_INITIAL_BACKOFF_SECONDS,
         help="Initial exponential backoff in seconds (constitution minimum enforced).",
     ),
+    hints_file: Path = typer.Option(
+        None,
+        "--hints-file",
+        help="Optional JSON file with hashtag/brand hints.",
+    ),
 ):
     try:
         from src.agents.brand_grouping_agent import run_brand_grouping
@@ -78,6 +83,7 @@ def group_brands_command(
         request_delay_seconds=request_delay,
         max_rate_limit_retries=max_rate_limit_retries,
         initial_backoff_seconds=initial_backoff,
+        hints_path=hints_file,
     )
     typer.echo(f"brand grouping written to {out}")
 
