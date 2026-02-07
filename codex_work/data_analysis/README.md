@@ -64,6 +64,24 @@ Run all available workflows (pipeline + sentiment + deep sentiment + grouping + 
 .venv/bin/python -m src.cli run-everything --year 2024
 ```
 
+Optional: clean analytics outputs before re-running analysis stages:
+
+```bash
+.venv/bin/python -m src.cli run-everything --year 2024 --clean-outputs
+```
+
+Optional: supply parent-company hints to improve grouping of franchise brands:
+
+```bash
+.venv/bin/python -m src.cli group-parent-companies --year 2024 --hints-file config/parent_company_hints.json
+```
+
+Optional: supply brand-group hints to improve brand grouping:
+
+```bash
+.venv/bin/python -m src.cli group-brands --year 2024 --hints-file config/brand_group_hints.json
+```
+
 Run everything except selected workflows (repeat `--exclude`):
 
 ```bash
@@ -75,6 +93,8 @@ Valid excludes: `sentiment`, `ad-sentiment`, `deep-sentiment`, `parent-company-s
 `sentiment-maps`, `emotion-breakdowns`.
 Notes: `ad-sentiment` requires `sentiment`, and `parent-company-deep-sentiment` requires
 `deep-sentiment` (these two combinations are hard errors if excluded).
+By default `run` and `run-everything` preserve existing analytics outputs. Use `--clean-outputs`
+only when you explicitly want to clear `outputs/analytics/<year>/` before analysis.
 
 ## Stages
 

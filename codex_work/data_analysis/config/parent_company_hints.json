@@ -1,0 +1,11 @@
+{
+  "hints": [
+    { "brand": "marvel", "parent_company": "disney" },
+    { "brand": "pixar", "parent_company": "disney" },
+    { "brand": "lucasfilm", "parent_company": "disney" },
+    { "brand": "espn", "parent_company": "disney" },
+    { "brand": "20th century studios", "parent_company": "disney" },
+    { "brand": "20th century fox", "parent_company": "disney" },
+    { "brand": "LIX", "parent_company": "nfl"}
+  ]
+}

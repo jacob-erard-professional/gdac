@@ -44,6 +44,9 @@ def run_everything_command(
     request_delay: float = typer.Option(2.5, "--request-delay", min=2.5),
     max_rate_limit_retries: int = typer.Option(12, "--max-rate-limit-retries", min=12),
     initial_backoff: float = typer.Option(2.0, "--initial-backoff", min=2.0),
+    clean_outputs: bool = typer.Option(False, "--clean-outputs"),
+    parent_hints_file: Path = typer.Option(None, "--parent-hints-file"),
+    brand_hints_file: Path = typer.Option(None, "--brand-hints-file"),
 ):
     if bool(year) == bool(data_dir):
         raise typer.BadParameter("Provide exactly one of --year or --data-dir")
@@ -118,6 +121,7 @@ def run_everything_command(
         deep_sentiment_label_map_file=resolved_label_map,
         deep_sentiment_device=deep_sentiment_device,
         with_parent_company_deep_sentiment=False,
+        clean_outputs=clean_outputs,
     )
 
     typer.echo(f"[run-everything] starting core pipeline for year={cfg.year}")
@@ -142,6 +146,7 @@ def run_everything_command(
             request_delay_seconds=request_delay,
             max_rate_limit_retries=max_rate_limit_retries,
             initial_backoff_seconds=initial_backoff,
+            hints_path=brand_hints_file,
         )
 
     if run_group_parent_companies:
@@ -166,6 +171,7 @@ def run_everything_command(
             request_delay_seconds=request_delay,
             max_rate_limit_retries=max_rate_limit_retries,
             initial_backoff_seconds=initial_backoff,
+            hints_path=parent_hints_file,
         )
         try:
             from src.utils.tweet_company_map import build_brand_tweet_map, build_parent_company_tweet_map

@@ -69,6 +69,107 @@ h1 {
   line-height: 1.6;
 }
 
+.view-toggle {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.view-toggle button {
+  border: 1px solid #cfd7cf;
+  background: #f7f5f0;
+  color: #2a2a2a;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-toggle button.active {
+  background: #0f6b5d;
+  border-color: #0f6b5d;
+  color: #fff;
+}
+
+.view-toggle button:hover {
+  transform: translateY(-1px);
+}
+
+.company-search {
+  margin-top: 12px;
+}
+
+.company-search input {
+  width: 100%;
+  max-width: 420px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #cfd7cf;
+  background: #fff;
+  font-size: 0.95rem;
+}
+
+.tweet-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.tweet-nav button {
+  border: 1px solid #cfd7cf;
+  background: #f7f5f0;
+  color: #2a2a2a;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.tweet-nav button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tweet-card {
+  border: 1px solid #e2e6e0;
+  border-radius: 16px;
+  padding: 18px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.tweet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.tweet-handle {
+  font-weight: 600;
+  color: #0f6b5d;
+}
+
+.tweet-emotion {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+}
+
+.tweet-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.tweet-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
 .year-selector {
   background: #fbf8f2;
   border: 1px solid var(--border);
