@@ -244,6 +244,8 @@ def infer_deep_sentiment_batches(
             main_sentiment = model_bundle.canonical_id2label.get(label_idx)
             if not main_sentiment:
                 raise ValueError(f"Unsupported predicted label index: {label_idx}")
+            if float(confidence) < 0.65:
+                main_sentiment = "neutral"
 
             out.append(
                 {
@@ -282,7 +284,7 @@ def write_deep_sentiment_output(
             "source_file": str(input_path),
             "invalid_rows_skipped": int(invalid_rows),
             "total_records": len(records),
-            "taxonomy": sorted(set(model_bundle.canonical_id2label.values())),
+            "taxonomy": sorted(set(model_bundle.canonical_id2label.values()) | {"neutral"}),
         },
         "records": records,
     }

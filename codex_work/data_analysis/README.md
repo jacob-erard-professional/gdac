@@ -1,9 +1,7 @@
 # Super Bowl Twitter Data Analysis
 
 This repository contains a deterministic, stage-based CLI pipeline for year-scoped
-Twitter Super Bowl analysis.
-
-Beyond the deterministic pipeline, there are LLM calls that group together similar hashtags.
+Twitter Super Bowl analysis, plus optional LLM-driven grouping and sentiment analysis.
 
 ## Directory Scope Rule
 
@@ -19,11 +17,15 @@ data/
   enriched/<year>/
 outputs/
   analytics/<year>/
+  aux/<year>/   # maps, partial JSONLs, recovery artifacts, joined parquet maps
+sentiment/
+  bertweet/<year>/sentiment.json
+  deep/<year>/deep_sentiment.json
 ```
 
 Raw files are immutable after ingest.
 
-## CLI
+## Quickstart
 
 Single stage:
 
@@ -31,121 +33,138 @@ Single stage:
 .venv/bin/python -m src.cli run --year 2024 --stage clean
 ```
 
-Full pipeline for one year:
+Full pipeline (one year):
 
 ```bash
 .venv/bin/python -m src.cli run --year 2024 --all
 ```
 
-Full pipeline with optional BERTweet sentiment inference:
+Full pipeline + BERTweet sentiment:
 
 ```bash
 .venv/bin/python -m src.cli run --year 2024 --all --with-sentiment
 ```
 
-Full pipeline with sentiment + ad sentiment aggregation:
-
-```bash
-.venv/bin/python -m src.cli run --year 2024 --all --with-sentiment --with-ad-sentiment
-```
-
-Full pipeline with optional deeper emotion classification:
+Full pipeline + deep sentiment:
 
 ```bash
 .venv/bin/python -m src.cli run --year 2024 --all --with-deep-sentiment
 ```
 
-Full pipeline with parent-company sentiment impact:
+Full pipeline + parent-company joins:
 
 ```bash
 .venv/bin/python -m src.cli run --year 2024 --all --with-sentiment --with-parent-company-sentiment
-```
-
-Full pipeline with parent-company deep sentiment impact:
-
-```bash
 .venv/bin/python -m src.cli run --year 2024 --all --with-deep-sentiment --with-parent-company-deep-sentiment
 ```
 
-Full pipeline from explicit data directory:
-
-```bash
-.venv/bin/python -m src.cli run --data-dir data/raw/2024 --all
-```
-
-Full pipeline for all discovered years under `data/raw/`:
-
-```bash
-.venv/bin/python -m src.cli run --all
-```
-
-`--data-dir` is treated as the explicit raw-input directory for that run (it is not rewritten).
-
-Run all available workflows for one year (pipeline + sentiment + deep sentiment + grouping):
+Run all available workflows (pipeline + sentiment + deep sentiment + grouping):
 
 ```bash
 .venv/bin/python -m src.cli run-everything --year 2024
 ```
 
-Run everything except selected workflows (repeat `--exclude` as needed):
+Run everything except selected workflows (repeat `--exclude`):
 
 ```bash
 .venv/bin/python -m src.cli run-everything --year 2024 --exclude deep-sentiment --exclude group-parent-companies
 ```
 
-`run-everything` assumes `OPENROUTER_API_KEY` is already set when grouping workflows are included.
-Valid excludes: `sentiment`, `ad-sentiment`, `deep-sentiment`, `parent-company-deep-sentiment`, `group-brands`, `group-parent-companies`.
+Valid excludes: `sentiment`, `ad-sentiment`, `deep-sentiment`, `parent-company-deep-sentiment`,
+`group-brands`, `group-parent-companies`.
 
-Brand-grouping agent workflow (reads `hashtags_frequency.json` and groups hashtag aliases by brand):
+## Stages
+
+- ingest: schema validation from `data/raw/<year>/` to `data/processed/<year>/ingested.csv`
+- clean: dedupe/null/timestamp normalization to `data/processed/<year>/cleaned.csv`
+  (includes canonical Twitter fields such as `id`, `author_id`, `conversation_id`,
+  `entities.*`, `public_metrics.*`, `username`, and `name`; adds `pipeline_row_id`)
+- process: text features/tags to `data/enriched/<year>/enriched.csv`
+- analyze: analytics artifact generation under `outputs/analytics/<year>/`
+- sentiment (optional): BERTweet sentiment inference → `sentiment/bertweet/<year>/sentiment.json`
+- ad_sentiment (optional): joins sentiment + enriched rows → ad-level outputs
+- deep_sentiment (optional): deep emotion inference → `sentiment/deep/<year>/deep_sentiment.json`
+- parent_company_sentiment (optional): joins sentiment + parent company groupings
+- parent_company_deep_sentiment (optional): joins deep sentiment + parent company groupings
+- visualize (optional): placeholder visualization output
+- export (optional): placeholder export artifact
+
+## LLM Grouping Workflows
+
+Brand-grouping (hashtags → brands):
 
 ```bash
 cp .env.example .env
 export OPENROUTER_API_KEY=... # keep local only; never commit
-.venv/bin/python -m src.cli group-brands --year 2023 --model openai/gpt-oss-120b:free
+.venv/bin/python -m src.cli group-brands --year 2024 --model openai/gpt-4.1-mini
 ```
 
-If free-model rate limits are high, add `--request-delay 2.5 --max-rate-limit-retries 12`.
-All agentic workflows enforce constitution-aligned minimum throttling and retries
-(currently 2.5s request delay and 12 rate-limit retries), even if lower values are passed.
-
-Parent-company grouping agent workflow (reads `brand_groups.json` and groups brands under parent companies):
+Parent-company grouping (brands → parent companies):
 
 ```bash
-.venv/bin/python -m src.cli group-parent-companies --year 2023 --model openai/gpt-oss-120b:free
+.venv/bin/python -m src.cli group-parent-companies --year 2024 --model openai/gpt-4.1-mini
 ```
 
-Parent-company grouping applies deterministic franchise/company overrides from
-`config/parent_company_overrides.json` before LLM mapping (for example, minions
-and despicableme4 map to universal).
+Notes:
+- `config/parent_company_overrides.json` is applied before LLM mapping.
+- Both grouping workflows support `--resume` (default) and `--no-resume`.
+- Partial JSONLs and parse failures go to `outputs/aux/<year>/`.
+- All agentic workflows enforce minimum throttling and retries (2.5s delay, 12 retries).
+- On rate-limit or parse failure, you’ll be prompted to enter a new model ID.
 
-BERTweet sentiment workflow (independent CLI command):
+## Sentiment Workflows
+
+BERTweet sentiment:
 
 ```bash
 .venv/bin/python -m src.cli sentiment --year 2024 --batch-size 64
 ```
 
-Deep sentiment workflow (independent CLI command):
+Deep sentiment (Twitter-trained model):
 
 ```bash
 .venv/bin/python -m src.cli deep-sentiment --year 2024 --batch-size 64
 ```
 
-Ad-level sentiment aggregation workflow:
+GPU usage:
+- Defaults to CUDA if available (falls back to CPU).
+- Override with `--device cpu` for the CLI, or `--sentiment-device` / `--deep-sentiment-device` for `run`.
+
+## Mapping & Aggregation Scripts
+
+Match sentiment tweets to brands and parent companies (from hashtags in the sentiment text):
 
 ```bash
-.venv/bin/python -m src.cli ad-sentiment --year 2024
+.venv/bin/python -m src.scripts.match_sentiment_to_companies \
+  --sentiment-file sentiment/bertweet/2024/sentiment.json \
+  --brand-groups-file outputs/analytics/2024/brand_groups.json \
+  --parent-groups-file outputs/analytics/2024/parent_company_groups.json \
+  --output-file outputs/aux/2024/sentiment_company_map.jsonl \
+  --batch-size 1000
 ```
 
-Parent-company sentiment impact workflow:
+Same, but choose which label field to store (e.g., `sentiment`):
 
 ```bash
-.venv/bin/python -m src.cli parent-company-sentiment --year 2024
+.venv/bin/python -m src.scripts.match_sentiment_to_companies_by_label \
+  --sentiment-file sentiment/bertweet/2024/sentiment_reclassified.json \
+  --brand-groups-file outputs/analytics/2024/brand_groups.json \
+  --parent-groups-file outputs/analytics/2024/parent_company_groups.json \
+  --output-file outputs/aux/2024/sentiment_company_map.jsonl \
+  --label-field sentiment \
+  --batch-size 1000
 ```
 
-Parent-company deep sentiment impact workflow:
+Batch match tweets to parent companies directly from enriched data:
 
 ```bash
-.venv/bin/python -m src.cli parent-company-deep-sentiment --year 2024
+.venv/bin/python -m src.scripts.match_tweets_to_parent_company \
+  --enriched-file data/enriched/2024/enriched.csv \
+  --brand-groups-file outputs/analytics/2024/brand_groups.json \
+  --parent-groups-file outputs/analytics/2024/parent_company_groups.json \
+  --output-file outputs/aux/2024/parent_company_tweet_map.jsonl \
+  --year 2024 \
+  --batch-size 1000
 ```
 
 Emotion breakdowns from sentiment-company maps:
@@ -164,45 +183,29 @@ Emotion breakdowns from sentiment-company maps:
   --brand-out outputs/aux/2024/brand_emotion_breakdown.json
 ```
 
-Run sentiment on a custom dataset:
+Reclassify sentiment by confidence (keep both datasets):
 
 ```bash
-.venv/bin/python -m src.cli sentiment --input-file /path/to/my_dataset.parquet --year 2024
+.venv/bin/python -m src.scripts.reclassify_sentiment_by_confidence \
+  --input-file sentiment/bertweet/2024/sentiment.json \
+  --output-file sentiment/bertweet/2024/sentiment_reclassified.json \
+  --threshold 0.65 \
+  --label-field sentiment
 ```
 
-The default model is `finiteautomata/bertweet-base-sentiment-analysis`.
-Fallback model use is disabled by default to avoid silent substitution. To allow
-the explicit fallback (`rabindralamsal/finetuned-bertweet-sentiment-analysis`),
-pass `--allow-fallback`.
+```bash
+.venv/bin/python -m src.scripts.reclassify_sentiment_by_confidence \
+  --input-file sentiment/deep/2024/deep_sentiment.json \
+  --output-file sentiment/deep/2024/deep_sentiment_reclassified.json \
+  --threshold 0.65 \
+  --label-field main_sentiment
+```
 
-## Stages
-
-- ingest: schema validation from `data/raw/<year>/` to `data/processed/<year>/ingested.csv`
-- clean: dedupe/null/timestamp normalization to `data/processed/<year>/cleaned.csv`
-  (includes canonical Twitter fields such as `id`, `author_id`, `conversation_id`,
-  `entities.*`, `public_metrics.*`, `username`, and `name`)
-- process: text features/tags to `data/enriched/<year>/enriched.csv`
-- analyze: analytics artifact generation under `outputs/analytics/<year>/`
-- sentiment (optional): deterministic BERTweet sentiment inference written to `sentiment/bertweet/<year>/sentiment.json`
-- ad_sentiment (optional): joins sentiment + enriched rows and writes ad-level sentiment outputs
-- deep_sentiment (optional): deterministic deep emotion inference written to `sentiment/deep/<year>/deep_sentiment.json`
-- parent_company_sentiment (optional): joins sentiment + parent company groupings and writes company impact outputs
-- parent_company_deep_sentiment (optional): joins deep sentiment + parent company groupings and writes emotion impact outputs
-- visualize (optional): placeholder visualization output
-- export (optional): placeholder export artifact
-
-## Analytics Capabilities
-
-- Hashtag frequency list ordered by frequency (`hashtags_frequency.json`)
-- Mention frequency list ordered by frequency (`mentions_frequency.json`)
-
-## Outputs and Metadata
-
-The analyze stage writes only two files under `outputs/analytics/<year>/`:
-`hashtags_frequency.json` and `mentions_frequency.json`.
-
-Auxiliary outputs (maps, partial JSONLs, recovery artifacts, joined parquet maps) are written to
-`outputs/aux/<year>/` and are ignored by git.
+Other helper scripts:
+- `src/scripts/split_raw_csv.py` (first N rows of raw data)
+- `src/scripts/split_cleaned_csv.py` (first N rows of cleaned data)
+- `src/scripts/split_hashtags_frequency.py` (first N hashtags for grouping)
+- `src/scripts/recover_grouping_from_partial.py` (rebuild groups from partial JSONL)
 
 ## ID Flow Diagram
 
@@ -228,53 +231,58 @@ ingest -> clean (adds pipeline_row_id)
    parent_company_*_sentiment_* joins on pipeline_row_id
 ```
 
-The brand-grouping agent writes:
-- `outputs/analytics/<year>/brand_groups.json`
-- `outputs/aux/<year>/brand_tweet_map.json`
+## Outputs
 
-The parent-company grouping agent writes:
-- `outputs/analytics/<year>/parent_company_groups.json`
-- `outputs/aux/<year>/parent_company_tweet_map.json`
+Analytics outputs (`outputs/analytics/<year>/`):
+- `hashtags_frequency.json`
+- `mentions_frequency.json`
+- `brand_groups.json`
+- `parent_company_groups.json`
+- `ad_sentiment_joined.parquet`
+- `ad_sentiment_summary.json`
+- `ad_sentiment_summary.csv`
+- `parent_company_sentiment_joined.parquet`
+- `parent_company_sentiment_summary.json`
+- `parent_company_sentiment_summary.csv`
+- `parent_company_sentiment_timeslices.json`
+- `parent_company_sentiment_timeslices.csv`
+- `parent_company_sentiment_by_ad_tag.json`
+- `parent_company_sentiment_by_ad_tag.csv`
+- `parent_company_deep_sentiment_summary.json`
+- `parent_company_deep_sentiment_summary.csv`
+- `parent_company_deep_sentiment_timeslices.json`
+- `parent_company_deep_sentiment_timeslices.csv`
 
-The BERTweet sentiment workflow writes:
+Auxiliary outputs (`outputs/aux/<year>/`, gitignored):
+- `brand_tweet_map.json`
+- `parent_company_tweet_map.json`
+- `*_partial.jsonl`
+- `*_parse_failures.txt`
+- `*_recovered.json`
+- `parent_company_deep_sentiment_joined.parquet`
+- `sentiment_company_map.jsonl`
+- `deep_sentiment_company_map.jsonl`
+- `parent_company_tweet_map.jsonl`
+- `*_emotion_breakdown.json`
+
+Sentiment outputs:
 - `sentiment/bertweet/<year>/sentiment.json`
-
-The ad sentiment workflow writes:
-- `outputs/analytics/<year>/ad_sentiment_joined.parquet`
-- `outputs/analytics/<year>/ad_sentiment_summary.json`
-- `outputs/analytics/<year>/ad_sentiment_summary.csv`
-
-The parent-company sentiment workflow writes:
-- `outputs/analytics/<year>/parent_company_sentiment_joined.parquet`
-- `outputs/analytics/<year>/parent_company_sentiment_summary.json`
-- `outputs/analytics/<year>/parent_company_sentiment_summary.csv`
-- `outputs/analytics/<year>/parent_company_sentiment_timeslices.json`
-- `outputs/analytics/<year>/parent_company_sentiment_timeslices.csv`
-- `outputs/analytics/<year>/parent_company_sentiment_by_ad_tag.json`
-- `outputs/analytics/<year>/parent_company_sentiment_by_ad_tag.csv`
-
-The deep sentiment workflow writes:
+- `sentiment/bertweet/<year>/sentiment_reclassified.json`
 - `sentiment/deep/<year>/deep_sentiment.json`
+- `sentiment/deep/<year>/deep_sentiment_reclassified.json`
 
-The parent-company deep sentiment workflow writes:
-- `outputs/aux/<year>/parent_company_deep_sentiment_joined.parquet`
-- `outputs/analytics/<year>/parent_company_deep_sentiment_summary.json`
-- `outputs/analytics/<year>/parent_company_deep_sentiment_summary.csv`
-- `outputs/analytics/<year>/parent_company_deep_sentiment_timeslices.json`
-- `outputs/analytics/<year>/parent_company_deep_sentiment_timeslices.csv`
+## Models
 
-## BERTweet Sentiment Notes
+BERTweet sentiment:
+- Default: `finiteautomata/bertweet-base-sentiment-analysis`
+- Fallback (explicit): `rabindralamsal/finetuned-bertweet-sentiment-analysis`
 
-- Why BERTweet: the default checkpoint is pretrained for tweet text and already includes a sentiment classification head.
-- Preprocessing: URLs are removed and whitespace normalized; hashtags/emojis/punctuation are preserved.
-- Output interpretation: each record contains `tweet_id`, `year`, `text`, `sentiment`, and model confidence.
-- GPU usage: defaults to CUDA when available; falls back to CPU if not (`--device cpu` to force).
-- Known limitations: sarcasm, memes, and domain drift can reduce accuracy; model outputs may reflect dataset bias.
+Deep sentiment (Twitter-trained):
+- Default: `cardiffnlp/twitter-roberta-base-emotion-latest`
+- Native labels are preserved (no fixed taxonomy).
 
-## Deep Sentiment Notes
+## Notes
 
-- Why this model: default `cardiffnlp/twitter-roberta-base-emotion-latest` is Twitter-trained and retains native labels.
-- Output interpretation: each record contains `tweet_id`, `hashtags`, `text`, `main_sentiment`, `year`, and confidence.
-- Label mapping: provide `--label-map-file path/to/map.json` to rename model labels (optional).
-- GPU usage: defaults to CUDA when available; falls back to CPU if not (`--device cpu` to force).
-- Known limitations: model labels may be fine-grained; consider post-processing for aggregation.
+- Sentiment confidence gate: deep sentiment outputs are reclassified to `neutral` when confidence < 0.65.
+- `run-everything` assumes `OPENROUTER_API_KEY` is set for grouping workflows.
+- `--data-dir` is treated as the explicit raw-input directory for that run (it is not rewritten).
