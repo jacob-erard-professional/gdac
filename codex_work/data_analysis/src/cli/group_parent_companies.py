@@ -27,9 +27,9 @@ def group_parent_companies_command(
         help="Optional enriched.csv path for tweet-to-parent mapping output",
     ),
     model: str = typer.Option(
-        "openai/gpt-4.1-mini",
+        ...,
         "--model",
-        help="OpenRouter model id",
+        help="OpenRouter model id (required)",
     ),
     chunk_size: int = typer.Option(40, "--chunk-size", min=10, max=500),
     resume: bool = typer.Option(True, "--resume/--no-resume", help="Resume from existing partial results"),

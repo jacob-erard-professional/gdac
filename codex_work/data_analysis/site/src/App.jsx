@@ -218,6 +218,7 @@ export default function App() {
   const [selectedCompany, setSelectedCompany] = useState("");
   const [companyInput, setCompanyInput] = useState("");
   const [slideIndex, setSlideIndex] = useState(0);
+  const [selectedEmotion, setSelectedEmotion] = useState("all");
   const { status, data, errors } = useData(year);
 
   useEffect(() => {
@@ -236,6 +237,7 @@ export default function App() {
 
   useEffect(() => {
     setSlideIndex(0);
+    setSelectedEmotion("all");
   }, [selectedCompany]);
 
   const companyOptions = useMemo(() => {
@@ -386,7 +388,7 @@ export default function App() {
       const key = String(record.pipeline_row_id || record.tweet_id || "");
       if (!key) continue;
       if (!textById.has(key)) {
-        textById.set(key, record.text || "");
+        textById.set(key, { text: record.text || "", username: record.username || "" });
       }
     }
 
@@ -398,11 +400,13 @@ export default function App() {
       const emotion = String(record.sentiment_label || "").toLowerCase();
       if (!emotion) continue;
       const key = String(record.pipeline_row_id || record.tweet_id || "");
-      const text = textById.get(key) || "";
+      const payload = textById.get(key);
+      const text = payload?.text || "";
       if (!text) continue;
       if (!byEmotion[emotion]) byEmotion[emotion] = [];
       byEmotion[emotion].push({
         text,
+        username: payload?.username || "",
         confidence: Number(record.confidence) || 0,
         emotion,
       });
@@ -412,14 +416,29 @@ export default function App() {
     const slides = [];
     for (const emotion of ordered) {
       const picks = byEmotion[emotion]
+        .filter((item) => item.confidence >= 0.9)
         .sort((a, b) => b.confidence - a.confidence)
-        .slice(0, 2);
+        .slice();
       slides.push(...picks);
     }
-    return slides.slice(0, 12);
-  }, [data.deepMap, data.deepSentiment, selectedCompany]);
+    if (selectedEmotion === "all") {
+      return slides;
+    }
+    return slides.filter((item) => item.emotion === selectedEmotion);
+  }, [data.deepMap, data.deepSentiment, selectedCompany, selectedEmotion]);
 
   const activeSlide = deepCompanyTweets[slideIndex] || null;
+
+  const emotionOptions = useMemo(() => {
+    const mapRecords = Array.isArray(data.deepMap) ? data.deepMap : [];
+    if (!mapRecords.length || !selectedCompany) return [];
+    const emotions = new Set(
+      mapRecords
+        .filter((record) => record.primary_parent_company === selectedCompany && record.sentiment_label)
+        .map((record) => String(record.sentiment_label || "").toLowerCase())
+    );
+    return ["all", ...Array.from(emotions).sort()];
+  }, [data.deepMap, selectedCompany]);
 
   const hashtagWordCloud = useMemo(() => {
     if (!data.hashtags?.hashtags) return null;
@@ -599,7 +618,7 @@ export default function App() {
           <div className="card-header">
             <div>
               <h3>Representative Tweets</h3>
-              <p className="muted">Highest-confidence tweets for the selected company.</p>
+              <p className="muted">Highest-confidence tweets for the selected company (≥ 0.90).</p>
             </div>
             <div className="tweet-nav">
               <button
@@ -609,6 +628,9 @@ export default function App() {
               >
                 Prev
               </button>
+              <span className="tweet-count">
+                {deepCompanyTweets.length ? `${slideIndex + 1} / ${deepCompanyTweets.length}` : "0 / 0"}
+              </span>
               <button
                 type="button"
                 onClick={() => setSlideIndex((idx) => Math.min(idx + 1, deepCompanyTweets.length - 1))}
@@ -618,10 +640,29 @@ export default function App() {
               </button>
             </div>
           </div>
+          <div className="tweet-filter">
+            <label htmlFor="emotion-filter">Emotion</label>
+            <select
+              id="emotion-filter"
+              value={selectedEmotion}
+              onChange={(event) => {
+                setSelectedEmotion(event.target.value);
+                setSlideIndex(0);
+              }}
+            >
+              {emotionOptions.map((emotion) => (
+                <option key={emotion} value={emotion}>
+                  {emotion === "all" ? "All" : emotion}
+                </option>
+              ))}
+            </select>
+          </div>
           {activeSlide ? (
             <div className="tweet-card">
               <div className="tweet-header">
-                <span className="tweet-handle">@superbowl</span>
+                <span className="tweet-handle">
+                  {activeSlide.username ? `@${activeSlide.username}` : "@unknown"}
+                </span>
                 <span className="tweet-emotion">{activeSlide.emotion}</span>
               </div>
               <p className="tweet-text">{activeSlide.text}</p>

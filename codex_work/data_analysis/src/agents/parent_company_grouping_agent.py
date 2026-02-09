@@ -21,7 +21,7 @@ from src.agents.rate_limit_policy import (
 )
 
 
-MODEL_DEFAULT = "openai/gpt-4.1-mini"
+MODEL_DEFAULT = "openai/gpt-4.1"
 NORMALIZE_CHUNK_SIZE = 200
 LLM_TIMEOUT_SECONDS = 180
 DEFAULT_OVERRIDE_FILE = Path(__file__).resolve().parents[2] / "config" / "parent_company_overrides.json"
@@ -356,7 +356,7 @@ def _normalize_parent_labels(invoker: _RateLimitedInvoker, labels: List[str]) ->
 def run_parent_company_grouping(
     brand_groups_path: Path,
     output_path: Path,
-    model: str = MODEL_DEFAULT,
+    model: str,
     chunk_size: int = 40,
     request_delay_seconds: float = MIN_REQUEST_DELAY_SECONDS,
     max_rate_limit_retries: int = MIN_MAX_RATE_LIMIT_RETRIES,
