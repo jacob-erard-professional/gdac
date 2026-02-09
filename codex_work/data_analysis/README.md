@@ -61,7 +61,7 @@ Full pipeline + parent-company joins:
 Run all available workflows (pipeline + sentiment + deep sentiment + grouping + maps + breakdowns):
 
 ```bash
-.venv/bin/python -m src.cli run-everything --year 2024
+.venv/bin/python -m src.cli run-everything --year 2024 --grouping-model openai/gpt-4.1
 ```
 
 Optional: clean analytics outputs before re-running analysis stages:
@@ -85,16 +85,17 @@ Optional: supply brand-group hints to improve brand grouping:
 Run everything except selected workflows (repeat `--exclude`):
 
 ```bash
-.venv/bin/python -m src.cli run-everything --year 2024 --exclude deep-sentiment --exclude group-parent-companies
+.venv/bin/python -m src.cli run-everything --year 2024 --grouping-model openai/gpt-4.1 --exclude deep-sentiment --exclude group-parent-companies
 ```
 
 Valid excludes: `sentiment`, `ad-sentiment`, `deep-sentiment`, `parent-company-sentiment`,
-`parent-company-deep-sentiment`, `group-brands`, `group-parent-companies`,
+`parent-company-deep-sentiment`, `agentic-emotion`, `group-brands`, `group-parent-companies`,
 `sentiment-maps`, `emotion-breakdowns`.
 Notes: `ad-sentiment` requires `sentiment`, and `parent-company-deep-sentiment` requires
 `deep-sentiment` (these two combinations are hard errors if excluded).
 By default `run` and `run-everything` preserve existing analytics outputs. Use `--clean-outputs`
 only when you explicitly want to clear `outputs/analytics/<year>/` before analysis.
+Grouping workflows require `--grouping-model`. Agentic emotion requires `--agentic-emotion-model`.
 
 ## Stages
 
@@ -119,13 +120,13 @@ Brand-grouping (hashtags → brands):
 ```bash
 cp .env.example .env
 export OPENROUTER_API_KEY=... # keep local only; never commit
-.venv/bin/python -m src.cli group-brands --year 2024 --model openai/gpt-4.1-mini
+.venv/bin/python -m src.cli group-brands --year 2024 --model openai/gpt-4.1
 ```
 
 Parent-company grouping (brands → parent companies):
 
 ```bash
-.venv/bin/python -m src.cli group-parent-companies --year 2024 --model openai/gpt-4.1-mini
+.venv/bin/python -m src.cli group-parent-companies --year 2024 --model openai/gpt-4.1
 ```
 
 Notes:
@@ -147,6 +148,18 @@ Deep sentiment (Twitter-trained model):
 
 ```bash
 .venv/bin/python -m src.cli deep-sentiment --year 2024 --batch-size 64
+```
+
+Agentic emotion classification (committee + supervisor):
+
+```bash
+.venv/bin/python -m src.cli agentic-emotion --year 2024 --model openai/gpt-4.1 --batch-size 40
+```
+
+Optional brand filter:
+
+```bash
+.venv/bin/python -m src.cli agentic-emotion --year 2024 --model openai/gpt-4.1 --brand-filter "marvel,disney"
 ```
 
 GPU usage:

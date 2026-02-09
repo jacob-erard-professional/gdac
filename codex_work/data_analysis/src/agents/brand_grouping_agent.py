@@ -20,7 +20,7 @@ from src.agents.rate_limit_policy import (
 )
 
 
-MODEL_DEFAULT = "openai/gpt-4.1-mini"
+MODEL_DEFAULT = "openai/gpt-4.1"
 NORMALIZE_CHUNK_SIZE = 200
 LLM_TIMEOUT_SECONDS = 180
 
@@ -334,7 +334,7 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
 def run_brand_grouping(
     hashtags_path: Path,
     output_path: Path,
-    model: str = MODEL_DEFAULT,
+    model: str,
     chunk_size: int = 60,
     request_delay_seconds: float = MIN_REQUEST_DELAY_SECONDS,
     max_rate_limit_retries: int = MIN_MAX_RATE_LIMIT_RETRIES,

@@ -12,6 +12,7 @@ VALID_EXCLUDES = {
     "deep-sentiment",
     "parent-company-sentiment",
     "parent-company-deep-sentiment",
+    "agentic-emotion",
     "group-brands",
     "group-parent-companies",
     "sentiment-maps",
@@ -25,7 +26,7 @@ def run_everything_command(
     exclude: list[str] = typer.Option(
         [],
         "--exclude",
-        help="Repeatable. One of: sentiment, ad-sentiment, deep-sentiment, parent-company-sentiment, parent-company-deep-sentiment, group-brands, group-parent-companies, sentiment-maps, emotion-breakdowns",
+        help="Repeatable. One of: sentiment, ad-sentiment, deep-sentiment, parent-company-sentiment, parent-company-deep-sentiment, agentic-emotion, group-brands, group-parent-companies, sentiment-maps, emotion-breakdowns",
     ),
     sentiment_model: str = typer.Option(
         "finiteautomata/bertweet-base-sentiment-analysis",
@@ -40,7 +41,11 @@ def run_everything_command(
     deep_sentiment_batch_size: int = typer.Option(64, "--deep-sentiment-batch-size", min=1, max=4096),
     deep_sentiment_device: str = typer.Option("cuda", "--deep-sentiment-device"),
     deep_sentiment_label_map_file: Path = typer.Option(None, "--deep-sentiment-label-map-file"),
-    grouping_model: str = typer.Option("openai/gpt-4.1-mini", "--grouping-model"),
+    agentic_emotion_model: str = typer.Option(None, "--agentic-emotion-model"),
+    agentic_emotion_batch_size: int = typer.Option(40, "--agentic-emotion-batch-size", min=1, max=200),
+    agentic_emotion_brand_filter: str = typer.Option("", "--agentic-emotion-brand-filter"),
+    agentic_emotion_examples_per_emotion: int = typer.Option(3, "--agentic-emotion-examples-per-emotion", min=1, max=10),
+    grouping_model: str = typer.Option(None, "--grouping-model"),
     request_delay: float = typer.Option(2.5, "--request-delay", min=2.5),
     max_rate_limit_retries: int = typer.Option(12, "--max-rate-limit-retries", min=12),
     initial_backoff: float = typer.Option(2.0, "--initial-backoff", min=2.0),
@@ -61,6 +66,7 @@ def run_everything_command(
     run_deep_sentiment = "deep-sentiment" not in excluded
     run_parent_company_sentiment = "parent-company-sentiment" not in excluded
     run_parent_company_deep_sentiment = "parent-company-deep-sentiment" not in excluded
+    run_agentic_emotion = "agentic-emotion" not in excluded
     run_group_brands = "group-brands" not in excluded
     run_group_parent_companies = "group-parent-companies" not in excluded
     run_sentiment_maps = "sentiment-maps" not in excluded
@@ -121,6 +127,12 @@ def run_everything_command(
         deep_sentiment_label_map_file=resolved_label_map,
         deep_sentiment_device=deep_sentiment_device,
         with_parent_company_deep_sentiment=False,
+        with_agentic_emotion=run_agentic_emotion,
+        agentic_emotion_model=agentic_emotion_model,
+        agentic_emotion_batch_size=agentic_emotion_batch_size,
+        agentic_emotion_dry_run=False,
+        agentic_emotion_brand_filter=agentic_emotion_brand_filter or None,
+        agentic_emotion_examples_per_emotion=agentic_emotion_examples_per_emotion,
         clean_outputs=clean_outputs,
     )
 
@@ -313,3 +325,7 @@ def run_everything_command(
             )
 
     typer.echo("[run-everything] complete")
+    if (run_group_brands or run_group_parent_companies) and not grouping_model:
+        raise typer.BadParameter("--grouping-model is required when running grouping workflows.")
+    if run_agentic_emotion and not agentic_emotion_model:
+        raise typer.BadParameter("--agentic-emotion-model is required when running agentic emotion.")
