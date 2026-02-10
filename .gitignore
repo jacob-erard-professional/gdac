@@ -6,6 +6,8 @@ codex_work/data_analysis/outputs/analytics/2024_copy
 codex_work/data_analysis/.codex/
 codex_work/data_cleaning/.codex/
 
+codex_work/data_cleaning/aux/
+
 # OS cruft
 .DS_Store
 Thumbs.db
@@ -16,3 +18,5 @@ __pycache__/
 
 # local file
 command_for_codex.txt
+# too large for GitHub
+codex_work/data_cleaning/data/input/tweets.csv
