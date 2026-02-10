@@ -21,7 +21,7 @@ from src.agents.rate_limit_policy import (
 )
 
 
-MODEL_DEFAULT = "openai/gpt-4.1-mini"
+MODEL_DEFAULT = "openai/gpt-4.1"
 NORMALIZE_CHUNK_SIZE = 200
 LLM_TIMEOUT_SECONDS = 180
 DEFAULT_OVERRIDE_FILE = Path(__file__).resolve().parents[2] / "config" / "parent_company_overrides.json"
@@ -234,7 +234,7 @@ def _chunks(items: List[BrandGroup], size: int) -> Iterable[List[BrandGroup]]:
 
 
 def _map_chunk_to_parent_companies(
-    invoker: _RateLimitedInvoker, chunk: List[BrandGroup]
+    invoker: _RateLimitedInvoker, chunk: List[BrandGroup], hints: List[Dict[str, str]]
 ) -> Dict[str, str]:
     items = [
         {
@@ -251,8 +251,10 @@ def _map_chunk_to_parent_companies(
         "Rules:\n"
         "- parent_company labels must be lowercase concise names.\n"
         "- every brand must map exactly once.\n"
+        "- use the provided hints when a brand matches or when hashtags clearly indicate a known brand owner.\n"
         "- if parent company is unknown, keep parent_company equal to the brand label.\n"
         "- never return markdown.\n\n"
+        f"hints={json.dumps(hints, ensure_ascii=True)}\n"
         f"brand_groups={json.dumps(items, ensure_ascii=True)}"
     )
     payload = _invoke_json(invoker, prompt)
@@ -354,12 +356,13 @@ def _normalize_parent_labels(invoker: _RateLimitedInvoker, labels: List[str]) ->
 def run_parent_company_grouping(
     brand_groups_path: Path,
     output_path: Path,
-    model: str = MODEL_DEFAULT,
+    model: str,
     chunk_size: int = 40,
     request_delay_seconds: float = MIN_REQUEST_DELAY_SECONDS,
     max_rate_limit_retries: int = MIN_MAX_RATE_LIMIT_RETRIES,
     initial_backoff_seconds: float = MIN_INITIAL_BACKOFF_SECONDS,
     resume: bool = True,
+    hints_path: Path | None = None,
 ) -> Path:
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
@@ -373,6 +376,15 @@ def run_parent_company_grouping(
     parent_overrides = _load_parent_company_overrides()
 
     year, groups = _load_brand_groups(brand_groups_path)
+    hints: List[Dict[str, str]] = []
+    resolved_hints = hints_path
+    if resolved_hints is None:
+        resolved_hints = brand_groups_path.parents[2] / "config" / "parent_company_hints.json"
+    if resolved_hints and not resolved_hints.is_absolute():
+        resolved_hints = (brand_groups_path.parents[2] / resolved_hints).resolve()
+    if resolved_hints and resolved_hints.exists():
+        payload = json.loads(resolved_hints.read_text(encoding="utf-8"))
+        hints = payload.get("hints", [])
     def _build_invoker(model_id: str) -> _RateLimitedInvoker:
         llm = ChatOpenAI(
             model=model_id,
@@ -430,7 +442,7 @@ def run_parent_company_grouping(
         attempt_model_switch = True
         while True:
             try:
-                mapped = _map_chunk_to_parent_companies(invoker, unresolved_chunk)
+                mapped = _map_chunk_to_parent_companies(invoker, unresolved_chunk, hints)
                 brand_to_parent.update(mapped)
                 _append_jsonl(
                     partial_jsonl_path,

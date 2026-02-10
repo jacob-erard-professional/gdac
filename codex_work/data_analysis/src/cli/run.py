@@ -24,6 +24,7 @@ def run_command(
     with_deep_sentiment: bool = typer.Option(False, "--with-deep-sentiment"),
     with_parent_company_sentiment: bool = typer.Option(False, "--with-parent-company-sentiment"),
     with_parent_company_deep_sentiment: bool = typer.Option(False, "--with-parent-company-deep-sentiment"),
+    with_agentic_emotion: bool = typer.Option(False, "--with-agentic-emotion"),
     deep_sentiment_model: str = typer.Option(
         DEFAULT_DEEP_SENTIMENT_MODEL,
         "--deep-sentiment-model",
@@ -34,6 +35,12 @@ def run_command(
     deep_sentiment_device: str = typer.Option("cuda", "--deep-sentiment-device"),
     parent_company_sentiment_min_tweets: int = typer.Option(1, "--parent-company-sentiment-min-tweets", min=1),
     parent_company_deep_sentiment_min_tweets: int = typer.Option(1, "--parent-company-deep-sentiment-min-tweets", min=1),
+    agentic_emotion_model: str = typer.Option(None, "--agentic-emotion-model"),
+    agentic_emotion_batch_size: int = typer.Option(40, "--agentic-emotion-batch-size", min=1, max=200),
+    agentic_emotion_dry_run: bool = typer.Option(False, "--agentic-emotion-dry-run"),
+    agentic_emotion_brand_filter: str = typer.Option("", "--agentic-emotion-brand-filter"),
+    agentic_emotion_examples_per_emotion: int = typer.Option(3, "--agentic-emotion-examples-per-emotion", min=1, max=10),
+    clean_outputs: bool = typer.Option(False, "--clean-outputs"),
 ):
     if bool(stage) == bool(all_):
         raise typer.BadParameter("Provide exactly one of --stage or --all")
@@ -50,10 +57,11 @@ def run_command(
             or with_deep_sentiment
             or with_parent_company_sentiment
             or with_parent_company_deep_sentiment
+            or with_agentic_emotion
         ):
             raise typer.BadParameter(
                 "--with-sentiment/--with-ad-sentiment/--with-deep-sentiment/"
-                "--with-parent-company-sentiment/--with-parent-company-deep-sentiment "
+                "--with-parent-company-sentiment/--with-parent-company-deep-sentiment/--with-agentic-emotion "
                 "are supported only with --all"
             )
         if bool(year) == bool(resolved_data_dir):
@@ -68,6 +76,8 @@ def run_command(
             raise typer.BadParameter("--with-parent-company-sentiment requires --with-sentiment")
         if with_parent_company_deep_sentiment and not with_deep_sentiment:
             raise typer.BadParameter("--with-parent-company-deep-sentiment requires --with-deep-sentiment")
+        if with_agentic_emotion and not agentic_emotion_model:
+            raise typer.BadParameter("--with-agentic-emotion requires --agentic-emotion-model")
         mode = 'full_all_years' if not year and not resolved_data_dir else 'full_year'
 
     req = RunRequest(
@@ -94,6 +104,13 @@ def run_command(
         deep_sentiment_device=deep_sentiment_device,
         parent_company_sentiment_min_tweets=parent_company_sentiment_min_tweets,
         parent_company_deep_sentiment_min_tweets=parent_company_deep_sentiment_min_tweets,
+        with_agentic_emotion=with_agentic_emotion,
+        agentic_emotion_model=agentic_emotion_model,
+        agentic_emotion_batch_size=agentic_emotion_batch_size,
+        agentic_emotion_dry_run=agentic_emotion_dry_run,
+        agentic_emotion_brand_filter=agentic_emotion_brand_filter or None,
+        agentic_emotion_examples_per_emotion=agentic_emotion_examples_per_emotion,
+        clean_outputs=clean_outputs,
     )
     results = run_pipeline(base_dir, req)
     for result in results:

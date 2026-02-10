@@ -20,7 +20,7 @@ from src.agents.rate_limit_policy import (
 )
 
 
-MODEL_DEFAULT = "openai/gpt-4.1-mini"
+MODEL_DEFAULT = "openai/gpt-4.1"
 NORMALIZE_CHUNK_SIZE = 200
 LLM_TIMEOUT_SECONDS = 180
 
@@ -209,7 +209,9 @@ def _prompt_for_model(current_model: str, *, context: str) -> str | None:
     return value or None
 
 
-def _map_chunk_to_brands(invoker: _RateLimitedInvoker, chunk: List[HashtagCount]) -> Dict[str, str]:
+def _map_chunk_to_brands(
+    invoker: _RateLimitedInvoker, chunk: List[HashtagCount], hints: List[Dict[str, str]]
+) -> Dict[str, str]:
     items = [{"hashtag": item.hashtag, "count": item.count} for item in chunk]
     prompt = (
         "Group hashtags into coherent canonical groups.\n"
@@ -222,8 +224,10 @@ def _map_chunk_to_brands(invoker: _RateLimitedInvoker, chunk: List[HashtagCount]
         "- every hashtag MUST map to a specific group label.\n"
         "- do NOT use a generic catch-all label like 'unassigned'.\n"
         "- if a hashtag has no close match, create a singleton group label for it.\n"
+        "- use provided hints when a hashtag matches a known franchise/brand keyword.\n"
         "- map every hashtag exactly once.\n"
         "- never return markdown.\n\n"
+        f"hints={json.dumps(hints, ensure_ascii=True)}\n"
         f"hashtags={json.dumps(items, ensure_ascii=True)}"
     )
     payload = _invoke_json(invoker, prompt)
@@ -330,12 +334,13 @@ def _normalize_brand_labels(invoker: _RateLimitedInvoker, labels: List[str]) -> 
 def run_brand_grouping(
     hashtags_path: Path,
     output_path: Path,
-    model: str = MODEL_DEFAULT,
+    model: str,
     chunk_size: int = 60,
     request_delay_seconds: float = MIN_REQUEST_DELAY_SECONDS,
     max_rate_limit_retries: int = MIN_MAX_RATE_LIMIT_RETRIES,
     initial_backoff_seconds: float = MIN_INITIAL_BACKOFF_SECONDS,
     resume: bool = True,
+    hints_path: Path | None = None,
 ) -> Path:
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
@@ -348,6 +353,15 @@ def run_brand_grouping(
     )
 
     year, hashtags = _load_hashtags(hashtags_path)
+    hints: List[Dict[str, str]] = []
+    resolved_hints = hints_path
+    if resolved_hints is None:
+        resolved_hints = hashtags_path.parents[2] / "config" / "brand_group_hints.json"
+    if resolved_hints and not resolved_hints.is_absolute():
+        resolved_hints = (hashtags_path.parents[2] / resolved_hints).resolve()
+    if resolved_hints and resolved_hints.exists():
+        payload = json.loads(resolved_hints.read_text(encoding="utf-8"))
+        hints = payload.get("hints", [])
     def _build_invoker(model_id: str) -> _RateLimitedInvoker:
         llm = ChatOpenAI(
             model=model_id,
@@ -384,7 +398,7 @@ def run_brand_grouping(
         attempt_model_switch = True
         while True:
             try:
-                mapped = _map_chunk_to_brands(invoker, chunk)
+                mapped = _map_chunk_to_brands(invoker, chunk, hints)
                 hashtag_to_brand.update(mapped)
                 _append_jsonl(
                     partial_jsonl_path,

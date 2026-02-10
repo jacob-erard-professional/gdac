@@ -17,22 +17,21 @@ def _select_primary(items: list[str]) -> str:
     return items[0] if items else "unmatched"
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Match sentiment records to brand and parent company groups.")
-    parser.add_argument("--sentiment-file", required=True, type=Path, help="Path to sentiment.json or deep_sentiment.json")
-    parser.add_argument("--brand-groups-file", required=True, type=Path, help="Path to brand_groups.json")
-    parser.add_argument("--parent-groups-file", required=True, type=Path, help="Path to parent_company_groups.json")
-    parser.add_argument("--output-file", required=True, type=Path, help="Output JSONL path")
-    parser.add_argument("--batch-size", type=int, default=1000)
-    args = parser.parse_args()
-
-    if args.batch_size < 1:
+def run_match_sentiment_to_companies(
+    *,
+    sentiment_file: Path,
+    brand_groups_file: Path,
+    parent_groups_file: Path,
+    output_file: Path,
+    batch_size: int = 1000,
+) -> Path:
+    if batch_size < 1:
         raise ValueError("batch_size must be >= 1")
 
-    payload = json.loads(args.sentiment_file.read_text(encoding="utf-8"))
+    payload = json.loads(sentiment_file.read_text(encoding="utf-8"))
     records = payload.get("records", [])
 
-    output_path = args.output_file
+    output_path = output_file
     if not output_path.is_absolute():
         output_path = (Path.cwd() / output_path).resolve()
     if "/outputs/analytics/" in str(output_path):
@@ -41,14 +40,14 @@ def main():
             output_path = Path(parts[0]) / "outputs" / "aux" / parts[1]
             print(f"[sentiment-map] redirecting output to aux: {output_path}")
 
-    hashtag_to_brand, _hashtag_counts = _load_brand_groups(args.brand_groups_file)
-    parent_map = _load_parent_company_groups(args.parent_groups_file)
+    hashtag_to_brand, _hashtag_counts = _load_brand_groups(brand_groups_file)
+    parent_map = _load_parent_company_groups(parent_groups_file)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     total = len(records)
     with output_path.open("w", encoding="utf-8") as f:
-        for start in range(0, total, args.batch_size):
-            batch = records[start : start + args.batch_size]
+        for start in range(0, total, batch_size):
+            batch = records[start : start + batch_size]
             out_records = []
             for record in batch:
                 text = str(record.get("text", ""))
@@ -89,9 +88,28 @@ def main():
                 + "\n"
             )
             print(
-                f"[sentiment-map] wrote batch {start // args.batch_size + 1} "
+                f"[sentiment-map] wrote batch {start // batch_size + 1} "
                 f"rows={len(batch)} total={total}"
             )
+    return output_path
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Match sentiment records to brand and parent company groups.")
+    parser.add_argument("--sentiment-file", required=True, type=Path, help="Path to sentiment.json or deep_sentiment.json")
+    parser.add_argument("--brand-groups-file", required=True, type=Path, help="Path to brand_groups.json")
+    parser.add_argument("--parent-groups-file", required=True, type=Path, help="Path to parent_company_groups.json")
+    parser.add_argument("--output-file", required=True, type=Path, help="Output JSONL path")
+    parser.add_argument("--batch-size", type=int, default=1000)
+    args = parser.parse_args()
+
+    run_match_sentiment_to_companies(
+        sentiment_file=args.sentiment_file,
+        brand_groups_file=args.brand_groups_file,
+        parent_groups_file=args.parent_groups_file,
+        output_file=args.output_file,
+        batch_size=args.batch_size,
+    )
 
 
 if __name__ == "__main__":

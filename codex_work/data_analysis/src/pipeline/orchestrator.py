@@ -22,6 +22,7 @@ RUNNERS = {
     'deep_sentiment': stages.deep_sentiment.run,
     'parent_company_sentiment': stages.parent_company_sentiment.run,
     'parent_company_deep_sentiment': stages.parent_company_deep_sentiment.run,
+    'agentic_emotion': stages.agentic_emotion.run,
 }
 
 
@@ -83,6 +84,22 @@ def _run_for_year(
                 config,
                 min_tweets=req.parent_company_deep_sentiment_min_tweets,
             )
+        elif stage == 'agentic_emotion':
+            if not req.agentic_emotion_model:
+                raise ValueError("agentic_emotion requires agentic_emotion_model")
+            manifest = RUNNERS[stage](
+                config,
+                model=req.agentic_emotion_model,
+                batch_size=req.agentic_emotion_batch_size,
+                dry_run=req.agentic_emotion_dry_run,
+                brand_filter=req.agentic_emotion_brand_filter,
+                examples_per_emotion=req.agentic_emotion_examples_per_emotion,
+            )
+        elif stage == 'analyze':
+            manifest = RUNNERS[stage](
+                config,
+                clean_outputs=req.clean_outputs,
+            )
         else:
             manifest = RUNNERS[stage](config)
         for out in manifest.output_files:
@@ -120,6 +137,8 @@ def run_pipeline(base_dir: Path, req: RunRequest):
             stage_list = stage_list + ['parent_company_sentiment']
         if req.with_parent_company_deep_sentiment:
             stage_list = stage_list + ['parent_company_deep_sentiment']
+        if req.with_agentic_emotion:
+            stage_list = stage_list + ['agentic_emotion']
         return [_run_for_year(base_dir, req, req.year, req.data_dir, stage_list)]
 
     if req.mode == 'full_all_years':
@@ -135,6 +154,8 @@ def run_pipeline(base_dir: Path, req: RunRequest):
             stage_list = stage_list + ['parent_company_sentiment']
         if req.with_parent_company_deep_sentiment:
             stage_list = stage_list + ['parent_company_deep_sentiment']
+        if req.with_agentic_emotion:
+            stage_list = stage_list + ['agentic_emotion']
         return [
             _run_for_year(base_dir, req, y, None, stage_list)
             for y in years

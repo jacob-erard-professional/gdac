@@ -30,6 +30,7 @@ class RunRequest:
     with_deep_sentiment: bool = False
     with_parent_company_sentiment: bool = False
     with_parent_company_deep_sentiment: bool = False
+    with_agentic_emotion: bool = False
     deep_sentiment_model: str = "cardiffnlp/twitter-roberta-base-emotion-latest"
     deep_sentiment_batch_size: int = 64
     deep_sentiment_dry_run: bool = False
@@ -37,6 +38,12 @@ class RunRequest:
     deep_sentiment_device: str = "cuda"
     parent_company_sentiment_min_tweets: int = 1
     parent_company_deep_sentiment_min_tweets: int = 1
+    agentic_emotion_model: Optional[str] = None
+    agentic_emotion_batch_size: int = 40
+    agentic_emotion_dry_run: bool = False
+    agentic_emotion_brand_filter: Optional[str] = None
+    agentic_emotion_examples_per_emotion: int = 3
+    clean_outputs: bool = False
 
 
 def validate_year(year: str) -> str:

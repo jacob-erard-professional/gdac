@@ -27,9 +27,9 @@ def group_parent_companies_command(
         help="Optional enriched.csv path for tweet-to-parent mapping output",
     ),
     model: str = typer.Option(
-        "openai/gpt-4.1-mini",
+        ...,
         "--model",
-        help="OpenRouter model id",
+        help="OpenRouter model id (required)",
     ),
     chunk_size: int = typer.Option(40, "--chunk-size", min=10, max=500),
     resume: bool = typer.Option(True, "--resume/--no-resume", help="Resume from existing partial results"),
@@ -50,6 +50,11 @@ def group_parent_companies_command(
         "--initial-backoff",
         min=MIN_INITIAL_BACKOFF_SECONDS,
         help="Initial exponential backoff in seconds (constitution minimum enforced).",
+    ),
+    hints_file: Path = typer.Option(
+        None,
+        "--hints-file",
+        help="Optional JSON file with brand->parent_company hints.",
     ),
 ):
     try:
@@ -79,6 +84,7 @@ def group_parent_companies_command(
         request_delay_seconds=request_delay,
         max_rate_limit_retries=max_rate_limit_retries,
         initial_backoff_seconds=initial_backoff,
+        hints_path=hints_file,
     )
     typer.echo(f"parent company grouping written to {out}")
 

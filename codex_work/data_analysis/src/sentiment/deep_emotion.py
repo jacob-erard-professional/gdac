@@ -175,6 +175,7 @@ def load_input_rows(input_path: Path, *, target_year: int | None) -> tuple[list[
             "year": years,
             "created_at": frame[created_at_col].astype(str) if created_at_col in frame.columns else "",
             "pipeline_row_id": frame["pipeline_row_id"].astype(str) if "pipeline_row_id" in frame.columns else "",
+            "username": frame["username"].astype(str) if "username" in frame.columns else "",
         }
     )
 
@@ -254,6 +255,7 @@ def infer_deep_sentiment_batches(
                     "text": row["text"],
                     "year": int(row["year"]),
                     "pipeline_row_id": row.get("pipeline_row_id", ""),
+                    "username": row.get("username", ""),
                     "main_sentiment": main_sentiment,
                     "confidence": round(float(confidence), 6),
                 }
