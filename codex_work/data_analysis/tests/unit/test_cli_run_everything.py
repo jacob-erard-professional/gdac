@@ -67,6 +67,8 @@ def test_run_everything_runs_pipeline_and_group_brands(monkeypatch, tmp_path: Pa
             "run-everything",
             "--year",
             "2024",
+            "--grouping-model",
+            "openai/gpt-4.1",
             "--exclude",
             "deep-sentiment",
             "--exclude",
@@ -81,3 +83,44 @@ def test_run_everything_runs_pipeline_and_group_brands(monkeypatch, tmp_path: Pa
     assert calls["req"].with_ad_sentiment is True
     assert calls["req"].with_deep_sentiment is False
     assert calls["brand"]["hashtags_path"] == analytics_dir / "hashtags_frequency.json"
+
+
+def test_run_everything_defaults_agentic_emotion_model_to_grouping_model(monkeypatch, tmp_path: Path):
+    analytics_dir = tmp_path / "outputs" / "analytics" / "2024"
+    analytics_dir.mkdir(parents=True, exist_ok=True)
+
+    calls = {}
+
+    def fake_resolve(_base, year=None, data_dir=None):
+        assert year == "2024"
+        return _Cfg("2024", analytics_dir)
+
+    def fake_pipeline(_base, req):
+        calls["req"] = req
+        return [type("R", (), {"year": "2024", "mode": "full_year", "status": "success"})()]
+
+    monkeypatch.setattr("src.cli.run_everything.resolve_year_config", fake_resolve)
+    monkeypatch.setattr("src.cli.run_everything.run_pipeline", fake_pipeline)
+
+    result = runner.invoke(
+        app,
+        [
+            "run-everything",
+            "--year",
+            "2024",
+            "--grouping-model",
+            "openai/gpt-4.1",
+            "--exclude",
+            "group-brands",
+            "--exclude",
+            "group-parent-companies",
+            "--exclude",
+            "sentiment-maps",
+            "--exclude",
+            "emotion-breakdowns",
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert calls["req"].with_agentic_emotion is True
+    assert calls["req"].agentic_emotion_model == "openai/gpt-4.1"

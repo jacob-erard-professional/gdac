@@ -97,6 +97,8 @@ def run_everything_command(
         run_emotion_breakdowns = False
         typer.echo("[run-everything] skipping emotion-breakdowns (requires sentiment-maps)")
 
+    resolved_agentic_emotion_model = agentic_emotion_model or grouping_model
+
     base_dir = Path(__file__).resolve().parents[2]
     resolved_data_dir = data_dir
     if resolved_data_dir and not resolved_data_dir.is_absolute():
@@ -128,7 +130,7 @@ def run_everything_command(
         deep_sentiment_device=deep_sentiment_device,
         with_parent_company_deep_sentiment=False,
         with_agentic_emotion=run_agentic_emotion,
-        agentic_emotion_model=agentic_emotion_model,
+        agentic_emotion_model=resolved_agentic_emotion_model,
         agentic_emotion_batch_size=agentic_emotion_batch_size,
         agentic_emotion_dry_run=False,
         agentic_emotion_brand_filter=agentic_emotion_brand_filter or None,
@@ -327,5 +329,5 @@ def run_everything_command(
     typer.echo("[run-everything] complete")
     if (run_group_brands or run_group_parent_companies) and not grouping_model:
         raise typer.BadParameter("--grouping-model is required when running grouping workflows.")
-    if run_agentic_emotion and not agentic_emotion_model:
+    if run_agentic_emotion and not resolved_agentic_emotion_model:
         raise typer.BadParameter("--agentic-emotion-model is required when running agentic emotion.")
