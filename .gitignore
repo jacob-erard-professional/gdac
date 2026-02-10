@@ -18,3 +18,5 @@ __pycache__/
 
 # local file
 command_for_codex.txt
+# too large for GitHub
+codex_work/data_cleaning/data/input/tweets.csv
