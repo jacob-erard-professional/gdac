@@ -1,0 +1,12 @@
+[project]
+name = "data-cleaning"
+version = "0.1.0"
+description = "Brand mention classification tools"
+requires-python = ">=3.11"
+readme = "README.md"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

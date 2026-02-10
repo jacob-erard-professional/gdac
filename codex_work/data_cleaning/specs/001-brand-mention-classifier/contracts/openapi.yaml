@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: Brand Mention Classifier
+  version: 1.0.0
+  description: Classify whether a tweet is about its assigned brand using an
+    OpenRouter-backed model selected by the CLI.
+paths:
+  /classify:
+    post:
+      summary: Classify a tweet record
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TweetRecord"
+      responses:
+        "200":
+          description: Classification result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClassificationResult"
+components:
+  schemas:
+    TweetRecord:
+      type: object
+      required:
+        - text
+        - brand
+      properties:
+        text:
+          type: string
+          description: Tweet text (primary signal).
+        brand:
+          type: string
+          description: Assigned brand to validate against.
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Optional contextual columns from the CSV.
+    ClassificationResult:
+      type: object
+      required:
+        - is_about_brand
+        - confidence
+        - rationale
+      properties:
+        is_about_brand:
+          type: boolean
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        rationale:
+          type: string
+        prompt_version:
+          type: string
