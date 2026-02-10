@@ -249,3 +249,5 @@ With multiple developers:
 - Commit after each task or logical group
 - Stop at any checkpoint to validate story independently
 - Avoid: vague tasks, same file conflicts, cross-story dependencies that break independence
+- Include explicit tasks for manifests, structured logging, and config-driven thresholds when the feature touches pipeline steps.
+- Include README updates for any behavior or step changes, including how to run the new or updated feature.

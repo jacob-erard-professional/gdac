@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AgentInput",
+  "type": "object",
+  "required": [
+    "input_id",
+    "text_normalized",
+    "brand_normalized",
+    "brand_original",
+    "prompt_version",
+    "model",
+    "router_model_params"
+  ],
+  "properties": {
+    "input_id": { "type": "string" },
+    "text_normalized": { "type": "string" },
+    "brand_normalized": { "type": "string" },
+    "brand_original": { "type": "string" },
+    "metadata": { "type": "object" },
+    "prompt_version": { "type": "string" },
+    "model": { "type": "string" },
+    "router_model_params": { "type": "object" }
+  },
+  "additionalProperties": false
+}

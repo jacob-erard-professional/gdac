@@ -1,50 +1,90 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+- Version change: 1.0.0 -> 1.1.0
+- Modified principles: None
+- Added sections: None
+- Removed sections: None
+- Templates requiring updates: ✅ updated .specify/templates/tasks-template.md
+- Follow-up TODOs: TODO(RATIFICATION_DATE): original adoption date not found in repository; TODO(README_RUN_INSTRUCTIONS): add concrete CLI commands once implemented
+-->
+# Twitter (X) Data Cleaning Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Determinism Over Cleverness
+- Given the same input data and configuration, the pipeline MUST always produce the same outputs.
+- No non-deterministic operations are allowed unless explicitly seeded and documented.
+- Any step that depends on ordering MUST make the ordering explicit and stable.
+Rationale: Determinism is required for auditability and reproducibility in downstream analysis.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Modular Step-Based Pipeline
+- Each data cleaning concern MUST live in its own clearly defined step.
+- Steps MUST be runnable independently and composable into a full pipeline.
+- Each step MUST read from exactly one input directory and write to exactly one output directory.
+- Each step MUST produce a manifest with input hashes, output hashes, row counts before/after,
+  and rejection counts with reasons.
+Rationale: Modular, composable steps keep the pipeline explainable and testable.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Schema-First Validation
+- All datasets MUST adhere to explicit schemas including `text` (string, non-empty) and
+  `brand` (string, may be empty or incorrect).
+- The pipeline MUST NOT perform silent column dropping, silent type coercion, or implicit
+  renaming.
+- Rows that violate schema requirements MUST be logged, counted, and either corrected
+  explicitly or quarantined.
+Rationale: Schema enforcement prevents hidden data loss and preserves trust in outputs.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Brand Skepticism & Preservation
+- The `brand` column is treated as a hypothesis, not truth.
+- Brand validation, correction, or rejection MUST be explicit and traceable.
+- Brand relevance checks MUST produce explicit flags or confidence scores and MUST NOT
+  overwrite the original `brand` value.
+Rationale: Brand labels are noisy and require explicit, auditable handling.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Raw Data Immutability & Explainability
+- Raw input data MUST NEVER be mutated or overwritten.
+- All derived data MUST be written to new, versionable artifacts.
+- Every transformation MUST be explainable by reading the code and README; no "magic" steps.
+- All thresholds, heuristics, and toggles MUST live in configuration files with defaults
+  documented.
+Rationale: Immutability and explainability keep the pipeline safe, reviewable, and
+maintainable.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Pipeline & Data Standards
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Repository layout MUST follow: `data/raw`, `data/intermediate`, `data/clean`, `src/ingest`,
+  `src/cleaning`, `src/brand`, `src/text`, `src/orchestrator`, `src/config`, and `scripts`.
+- `data/raw` is for original input CSVs and is read-only.
+- `data/intermediate` is for step outputs; `data/clean` is for final datasets.
+- Cleaning categories MUST exist as separate steps: Schema Validation; Text Normalization
+  (Unicode, URL handling, whitespace, optional casing); Noise Handling (retweets, duplicates,
+  rule-based bot or empty content); Brand Normalization (canonical labels, alias handling,
+  case normalization); Brand Relevance Validation (flags or confidence scores, no overwrite).
+- Logs MUST be structured and machine-readable, capturing rows in/out and rejections.
+- Failures MUST be loud and actionable.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Documentation & Change Control
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- The repository MUST expose a CLI that supports running a single step, the full pipeline,
+  selecting input/output directories, and dry-run or validation-only mode.
+- The CLI MUST NOT contain business logic; logic lives in `src/` modules.
+- The README MUST explain the repository purpose, each pipeline step, how to run the
+  pipeline, and all configuration options.
+- Any new feature or cleaning step MUST update the README, including how to run that
+  feature.
+- The repository MUST NOT: train machine learning models; perform sentiment or emotion
+  analysis; perform aggregation or reporting; or make irreversible assumptions about brand
+  correctness.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution supersedes all other practices in this repository.
+- Amendments require updating this file, reflecting changes in templates and runtime
+  guidance docs, and documenting any migrations or behavior changes.
+- Versioning follows semantic versioning: MAJOR for backward-incompatible governance changes
+  or removals; MINOR for new principles or materially expanded guidance; PATCH for
+  clarifications or wording improvements.
+- Compliance review is mandatory for all changes; pull requests that modify behavior
+  without corresponding documentation updates are invalid.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.1.0 | **Ratified**: TODO(RATIFICATION_DATE): original adoption date not found in repository | **Last Amended**: 2026-02-09
