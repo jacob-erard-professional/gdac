@@ -95,6 +95,16 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Constitutional Requirements
+
+- **CR-001**: Pipeline behavior MUST be deterministic for the same input data and configuration.
+- **CR-002**: Each cleaning concern MUST be a distinct, independently runnable step.
+- **CR-003**: Steps MUST read exactly one input directory and write exactly one output directory.
+- **CR-004**: Each step MUST produce a manifest and structured logs with row counts and rejections.
+- **CR-005**: Raw data MUST remain read-only; outputs are new artifacts only.
+- **CR-006**: Brand handling MUST preserve the original `brand` value and produce explicit flags or scores.
+- **CR-007**: All thresholds and heuristics MUST live in configuration files, not code.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]

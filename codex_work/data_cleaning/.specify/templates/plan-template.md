@@ -31,7 +31,11 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Deterministic pipeline behavior defined; any non-determinism is explicitly seeded and documented.
+- Step boundaries are explicit with one input directory and one output directory per step.
+- Manifest and structured logging requirements are specified for each step.
+- Schema validation, brand skepticism, and raw data immutability are enforced in the design.
+- CLI remains thin; business logic resides in `src/`.
 
 ## Project Structure
 
