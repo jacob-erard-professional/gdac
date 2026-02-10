@@ -25,3 +25,6 @@ coverage/
 Thumbs.db
 .vscode/
 .idea/
+
+# too large for GitHub
+codex_work/data_cleaning/data/input/tweets.csv
