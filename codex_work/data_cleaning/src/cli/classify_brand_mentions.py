@@ -20,6 +20,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--model", required=True, help="OpenRouter model identifier")
     parser.add_argument("--batch-size", type=int, default=100, help="Rows per batch")
     parser.add_argument("--progress-every", type=int, default=1, help="Log progress every N rows")
+    parser.add_argument(
+        "--start-row",
+        type=int,
+        default=1,
+        help="1-based data row to start processing from (excluding CSV header)",
+    )
     return parser
 
 
@@ -34,13 +40,32 @@ def _chunked(iterable: Iterable[Dict[str, Any]], size: int) -> Iterable[List[Dic
         yield batch
 
 
+def _skip_rows(iterable: Iterable[Dict[str, Any]], rows_to_skip: int) -> Iterable[Dict[str, Any]]:
+    if rows_to_skip <= 0:
+        return iterable
+    iterator = iter(iterable)
+    for _ in range(rows_to_skip):
+        try:
+            next(iterator)
+        except StopIteration:
+            break
+    return iterator
+
+
 def run(
     args: argparse.Namespace,
     client: Callable[[str, str, list, int, Dict[str, Any] | None, list | None], Dict[str, Any]] = call_openrouter,
 ) -> None:
+    if args.start_row < 1:
+        raise ValueError("--start-row must be >= 1")
+
     logging.info("Starting batch classification")
     api_key = get_api_key()
     rows_iter = read_csv_rows(args.input)
+    rows_to_skip = args.start_row - 1
+    if rows_to_skip > 0:
+        logging.info("Skipping %s rows; starting from row %s", rows_to_skip, args.start_row)
+        rows_iter = _skip_rows(rows_iter, rows_to_skip)
 
     processed = 0
     if args.format == "jsonl":

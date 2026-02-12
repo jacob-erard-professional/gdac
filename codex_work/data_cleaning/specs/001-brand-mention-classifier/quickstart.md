@@ -43,7 +43,8 @@ python -m src.cli.classify_brand_mentions \
   --output data/output/classified.csv \
   --model openrouter/your-model \
   --batch-size 100 \
-  --progress-every 1
+  --progress-every 1 \
+  --start-row 1
 ```
 
 Optional JSONL output:
@@ -56,7 +57,8 @@ python -m src.cli.classify_brand_mentions \
   --format jsonl \
   --model openrouter/your-model \
   --batch-size 100 \
-  --progress-every 1
+  --progress-every 1 \
+  --start-row 1
 ```
 
 ## Output Columns
