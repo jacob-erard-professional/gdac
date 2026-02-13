@@ -20,3 +20,4 @@ __pycache__/
 command_for_codex.txt
 # too large for GitHub
 codex_work/data_cleaning/data/input/tweets.csv
+codex_work/data_cleaning/data/output/classified.csv
