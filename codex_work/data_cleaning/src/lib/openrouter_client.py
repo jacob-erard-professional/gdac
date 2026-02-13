@@ -12,7 +12,7 @@ def call_openrouter(
     api_key: str,
     model: str,
     messages: List[Dict[str, str]],
-    timeout: int = 30,
+    timeout: int = 60,
     response_format: Optional[Dict[str, Any]] = None,
     plugins: Optional[List[Dict[str, str]]] = None,
 ) -> Dict[str, Any]:
