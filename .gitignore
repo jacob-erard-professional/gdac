@@ -15,9 +15,17 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+.pytest_cache/
+.env.example
+
+.codex
 
 # local file
 command_for_codex.txt
 # too large for GitHub
 codex_work/data_cleaning/data/input/tweets.csv
 codex_work/data_cleaning/data/output/classified.csv
+
+data/
+aux/
+outputs/
