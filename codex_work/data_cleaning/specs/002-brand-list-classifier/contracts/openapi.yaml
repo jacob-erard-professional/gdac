@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  title: Brand List Classifier
+  version: 1.0.1
+  description: Classify tweet rows against a candidate brand list with skip handling.
+paths:
+  /classify-brand-list:
+    post:
+      summary: Classify a tweet row using candidate brands
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandListRequest'
+      responses:
+        '200':
+          description: Classification response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandListResult'
+components:
+  schemas:
+    BrandListRequest:
+      type: object
+      required:
+        - text
+        - is_about_brand
+        - candidate_brands
+      properties:
+        text:
+          type: string
+        is_about_brand:
+          oneOf:
+            - type: boolean
+            - type: string
+        candidate_brands:
+          type: array
+          items:
+            type: string
+        metadata:
+          type: object
+          additionalProperties: true
+    BrandListResult:
+      type: object
+      required:
+        - category
+        - confidence
+        - rationale
+      properties:
+        category:
+          type: string
+          enum: [listed_brand, new_brand, no_brand, skipped]
+        assigned_brand:
+          type: string
+        suggested_brand:
+          type: string
+        confidence:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+        rationale:
+          type: string

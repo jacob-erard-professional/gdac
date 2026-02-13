@@ -89,3 +89,35 @@ def build_messages_batch(tweets: List[TweetRecord]) -> List[Dict[str, str]]:
         {"role": "system", "content": system},
         {"role": "user", "content": user},
     ]
+
+
+def build_brand_list_messages_batch(rows: List[Dict[str, Any]], candidate_brands: List[str]) -> List[Dict[str, str]]:
+    header = ["id", "text", "is_about_brand"]
+    lines = ["tweets[%d]{%s}:" % (len(rows), ",".join(header))]
+    for idx, row in enumerate(rows, start=1):
+        lines.append(
+            ",".join(
+                [
+                    str(idx),
+                    _toon_escape(row.get("text", "")),
+                    _toon_escape(row.get("is_about_brand", "")),
+                ]
+            )
+        )
+    toon_payload = "\n".join(lines)
+    system = (
+        "You are a strict brand-list classifier. For each tweet, choose one category: "
+        "listed_brand, new_brand, or no_brand. Use text as the primary signal."
+    )
+    user = (
+        "Candidate brands:\n"
+        f"{json.dumps(candidate_brands, ensure_ascii=False)}\n\n"
+        "Return JSON with `results` where each item has: id, category, assigned_brand, "
+        "suggested_brand, confidence, rationale.\n\n"
+        "TOON INPUT:\n"
+        f"{toon_payload}"
+    )
+    return [
+        {"role": "system", "content": system},
+        {"role": "user", "content": user},
+    ]

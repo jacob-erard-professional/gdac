@@ -26,6 +26,15 @@ class ClassificationResult:
     prompt_version: Optional[str] = None
 
 
+@dataclass
+class BrandListClassificationResult:
+    category: str
+    assigned_brand: str
+    suggested_brand: str
+    confidence: float
+    rationale: str
+
+
 def normalize_text(value: Any) -> str:
     return "" if value is None else str(value).strip()
 

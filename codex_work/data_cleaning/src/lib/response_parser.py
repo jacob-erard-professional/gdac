@@ -50,3 +50,28 @@ def parse_batch_response(content: str) -> List[Dict[str, Any]]:
             }
         )
     return normalized
+
+
+def parse_brand_list_batch_response(content: str) -> List[Dict[str, Any]]:
+    payload = _extract_json(content)
+    results = payload.get("results")
+    if not isinstance(results, list):
+        raise ValueError("Batch response must include results array")
+    normalized = []
+    for item in results:
+        if not isinstance(item, dict):
+            continue
+        raw_id = item.get("id")
+        if raw_id is None:
+            continue
+        normalized.append(
+            {
+                "id": int(raw_id),
+                "category": str(item.get("category", "no_brand")),
+                "assigned_brand": str(item.get("assigned_brand", "") or ""),
+                "suggested_brand": str(item.get("suggested_brand", "") or ""),
+                "confidence": clamp_confidence(item.get("confidence")),
+                "rationale": ensure_rationale(item.get("rationale")),
+            }
+        )
+    return normalized
