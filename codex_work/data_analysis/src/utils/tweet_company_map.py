@@ -49,6 +49,14 @@ def _parse_hashtags(raw: str) -> list[str]:
     return tags
 
 
+def _extract_row_brand(row: Any) -> str:
+    for key in ("brand", "brand_tag", "brand_ad_name"):
+        value = str(row.get(key, "")).strip().lower()
+        if value and value not in {"unknown_brand", "unmatched"}:
+            return value
+    return ""
+
+
 def _brand_scores(tags: list[str], hashtag_to_brand: dict[str, str], hashtag_to_count: dict[str, int]) -> dict[str, int]:
     scores: dict[str, int] = {}
     for tag in tags:
@@ -88,14 +96,20 @@ def build_brand_tweet_map(
 
     records: list[dict[str, Any]] = []
     for _, row in frame.iterrows():
-        tags = _parse_hashtags(row.get("hashtags", ""))
-        scores = _brand_scores(tags, hashtag_to_brand, hashtag_to_count)
-        ordered_brands = sorted(scores.items(), key=lambda item: (-int(item[1]), str(item[0])))
-        brand_tags = [str(item[0]) for item in ordered_brands]
+        row_brand = _extract_row_brand(row)
+        if row_brand:
+            brand_tags = [row_brand]
+            primary_brand = row_brand
+        else:
+            tags = _parse_hashtags(row.get("hashtags", ""))
+            scores = _brand_scores(tags, hashtag_to_brand, hashtag_to_count)
+            ordered_brands = sorted(scores.items(), key=lambda item: (-int(item[1]), str(item[0])))
+            brand_tags = [str(item[0]) for item in ordered_brands]
+            primary_brand = _select_primary(scores)
         record = {
             "tweet_id": str(row.get(tweet_id_col, "")).strip(),
             "brand_tags": brand_tags,
-            "primary_brand": _select_primary(scores),
+            "primary_brand": primary_brand,
         }
         if pipeline_col:
             record["pipeline_row_id"] = str(row.get(pipeline_col, "")).strip()
@@ -205,9 +219,13 @@ def build_parent_company_tweet_map_jsonl(
             batch = frame.iloc[start : start + batch_size]
             records: list[dict[str, Any]] = []
             for _, row in batch.iterrows():
-                tags = _parse_hashtags(row.get("hashtags", ""))
-                scores = _brand_scores(tags, hashtag_to_brand, hashtag_to_count)
-                primary_brand = _select_primary(scores)
+                row_brand = _extract_row_brand(row)
+                if row_brand:
+                    primary_brand = row_brand
+                else:
+                    tags = _parse_hashtags(row.get("hashtags", ""))
+                    scores = _brand_scores(tags, hashtag_to_brand, hashtag_to_count)
+                    primary_brand = _select_primary(scores)
                 parent = parent_map.get(primary_brand, "unmatched")
                 record = {
                     "tweet_id": str(row.get(tweet_id_col, "")).strip(),

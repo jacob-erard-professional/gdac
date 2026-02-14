@@ -179,6 +179,11 @@ Match sentiment tweets to brands and parent companies (from hashtags in the sent
   --batch-size 1000
 ```
 
+Brand source rule:
+- Sentiment-company mapping now uses the sentiment record `brand` (carried from raw CSV
+  `brand`/`brand_ad_name`) as the primary brand signal.
+- Hashtag-to-brand matching is only a fallback when `brand` is missing/empty.
+
 Same, but choose which label field to store (e.g., `sentiment`):
 
 ```bash

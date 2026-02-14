@@ -1,4 +1,5 @@
 import argparse
+import csv
 import json
 import re
 from pathlib import Path
@@ -15,6 +16,38 @@ def _extract_hashtags(text: str) -> list[str]:
 
 def _select_primary(items: list[str]) -> str:
     return items[0] if items else "unmatched"
+
+
+def _normalize_brand(value: object) -> str:
+    return str(value or "").strip().lower()
+
+
+def _load_cleaned_brand_lookup(year: int | str | None) -> tuple[dict[str, str], dict[str, str]]:
+    try:
+        year_str = str(int(year))
+    except (TypeError, ValueError):
+        return {}, {}
+    cleaned_path = Path.cwd() / "data" / "processed" / year_str / "cleaned.csv"
+    if not cleaned_path.exists():
+        return {}, {}
+
+    by_row: dict[str, str] = {}
+    by_tweet: dict[str, str] = {}
+    with cleaned_path.open(newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            brand = _normalize_brand(
+                row.get("brand") or row.get("brand_ad_name") or row.get("brand_tag")
+            )
+            if not brand:
+                continue
+            row_id = str(row.get("pipeline_row_id", "")).strip()
+            tweet_id = str(row.get("id") or row.get("tweet_id") or "").strip()
+            if row_id and row_id not in by_row:
+                by_row[row_id] = brand
+            if tweet_id and tweet_id not in by_tweet:
+                by_tweet[tweet_id] = brand
+    return by_row, by_tweet
 
 
 def run_match_sentiment_to_companies(
@@ -40,25 +73,40 @@ def run_match_sentiment_to_companies(
             output_path = Path(parts[0]) / "outputs" / "aux" / parts[1]
             print(f"[sentiment-map] redirecting output to aux: {output_path}")
 
-    hashtag_to_brand, _hashtag_counts = _load_brand_groups(brand_groups_file)
+    if brand_groups_file.exists():
+        hashtag_to_brand, _hashtag_counts = _load_brand_groups(brand_groups_file)
+    else:
+        print(f"[sentiment-map] brand groups not found, using brand field only: {brand_groups_file}")
+        hashtag_to_brand = {}
     parent_map = _load_parent_company_groups(parent_groups_file)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    year_hint = records[0].get("year") if records else None
+    brand_by_row, brand_by_tweet = _load_cleaned_brand_lookup(year_hint)
     total = len(records)
     with output_path.open("w", encoding="utf-8") as f:
         for start in range(0, total, batch_size):
             batch = records[start : start + batch_size]
             out_records = []
             for record in batch:
+                record_brand = _normalize_brand(record.get("brand"))
+                if not record_brand:
+                    row_id = str(record.get("pipeline_row_id", "")).strip()
+                    tweet_id = str(record.get("tweet_id", "")).strip()
+                    record_brand = brand_by_row.get(row_id) or brand_by_tweet.get(tweet_id) or ""
                 text = str(record.get("text", ""))
                 hashtags = _extract_hashtags(text)
-                brand_tags = []
-                for tag in hashtags:
-                    brand = hashtag_to_brand.get(tag)
-                    if brand:
-                        brand_tags.append(brand)
-                brand_tags = sorted(set(brand_tags))
-                primary_brand = _select_primary(brand_tags)
+                if record_brand and record_brand not in {"unknown_brand", "unmatched"}:
+                    brand_tags = [record_brand]
+                    primary_brand = record_brand
+                else:
+                    brand_tags = []
+                    for tag in hashtags:
+                        brand = hashtag_to_brand.get(tag)
+                        if brand:
+                            brand_tags.append(brand)
+                    brand_tags = sorted(set(brand_tags))
+                    primary_brand = _select_primary(brand_tags)
                 parent_tags = sorted({parent_map.get(brand) for brand in brand_tags if parent_map.get(brand)})
                 primary_parent = parent_map.get(primary_brand) or _select_primary(parent_tags)
 
@@ -67,6 +115,7 @@ def run_match_sentiment_to_companies(
                     "pipeline_row_id": str(record.get("pipeline_row_id", "")).strip(),
                     "year": record.get("year"),
                     "hashtags": hashtags,
+                    "brand": record_brand,
                     "brand_tags": brand_tags,
                     "primary_brand": primary_brand,
                     "parent_company_tags": parent_tags,

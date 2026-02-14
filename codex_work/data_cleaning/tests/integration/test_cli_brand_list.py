@@ -49,6 +49,7 @@ def test_cli_brand_list_csv(tmp_path, monkeypatch):
         model="openrouter/test",
         batch_size=100,
         progress_every=1,
+        start_row=1,
     )
     run(args, client=fake_client)
 
@@ -78,6 +79,7 @@ def test_cli_brand_list_jsonl(tmp_path, monkeypatch):
         model="openrouter/test",
         batch_size=100,
         progress_every=1,
+        start_row=1,
     )
     run(args, client=fake_client)
 
@@ -102,6 +104,37 @@ def test_cli_brand_list_parity_flags(tmp_path, monkeypatch):
         model="openrouter/test",
         batch_size=2,
         progress_every=1,
+        start_row=1,
     )
     run(args, client=fake_client)
     assert out_csv.exists()
+
+
+def test_cli_brand_list_start_row(tmp_path, monkeypatch):
+    monkeypatch.setenv("OPENROUTER_API_KEY", "testkey")
+    in_csv = tmp_path / "tweets.csv"
+    brands_csv = tmp_path / "brands.csv"
+    out_csv = tmp_path / "out.csv"
+    with in_csv.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["text", "is_about_brand", "id"])
+        writer.writeheader()
+        writer.writerow({"text": "row1", "is_about_brand": "false", "id": "1"})
+        writer.writerow({"text": "row2", "is_about_brand": "false", "id": "2"})
+        writer.writerow({"text": "row3", "is_about_brand": "false", "id": "3"})
+    _write_brands(brands_csv)
+
+    args = argparse.Namespace(
+        input=str(in_csv),
+        brand_list=str(brands_csv),
+        output=str(out_csv),
+        format="csv",
+        model="openrouter/test",
+        batch_size=100,
+        progress_every=1,
+        start_row=3,
+    )
+    run(args, client=fake_client)
+
+    rows = list(csv.DictReader(out_csv.open("r", encoding="utf-8")))
+    assert len(rows) == 1
+    assert rows[0]["text"] == "row3"

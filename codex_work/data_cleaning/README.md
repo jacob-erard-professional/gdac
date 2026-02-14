@@ -71,6 +71,23 @@ python3 scripts/remove_duplicate_rows.py \
   --output tweets_2026-02-10_deduped.csv
 ```
 
+## Sample Balanced Rows
+
+```bash
+python3 scripts/sample_balanced_classified.py \
+  --input data/output/classified_full.csv \
+  --output data/output/classified_full_sample_200.csv \
+  --seed 42
+```
+
+## Clean Brand `_1`
+
+```bash
+python3 scripts/remove_brand_literal_1.py \
+  --input data/input/tweets.csv \
+  --output data/input/tweets_cleaned.csv
+```
+
 ## Brand List Classifier
 
 ```bash
@@ -82,4 +99,17 @@ python3 -m src.cli.classify_brand_list \
   --model openrouter/your-model \
   --batch-size 100 \
   --progress-every 1
+```
+
+Resume from row 12401:
+
+```bash
+python3 -m src.cli.classify_brand_list \
+  --input data/input/tweets.csv \
+  --brand-list data/input/brands.csv \
+  --output data/output/brand_list_classified_resume.csv \
+  --model openrouter/your-model \
+  --batch-size 100 \
+  --progress-every 1 \
+  --start-row 12401
 ```

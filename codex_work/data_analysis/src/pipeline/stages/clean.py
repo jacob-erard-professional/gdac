@@ -8,6 +8,9 @@ TARGET_COLUMNS = [
     'author_id',
     'created_at',
     'conversation_id',
+    'brand',
+    'brand_ad_name',
+    'team_name',
     'text',
     'lang',
     'possibly_sensitive',
@@ -53,6 +56,13 @@ def run(config):
             normalized = {k: row.get(k, '') for k in TARGET_COLUMNS}
             normalized['id'] = normalized['id'] or row.get('tweet_id', '')
             normalized['author_id'] = normalized['author_id'] or row.get('user_id', '')
+            normalized['brand'] = (
+                row.get('brand')
+                or row.get('brand_ad_name')
+                or row.get('team_name')
+                or row.get('brand_tag')
+                or ''
+            )
             normalized['text'] = text
             row_index += 1
             normalized['pipeline_row_id'] = str(row_index)

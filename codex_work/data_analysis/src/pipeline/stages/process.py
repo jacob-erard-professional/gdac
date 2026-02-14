@@ -28,8 +28,15 @@ def run(config):
             words = [w.lower() for w in WORD_RE.findall(text)]
             row['hashtags'] = '|'.join(sorted(set(hashtags)))
             row['keywords'] = '|'.join(sorted(set(words[:25])))
-            row['brand_tag'] = row.get('brand_hint') or ('unknown_brand')
-            row['ad_tag'] = row.get('ad_hint') or ('unknown_ad')
+            brand = (
+                row.get('brand')
+                or row.get('brand_ad_name')
+                or row.get('brand_hint')
+                or ''
+            )
+            row['brand'] = str(brand).strip()
+            row['brand_tag'] = row['brand'].lower() if row['brand'] else 'unknown_brand'
+            row['ad_tag'] = row.get('brand_ad_name') or row.get('ad_hint') or row.get('brand') or 'unknown_ad'
             row['sentiment_label'] = _sentiment(text)
             row['sentiment_score'] = {'negative': -1, 'neutral': 0, 'positive': 1}[row['sentiment_label']]
             row['game_phase'] = row.get('game_phase') or 'unknown'

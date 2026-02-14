@@ -167,6 +167,11 @@ def load_input_rows(input_path: Path, *, target_year: int | None) -> tuple[list[
         raise ValueError("Input is missing year column and no --year was provided")
 
     created_at_col = "created_at_utc" if "created_at_utc" in frame.columns else "created_at"
+    brand_col = (
+        "brand"
+        if "brand" in frame.columns
+        else ("brand_ad_name" if "brand_ad_name" in frame.columns else ("brand_tag" if "brand_tag" in frame.columns else None))
+    )
 
     normalized = pd.DataFrame(
         {
@@ -176,6 +181,7 @@ def load_input_rows(input_path: Path, *, target_year: int | None) -> tuple[list[
             "created_at": frame[created_at_col].astype(str) if created_at_col in frame.columns else "",
             "pipeline_row_id": frame["pipeline_row_id"].astype(str) if "pipeline_row_id" in frame.columns else "",
             "username": frame["username"].astype(str) if "username" in frame.columns else "",
+            "brand": frame[brand_col].astype(str) if brand_col else "",
         }
     )
 
@@ -194,7 +200,7 @@ def load_input_rows(input_path: Path, *, target_year: int | None) -> tuple[list[
     valid["row_order"] = valid.index.astype(int)
     valid = valid.sort_values(by=["tweet_id", "created_at", "row_order"], kind="mergesort")
 
-    rows = valid[["tweet_id", "text", "hashtags", "year", "pipeline_row_id"]].to_dict(orient="records")
+    rows = valid[["tweet_id", "text", "hashtags", "year", "pipeline_row_id", "username", "brand"]].to_dict(orient="records")
     return rows, invalid_count
 
 
@@ -256,6 +262,7 @@ def infer_deep_sentiment_batches(
                     "year": int(row["year"]),
                     "pipeline_row_id": row.get("pipeline_row_id", ""),
                     "username": row.get("username", ""),
+                    "brand": str(row.get("brand", "")).strip().lower(),
                     "main_sentiment": main_sentiment,
                     "confidence": round(float(confidence), 6),
                 }
