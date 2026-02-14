@@ -15,7 +15,7 @@ columns such as annotations, mentions, hashtags, cashtags, and URLs.
 
 ```bash
 export OPENROUTER_API_KEY="your_api_key"
-python -m src.cli.classify_brand_mentions \
+python3 -m src.cli.classify_brand_mentions \
   --input data/input/tweets.csv \
   --output data/output/classified.csv \
   --model openrouter/your-model \
@@ -28,7 +28,7 @@ Optional JSONL output:
 
 ```bash
 export OPENROUTER_API_KEY="your_api_key"
-python -m src.cli.classify_brand_mentions \
+python3 -m src.cli.classify_brand_mentions \
   --input data/input/tweets.csv \
   --output data/output/classified.jsonl \
   --format jsonl \
@@ -41,7 +41,7 @@ python -m src.cli.classify_brand_mentions \
 Resume from row 16701:
 
 ```bash
-python -m src.cli.classify_brand_mentions \
+python3 -m src.cli.classify_brand_mentions \
   --input data/input/tweets.csv \
   --output data/output/classified_resume.csv \
   --model openrouter/your-model \
@@ -69,4 +69,47 @@ python3 scripts/extract_brand_text_label.py \
 python3 scripts/remove_duplicate_rows.py \
   --input 2026 tweets_2026-02-10.csv \
   --output tweets_2026-02-10_deduped.csv
+```
+
+## Sample Balanced Rows
+
+```bash
+python3 scripts/sample_balanced_classified.py \
+  --input data/output/classified_full.csv \
+  --output data/output/classified_full_sample_200.csv \
+  --seed 42
+```
+
+## Clean Brand `_1`
+
+```bash
+python3 scripts/remove_brand_literal_1.py \
+  --input data/input/tweets.csv \
+  --output data/input/tweets_cleaned.csv
+```
+
+## Brand List Classifier
+
+```bash
+export OPENROUTER_API_KEY="your_api_key"
+python3 -m src.cli.classify_brand_list \
+  --input data/input/tweets.csv \
+  --brand-list data/input/brands.csv \
+  --output data/output/brand_list_classified.csv \
+  --model openrouter/your-model \
+  --batch-size 100 \
+  --progress-every 1
+```
+
+Resume from row 12401:
+
+```bash
+python3 -m src.cli.classify_brand_list \
+  --input data/input/tweets.csv \
+  --brand-list data/input/brands.csv \
+  --output data/output/brand_list_classified_resume.csv \
+  --model openrouter/your-model \
+  --batch-size 100 \
+  --progress-every 1 \
+  --start-row 12401
 ```

@@ -25,6 +25,8 @@ METRIC_COLUMNS = {
     "public_metrics.impression_count",
 }
 
+TRUE_VALUES = {"true", "1", "yes", "y"}
+
 
 def parse_json_like(value: Any) -> List[Dict[str, Any]]:
     if value is None:
@@ -56,11 +58,35 @@ def parse_int(value: Any) -> int:
         return 0
 
 
+def is_true_like(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if value is None:
+        return False
+    return str(value).strip().lower() in TRUE_VALUES
+
+
 def read_csv_rows(path: str) -> Iterable[Dict[str, Any]]:
     with open(path, newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         for row in reader:
             yield row
+
+
+def load_brand_list_csv(path: str) -> List[str]:
+    with open(path, newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        if reader.fieldnames != ["brand"]:
+            raise ValueError("Brand list CSV must contain exactly one header named 'brand'")
+        brands: List[str] = []
+        for row in reader:
+            brand = normalize_text(row.get("brand"))
+            if not brand:
+                raise ValueError("Brand list CSV contains blank brand value")
+            brands.append(brand)
+    if not brands:
+        raise ValueError("Brand list CSV must contain at least one brand")
+    return brands
 
 
 def parse_row(row: Dict[str, Any]) -> TweetRecord:

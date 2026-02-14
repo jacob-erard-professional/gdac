@@ -14,6 +14,25 @@ def _extract_content(response: Dict[str, Any]) -> str:
         raise ValueError("Unexpected OpenRouter response format") from exc
 
 
+def invoke_openrouter_with_schema(
+    api_key: str,
+    model: str,
+    messages: list,
+    response_format: Dict[str, Any],
+    client: Callable[[str, str, list, int, Dict[str, Any] | None, list | None], Dict[str, Any]],
+) -> str:
+    plugins = [{"id": "response-healing"}]
+    response = client(
+        api_key,
+        model,
+        messages,
+        30,
+        response_format,
+        plugins,
+    )
+    return _extract_content(response)
+
+
 def classify_batch(
     tweets: list[TweetRecord],
     model: str,
@@ -63,16 +82,12 @@ def classify_batch(
                 },
             },
         }
-        plugins = [{"id": "response-healing"}]
-        content = _extract_content(
-            client(
-                api_key,
-                model,
-                messages,
-                30,
-                response_format,
-                plugins,
-            )
+        content = invoke_openrouter_with_schema(
+            api_key,
+            model,
+            messages,
+            response_format,
+            client,
         )
         batch_results = parse_batch_response(content)
         by_id = {item["id"]: item for item in batch_results}
