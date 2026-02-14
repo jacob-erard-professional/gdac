@@ -9,9 +9,7 @@ from src.pipeline.path_resolution import resolve_year_config
 VALID_EXCLUDES = {
     "sentiment",
     "ad-sentiment",
-    "deep-sentiment",
     "parent-company-sentiment",
-    "parent-company-deep-sentiment",
     "agentic-emotion",
     "group-brands",
     "group-parent-companies",
@@ -26,7 +24,7 @@ def run_everything_command(
     exclude: list[str] = typer.Option(
         [],
         "--exclude",
-        help="Repeatable. One of: sentiment, ad-sentiment, deep-sentiment, parent-company-sentiment, parent-company-deep-sentiment, agentic-emotion, group-brands, group-parent-companies, sentiment-maps, emotion-breakdowns",
+        help="Repeatable. One of: sentiment, ad-sentiment, parent-company-sentiment, agentic-emotion, group-brands, group-parent-companies, sentiment-maps, emotion-breakdowns",
     ),
     sentiment_model: str = typer.Option(
         "finiteautomata/bertweet-base-sentiment-analysis",
@@ -34,13 +32,6 @@ def run_everything_command(
     ),
     sentiment_batch_size: int = typer.Option(64, "--sentiment-batch-size", min=1, max=4096),
     sentiment_device: str = typer.Option("cuda", "--sentiment-device"),
-    deep_sentiment_model: str = typer.Option(
-        "cardiffnlp/twitter-roberta-base-emotion-latest",
-        "--deep-sentiment-model",
-    ),
-    deep_sentiment_batch_size: int = typer.Option(64, "--deep-sentiment-batch-size", min=1, max=4096),
-    deep_sentiment_device: str = typer.Option("cuda", "--deep-sentiment-device"),
-    deep_sentiment_label_map_file: Path = typer.Option(None, "--deep-sentiment-label-map-file"),
     agentic_emotion_model: str = typer.Option(None, "--agentic-emotion-model"),
     agentic_emotion_batch_size: int = typer.Option(40, "--agentic-emotion-batch-size", min=1, max=200),
     agentic_emotion_brand_filter: str = typer.Option("", "--agentic-emotion-brand-filter"),
@@ -63,9 +54,7 @@ def run_everything_command(
 
     run_sentiment = "sentiment" not in excluded
     run_ad_sentiment = "ad-sentiment" not in excluded
-    run_deep_sentiment = "deep-sentiment" not in excluded
     run_parent_company_sentiment = "parent-company-sentiment" not in excluded
-    run_parent_company_deep_sentiment = "parent-company-deep-sentiment" not in excluded
     run_agentic_emotion = "agentic-emotion" not in excluded
     run_group_brands = "group-brands" not in excluded
     run_group_parent_companies = "group-parent-companies" not in excluded
@@ -74,22 +63,15 @@ def run_everything_command(
 
     if run_ad_sentiment and not run_sentiment:
         raise typer.BadParameter("ad-sentiment requires sentiment. Remove 'sentiment' from --exclude.")
-    if run_parent_company_deep_sentiment and not run_deep_sentiment:
-        raise typer.BadParameter(
-            "parent-company-deep-sentiment requires deep-sentiment. Remove 'deep-sentiment' from --exclude."
-        )
     if run_parent_company_sentiment and not run_sentiment:
         run_parent_company_sentiment = False
         typer.echo("[run-everything] skipping parent-company-sentiment (requires sentiment)")
     if run_parent_company_sentiment and not run_group_parent_companies:
         run_parent_company_sentiment = False
         typer.echo("[run-everything] skipping parent-company-sentiment (requires group-parent-companies)")
-    if run_parent_company_deep_sentiment and not run_group_parent_companies:
-        run_parent_company_deep_sentiment = False
-        typer.echo("[run-everything] skipping parent-company-deep-sentiment (requires group-parent-companies)")
-    if run_sentiment_maps and not (run_sentiment or run_deep_sentiment):
+    if run_sentiment_maps and not run_sentiment:
         run_sentiment_maps = False
-        typer.echo("[run-everything] skipping sentiment-maps (requires sentiment and/or deep-sentiment)")
+        typer.echo("[run-everything] skipping sentiment-maps (requires sentiment)")
     if run_sentiment_maps and not run_group_parent_companies:
         run_sentiment_maps = False
         typer.echo("[run-everything] skipping sentiment-maps (requires group-parent-companies)")
@@ -105,9 +87,6 @@ def run_everything_command(
         resolved_data_dir = (base_dir / resolved_data_dir).resolve()
 
     cfg = resolve_year_config(base_dir, year=year, data_dir=resolved_data_dir)
-    resolved_label_map = deep_sentiment_label_map_file
-    if resolved_label_map and not resolved_label_map.is_absolute():
-        resolved_label_map = (base_dir / resolved_label_map).resolve()
 
     req = RunRequest(
         mode="full_year",
@@ -122,13 +101,6 @@ def run_everything_command(
         sentiment_dry_run=False,
         sentiment_allow_fallback=False,
         sentiment_device=sentiment_device,
-        with_deep_sentiment=run_deep_sentiment,
-        deep_sentiment_model=deep_sentiment_model,
-        deep_sentiment_batch_size=deep_sentiment_batch_size,
-        deep_sentiment_dry_run=False,
-        deep_sentiment_label_map_file=resolved_label_map,
-        deep_sentiment_device=deep_sentiment_device,
-        with_parent_company_deep_sentiment=False,
         with_agentic_emotion=run_agentic_emotion,
         agentic_emotion_model=resolved_agentic_emotion_model,
         agentic_emotion_batch_size=agentic_emotion_batch_size,
@@ -238,30 +210,6 @@ def run_everything_command(
             min_tweets=1,
         )
 
-    if run_parent_company_deep_sentiment:
-        typer.echo("[run-everything] running parent-company-deep-sentiment")
-        from src.sentiment.parent_company_deep_impact import run_parent_company_deep_sentiment_analysis
-
-        deep_path = base_dir / "sentiment" / "deep" / cfg.year / "deep_sentiment.json"
-        if not deep_path.exists():
-            raise typer.BadParameter(
-                f"Deep sentiment file not found: {deep_path}. Run without excluding deep-sentiment."
-            )
-        parent_groups_path = cfg.analytics_dir / "parent_company_groups.json"
-        if not parent_groups_path.exists():
-            raise typer.BadParameter(
-                f"Parent company groups not found: {parent_groups_path}. Run without excluding group-parent-companies."
-            )
-        run_parent_company_deep_sentiment_analysis(
-            year=int(cfg.year),
-            deep_sentiment_path=deep_path,
-            enriched_path=cfg.enriched_dir / "enriched.csv",
-            parent_groups_path=parent_groups_path,
-            output_dir=cfg.analytics_dir,
-            min_tweets=1,
-            tweet_map_path=base_dir / "outputs" / "aux" / cfg.year / "parent_company_tweet_map.json",
-        )
-
     if run_sentiment_maps:
         try:
             from src.scripts.match_sentiment_to_companies import run_match_sentiment_to_companies
@@ -290,26 +238,11 @@ def run_everything_command(
             else:
                 typer.echo(f"[run-everything] sentiment file missing: {sentiment_path}")
 
-        if run_deep_sentiment:
-            deep_path = base_dir / "sentiment" / "deep" / cfg.year / "deep_sentiment.json"
-            if deep_path.exists():
-                typer.echo("[run-everything] building deep_sentiment_company_map")
-                run_match_sentiment_to_companies(
-                    sentiment_file=deep_path,
-                    brand_groups_file=brand_groups_path,
-                    parent_groups_file=parent_groups_path,
-                    output_file=aux_dir / "deep_sentiment_company_map.jsonl",
-                    batch_size=1000,
-                )
-            else:
-                typer.echo(f"[run-everything] deep sentiment file missing: {deep_path}")
-
     if run_emotion_breakdowns:
         from src.scripts.emotion_breakdown import run_emotion_breakdown
 
         aux_dir = base_dir / "outputs" / "aux" / cfg.year
         sentiment_map = aux_dir / "sentiment_company_map.jsonl"
-        deep_map = aux_dir / "deep_sentiment_company_map.jsonl"
 
         if sentiment_map.exists():
             typer.echo("[run-everything] computing sentiment breakdowns")
@@ -317,13 +250,6 @@ def run_everything_command(
                 input_jsonl=sentiment_map,
                 parent_out=aux_dir / "parent_company_sentiment_breakdown.json",
                 brand_out=aux_dir / "brand_sentiment_breakdown.json",
-            )
-        if deep_map.exists():
-            typer.echo("[run-everything] computing deep emotion breakdowns")
-            run_emotion_breakdown(
-                input_jsonl=deep_map,
-                parent_out=aux_dir / "parent_company_emotion_breakdown.json",
-                brand_out=aux_dir / "brand_emotion_breakdown.json",
             )
 
     typer.echo("[run-everything] complete")

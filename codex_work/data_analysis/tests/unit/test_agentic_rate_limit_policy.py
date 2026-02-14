@@ -49,7 +49,7 @@ def test_brand_grouping_enforces_policy_for_invoker(monkeypatch, tmp_path: Path)
     monkeypatch.setattr(
         brand_agent,
         "_map_chunk_to_brands",
-        lambda _invoker, chunk: {item.hashtag: item.hashtag for item in chunk},
+        lambda _invoker, chunk, _hints: {item.hashtag: item.hashtag for item in chunk},
     )
     monkeypatch.setattr(
         brand_agent,
@@ -60,6 +60,7 @@ def test_brand_grouping_enforces_policy_for_invoker(monkeypatch, tmp_path: Path)
     brand_agent.run_brand_grouping(
         hashtags_path=in_path,
         output_path=out_path,
+        model="openai/gpt-4.1",
         request_delay_seconds=0.0,
         max_rate_limit_retries=0,
         initial_backoff_seconds=0.1,
@@ -101,7 +102,7 @@ def test_parent_grouping_enforces_policy_for_invoker(monkeypatch, tmp_path: Path
     monkeypatch.setattr(
         parent_agent,
         "_map_chunk_to_parent_companies",
-        lambda _invoker, chunk: {item.brand: item.brand for item in chunk},
+        lambda _invoker, chunk, _hints: {item.brand: item.brand for item in chunk},
     )
     monkeypatch.setattr(
         parent_agent,
@@ -112,6 +113,7 @@ def test_parent_grouping_enforces_policy_for_invoker(monkeypatch, tmp_path: Path
     parent_agent.run_parent_company_grouping(
         brand_groups_path=in_path,
         output_path=out_path,
+        model="openai/gpt-4.1",
         request_delay_seconds=0.0,
         max_rate_limit_retries=0,
         initial_backoff_seconds=0.1,

@@ -28,15 +28,6 @@ def test_run_everything_requires_sentiment_for_ad_sentiment():
     assert "ad-sentiment requires sentiment" in result.stdout
 
 
-def test_run_everything_requires_deep_sentiment_for_parent_company_deep_sentiment():
-    result = runner.invoke(
-        app,
-        ["run-everything", "--year", "2024", "--exclude", "deep-sentiment"],
-    )
-    assert result.exit_code != 0
-    assert "parent-company-deep-sentiment requires deep-sentiment" in result.stdout
-
-
 def test_run_everything_runs_pipeline_and_group_brands(monkeypatch, tmp_path: Path):
     analytics_dir = tmp_path / "outputs" / "analytics" / "2024"
     analytics_dir.mkdir(parents=True, exist_ok=True)
@@ -70,10 +61,6 @@ def test_run_everything_runs_pipeline_and_group_brands(monkeypatch, tmp_path: Pa
             "--grouping-model",
             "openai/gpt-4.1",
             "--exclude",
-            "deep-sentiment",
-            "--exclude",
-            "parent-company-deep-sentiment",
-            "--exclude",
             "group-parent-companies",
         ],
     )
@@ -81,7 +68,6 @@ def test_run_everything_runs_pipeline_and_group_brands(monkeypatch, tmp_path: Pa
     assert result.exit_code == 0
     assert calls["req"].with_sentiment is True
     assert calls["req"].with_ad_sentiment is True
-    assert calls["req"].with_deep_sentiment is False
     assert calls["brand"]["hashtags_path"] == analytics_dir / "hashtags_frequency.json"
 
 

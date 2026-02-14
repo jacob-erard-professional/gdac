@@ -42,6 +42,7 @@ def test_parent_company_overrides_map_franchise_to_universal(monkeypatch, tmp_pa
     parent_agent.run_parent_company_grouping(
         brand_groups_path=in_path,
         output_path=out_path,
+        model="openai/gpt-4.1",
         chunk_size=2,
     )
 

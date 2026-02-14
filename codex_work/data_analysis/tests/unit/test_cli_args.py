@@ -51,13 +51,7 @@ def test_with_parent_company_sentiment_requires_with_sentiment():
     assert '--with-parent-company-sentiment requires --with-sentiment' in r.stdout
 
 
-def test_with_deep_sentiment_requires_all_mode():
-    r = runner.invoke(app, ['run', '--year', '2024', '--stage', 'clean', '--with-deep-sentiment'])
-    assert r.exit_code != 0
-    assert 'Error' in r.output
-
-
-def test_with_parent_company_deep_sentiment_requires_with_deep_sentiment():
-    r = runner.invoke(app, ['run', '--year', '2024', '--all', '--with-parent-company-deep-sentiment'])
+def test_with_agentic_emotion_requires_all_mode():
+    r = runner.invoke(app, ['run', '--year', '2024', '--stage', 'clean', '--with-agentic-emotion'])
     assert r.exit_code != 0
     assert 'Error' in r.output

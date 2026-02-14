@@ -20,7 +20,6 @@ outputs/
   aux/<year>/   # maps, partial JSONLs, recovery artifacts, joined parquet maps
 sentiment/
   bertweet/<year>/sentiment.json
-  deep/<year>/deep_sentiment.json
 ```
 
 Raw files are immutable after ingest.
@@ -45,20 +44,13 @@ Full pipeline + BERTweet sentiment:
 .venv/bin/python -m src.cli run --year 2024 --all --with-sentiment
 ```
 
-Full pipeline + deep sentiment:
-
-```bash
-.venv/bin/python -m src.cli run --year 2024 --all --with-deep-sentiment
-```
-
 Full pipeline + parent-company joins:
 
 ```bash
 .venv/bin/python -m src.cli run --year 2024 --all --with-sentiment --with-parent-company-sentiment
-.venv/bin/python -m src.cli run --year 2024 --all --with-deep-sentiment --with-parent-company-deep-sentiment
 ```
 
-Run all available workflows (pipeline + sentiment + deep sentiment + grouping + maps + breakdowns):
+Run all available workflows (pipeline + sentiment + grouping + maps + breakdowns):
 
 ```bash
 .venv/bin/python -m src.cli run-everything --year 2024 --grouping-model openai/gpt-4.1
@@ -85,14 +77,12 @@ Optional: supply brand-group hints to improve brand grouping:
 Run everything except selected workflows (repeat `--exclude`):
 
 ```bash
-.venv/bin/python -m src.cli run-everything --year 2024 --grouping-model openai/gpt-4.1 --exclude deep-sentiment --exclude group-parent-companies
+.venv/bin/python -m src.cli run-everything --year 2024 --grouping-model openai/gpt-4.1 --exclude group-parent-companies
 ```
 
-Valid excludes: `sentiment`, `ad-sentiment`, `deep-sentiment`, `parent-company-sentiment`,
-`parent-company-deep-sentiment`, `agentic-emotion`, `group-brands`, `group-parent-companies`,
+Valid excludes: `sentiment`, `ad-sentiment`, `parent-company-sentiment`, `agentic-emotion`, `group-brands`, `group-parent-companies`,
 `sentiment-maps`, `emotion-breakdowns`.
-Notes: `ad-sentiment` requires `sentiment`, and `parent-company-deep-sentiment` requires
-`deep-sentiment` (these two combinations are hard errors if excluded).
+Note: `ad-sentiment` requires `sentiment` (hard error if excluded).
 By default `run` and `run-everything` preserve existing analytics outputs. Use `--clean-outputs`
 only when you explicitly want to clear `outputs/analytics/<year>/` before analysis.
 Grouping workflows require `--grouping-model`. Agentic emotion requires `--agentic-emotion-model`.
@@ -107,9 +97,7 @@ Grouping workflows require `--grouping-model`. Agentic emotion requires `--agent
 - analyze: analytics artifact generation under `outputs/analytics/<year>/`
 - sentiment (optional): BERTweet sentiment inference → `sentiment/bertweet/<year>/sentiment.json`
 - ad_sentiment (optional): joins sentiment + enriched rows → ad-level outputs
-- deep_sentiment (optional): deep emotion inference → `sentiment/deep/<year>/deep_sentiment.json`
 - parent_company_sentiment (optional): joins sentiment + parent company groupings
-- parent_company_deep_sentiment (optional): joins deep sentiment + parent company groupings
 - visualize (optional): placeholder visualization output
 - export (optional): placeholder export artifact
 
@@ -144,12 +132,6 @@ BERTweet sentiment:
 .venv/bin/python -m src.cli sentiment --year 2024 --batch-size 64
 ```
 
-Deep sentiment (Twitter-trained model):
-
-```bash
-.venv/bin/python -m src.cli deep-sentiment --year 2024 --batch-size 64
-```
-
 Agentic emotion classification (committee + supervisor):
 
 ```bash
@@ -164,7 +146,7 @@ Optional brand filter:
 
 GPU usage:
 - Defaults to CUDA if available (falls back to CPU).
-- Override with `--device cpu` for the CLI, or `--sentiment-device` / `--deep-sentiment-device` for `run`.
+- Override with `--device cpu` for the CLI, or `--sentiment-device` for `run`.
 
 ## Mapping & Aggregation Scripts
 
@@ -217,13 +199,6 @@ Emotion breakdowns from sentiment-company maps:
   --brand-out outputs/aux/2024/brand_sentiment_breakdown.json
 ```
 
-```bash
-.venv/bin/python -m src.scripts.emotion_breakdown \
-  --input-jsonl outputs/aux/2024/deep_sentiment_company_map.jsonl \
-  --parent-out outputs/aux/2024/parent_company_emotion_breakdown.json \
-  --brand-out outputs/aux/2024/brand_emotion_breakdown.json
-```
-
 Reclassify sentiment by confidence (keep both datasets):
 
 ```bash
@@ -232,14 +207,6 @@ Reclassify sentiment by confidence (keep both datasets):
   --output-file sentiment/bertweet/2024/sentiment_reclassified.json \
   --threshold 0.65 \
   --label-field sentiment
-```
-
-```bash
-.venv/bin/python -m src.scripts.reclassify_sentiment_by_confidence \
-  --input-file sentiment/deep/2024/deep_sentiment.json \
-  --output-file sentiment/deep/2024/deep_sentiment_reclassified.json \
-  --threshold 0.65 \
-  --label-field main_sentiment
 ```
 
 Other helper scripts:
@@ -279,8 +246,6 @@ ingest -> clean (adds pipeline_row_id)
               |
               +--> sentiment/bertweet/sentiment.json (pipeline_row_id)
               |
-              +--> sentiment/deep/deep_sentiment.json (pipeline_row_id)
-              |
               +--> brand_groups.json + parent_company_groups.json
                         |
                         v
@@ -307,10 +272,6 @@ Analytics outputs (`outputs/analytics/<year>/`):
 - `parent_company_sentiment_timeslices.csv`
 - `parent_company_sentiment_by_ad_tag.json`
 - `parent_company_sentiment_by_ad_tag.csv`
-- `parent_company_deep_sentiment_summary.json`
-- `parent_company_deep_sentiment_summary.csv`
-- `parent_company_deep_sentiment_timeslices.json`
-- `parent_company_deep_sentiment_timeslices.csv`
 
 Auxiliary outputs (`outputs/aux/<year>/`, gitignored):
 - `brand_tweet_map.json`
@@ -318,17 +279,13 @@ Auxiliary outputs (`outputs/aux/<year>/`, gitignored):
 - `*_partial.jsonl`
 - `*_parse_failures.txt`
 - `*_recovered.json`
-- `parent_company_deep_sentiment_joined.parquet`
 - `sentiment_company_map.jsonl`
-- `deep_sentiment_company_map.jsonl`
 - `parent_company_tweet_map.jsonl`
 - `*_emotion_breakdown.json`
 
 Sentiment outputs:
 - `sentiment/bertweet/<year>/sentiment.json`
 - `sentiment/bertweet/<year>/sentiment_reclassified.json`
-- `sentiment/deep/<year>/deep_sentiment.json`
-- `sentiment/deep/<year>/deep_sentiment_reclassified.json`
 
 ## Models
 
@@ -336,12 +293,8 @@ BERTweet sentiment:
 - Default: `finiteautomata/bertweet-base-sentiment-analysis`
 - Fallback (explicit): `rabindralamsal/finetuned-bertweet-sentiment-analysis`
 
-Deep sentiment (Twitter-trained):
-- Default: `cardiffnlp/twitter-roberta-base-emotion-latest`
-- Native labels are preserved (no fixed taxonomy).
-
 ## Notes
 
-- Sentiment confidence gate: deep sentiment outputs are reclassified to `neutral` when confidence < 0.65.
+- Sentiment confidence gate: outputs are reclassified to `neutral` when confidence < 0.65.
 - `run-everything` assumes `OPENROUTER_API_KEY` is set for grouping workflows.
 - `--data-dir` is treated as the explicit raw-input directory for that run (it is not rewritten).

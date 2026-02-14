@@ -120,7 +120,7 @@ def run_match_sentiment_to_companies(
                     "primary_brand": primary_brand,
                     "parent_company_tags": parent_tags,
                     "primary_parent_company": primary_parent or "unmatched",
-                    "sentiment_label": record.get("sentiment") or record.get("main_sentiment"),
+                    "sentiment_label": record.get("sentiment"),
                     "confidence": record.get("confidence"),
                 }
                 out_records.append(out)
@@ -145,7 +145,7 @@ def run_match_sentiment_to_companies(
 
 def main():
     parser = argparse.ArgumentParser(description="Match sentiment records to brand and parent company groups.")
-    parser.add_argument("--sentiment-file", required=True, type=Path, help="Path to sentiment.json or deep_sentiment.json")
+    parser.add_argument("--sentiment-file", required=True, type=Path, help="Path to sentiment.json")
     parser.add_argument("--brand-groups-file", required=True, type=Path, help="Path to brand_groups.json")
     parser.add_argument("--parent-groups-file", required=True, type=Path, help="Path to parent_company_groups.json")
     parser.add_argument("--output-file", required=True, type=Path, help="Output JSONL path")
