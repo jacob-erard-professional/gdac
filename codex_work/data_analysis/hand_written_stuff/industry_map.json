@@ -1,5 +1,6 @@
 {
     "tech": [
+        "weathertech",
         "openai",
         "google",
         "salesforce",
@@ -48,7 +49,6 @@
         "e.l.f. cosmetics",
         "levi’s",
         "skechers",
-        "weathertech",
         "bosch"
     ],
     "automotive": [
