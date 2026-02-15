@@ -1,0 +1,87 @@
+{
+    "tech": [
+        "openai",
+        "google",
+        "salesforce",
+        "rippling",
+        "base44",
+        "amazon ring",
+        "oakley meta",
+        "squarespace",
+        "wix.com"
+    ],
+    "telecom": [
+        "t-mobile",
+        "xfinity",
+        "spectrum"
+    ],
+    "food_and_beverage": [
+        "pepsico",
+        "pepsi zero sugar",
+        "lay’s",
+        "pringles",
+        "ritz",
+        "kellogg’s",
+        "kinder bueno",
+        "nerds",
+        "oikos",
+        "hellmann’s",
+        "dunkin’",
+        "poppi",
+        "liquid i.v.",
+        "liquid death"
+    ],
+    "alcohol": [
+        "michelob ultra",
+        "bud light",
+        "budweiser",
+        "svedka vodka"
+    ],
+    "retail_and_delivery": [
+        "uber eats",
+        "grubhub",
+        "instacart"
+    ],
+    "consumer_goods": [
+        "dove",
+        "tree hut",
+        "e.l.f. cosmetics",
+        "levi’s",
+        "skechers",
+        "weathertech",
+        "bosch"
+    ],
+    "automotive": [
+        "toyota",
+        "volkswagen"
+    ],
+    "financial_services": [
+        "rocket mortgage & redfin",
+        "turbotax",
+        "draftkings",
+        "fanduel",
+        "fanatics sportsbook",
+        "state farm"
+    ],
+    "healthcare": [
+        "boehringer ingelheim",
+        "novo nordisk",
+        "novartis",
+        "ro",
+        "hims & hers"
+    ],
+    "sports": [
+        "nfl",
+        "cadillac formula 1"
+    ],
+    "real_estate": [
+        "homes.com"
+    ],
+    "nonprofit": [
+        "he gets us",
+        "blue square alliance against hate"
+    ],
+    "other": [
+        "maha"
+    ]
+}

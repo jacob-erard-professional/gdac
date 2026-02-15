@@ -44,8 +44,10 @@ def run_everything_command(
     parent_hints_file: Path = typer.Option(None, "--parent-hints-file"),
     brand_hints_file: Path = typer.Option(None, "--brand-hints-file"),
 ):
-    if bool(year) == bool(data_dir):
-        raise typer.BadParameter("Provide exactly one of --year or --data-dir")
+    if year:
+        raise typer.BadParameter("run-everything no longer accepts --year; use --data-dir pointing to a folder under data/raw.")
+    if not data_dir:
+        raise typer.BadParameter("run-everything requires --data-dir pointing to a folder under data/raw.")
 
     excluded = {item.strip().lower() for item in exclude}
     invalid = sorted(excluded.difference(VALID_EXCLUDES))
@@ -86,7 +88,7 @@ def run_everything_command(
     if resolved_data_dir and not resolved_data_dir.is_absolute():
         resolved_data_dir = (base_dir / resolved_data_dir).resolve()
 
-    cfg = resolve_year_config(base_dir, year=year, data_dir=resolved_data_dir)
+    cfg = resolve_year_config(base_dir, data_dir=resolved_data_dir)
 
     req = RunRequest(
         mode="full_year",

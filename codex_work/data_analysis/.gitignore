@@ -7,6 +7,7 @@ dist/
 *.egg-info/
 node_modules/
 site/dist/
+build/
 
 # Data/artifacts
 data/processed/
@@ -29,6 +30,7 @@ outputs/aux/
 # Frontend build/dependency artifacts
 site/node_modules/
 site/dist/
+site/build/
 site/.vite/
 site/coverage/
 site/npm-debug.log*

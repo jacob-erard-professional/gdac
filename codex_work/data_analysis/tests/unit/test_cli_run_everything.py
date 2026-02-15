@@ -14,7 +14,7 @@ class _Cfg:
 
 
 def test_run_everything_rejects_unknown_exclude():
-    result = runner.invoke(app, ["run-everything", "--year", "2024", "--exclude", "nope"])
+    result = runner.invoke(app, ["run-everything", "--data-dir", "data/raw/2024", "--exclude", "nope"])
     assert result.exit_code != 0
     assert "Unknown --exclude value" in result.stdout
 
@@ -22,10 +22,22 @@ def test_run_everything_rejects_unknown_exclude():
 def test_run_everything_requires_sentiment_for_ad_sentiment():
     result = runner.invoke(
         app,
-        ["run-everything", "--year", "2024", "--exclude", "sentiment"],
+        ["run-everything", "--data-dir", "data/raw/2024", "--exclude", "sentiment"],
     )
     assert result.exit_code != 0
     assert "ad-sentiment requires sentiment" in result.stdout
+
+
+def test_run_everything_requires_data_dir():
+    result = runner.invoke(app, ["run-everything", "--exclude", "group-brands"])
+    assert result.exit_code != 0
+    assert "requires --data-dir" in result.stdout
+
+
+def test_run_everything_rejects_year_flag():
+    result = runner.invoke(app, ["run-everything", "--year", "2024", "--data-dir", "data/raw/2024"])
+    assert result.exit_code != 0
+    assert "no longer accepts --year" in result.stdout
 
 
 def test_run_everything_runs_pipeline_and_group_brands(monkeypatch, tmp_path: Path):
@@ -36,7 +48,8 @@ def test_run_everything_runs_pipeline_and_group_brands(monkeypatch, tmp_path: Pa
     calls = {}
 
     def fake_resolve(_base, year=None, data_dir=None):
-        assert year == "2024"
+        assert year is None
+        assert data_dir is not None
         return _Cfg("2024", analytics_dir)
 
     def fake_pipeline(_base, req):
@@ -56,8 +69,8 @@ def test_run_everything_runs_pipeline_and_group_brands(monkeypatch, tmp_path: Pa
         app,
         [
             "run-everything",
-            "--year",
-            "2024",
+            "--data-dir",
+            str(tmp_path / "data" / "raw" / "2024"),
             "--grouping-model",
             "openai/gpt-4.1",
             "--exclude",
@@ -78,7 +91,8 @@ def test_run_everything_defaults_agentic_emotion_model_to_grouping_model(monkeyp
     calls = {}
 
     def fake_resolve(_base, year=None, data_dir=None):
-        assert year == "2024"
+        assert year is None
+        assert data_dir is not None
         return _Cfg("2024", analytics_dir)
 
     def fake_pipeline(_base, req):
@@ -92,8 +106,8 @@ def test_run_everything_defaults_agentic_emotion_model_to_grouping_model(monkeyp
         app,
         [
             "run-everything",
-            "--year",
-            "2024",
+            "--data-dir",
+            str(tmp_path / "data" / "raw" / "2024"),
             "--grouping-model",
             "openai/gpt-4.1",
             "--exclude",

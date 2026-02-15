@@ -53,13 +53,13 @@ Full pipeline + parent-company joins:
 Run all available workflows (pipeline + sentiment + grouping + maps + breakdowns):
 
 ```bash
-.venv/bin/python -m src.cli run-everything --year 2024 --grouping-model openai/gpt-4.1
+.venv/bin/python -m src.cli run-everything --data-dir data/raw/2024 --grouping-model openai/gpt-4.1
 ```
 
 Optional: clean analytics outputs before re-running analysis stages:
 
 ```bash
-.venv/bin/python -m src.cli run-everything --year 2024 --clean-outputs
+.venv/bin/python -m src.cli run-everything --data-dir data/raw/2024 --clean-outputs
 ```
 
 Optional: supply parent-company hints to improve grouping of franchise brands:
@@ -77,7 +77,7 @@ Optional: supply brand-group hints to improve brand grouping:
 Run everything except selected workflows (repeat `--exclude`):
 
 ```bash
-.venv/bin/python -m src.cli run-everything --year 2024 --grouping-model openai/gpt-4.1 --exclude group-parent-companies
+.venv/bin/python -m src.cli run-everything --data-dir data/raw/2024 --grouping-model openai/gpt-4.1 --exclude group-parent-companies
 ```
 
 Valid excludes: `sentiment`, `ad-sentiment`, `parent-company-sentiment`, `agentic-emotion`, `group-brands`, `group-parent-companies`,
@@ -217,7 +217,7 @@ Other helper scripts:
 
 ## Visualization Website
 
-The `site/` folder contains a React + ECharts visualization dashboard.
+The `site/` folder contains a React comparison dashboard for regular vs full datasets.
 
 Quickstart:
 
@@ -228,10 +228,20 @@ npm run dev
 ```
 
 The site reads artifacts from:
-- `outputs/analytics/<year>/`
-- `outputs/aux/<year>/`
+- `outputs/analytics/<year>/` (regular)
+- `outputs/analytics/<year>_full/` (full)
+- `data/raw/<year>/` and `data/raw/<year>_full/` (brand frequency + tweet cards)
 
-Optional: add `outputs/analytics/index.json` with a `years` array for year picker defaults.
+Current behavior:
+- Top dropdown lists only years where both regular and full analytics folders exist.
+- Required word clouds:
+  - Full combined hashtag+parent-group cloud.
+  - Celebrity clouds for regular and full (`celebrity_freq.csv`).
+  - Raw brand-frequency clouds for regular and full (`brand` column counts).
+- Example tweet cards:
+  - One card for regular and one for full, both with arrow navigation and index/total display.
+  - Duplicate tweet text is removed per card.
+  - Full card includes only rows with `is_about_brand=false`; if column is missing it is treated as `false`.
 
 ## ID Flow Diagram
 

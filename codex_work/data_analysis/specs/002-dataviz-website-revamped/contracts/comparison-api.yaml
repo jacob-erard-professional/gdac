@@ -1,0 +1,170 @@
+openapi: 3.0.3
+info:
+  title: Dataset Comparison Website Contract
+  version: 1.1.0
+  description: Contract for year options and per-year comparison payloads.
+servers:
+  - url: http://localhost
+paths:
+  /api/years:
+    get:
+      summary: List selectable years with strict dual-scope availability
+      operationId: listSelectableYears
+      responses:
+        '200':
+          description: Selectable years
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [years]
+                properties:
+                  years:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/YearOption'
+  /api/comparison/{year}:
+    get:
+      summary: Load comparison payload for selected year
+      operationId: getComparisonPayload
+      parameters:
+        - in: path
+          name: year
+          required: true
+          schema:
+            type: string
+            pattern: '^[0-9]{4}$'
+      responses:
+        '200':
+          description: Comparison payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ComparisonPayload'
+        '404':
+          description: Year unavailable for dual-scope comparison
+  /api/comparison/{year}/tweets:
+    get:
+      summary: Load deduplicated tweet-card entries for a scope
+      operationId: getTweetCardEntries
+      parameters:
+        - in: path
+          name: year
+          required: true
+          schema:
+            type: string
+            pattern: '^[0-9]{4}$'
+        - in: query
+          name: scope
+          required: true
+          schema:
+            type: string
+            enum: [regular, full]
+      responses:
+        '200':
+          description: Tweet card entries
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [scope, entries, total_count]
+                properties:
+                  scope:
+                    type: string
+                    enum: [regular, full]
+                  entries:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TweetCardEntry'
+                  total_count:
+                    type: integer
+                    minimum: 0
+components:
+  schemas:
+    YearOption:
+      type: object
+      required: [year, regular_path, full_path]
+      properties:
+        year:
+          type: string
+          pattern: '^[0-9]{4}$'
+        regular_path:
+          type: string
+        full_path:
+          type: string
+    WordCloudTerm:
+      type: object
+      required: [term, count, scope, cloud_type, year]
+      properties:
+        term:
+          type: string
+          minLength: 1
+        count:
+          type: integer
+          minimum: 1
+        scope:
+          type: string
+          enum: [regular, full]
+        cloud_type:
+          type: string
+          enum: [full_hashtag_parent, celebrity, raw_brand]
+        year:
+          type: string
+          pattern: '^[0-9]{4}$'
+    TweetCardEntry:
+      type: object
+      required: [text, normalized_text_key, scope, year]
+      properties:
+        tweet_id:
+          type: string
+        text:
+          type: string
+          minLength: 1
+        normalized_text_key:
+          type: string
+          minLength: 1
+        scope:
+          type: string
+          enum: [regular, full]
+        year:
+          type: string
+          pattern: '^[0-9]{4}$'
+        is_about_brand:
+          type: boolean
+          description: For full scope, missing values are interpreted as false during filtering.
+    ComparisonPayload:
+      type: object
+      required: [year, word_clouds, statuses]
+      properties:
+        year:
+          type: string
+          pattern: '^[0-9]{4}$'
+        word_clouds:
+          type: object
+          required: [full_hashtag_parent, regular_celebrity, full_celebrity, regular_raw_brand, full_raw_brand]
+          properties:
+            full_hashtag_parent:
+              type: array
+              items:
+                $ref: '#/components/schemas/WordCloudTerm'
+            regular_celebrity:
+              type: array
+              items:
+                $ref: '#/components/schemas/WordCloudTerm'
+            full_celebrity:
+              type: array
+              items:
+                $ref: '#/components/schemas/WordCloudTerm'
+            regular_raw_brand:
+              type: array
+              items:
+                $ref: '#/components/schemas/WordCloudTerm'
+            full_raw_brand:
+              type: array
+              items:
+                $ref: '#/components/schemas/WordCloudTerm'
+        statuses:
+          type: object
+          additionalProperties:
+            type: string
+            enum: [loaded, missing, partial]
