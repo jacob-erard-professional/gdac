@@ -32,10 +32,22 @@ Single stage:
 .venv/bin/python -m src.cli run --year 2024 --stage clean
 ```
 
+Single stage (same, using an explicit raw folder):
+
+```bash
+.venv/bin/python -m src.cli run --data-dir data/raw/2024 --stage clean
+```
+
 Full pipeline (one year):
 
 ```bash
 .venv/bin/python -m src.cli run --year 2024 --all
+```
+
+Full pipeline (same, using an explicit raw folder):
+
+```bash
+.venv/bin/python -m src.cli run --all --data-dir data/raw/2024
 ```
 
 Full pipeline + BERTweet sentiment:
@@ -87,6 +99,11 @@ By default `run` and `run-everything` preserve existing analytics outputs. Use `
 only when you explicitly want to clear `outputs/analytics/<year>/` before analysis.
 Grouping workflows require `--grouping-model`. Agentic emotion requires `--agentic-emotion-model`.
 
+Run mode selection notes:
+- `run --all` accepts `--year` or `--data-dir` (or neither to run all discovered years).
+- `run --stage` requires exactly one of `--year` or `--data-dir`.
+- `run-everything` requires `--data-dir` and does not accept `--year`.
+
 ## Stages
 
 - ingest: schema validation from `data/raw/<year>/` to `data/processed/<year>/ingested.csv`
@@ -131,6 +148,10 @@ BERTweet sentiment:
 ```bash
 .venv/bin/python -m src.cli sentiment --year 2024 --batch-size 64
 ```
+
+Outputs:
+- `sentiment/bertweet/<year>/tweets_with_sentiement.csv` (copy of source rows with appended `sentiment` and `confidence` columns)
+- `sentiment/bertweet/<year>/sentiment.json` (metadata + records for downstream compatibility)
 
 Agentic emotion classification (committee + supervisor):
 

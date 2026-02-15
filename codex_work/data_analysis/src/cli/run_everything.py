@@ -93,7 +93,7 @@ def run_everything_command(
     req = RunRequest(
         mode="full_year",
         stage=None,
-        year=cfg.year,
+        year=None,
         data_dir=resolved_data_dir,
         deterministic=True,
         with_sentiment=run_sentiment,

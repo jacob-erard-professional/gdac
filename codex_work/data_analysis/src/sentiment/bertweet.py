@@ -292,6 +292,64 @@ def write_sentiment_output(
     return output_path
 
 
+def write_sentiment_augmented_csv(
+    *,
+    output_path: Path,
+    input_path: Path,
+    records: list[dict[str, Any]],
+) -> Path:
+    suffix = input_path.suffix.lower()
+    if suffix == ".csv":
+        frame = pd.read_csv(input_path, dtype=str, keep_default_na=False)
+    elif suffix == ".parquet":
+        frame = pd.read_parquet(input_path).fillna("").astype(str)
+    else:
+        raise ValueError(f"Unsupported input format: {input_path}. Use .csv or .parquet")
+
+    # Keep appended columns at the end.
+    for col in ("sentiment", "confidence"):
+        if col in frame.columns:
+            frame = frame.drop(columns=[col])
+
+    records_frame = pd.DataFrame(records)
+    if records_frame.empty:
+        frame["sentiment"] = ""
+        frame["confidence"] = ""
+    else:
+        join_on_pipeline = (
+            "pipeline_row_id" in frame.columns
+            and "pipeline_row_id" in records_frame.columns
+            and records_frame["pipeline_row_id"].astype(str).str.strip().ne("").any()
+        )
+
+        if join_on_pipeline:
+            mapping = (
+                records_frame[["pipeline_row_id", "sentiment", "confidence"]]
+                .drop_duplicates(subset=["pipeline_row_id"], keep="first")
+            )
+            frame = frame.merge(mapping, on="pipeline_row_id", how="left")
+        else:
+            tweet_id_col = "tweet_id" if "tweet_id" in frame.columns else ("id" if "id" in frame.columns else None)
+            if tweet_id_col is None:
+                raise ValueError("Input is missing required tweet identifier column: tweet_id or id")
+            mapping = (
+                records_frame[["tweet_id", "sentiment", "confidence"]]
+                .drop_duplicates(subset=["tweet_id"], keep="first")
+            )
+            frame = frame.merge(mapping, left_on=tweet_id_col, right_on="tweet_id", how="left")
+            if "tweet_id_y" in frame.columns:
+                frame = frame.drop(columns=["tweet_id_y"])
+            if "tweet_id_x" in frame.columns:
+                frame = frame.rename(columns={"tweet_id_x": tweet_id_col})
+
+        frame["sentiment"] = frame["sentiment"].fillna("")
+        frame["confidence"] = frame["confidence"].fillna("")
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    frame.to_csv(output_path, index=False)
+    return output_path
+
+
 def run_bertweet_sentiment(
     *,
     year: int,
@@ -335,15 +393,22 @@ def run_bertweet_sentiment(
         logger=logger,
     )
 
-    output_path = output_root / "bertweet" / str(year) / "sentiment.json"
+    output_dir = output_root / "bertweet" / str(year)
+    output_json_path = output_dir / "sentiment.json"
+    output_csv_path = output_dir / "tweets_with_sentiement.csv"
     if logger:
-        logger(f"[sentiment] writing output to {output_path}")
+        logger(f"[sentiment] writing outputs to {output_dir}")
     write_sentiment_output(
-        output_path=output_path,
+        output_path=output_json_path,
         input_path=input_path,
         model_bundle=model_bundle,
         records=records,
         invalid_rows=invalid_rows,
+    )
+    write_sentiment_augmented_csv(
+        output_path=output_csv_path,
+        input_path=input_path,
+        records=records,
     )
 
     notes = [
@@ -354,7 +419,13 @@ def run_bertweet_sentiment(
     if model_bundle.commit_hash:
         notes.append(f"model_commit_hash={model_bundle.commit_hash}")
 
-    manifest = make_manifest([input_path], [output_path], len(rows) + invalid_rows, len(records), notes=notes)
+    manifest = make_manifest(
+        [input_path],
+        [output_json_path, output_csv_path],
+        len(rows) + invalid_rows,
+        len(records),
+        notes=notes,
+    )
     if logger:
         logger("[sentiment] complete")
-    return output_path, manifest
+    return output_csv_path, manifest
