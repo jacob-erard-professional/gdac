@@ -48,6 +48,18 @@ python3 -m src.cli.classify_brand_mentions \
   --start-row 16701
 ```
 
+Resume automatically from existing output rows:
+
+```bash
+python3 -m src.cli.classify_brand_mentions \
+  --input data/input/tweets.csv \
+  --output data/output/classified.csv \
+  --model openrouter/your-model \
+  --batch-size 100 \
+  --progress-every 100 \
+  --resume
+```
+
 ### Output Columns
 
 - `is_about_brand` (boolean)
