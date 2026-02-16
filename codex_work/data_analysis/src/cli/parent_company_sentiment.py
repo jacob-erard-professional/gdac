@@ -2,6 +2,7 @@ from pathlib import Path
 
 import typer
 
+from src.pipeline.config import extract_base_year
 from src.pipeline.path_resolution import resolve_year_config
 from src.sentiment.parent_company_impact import run_parent_company_sentiment_analysis
 
@@ -46,7 +47,7 @@ def parent_company_sentiment_command(
         resolved_tweet_map = None
 
     outputs, manifest = run_parent_company_sentiment_analysis(
-        year=int(cfg.year),
+        year=int(extract_base_year(cfg.year)),
         sentiment_path=resolved_sentiment,
         enriched_path=resolved_enriched,
         parent_groups_path=resolved_parent_groups,

@@ -1,3 +1,4 @@
+from src.pipeline.config import extract_base_year
 from src.sentiment.bertweet import DEFAULT_MODEL_ID, run_bertweet_sentiment
 
 
@@ -11,9 +12,10 @@ def run(
     device: str = "cuda",
 ):
     base_dir = config.processed_dir.parents[2]
-    input_path = config.processed_dir / "cleaned.csv"
+    input_path = config.processed_dir / "ingested.csv"
     _output_path, manifest = run_bertweet_sentiment(
-        year=int(config.year),
+        year=int(extract_base_year(config.year)),
+        output_partition=config.year,
         input_path=input_path,
         output_root=base_dir / "sentiment",
         model_id=model_id,

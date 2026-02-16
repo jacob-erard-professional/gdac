@@ -42,3 +42,10 @@ def validate_year(year: str) -> str:
     if not (year and len(year) == 4 and year.isdigit()):
         raise ValueError("year must be YYYY")
     return year
+
+
+def extract_base_year(year_or_partition: str) -> str:
+    value = str(year_or_partition or "").strip()
+    if value.endswith("_full"):
+        value = value[:-5]
+    return validate_year(value)

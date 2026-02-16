@@ -2,6 +2,7 @@ from pathlib import Path
 
 import typer
 
+from src.pipeline.config import extract_base_year
 from src.pipeline.path_resolution import resolve_year_config
 from src.sentiment.bertweet import DEFAULT_MODEL_ID, run_bertweet_sentiment
 
@@ -43,11 +44,12 @@ def sentiment_command(
             resolved_data_dir = (base_dir / resolved_data_dir).resolve()
 
         cfg = resolve_year_config(base_dir, year=year, data_dir=resolved_data_dir)
-        resolved_input = cfg.processed_dir / "cleaned.csv"
-        target_year = int(cfg.year)
+        resolved_input = cfg.processed_dir / "ingested.csv"
+        target_year = int(extract_base_year(cfg.year))
 
     output_path, manifest = run_bertweet_sentiment(
         year=target_year,
+        output_partition=(cfg.year if not input_file else str(target_year)),
         input_path=resolved_input,
         output_root=base_dir / "sentiment",
         model_id=model,

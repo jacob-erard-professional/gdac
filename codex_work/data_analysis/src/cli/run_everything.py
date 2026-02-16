@@ -2,7 +2,7 @@ from pathlib import Path
 
 import typer
 
-from src.pipeline.config import RunRequest
+from src.pipeline.config import RunRequest, extract_base_year
 from src.pipeline.orchestrator import run_pipeline
 from src.pipeline.path_resolution import resolve_year_config
 
@@ -175,14 +175,14 @@ def run_everything_command(
                     enriched_path=cfg.enriched_dir / "enriched.csv",
                     brand_groups_path=brand_groups_path,
                     output_path=brand_map_path,
-                    year=int(cfg.year),
+                    year=int(extract_base_year(cfg.year)),
                 )
             if brand_map_path.exists():
                 build_parent_company_tweet_map(
                     brand_tweet_map_path=brand_map_path,
                     parent_company_groups_path=cfg.analytics_dir / "parent_company_groups.json",
                     output_path=parent_map_path,
-                    year=int(cfg.year),
+                    year=int(extract_base_year(cfg.year)),
                 )
 
     if run_parent_company_sentiment:
@@ -203,7 +203,7 @@ def run_everything_command(
         if not tweet_map_path.exists():
             tweet_map_path = None
         run_parent_company_sentiment_analysis(
-            year=int(cfg.year),
+            year=int(extract_base_year(cfg.year)),
             sentiment_path=sentiment_path,
             enriched_path=cfg.enriched_dir / "enriched.csv",
             parent_groups_path=parent_groups_path,

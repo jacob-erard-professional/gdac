@@ -103,6 +103,7 @@ Run mode selection notes:
 - `run --all` accepts `--year` or `--data-dir` (or neither to run all discovered years).
 - `run --stage` requires exactly one of `--year` or `--data-dir`.
 - `run-everything` requires `--data-dir` and does not accept `--year`.
+- `--data-dir` may point to either `data/raw/YYYY` or `data/raw/YYYY_full`.
 
 ## Stages
 
@@ -152,6 +153,8 @@ BERTweet sentiment:
 Outputs:
 - `sentiment/bertweet/<year>/tweets_with_sentiement.csv` (copy of source rows with appended `sentiment` and `confidence` columns)
 - `sentiment/bertweet/<year>/sentiment.json` (metadata + records for downstream compatibility)
+
+Default source for `sentiment --year/--data-dir` is `data/processed/<partition>/ingested.csv` so original ingested columns are retained in the CSV output.
 
 Agentic emotion classification (committee + supervisor):
 

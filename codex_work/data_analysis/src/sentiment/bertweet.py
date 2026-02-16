@@ -306,7 +306,10 @@ def write_sentiment_augmented_csv(
     else:
         raise ValueError(f"Unsupported input format: {input_path}. Use .csv or .parquet")
 
-    # Keep appended columns at the end.
+    # Keep original order exactly; append only at the end.
+    original_columns = [str(col) for col in frame.columns if str(col) not in {"sentiment", "confidence"}]
+
+    # Remove existing output columns before re-appending at end.
     for col in ("sentiment", "confidence"):
         if col in frame.columns:
             frame = frame.drop(columns=[col])
@@ -323,27 +326,36 @@ def write_sentiment_augmented_csv(
         )
 
         if join_on_pipeline:
-            mapping = (
-                records_frame[["pipeline_row_id", "sentiment", "confidence"]]
-                .drop_duplicates(subset=["pipeline_row_id"], keep="first")
+            key_col = "pipeline_row_id"
+            mapping_frame = (
+                records_frame[[key_col, "sentiment", "confidence"]]
+                .astype({key_col: str})
+                .drop_duplicates(subset=[key_col], keep="first")
             )
-            frame = frame.merge(mapping, on="pipeline_row_id", how="left")
+            sentiment_map = dict(zip(mapping_frame[key_col], mapping_frame["sentiment"]))
+            confidence_map = dict(zip(mapping_frame[key_col], mapping_frame["confidence"]))
+            keys = frame[key_col].astype(str)
+            frame["sentiment"] = keys.map(lambda k: sentiment_map.get(k, ""))
+            frame["confidence"] = keys.map(lambda k: confidence_map.get(k, ""))
         else:
             tweet_id_col = "tweet_id" if "tweet_id" in frame.columns else ("id" if "id" in frame.columns else None)
             if tweet_id_col is None:
                 raise ValueError("Input is missing required tweet identifier column: tweet_id or id")
-            mapping = (
+            mapping_frame = (
                 records_frame[["tweet_id", "sentiment", "confidence"]]
+                .astype({"tweet_id": str})
                 .drop_duplicates(subset=["tweet_id"], keep="first")
             )
-            frame = frame.merge(mapping, left_on=tweet_id_col, right_on="tweet_id", how="left")
-            if "tweet_id_y" in frame.columns:
-                frame = frame.drop(columns=["tweet_id_y"])
-            if "tweet_id_x" in frame.columns:
-                frame = frame.rename(columns={"tweet_id_x": tweet_id_col})
+            sentiment_map = dict(zip(mapping_frame["tweet_id"], mapping_frame["sentiment"]))
+            confidence_map = dict(zip(mapping_frame["tweet_id"], mapping_frame["confidence"]))
+            keys = frame[tweet_id_col].astype(str)
+            frame["sentiment"] = keys.map(lambda k: sentiment_map.get(k, ""))
+            frame["confidence"] = keys.map(lambda k: confidence_map.get(k, ""))
 
-        frame["sentiment"] = frame["sentiment"].fillna("")
-        frame["confidence"] = frame["confidence"].fillna("")
+        frame["sentiment"] = frame["sentiment"].fillna("").astype(str)
+        frame["confidence"] = frame["confidence"].fillna("").astype(str)
+
+    frame = frame[original_columns + ["sentiment", "confidence"]]
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     frame.to_csv(output_path, index=False)
@@ -355,6 +367,7 @@ def run_bertweet_sentiment(
     year: int,
     input_path: Path,
     output_root: Path,
+    output_partition: str | None = None,
     model_id: str = DEFAULT_MODEL_ID,
     batch_size: int = 64,
     dry_run: bool = False,
@@ -393,7 +406,8 @@ def run_bertweet_sentiment(
         logger=logger,
     )
 
-    output_dir = output_root / "bertweet" / str(year)
+    partition = str(output_partition or year)
+    output_dir = output_root / "bertweet" / partition
     output_json_path = output_dir / "sentiment.json"
     output_csv_path = output_dir / "tweets_with_sentiement.csv"
     if logger:

@@ -1,3 +1,4 @@
+from src.pipeline.config import extract_base_year
 from src.sentiment.ad_impact import run_ad_sentiment_analysis
 
 
@@ -11,7 +12,7 @@ def run(config, *, min_tweets: int = 1):
         tweet_map_path = None
 
     _outputs, manifest = run_ad_sentiment_analysis(
-        year=int(config.year),
+        year=int(extract_base_year(config.year)),
         sentiment_path=sentiment_path,
         enriched_path=enriched_path,
         output_dir=output_dir,

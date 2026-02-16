@@ -1,5 +1,5 @@
 from pathlib import Path
-from .config import YearConfig, validate_year
+from .config import YearConfig, extract_base_year, validate_year
 
 
 def resolve_year_config(base_dir: Path, year: str | None = None, data_dir: Path | None = None) -> YearConfig:
@@ -10,7 +10,7 @@ def resolve_year_config(base_dir: Path, year: str | None = None, data_dir: Path 
         if not raw_dir.is_absolute():
             raw_dir = (base_dir / raw_dir).resolve()
         y = raw_dir.name
-        validate_year(y)
+        extract_base_year(y)
         return YearConfig(
             year=y,
             raw_dir=raw_dir,

@@ -1,3 +1,4 @@
+from src.pipeline.config import extract_base_year
 from src.sentiment.parent_company_impact import run_parent_company_sentiment_analysis
 
 
@@ -12,7 +13,7 @@ def run(config, *, min_tweets: int = 1):
         tweet_map_path = None
 
     _outputs, manifest = run_parent_company_sentiment_analysis(
-        year=int(config.year),
+        year=int(extract_base_year(config.year)),
         sentiment_path=sentiment_path,
         enriched_path=enriched_path,
         parent_groups_path=parent_groups_path,

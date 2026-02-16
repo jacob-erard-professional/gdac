@@ -8,6 +8,7 @@ from src.agents.rate_limit_policy import (
     MIN_MAX_RATE_LIMIT_RETRIES,
     MIN_REQUEST_DELAY_SECONDS,
 )
+from src.pipeline.config import extract_base_year
 from src.pipeline.path_resolution import resolve_year_config
 
 
@@ -54,7 +55,7 @@ def agentic_emotion_command(
     brands = [b.strip().lower() for b in brand_filter.split(",") if b.strip()]
 
     summary_path, examples_path = run_agentic_emotion(
-        year=int(cfg.year),
+        year=int(extract_base_year(cfg.year)),
         enriched_path=enriched_path,
         output_dir=output_dir,
         model=model,

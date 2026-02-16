@@ -1,6 +1,7 @@
 import json
 
 from src.agents.agentic_emotion_agent import run_agentic_emotion
+from src.pipeline.config import extract_base_year
 from src.pipeline.stage_runtime import make_manifest
 
 
@@ -18,7 +19,7 @@ def run(
     brands = [b.strip().lower() for b in (brand_filter or "").split(",") if b.strip()]
 
     summary_path, examples_path = run_agentic_emotion(
-        year=int(config.year),
+        year=int(extract_base_year(config.year)),
         enriched_path=enriched_path,
         output_dir=output_dir,
         model=model,
