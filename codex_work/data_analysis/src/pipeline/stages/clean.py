@@ -1,3 +1,5 @@
+"""Pipeline module for clean orchestration and execution."""
+
 import csv
 from datetime import datetime
 from src.pipeline.stage_runtime import make_manifest

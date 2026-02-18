@@ -1,3 +1,5 @@
+"""CLI entrypoints for parent company sentiment workflows."""
+
 from pathlib import Path
 
 import typer

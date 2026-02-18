@@ -1,3 +1,5 @@
+"""Tests for test pipeline contract responses behavior."""
+
 from src.pipeline.contracts import RunManifest, StageResult
 from src.pipeline.api_contract_adapter import stage_result_to_contract
 

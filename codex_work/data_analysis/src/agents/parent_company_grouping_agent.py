@@ -1,3 +1,5 @@
+"""Agent workflow module for parent company grouping agent tasks."""
+
 import json
 import os
 import re

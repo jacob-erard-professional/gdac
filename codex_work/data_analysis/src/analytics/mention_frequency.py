@@ -1,3 +1,5 @@
+"""Analytics module for mention frequency computations."""
+
 import json
 import re
 from collections import Counter

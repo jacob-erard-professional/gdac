@@ -1,3 +1,5 @@
+"""Sentiment processing module for bertweet."""
+
 import json
 import re
 from dataclasses import dataclass

@@ -1,3 +1,5 @@
+"""Pipeline module for parent company sentiment orchestration and execution."""
+
 from src.pipeline.config import extract_base_year
 from src.sentiment.parent_company_impact import run_parent_company_sentiment_analysis
 

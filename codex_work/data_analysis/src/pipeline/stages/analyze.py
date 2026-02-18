@@ -1,3 +1,5 @@
+"""Pipeline module for analyze orchestration and execution."""
+
 import csv
 from src.analytics.registry import module_registry
 from src.pipeline.stage_runtime import make_manifest

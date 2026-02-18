@@ -1,3 +1,5 @@
+"""Pipeline module for ad sentiment orchestration and execution."""
+
 from src.pipeline.config import extract_base_year
 from src.sentiment.ad_impact import run_ad_sentiment_analysis
 

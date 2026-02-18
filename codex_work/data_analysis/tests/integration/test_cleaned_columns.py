@@ -1,3 +1,5 @@
+"""Tests for test cleaned columns behavior."""
+
 import csv
 from pathlib import Path
 from src.pipeline.config import RunRequest

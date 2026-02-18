@@ -1,3 +1,5 @@
+"""Pipeline module for config orchestration and execution."""
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional

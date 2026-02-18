@@ -1,3 +1,5 @@
+"""Pipeline module for path resolution orchestration and execution."""
+
 from pathlib import Path
 from .config import YearConfig, extract_base_year, validate_year
 

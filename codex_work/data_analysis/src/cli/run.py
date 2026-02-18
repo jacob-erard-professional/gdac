@@ -1,3 +1,5 @@
+"""CLI entrypoints for run workflows."""
+
 from pathlib import Path
 import typer
 from src.pipeline.config import RunRequest

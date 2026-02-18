@@ -1,3 +1,5 @@
+"""Utility script for recover grouping from partial operations."""
+
 import json
 from pathlib import Path
 

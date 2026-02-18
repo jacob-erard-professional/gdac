@@ -1,3 +1,5 @@
+"""Utility script for match sentiment to companies operations."""
+
 import argparse
 import csv
 import json

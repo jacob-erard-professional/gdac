@@ -1,3 +1,5 @@
+"""Shared utilities for tweet company map."""
+
 import json
 from pathlib import Path
 from typing import Any

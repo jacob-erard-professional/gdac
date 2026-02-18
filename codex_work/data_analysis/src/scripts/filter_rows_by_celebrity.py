@@ -1,14 +1,39 @@
+"""Utility script for filter rows by celebrity operations."""
+
 import argparse
 import re
+import unicodedata
 from pathlib import Path
 
 import pandas as pd
 
 WHITESPACE_RE = re.compile(r"\s+")
+MOJIBAKE_MARKERS = ("Ã", "Â", "â", "ðŸ", "à¸", "à¹", "Å")
 
 
 def _strip_all_whitespace(value: str) -> str:
     return WHITESPACE_RE.sub("", str(value))
+
+
+def _repair_mojibake_once(value: str) -> str:
+    text = str(value or "")
+    if not any(marker in text for marker in MOJIBAKE_MARKERS):
+        return text
+    for enc in ("latin1", "cp1252"):
+        try:
+            repaired = text.encode(enc).decode("utf-8")
+            if sum(text.count(m) for m in MOJIBAKE_MARKERS) > sum(repaired.count(m) for m in MOJIBAKE_MARKERS):
+                return repaired
+        except Exception:
+            continue
+    return text
+
+
+def _normalize_for_match(value: str) -> str:
+    text = _repair_mojibake_once(str(value or ""))
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    return _strip_all_whitespace(text).lower()
 
 
 def _build_name_maps(names: list[str]) -> tuple[list[str], dict[str, str]]:
@@ -18,7 +43,7 @@ def _build_name_maps(names: list[str]) -> tuple[list[str], dict[str, str]]:
 
     canonical_to_display: dict[str, str] = {}
     for name in cleaned_names:
-        canonical = _strip_all_whitespace(name).lower()
+        canonical = _normalize_for_match(name)
         if not canonical:
             continue
         canonical_to_display.setdefault(canonical, name)
@@ -56,7 +81,7 @@ def filter_rows_by_celebrity(
         if confidence_column not in chunk.columns:
             raise ValueError(f"Input file missing required column: {confidence_column}")
 
-        text_norm = chunk[text_column].astype(str).map(_strip_all_whitespace).str.lower()
+        text_norm = chunk[text_column].astype(str).map(_normalize_for_match)
         matched_names: list[list[str]] = []
         keep_mask = []
 

@@ -1,3 +1,5 @@
+"""Pipeline module for   init   orchestration and execution."""
+
 from . import (
     ad_sentiment as ad_sentiment,
     analyze as analyze,

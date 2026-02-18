@@ -1,3 +1,5 @@
+"""Tests for test bertweet sentiment core behavior."""
+
 from pathlib import Path
 
 import pytest

@@ -1,3 +1,5 @@
+"""Tests for test full all years mode behavior."""
+
 from pathlib import Path
 from src.pipeline.config import RunRequest
 from src.pipeline.orchestrator import run_pipeline

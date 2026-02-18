@@ -1,3 +1,5 @@
+"""CLI entrypoints for agentic emotion workflows."""
+
 from pathlib import Path
 
 import typer

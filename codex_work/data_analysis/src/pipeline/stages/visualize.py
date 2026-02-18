@@ -1,3 +1,5 @@
+"""Pipeline module for visualize orchestration and execution."""
+
 from src.pipeline.stage_runtime import make_manifest
 
 

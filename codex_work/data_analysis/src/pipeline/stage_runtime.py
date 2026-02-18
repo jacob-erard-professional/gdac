@@ -1,3 +1,5 @@
+"""Pipeline module for stage runtime orchestration and execution."""
+
 from datetime import datetime, UTC
 from .contracts import RunManifest
 

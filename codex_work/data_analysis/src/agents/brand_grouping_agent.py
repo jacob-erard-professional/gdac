@@ -1,3 +1,5 @@
+"""Agent workflow module for brand grouping agent tasks."""
+
 import json
 import os
 from json import JSONDecodeError

@@ -1,3 +1,5 @@
+"""Shared utilities for checksums."""
+
 import hashlib
 from pathlib import Path
 

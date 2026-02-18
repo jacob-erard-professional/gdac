@@ -1,3 +1,5 @@
+"""Tests for test analytics module extension behavior."""
+
 from src.analytics.registry import module_registry
 
 

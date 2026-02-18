@@ -1,3 +1,5 @@
+"""Utility script for normalize brand column operations."""
+
 import argparse
 import re
 from pathlib import Path

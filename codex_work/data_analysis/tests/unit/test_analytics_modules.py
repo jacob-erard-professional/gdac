@@ -1,3 +1,5 @@
+"""Tests for test analytics modules behavior."""
+
 import json
 from pathlib import Path
 from src.analytics.registry import module_registry

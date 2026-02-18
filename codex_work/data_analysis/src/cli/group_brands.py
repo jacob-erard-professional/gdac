@@ -1,3 +1,5 @@
+"""CLI entrypoints for group brands workflows."""
+
 from pathlib import Path
 
 import typer

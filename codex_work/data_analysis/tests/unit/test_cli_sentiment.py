@@ -1,3 +1,5 @@
+"""Tests for test cli sentiment behavior."""
+
 from pathlib import Path
 
 from typer.testing import CliRunner

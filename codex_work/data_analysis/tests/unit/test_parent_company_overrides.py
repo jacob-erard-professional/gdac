@@ -1,3 +1,5 @@
+"""Tests for test parent company overrides behavior."""
+
 import json
 from pathlib import Path
 

@@ -1,3 +1,5 @@
+"""CLI entrypoints for run everything workflows."""
+
 from pathlib import Path
 
 import typer

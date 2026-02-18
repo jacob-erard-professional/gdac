@@ -1,3 +1,5 @@
+"""Tests for test process features behavior."""
+
 from src.pipeline.stages.process import _sentiment
 
 

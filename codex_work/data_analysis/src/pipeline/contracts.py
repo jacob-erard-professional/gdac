@@ -1,3 +1,5 @@
+"""Pipeline module for contracts orchestration and execution."""
+
 from dataclasses import dataclass, field
 from typing import Dict, List
 

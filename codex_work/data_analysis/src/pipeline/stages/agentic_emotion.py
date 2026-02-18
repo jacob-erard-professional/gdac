@@ -1,3 +1,5 @@
+"""Pipeline module for agentic emotion orchestration and execution."""
+
 import json
 
 from src.agents.agentic_emotion_agent import run_agentic_emotion

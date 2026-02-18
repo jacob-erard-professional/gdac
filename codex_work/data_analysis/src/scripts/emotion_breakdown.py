@@ -1,3 +1,5 @@
+"""Utility script for emotion breakdown operations."""
+
 import argparse
 import json
 from collections import Counter, defaultdict

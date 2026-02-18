@@ -1,3 +1,5 @@
+"""Analytics module for registry computations."""
+
 from . import hashtag_frequency, mention_frequency
 
 

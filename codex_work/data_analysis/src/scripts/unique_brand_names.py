@@ -1,3 +1,5 @@
+"""Utility script for unique brand names operations."""
+
 import argparse
 import json
 import re

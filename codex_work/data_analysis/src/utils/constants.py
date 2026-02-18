@@ -1,3 +1,5 @@
+"""Shared utilities for constants."""
+
 STAGES = ["ingest", "clean", "process", "analyze", "visualize", "export"]
 DATA_DIRS = {
     "raw": "data/raw",

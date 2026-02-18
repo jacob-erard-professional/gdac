@@ -1,3 +1,5 @@
+"""Utility script for count unique hashtags operations."""
+
 import argparse
 import json
 from pathlib import Path

@@ -1,3 +1,5 @@
+"""Pipeline module for manifest orchestration and execution."""
+
 import json
 from dataclasses import asdict
 from pathlib import Path

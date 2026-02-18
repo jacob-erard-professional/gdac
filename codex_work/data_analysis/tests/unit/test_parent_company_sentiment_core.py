@@ -1,3 +1,5 @@
+"""Tests for test parent company sentiment core behavior."""
+
 import json
 from pathlib import Path
 

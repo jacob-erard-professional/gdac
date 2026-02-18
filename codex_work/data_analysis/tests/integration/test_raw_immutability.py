@@ -1,3 +1,5 @@
+"""Tests for test raw immutability behavior."""
+
 from pathlib import Path
 from src.utils.guards import ensure_not_raw_output
 import pytest

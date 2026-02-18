@@ -1,3 +1,5 @@
+"""CLI entrypoints for main workflows."""
+
 import typer
 from .run import run_command
 from .group_brands import group_brands_command

@@ -1,3 +1,5 @@
+"""Pipeline module for stage registry orchestration and execution."""
+
 from src.utils.constants import STAGES
 
 

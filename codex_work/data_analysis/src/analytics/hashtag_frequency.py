@@ -1,3 +1,5 @@
+"""Analytics module for hashtag frequency computations."""
+
 import json
 from collections import Counter
 from pathlib import Path

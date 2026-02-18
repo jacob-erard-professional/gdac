@@ -1,3 +1,5 @@
+"""Pipeline module for sentiment orchestration and execution."""
+
 from src.pipeline.config import extract_base_year
 from src.sentiment.bertweet import DEFAULT_MODEL_ID, run_bertweet_sentiment
 

@@ -1,3 +1,5 @@
+"""CLI entrypoints for ad sentiment workflows."""
+
 from pathlib import Path
 
 import typer

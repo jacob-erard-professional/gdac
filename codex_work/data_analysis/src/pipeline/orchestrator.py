@@ -1,3 +1,5 @@
+"""Pipeline module for orchestrator orchestration and execution."""
+
 from dataclasses import dataclass
 from pathlib import Path
 from src.pipeline.config import RunRequest

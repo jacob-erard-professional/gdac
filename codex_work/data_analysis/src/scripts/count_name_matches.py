@@ -1,3 +1,5 @@
+"""Utility script for count name matches operations."""
+
 import argparse
 import json
 import re

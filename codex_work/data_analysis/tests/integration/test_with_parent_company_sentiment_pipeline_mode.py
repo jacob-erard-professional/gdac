@@ -1,3 +1,5 @@
+"""Tests for test with parent company sentiment pipeline mode behavior."""
+
 from pathlib import Path
 
 from src.pipeline import orchestrator

@@ -1,3 +1,5 @@
+"""Utility script for split hashtags frequency operations."""
+
 from pathlib import Path
 
 import json

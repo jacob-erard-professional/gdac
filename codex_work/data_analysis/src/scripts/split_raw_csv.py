@@ -1,3 +1,5 @@
+"""Utility script for split raw csv operations."""
+
 from pathlib import Path
 
 import pandas as pd

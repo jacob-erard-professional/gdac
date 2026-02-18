@@ -1,3 +1,5 @@
+"""Sentiment processing module for parent company impact."""
+
 import json
 from dataclasses import dataclass
 from pathlib import Path

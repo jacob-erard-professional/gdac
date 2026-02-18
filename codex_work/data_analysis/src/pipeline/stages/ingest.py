@@ -1,3 +1,5 @@
+"""Pipeline module for ingest orchestration and execution."""
+
 import csv
 from src.pipeline.schema import validate_columns, validate_row
 from src.pipeline.stage_runtime import make_manifest

@@ -1,3 +1,5 @@
+"""Utility script for brand name frequency operations."""
+
 import argparse
 import json
 import re

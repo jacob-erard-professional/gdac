@@ -1,3 +1,5 @@
+"""Tests for test with ad sentiment pipeline mode behavior."""
+
 from pathlib import Path
 
 from src.pipeline import orchestrator

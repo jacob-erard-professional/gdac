@@ -1,3 +1,5 @@
+"""Utility script for match tweets to parent company operations."""
+
 import argparse
 from pathlib import Path
 

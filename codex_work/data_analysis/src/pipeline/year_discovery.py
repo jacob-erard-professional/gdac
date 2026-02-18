@@ -1,3 +1,5 @@
+"""Pipeline module for year discovery orchestration and execution."""
+
 from pathlib import Path
 
 

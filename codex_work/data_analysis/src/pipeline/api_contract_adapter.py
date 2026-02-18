@@ -1,3 +1,5 @@
+"""Pipeline module for api contract adapter orchestration and execution."""
+
 from .contracts import StageResult
 
 

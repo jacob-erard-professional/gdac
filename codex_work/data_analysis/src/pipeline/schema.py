@@ -1,3 +1,5 @@
+"""Pipeline module for schema orchestration and execution."""
+
 from typing import Iterable, Dict, Tuple
 
 # Canonical fields expected from the Twitter export used by this pipeline.

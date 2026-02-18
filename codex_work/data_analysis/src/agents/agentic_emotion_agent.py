@@ -1,3 +1,5 @@
+"""Agent workflow module for agentic emotion agent tasks."""
+
 import json
 import os
 from dataclasses import dataclass

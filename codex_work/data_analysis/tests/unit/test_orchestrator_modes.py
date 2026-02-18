@@ -1,3 +1,5 @@
+"""Tests for test orchestrator modes behavior."""
+
 from pathlib import Path
 from src.pipeline.config import RunRequest
 from src.pipeline.orchestrator import run_pipeline

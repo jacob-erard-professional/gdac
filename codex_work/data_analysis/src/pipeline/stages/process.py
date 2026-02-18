@@ -1,3 +1,5 @@
+"""Pipeline module for process orchestration and execution."""
+
 import csv
 import re
 from src.pipeline.stage_runtime import make_manifest

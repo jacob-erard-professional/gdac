@@ -1,3 +1,5 @@
+"""Utility script for reclassify sentiment by confidence operations."""
+
 import argparse
 import json
 from pathlib import Path

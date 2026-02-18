@@ -1,3 +1,5 @@
+"""Shared utilities for guards."""
+
 from pathlib import Path
 
 

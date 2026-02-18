@@ -1,3 +1,5 @@
+"""Utility script for map brands to industry operations."""
+
 import argparse
 import json
 from pathlib import Path

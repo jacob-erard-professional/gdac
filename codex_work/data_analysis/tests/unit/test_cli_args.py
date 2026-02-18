@@ -1,3 +1,5 @@
+"""Tests for test cli args behavior."""
+
 from typer.testing import CliRunner
 from src.cli.main import app
 

@@ -1,3 +1,5 @@
+"""Shared utilities for io."""
+
 import csv
 from pathlib import Path
 from typing import Dict, Iterable, Iterator, List
