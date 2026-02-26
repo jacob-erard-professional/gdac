@@ -6,7 +6,6 @@ venv/
 dist/
 *.egg-info/
 node_modules/
-site/dist/
 build/
 
 # Data/artifacts
@@ -27,13 +26,3 @@ Thumbs.db
 *.log
 outputs/aux/
 
-# Frontend build/dependency artifacts
-site/node_modules/
-site/dist/
-site/build/
-site/.vite/
-site/coverage/
-site/npm-debug.log*
-site/yarn-debug.log*
-site/yarn-error.log*
-site/pnpm-debug.log*

@@ -239,34 +239,6 @@ Other helper scripts:
 - `src/scripts/split_hashtags_frequency.py` (first N hashtags for grouping)
 - `src/scripts/recover_grouping_from_partial.py` (rebuild groups from partial JSONL)
 
-## Visualization Website
-
-The `site/` folder contains a React comparison dashboard for regular vs full datasets.
-
-Quickstart:
-
-```bash
-cd site
-npm install
-npm run dev
-```
-
-The site reads artifacts from:
-- `outputs/analytics/<year>/` (regular)
-- `outputs/analytics/<year>_full/` (full)
-- `data/raw/<year>/` and `data/raw/<year>_full/` (brand frequency + tweet cards)
-
-Current behavior:
-- Top dropdown lists only years where both regular and full analytics folders exist.
-- Required word clouds:
-  - Full combined hashtag+parent-group cloud.
-  - Celebrity clouds for regular and full (`celebrity_freq.csv`).
-  - Raw brand-frequency clouds for regular and full (`brand` column counts).
-- Example tweet cards:
-  - One card for regular and one for full, both with arrow navigation and index/total display.
-  - Duplicate tweet text is removed per card.
-  - Full card includes only rows with `is_about_brand=false`; if column is missing it is treated as `false`.
-
 ## ID Flow Diagram
 
 ```

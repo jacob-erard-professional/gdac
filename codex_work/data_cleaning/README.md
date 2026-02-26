@@ -66,62 +66,40 @@ python3 -m src.cli.classify_brand_mentions \
 - `confidence` (0.0-1.0)
 - `rationale` (short string)
 
-## Extract Brand/Text/Label
+## Step 1: Dedupe By Text (Keep Highest Metrics)
 
 ```bash
-python3 scripts/extract_brand_text_label.py \
-  --input data/output/classified.csv \
-  --output data/output/brand_text_labels.csv \
-  --format csv
-```
-
-## Remove Duplicate Rows
-
-```bash
-python3 scripts/remove_duplicate_rows.py \
-  --input 2026 tweets_2026-02-10.csv \
-  --output tweets_2026-02-10_deduped.csv
-```
-
-## Sample Balanced Rows
-
-```bash
-python3 scripts/sample_balanced_classified.py \
-  --input data/output/classified_full.csv \
-  --output data/output/classified_full_sample_200.csv \
-  --seed 42
-```
-
-## Clean Brand `_1`
-
-```bash
-python3 scripts/remove_brand_literal_1.py \
+python3 scripts/dedupe_by_text_keep_highest_metrics.py \
   --input data/input/tweets.csv \
-  --output data/input/tweets_cleaned.csv
+  --output data/output/tweets_deduped.csv
 ```
 
-## Brand List Classifier
+This keeps one row per `text`, selecting the row with highest sum of:
+
+- `public_metrics.retweet_count`
+- `public_metrics.reply_count`
+- `public_metrics.like_count`
+- `public_metrics.quote_count`
+- `public_metrics.bookmark_count`
+- `public_metrics.impression_count`
+
+## Step 2: Classify Dedupe + Apply To Original Copy
 
 ```bash
 export OPENROUTER_API_KEY="your_api_key"
-python3 -m src.cli.classify_brand_list \
+python3 scripts/classify_and_apply_to_original_copy.py \
   --input data/input/tweets.csv \
-  --brand-list data/input/brands.csv \
-  --output data/output/brand_list_classified.csv \
+  --output data/output/tweets_classified_copy.csv \
   --model openrouter/your-model \
   --batch-size 100 \
-  --progress-every 1
+  --progress-every 100
 ```
 
-Resume from row 12401:
+This script:
 
-```bash
-python3 -m src.cli.classify_brand_list \
-  --input data/input/tweets.csv \
-  --brand-list data/input/brands.csv \
-  --output data/output/brand_list_classified_resume.csv \
-  --model openrouter/your-model \
-  --batch-size 100 \
-  --progress-every 1 \
-  --start-row 12401
-```
+1. Dedupes by `text` keeping the highest-metrics row.
+2. Runs LLM classification on the deduped rows.
+3. Writes a copy of the original dataset with appended:
+   - `is_about_brand`
+   - `confidence`
+   - `rationale`
